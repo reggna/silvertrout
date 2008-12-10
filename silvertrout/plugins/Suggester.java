@@ -116,15 +116,15 @@ public class Suggester extends silvertrout.Plugin {
      *@return The google "did you mean: ..."-suggestion, or null if not found
      */
     private static String getSuggestion(String s) {
-        // Find suggestion
-        String titlePattern = "(?i)class=p><b><i>([^<]+)";
-        Pattern pt = Pattern.compile(titlePattern);
-        Matcher mt = pt.matcher(ConnectHelper.Connect(connection, server,
-                file + s, port, maxContentLength));
-
-        if (mt.find()) {
-            return mt.group(1);
-        }
-        return null;
+        String suggestion = ConnectHelper.Connect(connection, server, file + s, 
+            port, maxContentLength);
+        suggestion = suggestion.substring(suggestion.indexOf("class=p><b><i>")+14);
+        suggestion = suggestion.substring(0, suggestion.indexOf("<"));
+        if(suggestion.indexOf(">") > 0) return null;
+        return suggestion;
+    }
+    
+    public static void main(String[] args){
+      System.out.println(getSuggestion(args[0]));
     }
 }
