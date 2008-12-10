@@ -28,7 +28,7 @@ class PluginClassLoader extends ClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        if (name.startsWith("jbt.plugins")) {
+        if (name.startsWith("silvertrout.plugins")) {
             name = name.replace('.', '/');
             try {
                 File f = new File(name + ".class");
@@ -52,7 +52,7 @@ class PluginClassLoader extends ClassLoader {
 
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        if (name.startsWith("jbt.plugins")) {
+        if (name.startsWith("silvertrout.plugins")) {
             return findClass(name);
         } else {
             return super.loadClass(name, resolve);

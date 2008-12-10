@@ -25,8 +25,8 @@ package silvertrout;
  * Abstract plugin class. All new plugins should inherit this class and 
  * overload the functions they want. As default the on* handlers do nothing.
  *
- * @see jbt.Network#loadPlugin
- * @see jbt.Network#unloadPlugin
+ * @see silvertrout.Network#loadPlugin
+ * @see silvertrout.Network#unloadPlugin
  *
  *
  */

@@ -327,7 +327,7 @@ public class Network implements Runnable {
             synchronized (plugins) {
                 try {
                     PluginClassLoader pcl = new PluginClassLoader();
-                    Class<?> c = pcl.findClass("jbt.plugins." + name);
+                    Class<?> c = pcl.findClass("silvertrout.plugins." + name);
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
                         p.setNetwork(this);
