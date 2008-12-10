@@ -108,7 +108,7 @@ public class AdminBoy extends silvertrout.Plugin {
         } else if(cmd.equals("!users")) {
             Channel chan = getNetwork().getChannel(parts[2]);
             getNetwork().sendPrivmsg(user.getNickname(), chan.getName() + " har "
-                + channel.getUsers().size() + " användare");
+                + chan.getUsers().size() + " användare");
             String  usrlst  = "";
             for(Map.Entry<User, Modes> ue: chan.getUsers().entrySet()) {
               usrlst += ue.getKey().getNickname() + "[" + ue.getValue().get() + "], ";

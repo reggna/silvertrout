@@ -80,8 +80,8 @@ public class Network implements Runnable {
         // Load default plugins:
         loadPlugin("AdminBoy");
         loadPlugin("KeepAlive");
-        loadPlugin("Quizmaster");
-        loadPlugin("TitleGiver");
+        //loadPlugin("Quizmaster");
+        //loadPlugin("TitleGiver");
         loadPlugin("Reloader");
 
         // Ticks executes once every second:
@@ -107,7 +107,7 @@ public class Network implements Runnable {
         this.port = port;
         this.channels = new ArrayList<Channel>();
         this.users = new ArrayList<User>();
-        this.me = new User("jbt214"); // TODO: fix name
+        this.me = new User("SilverTrout"); // TODO: fix name
         this.state = State.DISCONNECTED;
 
         this.users.add(this.me);
@@ -129,7 +129,7 @@ public class Network implements Runnable {
 
         // Login (TODO: fix name and stuff)
         sendRaw("NICK " + this.me.getNickname());
-        sendRaw("USER " + this.me.getNickname() + " 0 * :java irc bot #214");
+        sendRaw("USER " + this.me.getNickname() + " 0 * :SilverTrout IRC Bot #1");
 
         // Start listening thread
         new Thread(this).start();
@@ -252,14 +252,14 @@ public class Network implements Runnable {
      * @param channel - The name of the channel to change topic in
      * @param topic - The topic to set in the channel
      */
-    public void setChannelTopic(String channel, String topic) {
+    /*public void setChannelTopic(String channel, String topic) {
         for (Channel c : channels) {
             if (c.getName().equals(channel)) {
                 c.setTopic(topic);
                 break;
             }
         }
-    }
+    }*/
 
     /**
      * Add and join a channel in the NetWork. If the channel previously been joined, no action is taking place.
@@ -418,7 +418,7 @@ public class Network implements Runnable {
         if (msg.isReply()) {
             switch (msg.reply) {
                 case Message.RPL_TOPIC: {
-                    setChannelTopic(msg.params.get(1), msg.params.get(2));
+                    getChannel(msg.params.get(1)).setTopic(msg.params.get(2));
                     break;
                 }
                 case Message.RPL_ENDOFMOTD:
@@ -442,13 +442,13 @@ public class Network implements Runnable {
                         }
                         String user = namlist[i];
 
-                        if (user.startsWith("+") || user.startsWith("@")) {
+                        if (user.startsWith("+") || user.startsWith("@") || user.startsWith("&") || user.startsWith("~")) {
                             if (!existsUser(user.substring(1))) {
                                 addUser(user.substring(1));
                             }
                             if (user.startsWith("+")) {
                                 channel.addUser(getUser(user.substring(1)), new Modes("v"));
-                            } else if (user.startsWith("@")) {
+                            } else if (user.startsWith("@") || user.startsWith("&") || user.startsWith("~")) {
                                 channel.addUser(getUser(user.substring(1)), new Modes("o"));
                             }
                         } else {
@@ -457,7 +457,7 @@ public class Network implements Runnable {
                             }
                             channel.addUser(getUser(user), new Modes());
                         }
-                        System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
+                        //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
                     }
                     break;
                 }
@@ -466,131 +466,125 @@ public class Network implements Runnable {
 
         // Handle commands:
         } else if (msg.isCommand()) {
-            try {
-                if (cmd.equals("TOPIC")) {
+    
+            // Pre stuff
+            // =================================================================
+            String oldTopic    = new String();
+            String oldNickname = new String();
+            // Catch old topic and change it to the new one
+            if(cmd.equals("TOPIC")) {
+                Channel channel = getChannel(msg.params.get(0));
+                oldTopic = channel.getTopic();
+                channel.setTopic(msg.params.get(1));
+            // Add new user / channel
+            } else if(cmd.equals("JOIN")) {
+                if (usr == getMyUser()) {
+                    addChannel(msg.params.get(0));
+                } else {
+                    if (usr == null) {
+                        addUser(msg.nickname);
+                    }
+                    getChannel(msg.params.get(0)).
+                            addUser(getUser(msg.nickname), new Modes());
+                }
+            // Catch old nickname
+            } else if(cmd.equals("NICK")) {
+                oldNickname = usr.getNickname();
+                usr.setNickname(msg.params.get(0));
+            // TODO order, args, callback first or not?
+            } else if (cmd.equals("MODE")) {
+                // Channel
+                if (existsChannel(msg.params.get(0))) {
                     Channel channel = getChannel(msg.params.get(0));
-                    String oldTopic = channel.getTopic();
-                    channel.setTopic(msg.params.get(1));
-                    for (Plugin p : plugins.values()) {
-                        p.onTopic(usr, channel, oldTopic);
+                    for (int i = 1; i < msg.params.size(); i++) {
+                        if (msg.params.get(i).startsWith("+") 
+                                || msg.params.get(i).startsWith("-")) {
+
+                            String modes = msg.params.get(i);
+                            int affects = modes.length() - 1;
+                            char sign = modes.charAt(0);
+
+                            for (int j = 0; j + i + 1 < msg.params.size() 
+                                    && j < modes.length() - 1; j++) {
+
+                                char mode = modes.charAt(j + 1);
+                                User user = getUser(msg.params.get(i + j + 1));
+
+                                /*System.out.println("trying to give " 
+                                        + msg.params.get(i + j + 1) + " " 
+                                        + sign + " " + mode 
+                                        + " on channel " 
+                                        + channel.getName() + "(" + i 
+                                        + "," + j + ")");*/
+
+                                if (sign == '+') {
+                                    channel.getUsers().get(user).giveMode(mode);
+                                } else if (sign == '-') {
+                                    channel.getUsers().get(user).takeMode(mode);
+                                }
+
+                            }
+                        }
                     }
-                    setChannelTopic(msg.params.get(0), msg.params.get(1));
-                } else if (cmd.equals("PING")) {
-                    for (Plugin p : plugins.values()) {
+                // User:
+                } else {
+                    //System.out.println(msg.params.get(0) + " is not a valid " + "channel?");
+                // TODO.. or not?
+                }
+            }    
+            // Call plugin functions
+            for(Plugin p: plugins.values()) {
+                try {
+                    if(cmd.equals("TOPIC")) {
+                        p.onTopic(usr, getChannel(msg.params.get(0)), oldTopic);
+                    } else if(cmd.equals("PING")) {
                         p.onPing(msg.params.get(0));
-                    }
-                } else if (cmd.equals("NOTICE")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("NOTICE")) {
                         p.onNotice(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    }
-                // Private msg handler:
-                } else if (cmd.equals("PRIVMSG")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("PRIVMSG")) {
                         p.onPrivmsg(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    }
-                // Invite handler:
-                } else if (cmd.equals("INVITE")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("INVITE")) {
                         p.onInvite(usr, msg.params.get(1));
-                    }
-                // Kick handler:
-                } else if (cmd.equals("KICK")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("KICK")) {
                         p.onKick(usr, getChannel(msg.params.get(0)),
                                 getUser(msg.params.get(1)), msg.params.get(2));
-                    }
-                // Join handler:
-                } else if (cmd.equals("JOIN")) {
-                    if (usr == getMyUser()) {
-                        addChannel(msg.params.get(0));
-                    } else {
-                        if (usr == null) {
-                            addUser(msg.nickname);
-                        }
-                        getChannel(msg.params.get(0)).
-                                addUser(getUser(msg.nickname), new Modes());
-                    }
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("JOIN")) {
                         p.onJoin(getUser(msg.nickname), getChannel(msg.params.get(0)));
-                    }
-                // Part handler:
-                } else if (cmd.equals("PART")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if(cmd.equals("PART")) {
                         if (msg.params.size() > 1) {
                             p.onPart(usr, getChannel(msg.params.get(0)), msg.params.get(1));
                         } else {
-                            p.onPart(usr, getChannel(msg.params.get(0)), new String());
+                            p.onPart(usr, getChannel(msg.params.get(0)), null);
                         }
-                    }
-                    if (usr == getMyUser()) {
-                        removeChannel(msg.params.get(0));
-                    } else {
-                        getChannel(msg.params.get(0)).delUser(usr);
-                    }
-                // Quit handler:
-                } else if (cmd.equals("QUIT")) {
-                    for (Plugin p : plugins.values()) {
+                    } else if (cmd.equals("QUIT")) {
                         p.onQuit(usr, msg.params.get(0));
-                    }
-                    for (Channel c : channels) {
-                        c.delUser(usr);
-                    }
-                    users.remove(usr);
-                // Nick handler
-                } else if (cmd.equals("NICK")) {
-                    String oldNickname = usr.getNickname();
-                    usr.setNickname(msg.params.get(0));
-                    for (Plugin p : plugins.values()) {
+                    } else if (cmd.equals("NICK")) {
                         p.onNick(usr, oldNickname);
                     }
-
-                // TODO order, args, callback first or not?
-                } else if (cmd.equals("MODE")) {
-
-                    // Channel
-                    if (existsChannel(msg.params.get(0))) {
-                        Channel channel = getChannel(msg.params.get(0));
-                        for (int i = 1; i < msg.params.size(); i++) {
-                            if (msg.params.get(i).startsWith("+") || msg.params.get(i).startsWith("-")) {
-
-                                String modes = msg.params.get(i);
-                                int affects = modes.length() - 1;
-                                char sign = modes.charAt(0);
-
-                                for (int j = 0; j + i + 1 < msg.params.size() && j < modes.length() - 1; j++) {
-
-                                    char mode = modes.charAt(j + 1);
-                                    User user = getUser(msg.params.get(i + j + 1));
-
-                                    System.out.println("trying to give " + msg.params.get(i + j + 1) + " " + sign + " " + mode + " on channel " + channel.getName() + "(" + i + "," + j + ")");
-
-                                    if (sign == '+') {
-                                        channel.getUsers().get(user).giveMode(mode);
-                                    } else if (sign == '-') {
-                                        channel.getUsers().get(user).takeMode(mode);
-                                    }
-
-                                }
-                            }
-                        }
-                    // User:
-                    } else {
-                        System.out.println(msg.params.get(0) + " is not a valid " + "channel?");
-                    // TODO.. or not?
-                    }
-                // Unknown command found
-                } else {
-                    System.out.println("********* Unknown command: " + cmd);
-                    System.out.println("Params count is " + msg.params.size());
-                    for (String param : msg.params) {
-                        System.out.println(param);
-                    }
+                } catch (Exception e) {
+                    //System.out.println("Plugin crashed in " + cmd + " handler:");
+                    e.getMessage();
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                System.out.println("Plugin crashed in " + cmd + " handler:");
-                e.getMessage();
-                e.printStackTrace();
             }
+                    
+            // Post stuff
+            // =========================================================
+            // Part - We parted, or user parted from channel we are in
+            if(cmd.equals("PART")) {
+                if (usr == getMyUser()) {
+                    removeChannel(msg.params.get(0));
+                } else {
+                    getChannel(msg.params.get(0)).delUser(usr);
+                }
+            // Quit - User quit, TODO: could this be us?
+            } else if(cmd.equals("QUIT")) {
+                for (Channel c : channels) {
+                    c.delUser(usr);
+                }
+                users.remove(usr);
+            }
+
         }
     }
 

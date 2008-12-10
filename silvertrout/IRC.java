@@ -25,11 +25,6 @@ import java.util.ArrayList;
 
 public class IRC {
 
-    public String network;
-    public String server;
-    public int port;
-    public String nickname;
-    public String fullname;
     public ArrayList<Network> networks;
 
     /**
@@ -55,7 +50,7 @@ public class IRC {
      * @param args The command line arguments is not used in this program.
      */
     public static void main(String[] args) {
-        System.out.println("IRC - goodboys version: 1");
+        System.out.println("SilverTrout - Version unkown");
         IRC bot = new IRC();
     }
 }
