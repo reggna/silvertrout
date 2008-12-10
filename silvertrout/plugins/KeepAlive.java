@@ -1,24 +1,21 @@
-package jbt.plugins;
+package silvertrout.plugins;
 
-import jbt.User;
-import jbt.Channel;
+import silvertrout.User;
 
-public class KeepAlive extends jbt.Plugin {
+public class KeepAlive extends silvertrout.Plugin {
 
+    @Override
+    public void onDisconnected() {
+        getNetwork().connect("ChalmersIRC", "irc.chalmers.it", 6667);
+    }
 
-  @Override
-  public void onDisconnected() {
-    getNetwork().connect("ChalmersIRC", "irc.chalmers.it", 6667);
-  }
+    @Override
+    public void onPing(String id) {
+        getNetwork().sendRaw("PONG " + id);
+    }
 
-  @Override
-  public void onPing(String id) {
-    getNetwork().sendRaw("PONG " + id);
-  }
-
-  @Override
-  public void onInvite(User nick, String channelName) {
-    getNetwork().join(channelName);
-  }
-
+    @Override
+    public void onInvite(User nick, String channelName) {
+        getNetwork().join(channelName);
+    }
 }
