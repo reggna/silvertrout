@@ -21,6 +21,7 @@
  */
 package silvertrout;
 
+import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,8 +38,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Network class that handles connection to the network. Sending and
@@ -56,7 +59,8 @@ public class Network implements Runnable {
     private int port;
     private User me;
     private ArrayList<Channel> channels;
-    private ArrayList<User> users;
+    /** nickname -> user object */
+    private Map<String, User> users;
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
@@ -111,11 +115,11 @@ public class Network implements Runnable {
         this.host = host;
         this.port = port;
         this.channels = new ArrayList<Channel>();
-        this.users = new ArrayList<User>();
+        this.users = new HashMap<String, User>();
         this.state = State.DISCONNECTED;
         this.me = me;
 
-        this.users.add(this.me);
+        this.users.put(this.me.getNickname(), this.me);
 
         // Connect to Server:
         try {
@@ -160,12 +164,7 @@ public class Network implements Runnable {
      * @return true iff the user with the specified nick exist
      */
     public boolean existsUser(String nickname) {
-        for (User u : users) {
-            if (u.getNickname().equals(nickname)) {
-                return true;
-            }
-        }
-        return false;
+        return users.containsKey(nickname);
     }
 
     /**
@@ -175,20 +174,15 @@ public class Network implements Runnable {
      * @return The user with the specified nickname
      */
     public User getUser(String nickname) {
-        for (User u : users) {
-            if (u.getNickname().equals(nickname)) {
-                return u;
-            }
-        }
-        return null;
+        return users.get(nickname);
     }
 
     /**
-     * Fetch a list of the users known on the Network
+     * Fetch a map of the users known on the Network
      *
-     * @return A List containing all known users on the Network.
+     * @return A map containing all known users on the Network. With nickname as key and user object as value.
      */
-    public List<User> getUsers() {
+    public Map<String, User> getUsers() {
         return users;
     }
 
@@ -198,7 +192,7 @@ public class Network implements Runnable {
      * @param nickname - The nickname of the user to add
      */
     public void addUser(String nickname) {
-        users.add(new User(nickname));
+        users.put(nickname, new User(nickname));
     }
 
     /**
@@ -529,8 +523,7 @@ public class Network implements Runnable {
                     if (usr == null) {
                         addUser(msg.nickname);
                     }
-                    getChannel(msg.params.get(0)).
-                            addUser(getUser(msg.nickname), new Modes());
+                    getChannel(msg.params.get(0)).addUser(getUser(msg.nickname), new Modes());
                 }
             // Catch old nickname
             } else if (cmd.equals("NICK")) {
@@ -625,7 +618,7 @@ public class Network implements Runnable {
                 for (Channel c : channels) {
                     c.delUser(usr);
                 }
-                users.remove(usr);
+                users.remove(usr.getNickname());
             }
 
         }
@@ -685,8 +678,8 @@ public class Network implements Runnable {
         synchronized (this) {
             disconnect();
             // Clear channels and users:
-            this.channels = new ArrayList<Channel>();
-            this.users = new ArrayList<User>();
+            this.channels.clear();
+            this.users.clear();
             // Tell all plugins:
             for (Plugin p : plugins.values()) {
                 p.onDisconnected();

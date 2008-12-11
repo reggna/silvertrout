@@ -51,18 +51,26 @@ import org.xml.sax.SAXException;
 public class Settings {
 
     private File settingsFile = new File("config.xml");
-    private Element root;
     private List<NetworkSettings> networks = new ArrayList<NetworkSettings>();
     /**
      * Network name -> *Plugin name -> *Config name -> *Config setting
      */
     private Map<String, Map<String, Map<String, String>>> plugins = new HashMap<String, Map<String, Map<String, String>>>();
 
+    /**
+     * Creates settings manager with default settings file name
+     * @throws silvertrout.settings.Settings.ConfigurationParseException
+     */
     public Settings() throws ConfigurationParseException {
         createConfigIfNotFound();
         reload();
     }
 
+    /**
+     * Use a sepecific settings file
+     * @param settingsFile
+     * @throws silvertrout.settings.Settings.ConfigurationParseException
+     */
     public Settings(File settingsFile) throws ConfigurationParseException {
         this.settingsFile = settingsFile;
         createConfigIfNotFound();
@@ -103,6 +111,10 @@ public class Settings {
         throw new ConfigurationParseException("Config file template \"" + settingsFile.getAbsolutePath() + "\" created!");
     }
 
+    /**
+     * Reload config file
+     * @throws silvertrout.settings.Settings.ConfigurationParseException
+     */
     public void reload() throws ConfigurationParseException {
         try {
             readConfig();
@@ -120,7 +132,7 @@ public class Settings {
         plugins.clear();
 
         Document d = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(settingsFile);
-        root = d.getDocumentElement();
+        Element root = d.getDocumentElement();
         if (root == null) {
             throw new ParserConfigurationException("Settings document has no root element");
         }

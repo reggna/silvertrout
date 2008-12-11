@@ -126,7 +126,7 @@ public class User {
     }
 
     /**
-     * An arbitrary hashcode based on nickname only
+     * An arbitrary hashcode algorithm based on nickname only
      * @return hash of nickname
      */
     @Override
