@@ -22,18 +22,31 @@
 package silvertrout;
 
 import java.util.ArrayList;
+import silvertrout.settings.NetworkSettings;
+import silvertrout.settings.Settings;
+import silvertrout.settings.Settings.ConfigurationParseException;
 
 public class IRC {
 
     public ArrayList<Network> networks;
+    public Settings settings;
 
     /**
      * A basic constructor
      *
      */
     public IRC() {
+        try {
+            settings = new Settings();
+        } catch (ConfigurationParseException ex) {
+            System.err.println(ex.getMessage());
+            System.exit(1);
+        }
         networks = new ArrayList<Network>();
-        connect(new Network("IT", "irc.chalmers.it", 6667));
+        for (NetworkSettings networkSettings : settings.getNetworks()) {
+            User me = new User(networkSettings.getNickname(), null, null, networkSettings.getUsername(), networkSettings.getRealname(), false);
+            connect(new Network(this, networkSettings.getName(), networkSettings.getHost(), networkSettings.getPort(), me));
+        }
     }
 
     /**
@@ -43,6 +56,14 @@ public class IRC {
      */
     public synchronized void connect(Network n) {
         networks.add(n);
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public ArrayList<Network> getNetworks() {
+        return networks;
     }
 
     /**

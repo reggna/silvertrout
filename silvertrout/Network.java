@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Network class that handles connection to the network. Sending and
@@ -49,40 +51,43 @@ public class Network implements Runnable {
 
         CONNECTED, DISCONNECTED
     };
-    public String name;
+    private String name;
     private String host;
     private int port;
-    public User me;
-    public ArrayList<Channel> channels;
-    public ArrayList<User> users;
+    private User me;
+    private ArrayList<Channel> channels;
+    private ArrayList<User> users;
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-    public LinkedList<String> outputQueue;
-    public Timer timer;
-    public int ticks;
-    public ConcurrentHashMap<String, Plugin> plugins;
-    public State state;
+    private LinkedList<String> outputQueue;
+    private Timer timer;
+    private int ticks;
+    private ConcurrentHashMap<String, Plugin> plugins;
+    private State state;
+    private IRC irc;
 
     /**
      * Create and connect to a new Network,
      *
+     * @param irc  - Reference to the top
      * @param name - The name of the Network
      * @param host - The server's ip
      * @param port - The port to connect to
+     * @param me   - Contains settings for nickname, username, realname
      */
-    public Network(String name, String host, int port) {
+    public Network(IRC irc, String name, String host, int port, User me) {
+        this.irc = irc;
 
         // Init variables:
         this.plugins = new ConcurrentHashMap<String, Plugin>();
         this.outputQueue = new LinkedList<String>();
 
-        // Load default plugins:
-        loadPlugin("AdminBoy");
-        loadPlugin("KeepAlive");
-        //loadPlugin("Quizmaster");
-        //loadPlugin("TitleGiver");
-        loadPlugin("Reloader");
+        // Load plugins:
+        for (Entry<String, Map<String, String>> plugin : getIrc().getSettings().getPluginsFor(name).entrySet()) {
+            // settings = entry.getValue();
+            loadPlugin(plugin.getKey());
+        }
 
         // Ticks executes once every second:
         ticks = 0;
@@ -97,18 +102,18 @@ public class Network implements Runnable {
         timer.schedule(ticker, 0, 1000);
 
         // Connect to server
-        connect(name, host, port);
+        connect(name, host, port, me);
     }
 
-    public void connect(String name, String host, int port) {
+    public void connect(String name, String host, int port, User me) {
 
         this.name = name;
         this.host = host;
         this.port = port;
         this.channels = new ArrayList<Channel>();
         this.users = new ArrayList<User>();
-        this.me = new User("SilverTrout"); // TODO: fix name
         this.state = State.DISCONNECTED;
+        this.me = me;
 
         this.users.add(this.me);
 
@@ -129,7 +134,7 @@ public class Network implements Runnable {
 
         // Login (TODO: fix name and stuff)
         sendRaw("NICK " + this.me.getNickname());
-        sendRaw("USER " + this.me.getNickname() + " 0 * :SilverTrout IRC Bot #1");
+        sendRaw("USER " + this.me.getUsername() + " 0 * :" + this.me.getRealname());
 
         // Start listening thread
         new Thread(this).start();
@@ -217,6 +222,47 @@ public class Network implements Runnable {
     }
 
     /**
+     * Get a reference to the top level.
+     * This is where the settings manage is available
+     * @return the IRC object
+     */
+    public IRC getIrc() {
+        return irc;
+    }
+
+    /**
+     * Get the host the server tries to connect to
+     * @return
+     */
+    public String getHost() {
+        return host;
+    }
+
+    /**
+     * Get the configured plugins for this network
+     * @return the plugins
+     */
+    public ConcurrentHashMap<String, Plugin> getPlugins() {
+        return plugins;
+    }
+
+    /**
+     * Get the network name
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Get the TCP port of the connection
+     * @return
+     */
+    public int getPort() {
+        return port;
+    }
+
+    /**
      * Search for a channel with the specified name
      *
      * @param name - The name of the channel to search for
@@ -253,14 +299,13 @@ public class Network implements Runnable {
      * @param topic - The topic to set in the channel
      */
     /*public void setChannelTopic(String channel, String topic) {
-        for (Channel c : channels) {
-            if (c.getName().equals(channel)) {
-                c.setTopic(topic);
-                break;
-            }
-        }
+    for (Channel c : channels) {
+    if (c.getName().equals(channel)) {
+    c.setTopic(topic);
+    break;
+    }
+    }
     }*/
-
     /**
      * Add and join a channel in the NetWork. If the channel previously been joined, no action is taking place.
      *
@@ -457,7 +502,7 @@ public class Network implements Runnable {
                             }
                             channel.addUser(getUser(user), new Modes());
                         }
-                        //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
+                    //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
                     }
                     break;
                 }
@@ -466,18 +511,18 @@ public class Network implements Runnable {
 
         // Handle commands:
         } else if (msg.isCommand()) {
-    
+
             // Pre stuff
             // =================================================================
-            String oldTopic    = new String();
+            String oldTopic = new String();
             String oldNickname = new String();
             // Catch old topic and change it to the new one
-            if(cmd.equals("TOPIC")) {
+            if (cmd.equals("TOPIC")) {
                 Channel channel = getChannel(msg.params.get(0));
                 oldTopic = channel.getTopic();
                 channel.setTopic(msg.params.get(1));
             // Add new user / channel
-            } else if(cmd.equals("JOIN")) {
+            } else if (cmd.equals("JOIN")) {
                 if (usr == getMyUser()) {
                     addChannel(msg.params.get(0));
                 } else {
@@ -488,7 +533,7 @@ public class Network implements Runnable {
                             addUser(getUser(msg.nickname), new Modes());
                 }
             // Catch old nickname
-            } else if(cmd.equals("NICK")) {
+            } else if (cmd.equals("NICK")) {
                 oldNickname = usr.getNickname();
                 usr.setNickname(msg.params.get(0));
             // TODO order, args, callback first or not?
@@ -497,25 +542,23 @@ public class Network implements Runnable {
                 if (existsChannel(msg.params.get(0))) {
                     Channel channel = getChannel(msg.params.get(0));
                     for (int i = 1; i < msg.params.size(); i++) {
-                        if (msg.params.get(i).startsWith("+") 
-                                || msg.params.get(i).startsWith("-")) {
+                        if (msg.params.get(i).startsWith("+") || msg.params.get(i).startsWith("-")) {
 
                             String modes = msg.params.get(i);
                             int affects = modes.length() - 1;
                             char sign = modes.charAt(0);
 
-                            for (int j = 0; j + i + 1 < msg.params.size() 
-                                    && j < modes.length() - 1; j++) {
+                            for (int j = 0; j + i + 1 < msg.params.size() && j < modes.length() - 1; j++) {
 
                                 char mode = modes.charAt(j + 1);
                                 User user = getUser(msg.params.get(i + j + 1));
 
                                 /*System.out.println("trying to give " 
-                                        + msg.params.get(i + j + 1) + " " 
-                                        + sign + " " + mode 
-                                        + " on channel " 
-                                        + channel.getName() + "(" + i 
-                                        + "," + j + ")");*/
+                                + msg.params.get(i + j + 1) + " "
+                                + sign + " " + mode
+                                + " on channel "
+                                + channel.getName() + "(" + i
+                                + "," + j + ")");*/
 
                                 if (sign == '+') {
                                     channel.getUsers().get(user).giveMode(mode);
@@ -529,28 +572,28 @@ public class Network implements Runnable {
                 // User:
                 } else {
                     //System.out.println(msg.params.get(0) + " is not a valid " + "channel?");
-                // TODO.. or not?
+                    // TODO.. or not?
                 }
-            }    
+            }
             // Call plugin functions
-            for(Plugin p: plugins.values()) {
+            for (Plugin p : plugins.values()) {
                 try {
-                    if(cmd.equals("TOPIC")) {
+                    if (cmd.equals("TOPIC")) {
                         p.onTopic(usr, getChannel(msg.params.get(0)), oldTopic);
-                    } else if(cmd.equals("PING")) {
+                    } else if (cmd.equals("PING")) {
                         p.onPing(msg.params.get(0));
-                    } else if(cmd.equals("NOTICE")) {
+                    } else if (cmd.equals("NOTICE")) {
                         p.onNotice(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    } else if(cmd.equals("PRIVMSG")) {
+                    } else if (cmd.equals("PRIVMSG")) {
                         p.onPrivmsg(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    } else if(cmd.equals("INVITE")) {
+                    } else if (cmd.equals("INVITE")) {
                         p.onInvite(usr, msg.params.get(1));
-                    } else if(cmd.equals("KICK")) {
+                    } else if (cmd.equals("KICK")) {
                         p.onKick(usr, getChannel(msg.params.get(0)),
                                 getUser(msg.params.get(1)), msg.params.get(2));
-                    } else if(cmd.equals("JOIN")) {
+                    } else if (cmd.equals("JOIN")) {
                         p.onJoin(getUser(msg.nickname), getChannel(msg.params.get(0)));
-                    } else if(cmd.equals("PART")) {
+                    } else if (cmd.equals("PART")) {
                         if (msg.params.size() > 1) {
                             p.onPart(usr, getChannel(msg.params.get(0)), msg.params.get(1));
                         } else {
@@ -567,18 +610,18 @@ public class Network implements Runnable {
                     e.printStackTrace();
                 }
             }
-                    
+
             // Post stuff
             // =========================================================
             // Part - We parted, or user parted from channel we are in
-            if(cmd.equals("PART")) {
+            if (cmd.equals("PART")) {
                 if (usr == getMyUser()) {
                     removeChannel(msg.params.get(0));
                 } else {
                     getChannel(msg.params.get(0)).delUser(usr);
                 }
             // Quit - User quit, TODO: could this be us?
-            } else if(cmd.equals("QUIT")) {
+            } else if (cmd.equals("QUIT")) {
                 for (Channel c : channels) {
                     c.delUser(usr);
                 }

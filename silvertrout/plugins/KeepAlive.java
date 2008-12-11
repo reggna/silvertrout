@@ -27,7 +27,7 @@ public class KeepAlive extends silvertrout.Plugin {
 
     @Override
     public void onDisconnected() {
-        getNetwork().connect("ChalmersIRC", "irc.chalmers.it", 6667);
+        getNetwork().connect(getNetwork().getName(), getNetwork().getName(), getNetwork().getPort(), getNetwork().getMyUser());
     }
 
     @Override

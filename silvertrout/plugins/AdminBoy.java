@@ -81,7 +81,7 @@ public class AdminBoy extends silvertrout.Plugin {
       } else if(parts.length == 2) {
         if(cmd.equals("!listplugins")) {
           int number = 1;
-          for(String p: getNetwork().plugins.keySet()) {
+          for(String p: getNetwork().getPlugins().keySet()) {
             getNetwork().sendPrivmsg(user.getNickname(), "#" + (number++) + " - " + p);
           }
         } else if(cmd.equals("!channels")) {

@@ -21,7 +21,6 @@
  */
 package silvertrout;
 
-import java.util.ArrayList;
 
 /**
  * 
@@ -33,9 +32,9 @@ public class User {
     private String nickname;
     private String hostname;
     private String server;
+    private String username;
     private String realname;
     private boolean secureConnection;
-    private ArrayList<Channel> channels;
 
     /**
      * A basic constructor to create a new User
@@ -46,13 +45,13 @@ public class User {
         this.nickname = nickname;
     }
 
-    public User(String nickname, String hostname, String server,
-            boolean secureConnection, ArrayList<Channel> channels) {
-        this(nickname);
-    }
-
-    public ArrayList<Channel> getChannels() {
-        return channels;
+    public User(String nickname, String hostname, String server, String username, String realname, boolean secureConnection) {
+        this.nickname = nickname;
+        this.hostname = hostname;
+        this.server = server;
+        this.username = username;
+        this.realname = realname;
+        this.secureConnection = secureConnection;
     }
 
     /**
@@ -73,6 +72,26 @@ public class User {
         this.nickname = nickname;
     }
 
+    public String getHostname() {
+        return hostname;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public boolean isSecureConnection() {
+        return secureConnection;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     /**
      * Returnes the user as a String
      *
@@ -81,6 +100,40 @@ public class User {
     @Override
     public String toString() {
         return "[" + nickname + "@" + hostname + " (" + server + ") " + realname + " : " + hashCode() + "]";
+    }
+
+    /**
+     * If the nickname is different they are not the same
+     * If both have server set and the servers are not equal they are not the same
+     * Otherwise they are the same
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if ((this.nickname == null) ? (other.nickname != null) : !this.nickname.equals(other.nickname)) {
+            return false;
+        }
+        if (this.server != null && other.server != null && !this.server.equals(other.server)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * An arbitrary hashcode based on nickname only
+     * @return hash of nickname
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
+        return hash;
     }
 }
 

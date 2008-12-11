@@ -58,17 +58,16 @@ public class Logger extends silvertrout.Plugin {
         }
     }
 
-    /* TODO:
-    This won't work, since user.getChannels() will return null
+    /**
+     * Todo: May work..?
      */
     @Override
     public void onQuit(User user, String quitMessage) {
-        if (user.getChannels() == null) {
-            return;
-        }
-        for (Channel channel : user.getChannels()) {
-            writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
-                    user.toString() + " has quit (" + quitMessage + ")");
+        for (Channel channel : getNetwork().getChannels()) {
+            if (channel.getUsers().containsKey(user)) {
+                writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
+                        user.toString() + " has quit (" + quitMessage + ")");
+            }
         }
     }
 
@@ -92,16 +91,18 @@ public class Logger extends silvertrout.Plugin {
 
     @Override
     public void onNick(User user, String oldNickname) {
-        for (Channel channel : user.getChannels()) {
-            writeToLog(getFile(channel), "-!- " + oldNickname + " is now known as " +
-                    user.getNickname());
+        for (Channel channel : getNetwork().getChannels()) {
+            if (channel.getUsers().containsKey(user)) {
+                writeToLog(getFile(channel), "-!- " + oldNickname +
+                        " is now known as " + user.getNickname());
+            }
         }
     }
 
     public File getFile(Channel channel) {
         try {
             /* create the folder if the folder has been deleted */
-            String dir = "jbt/plugins/Logger/" + getNetwork().name;
+            String dir = "jbt/plugins/Logger/" + getNetwork().getName();
             (new File(dir)).mkdirs();
 
             String file = channel.getName().substring(1) + ".log";

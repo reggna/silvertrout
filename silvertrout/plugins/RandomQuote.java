@@ -41,7 +41,7 @@ public class RandomQuote extends silvertrout.Plugin {
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
         if (channel != null) {
-            String dir = "jbt/plugins/Logger/" + getNetwork().name;
+            String dir = "jbt/plugins/Logger/" + getNetwork().getName();
             String file = channel.getName().substring(1) + ".log";
             if (message.equals("!random")) {
                 try {
