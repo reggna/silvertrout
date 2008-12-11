@@ -58,7 +58,7 @@ class PluginClassLoader extends ClassLoader {
                 || name.startsWith("silvertrout.commons")) {
             name = name.replace('.', '/');
             try {
-                File f = new File(name + ".class");
+                File f = new File(super.getResource(name + ".class").getFile());
                 if (f.exists()) {
                     byte[] bytes = new byte[(int) f.length()];
                     FileInputStream s = new FileInputStream(f);

@@ -87,7 +87,7 @@ public class Settings {
         String templateConfig =
                 "<silvertrout>\n" +
                 "   <network name=\"itstud\" host=\"irc.chalmers.it\" port=\"6667\" username=\"silvertrout\" nickname=\"silvertrout\" realname=\"silvertrout\" enabled=\"true\">\n" +
-                "        <plugin name=\"Quizmaster\" />\n" +
+                "        <plugin name=\"KeepAlive\" />\n" +
                 "        <plugin name=\"AdminBoy\">\n" +
                 "            <password>password2</password>\n" +
                 "        </plugin>\n" +

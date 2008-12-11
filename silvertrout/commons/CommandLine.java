@@ -28,6 +28,22 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class CommandLine {
+    
+    /*
+    class Command {
+        String cmd;
+        
+        class Parameter {
+            String  name;
+            String  shortName;
+            String  description;
+            boolean mandatory;
+            Type    type;
+        }
+        addParameter( ...)  
+    }
+    
+    addCommand(...) */
 
     private String command;
     private Map<String, String> options = new HashMap<String, String>();
