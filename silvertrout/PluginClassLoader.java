@@ -23,36 +23,86 @@ package silvertrout;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+/**
+ * Classloader for plugins. 
+ *
+ * Each plugin will have its own unique classloader that will help it load 
+ * itself, any subclass and its common classes. This allows plugins to be 
+ * unloaded and loaded at run time.
+ *
+ * @author  Gustav Tiger
+ */
 class PluginClassLoader extends ClassLoader {
 
+    /** 
+     * Find a class by name.
+     *
+     * This function converts the class name into a file name and tries to 
+     * find and load that file as a class. This only looks for classes in the
+     * packages silvertrout.plugins or silvertrout.commons. All other classes
+     * will make this function throw a ClassNotFoundException.
+     *
+     * @param  name  The binary name of the class, starting with 
+     *               silvertrout.plugins or silvertrout.commons
+     * @return       The class
+     *
+     * @throws ClassNotFoundException If the class name is invalid or the file
+     *                                could not be found
+     */
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        if (name.startsWith("silvertrout.plugins")) {
+        if (name.startsWith("silvertrout.plugins") 
+                || name.startsWith("silvertrout.commons")) {
             name = name.replace('.', '/');
             try {
                 File f = new File(name + ".class");
                 if (f.exists()) {
-                    byte[] bytes = new byte[(int) f.length()]; //Fix possible error when long > Integer.MAX
+                    byte[] bytes = new byte[(int) f.length()];
                     FileInputStream s = new FileInputStream(f);
                     for (int i = 0; i < f.length(); i++) {
                         bytes[i] = (byte) s.read();
                     }
                     return defineClass(null, bytes, 0, (int) f.length());
                 } else {
-                    System.out.println("File don't exists: " + name + ".class");
+                    throw new ClassNotFoundException(
+                            "Class " + name + ".class does not exists");
                 }
-            } catch (Exception e) {
+            } catch (FileNotFoundException e) {
+                throw new ClassNotFoundException(
+                        "Class " + name + ".class does not exists");
+            } catch (IOException e) {
+                throw new ClassNotFoundException(
+                        "There was an error reading " + name + ".class");
+            } catch (ClassFormatError e) {
+                throw new ClassNotFoundException(
+                        "Class " + name + ".class is not a valid class");
             }
         } else {
-            System.out.println("Wrong prefix");
+            throw new ClassNotFoundException(
+                    "Class " + name + " have a non-valid prefix");
         }
-        throw new ClassNotFoundException(name + " is not a plugin");
+        
     }
-
+    
+    /** 
+     * Load a class by name.
+     *
+     * This function tries to load a class. First it looks at the name. If the
+     * name starts with silvertrout.plugins or silvertrout.commons, the function
+     * will call findClass to make sure that these classes is unique to the
+     * plugin. Any other plugin can be shared and is located using the parent
+     * classloader.
+     *
+     * @param  name                   The binary name of the class
+     * @return                        The class
+     * @throws ClassNotFoundException If the class could not be found
+     */
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        if (name.startsWith("silvertrout.plugins")) {
+        if (name.startsWith("silvertrout.plugins") || name.startsWith("silvertrout.commons")) {
             return findClass(name);
         } else {
             return super.loadClass(name, resolve);
