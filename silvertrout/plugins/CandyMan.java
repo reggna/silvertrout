@@ -35,7 +35,7 @@ public class CandyMan extends silvertrout.Plugin {
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-
+System.out.println("GODIS!");
         // Only in channels:
         if (channel != null) {
 
@@ -52,6 +52,7 @@ public class CandyMan extends silvertrout.Plugin {
                 what = icecreams[r.nextInt(icecreams.length)];
             } else if (message.equals("!godis")) {
                 what = candy[r.nextInt(candy.length)];
+                
             } else if (message.equals("!knark")) {
                 what = drugs[r.nextInt(drugs.length)];
             } else {

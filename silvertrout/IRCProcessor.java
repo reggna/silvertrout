@@ -94,7 +94,6 @@ public class IRCProcessor {
                 network.onTopic(channel, msg.params.get(1));
             // Add new user / channel
             } else if (cmd.equals("JOIN")) {
-
                 if (user == network.getMyUser()) {
                     network.onJoin(msg.params.get(0));
                 } else {

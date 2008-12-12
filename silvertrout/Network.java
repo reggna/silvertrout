@@ -26,7 +26,8 @@ import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import java.util.ArrayList;
+import java.util.Collection;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +47,8 @@ public class Network {
 
     private final NetworkSettings networkSettings;
     private final User me;
-    private final ArrayList<Channel> channels = new ArrayList<Channel>();
     /** nickname -> user object */
+    private final Map<String, Channel> channels = new HashMap<String, Channel>();
     private final Map<String, User> users = new HashMap<String, User>();
     private final Map<String, Plugin> plugins = new ConcurrentHashMap<String, Plugin>();
     private final IRC irc;
@@ -65,11 +66,15 @@ public class Network {
         this.irc = irc;
         this.networkSettings = networkSettings;
         this.me = me;
-
+        
+        
         // Load plugins:
         for (Entry<String, Map<String, String>> plugin : getIrc().getSettings().getPluginsFor(networkSettings.getName()).entrySet()) {
             // settings = entry.getValue();
-            loadPlugin(plugin.getKey());
+            if(loadPlugin(plugin.getKey()))
+                System.out.println("Plugin loaded: " + plugin.getKey());
+            else
+                System.out.println("Unable to load plugin: " + plugin.getKey());
         }
 
         // Connect to server
@@ -95,6 +100,7 @@ public class Network {
         for (Plugin plugin : plugins.values()) {
             plugin.onDisconnected();
         }
+        removeUser(me.getNickname());
     // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
     }
 
@@ -260,12 +266,15 @@ public class Network {
      * @param message
      */
     void onQuit(User user, String message) {
-        for (Channel channel : channels) {
+        /* remove the user from all channels */
+        for (Channel channel : channels.values()) {
             channel.delUser(user);
         }
+        
+        /* remove user from user list */
+        removeUser(user.getNickname());
 
-        removeChannel(user.getNickname());
-
+        /* run the onQuit in plugins */
         for (Plugin plugin : plugins.values()) {
             plugin.onQuit(user, message);
         }
@@ -320,13 +329,12 @@ public class Network {
     void onJoin(String channel) {
         if (!existsChannel(channel)) { // ignore if we are already joined
             Channel c = new Channel(channel, this);
-
+            System.out.println("adding channel");
             addChannel(c);
-
             for (Plugin plugin : plugins.values()) {
                 plugin.onJoin(c);
             }
-        }
+        }      
     }
 
     /**
@@ -363,6 +371,7 @@ public class Network {
      * Called on connection successful
      */
     void onConnect() {
+        addUser(me);
         for (Plugin p : getPlugins().values()) {
             p.onConnected();
         }
@@ -418,6 +427,15 @@ public class Network {
     public User getUser(String nickname) {
         return users.get(nickname);
     }
+    
+    /**
+     * Remove a User from the user list
+     *
+     * @param nickname - The nickname of the user to delete
+     */
+    private void removeUser(String nickname){
+        users.remove(nickname);
+    }
 
     /**
      * Fetch a map of the users known on the Network
@@ -453,8 +471,8 @@ public class Network {
      *
      * @return all known channels on the Network
      */
-    public ArrayList<Channel> getChannels() {
-        return channels;
+    public Collection<Channel> getChannels() {
+        return channels.values();
     }
 
     /**
@@ -491,12 +509,7 @@ public class Network {
      * @return ture iff the channel with the specified name is known on this Network
      */
     public boolean existsChannel(String name) {
-        for (Channel c : channels) {
-            if (c.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+        return channels.containsKey(name);
     }
 
     /**
@@ -506,12 +519,7 @@ public class Network {
      * @return The channel with the specified name, if the Channel does not exist returns null
      */
     public Channel getChannel(String name) {
-        for (Channel c : channels) {
-            if (c.getName().equals(name)) {
-                return c;
-            }
-        }
-        return null;
+        return channels.get(name);
     }
 
     /**
@@ -521,7 +529,7 @@ public class Network {
      */
     void addChannel(Channel channel) {
         if (!existsChannel(channel.getName())) {
-            channels.add(channel);
+            channels.put(channel.getName(), channel);
         }
     }
 
@@ -531,13 +539,8 @@ public class Network {
      * @param channel - The name of the channel to remove from.
      */
     void removeChannel(String channel) {
-        for (Channel c : channels) {
-            if (c.getName().equals(channel)) {
-                channels.remove(c);
-                System.out.println("Parting from channel " + channel);
-                break;
-            }
-        }
+        if(channels.remove(channel) != null)
+            System.out.println("Parting from channel " + channel);
     }
     // } END CHANNEL MANAGER (TODO ? )
 

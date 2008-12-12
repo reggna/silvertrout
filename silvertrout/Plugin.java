@@ -210,14 +210,14 @@ public abstract class Plugin {
      * @param receiver
      * @param mode
      */
-    void onGiveMode(User giver, Channel channel, User receiver, char mode) {
+    public void onGiveMode(User giver, Channel channel, User receiver, char mode) {
     }
 
     /**
      * We joined a channel
      * @param c the channel we joined
      */
-    void onJoin(Channel c) {
+    public void onJoin(Channel c) {
     }
 
     /**
@@ -226,8 +226,8 @@ public abstract class Plugin {
      * @param user
      * @param message
      */
-    void onNotice(User user, String message) {
-
+    public void onNotice(User user, String message) {
+        onNotice(user, null, message);
     }
 
     /**
@@ -235,7 +235,8 @@ public abstract class Plugin {
      * @param channel the channel we parted
      * @param message our message
      */
-    void onPart(Channel channel, String message) {
+    public void onPart(Channel channel, String message) {
+        onPart(null, channel, message);
     }
 
     /**
@@ -243,8 +244,8 @@ public abstract class Plugin {
      * @param user
      * @param message
      */
-    void onPrivmsg(User user, String message) {
-
+    public void onPrivmsg(User user, String message) {
+        onPrivmsg(user, null, message);
     }
 
     /**
@@ -254,6 +255,6 @@ public abstract class Plugin {
      * @param affectedUser 
      * @param mode
      */
-    void onTakeMode(User giver, Channel channel, User affectedUser, char mode) {
+    public void onTakeMode(User giver, Channel channel, User affectedUser, char mode) {
     }
 }

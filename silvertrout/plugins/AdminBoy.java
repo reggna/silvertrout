@@ -34,10 +34,8 @@ public class AdminBoy extends silvertrout.Plugin {
   private String password = "password";
   
   @Override
-  public void onPrivmsg(User user, Channel channel, String message) {
-
+  public void onPrivmsg(User user, String message) {
     String[] parts = message.split("\\s");
-    
     if(parts.length > 1 && parts[0].equals(password)) {
       String cmd = parts[1].toLowerCase();
       

@@ -74,7 +74,7 @@ public class NetworkSettings {
     }
 
     public String getRealname() {
-        return name;
+        return realname;
     }
 
     public String getUsername() {
