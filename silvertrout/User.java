@@ -35,14 +35,21 @@ public class User {
     private String username;
     private String realname;
     private boolean secureConnection;
+    
+    /**
+     * Network the user is in
+     */
+    private Network network;
 
     /**
      * A basic constructor to create a new User
      *
      * @param nickname - The nickname to set to the new User
      */
-    User(String nickname) {
+    User(String nickname, Network network) {
         this.nickname = nickname;
+        if(network == null) System.out.println("NUUUUUL");
+        this.network  = network;
     }
 
     User(String nickname, String hostname, String server, String username, String realname, boolean secureConnection) {
@@ -90,6 +97,16 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+    
+    /**
+     * Send a private message to this user.
+     *
+     * @param  message  Message to send
+     */
+    public void sendPrivmsg(String message) {
+        if(network == null) System.out.println("NUUUUUL");
+        network.getConnection().sendPrivmsg(this, message);
     }
 
     /**

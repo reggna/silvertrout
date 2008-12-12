@@ -222,9 +222,9 @@ class Message {
 
         //System.out.print("Pr: " + prefix);
 
-        if (nickname != null) {
+        /*if (nickname != null) {
             System.out.print(" [" + nickname + ", " + username + ", " + host + "]");
-        }
+        }*/
 
         /*if (isReply()) {
             System.out.print(", RPLY: " + reply);

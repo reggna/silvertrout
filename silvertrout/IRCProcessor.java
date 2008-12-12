@@ -184,12 +184,12 @@ public class IRCProcessor {
                 if (network.existsChannel(msg.params.get(0))) {
                     // known user in channel
                     network.onPrivmsg(user, network.getChannel(msg.params.get(0)), msg.params.get(1));
-                } else if (network.existsUser(msg.params.get(0))) {
+                } else if (user != null) {
                     // known user in private chat
-                    network.onPrivmsg(network.getUser(msg.params.get(0)), msg.params.get(1));
+                    network.onPrivmsg(user, msg.params.get(1));
                 } else {
                     // unknown user in private chat
-                    network.onPrivmsg(msg.params.get(0), msg.params.get(1));
+                    network.onPrivmsg(msg.nickname, msg.params.get(1));
                 }
             } else if (cmd.equals("INVITE")) {
                 //p.onInvite(user, msg.params.get(1));

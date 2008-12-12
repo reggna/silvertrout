@@ -133,7 +133,7 @@ public class Network {
      * @param channel
      */
     void onInvite(String nickname, String channel) {
-        onInvite(new User(nickname), channel);
+        onInvite(new User(nickname, this), channel);
     }
 
     /**
@@ -178,7 +178,7 @@ public class Network {
      * @param message
      */
     void onNotice(String nickname, Channel channel, String message) {
-        onNotice(new User(nickname), channel, message);
+        onNotice(new User(nickname, this), channel, message);
     }
 
     /**
@@ -187,7 +187,7 @@ public class Network {
      * @param message
      */
     void onNotice(String nickname, String message) {
-        onNotice(new User(nickname), message);
+        onNotice(new User(nickname, this), message);
     }
 
     /**
@@ -234,7 +234,7 @@ public class Network {
      */
     void onPrivmsg(String nickname, String message) {
         // do not do run addUser() .. we have no idéa of tracking if user changes nickname later.
-        onPrivmsg(new User(nickname), message);
+        onPrivmsg(new User(nickname, this), message);
     }
 
     /**
@@ -300,7 +300,7 @@ public class Network {
      * @param channel
      */
     void onJoin(String nickname, Channel channel) {
-        User u = new User(nickname);
+        User u = new User(nickname, this);
         addUser(u);
         channel.addUser(u, new Modes());
 
@@ -388,7 +388,7 @@ public class Network {
 
             if (nickname.startsWith("+") || nickname.startsWith("@") || nickname.startsWith("&") || nickname.startsWith("~")) {
                 if (!existsUser(nickname.substring(1))) {
-                    addUser(new User(nickname.substring(1)));
+                    addUser(new User(nickname.substring(1), this));
                 }
                 if (nickname.startsWith("+")) {
                     channel.addUser(getUser(nickname.substring(1)), new Modes("v"));
@@ -397,7 +397,7 @@ public class Network {
                 }
             } else {
                 if (!existsUser(nickname)) {
-                    addUser(new User(nickname));
+                    addUser(new User(nickname, this));
                 }
                 channel.addUser(getUser(nickname), new Modes());
             }
