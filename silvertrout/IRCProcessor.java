@@ -41,36 +41,42 @@ public class IRCProcessor {
      */
     void process(Message msg) {
 
+        // TODO: crash here makes bot unresponsive!
         String cmd = msg.command;
+        String nck = msg.nickname;
         User user = network.getUser(msg.nickname);
 
         // Handle replies / error (Possible TODO: move error handeling):
         if (msg.isReply()) {
             switch (msg.reply) {
                 case Message.RPL_TOPIC: {
-                    network.onTopic(network.getChannel(msg.params.get(1)), msg.params.get(2));
+                    network.onTopic(msg.params.get(1), msg.params.get(2));
                     break;
                 }
-                case Message.RPL_ENDOFMOTD:
+                case Message.RPL_ENDOFMOTD: {
+                    network.onEndOfMotd();
+                    break;
+                }
+                case Message.RPL_MOTD: {
+                    network.onMotd(msg.params.get(1).substring(1));
+                    break;
+                }
                 case Message.ERR_NOMOTD: {
-                    System.out.println("!!! We are connected");
+                    network.onNoMotd();
+                    //System.out.println("!!! We are connected");
                     // Change state of network to connected:
                     // TODO: Does this really work?! at all?
                     //state = State.CONNECTED;
-                    network.onConnect();
+                    
                     break;
                 }
                 case Message.RPL_NAMREPLY: {
                     String[] namlist = msg.params.get(3).split("\\s");
-
-                    Channel channel = network.getChannel(msg.params.get(2));
-
-                    if (channel == null) {
-                        System.out.println("Message.RPL_NAMREPLY: Channel is null: " + msg.params.get(2));
-                    } else {
-                        network.onNames(channel, namlist);
-                    }
-
+                    network.onNames(msg.params.get(2), namlist);
+                    break;
+                }
+                case Message.RPL_ENDOFNAMES: {
+                    network.onEndOfNames(msg.params.get(1));
                     break;
                 }
             }
@@ -79,40 +85,16 @@ public class IRCProcessor {
         // Handle commands:
         } else if (msg.isCommand()) {
 
-            // Pre stuff
-            // =================================================================
-            String oldTopic = new String();
-            String oldNickname = new String();
             // Catch old topic and change it to the new one
             if (cmd.equals("TOPIC")) {
-                Channel channel = network.getChannel(msg.params.get(0));
-                if (channel == null) {
-                    System.out.println("TOPIC: Channel was null! " + msg.params.get(0));
-                    return;
-                }
-                oldTopic = channel.getTopic();
-                network.onTopic(channel, msg.params.get(1));
+                network.onTopic(msg.params.get(0), msg.params.get(1));
             // Add new user / channel
             } else if (cmd.equals("JOIN")) {
-                if (user == network.getMyUser()) {
-                    network.onJoin(msg.params.get(0));
-                } else {
-                    Channel channel = network.getChannel(msg.params.get(0));
-                    if (channel == null) {
-                        System.out.println("JOIN: Channel was null! " + msg.params.get(0) + ", user: " + msg.nickname);
-                        return;
-                    }
-
-                    if (user == null) {
-                        network.onJoin(msg.nickname, channel);
-                    } else {
-                        network.onJoin(user, channel);
-                    }
-                }
+                network.onJoin(msg.nickname, msg.params.get(0));
             // Catch old nickname
             } else if (cmd.equals("NICK")) {
-                oldNickname = user.getNickname();
-                network.onNick(user, msg.params.get(0));
+                //oldNickname = user.getNickname();
+                network.onNick(msg.nickname, msg.params.get(0));
             // TODO order, args, callback first or not?
             } else if (cmd.equals("MODE")) {
                 // Channel
@@ -154,12 +136,6 @@ public class IRCProcessor {
                     //System.out.println(msg.params.get(0) + " is not a valid " + "channel?");
                     // TODO.. or not?
                 }
-            }
-
-            // more commands
-            if (cmd.equals("TOPIC")) {
-                //p.onTopic(user, getChannel(msg.params.get(0)), oldTopic);
-                // already done
             } else if (cmd.equals("PING")) {
                 //p.onPing(msg.params.get(0));
                 network.onPing(msg.params.get(0));
@@ -180,17 +156,7 @@ public class IRCProcessor {
                     network.onNotice(user, msg.params.get(1));
                 }
             } else if (cmd.equals("PRIVMSG")) {
-                //p.onPrivmsg(user, getChannel(msg.params.get(0)), msg.params.get(1));
-                if (network.existsChannel(msg.params.get(0))) {
-                    // known user in channel
-                    network.onPrivmsg(user, network.getChannel(msg.params.get(0)), msg.params.get(1));
-                } else if (user != null) {
-                    // known user in private chat
-                    network.onPrivmsg(user, msg.params.get(1));
-                } else {
-                    // unknown user in private chat
-                    network.onPrivmsg(msg.nickname, msg.params.get(1));
-                }
+                network.onPrivmsg(msg.nickname, msg.params.get(0), msg.params.get(1));
             } else if (cmd.equals("INVITE")) {
                 //p.onInvite(user, msg.params.get(1));
                 network.onInvite(user, msg.params.get(1));
@@ -210,31 +176,6 @@ public class IRCProcessor {
             } else if (cmd.equals("QUIT")) {
                 //p.onQuit(user, msg.params.get(0));
                 network.onQuit(user, msg.params.get(0));
-            } else if (cmd.equals("NICK")) {
-                //p.onNick(user, oldNickname);
-                //already caught
-            }
-
-
-            // Post stuff
-            // =========================================================
-            // Part - We parted, or user parted from channel we are in
-            if (cmd.equals("PART")) {
-                /*if (user == getMyUser()) {
-                //removeChannel(msg.params.get(0));
-                // caught above
-                } else {
-                //getChannel(msg.params.get(0)).delUser(user);
-                // caught above
-                }*/
-                // Quit - User quit, TODO: could this be us?
-            } else if (cmd.equals("QUIT")) {
-                /*for (Channel c : channels) {
-                //c.delUser(user);
-                }
-                //users.remove(user.getNickname());
-                //Already caught and done!
-                 */
             }
 
         }

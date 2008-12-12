@@ -262,6 +262,7 @@ public class IRCConnection {
      * @param message - the string to send to the Network
      */
     public void sendRaw(String message) {
+        System.out.println("OUT -> | " + message);
         senderThread.sendRaw(message);
     }
 

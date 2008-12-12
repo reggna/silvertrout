@@ -220,20 +220,20 @@ class Message {
             host = prefixParts[2];
         }
 
-        //System.out.print("Pr: " + prefix);
+        System.out.print("IN  <- | PRFX=" + prefix);
 
         /*if (nickname != null) {
             System.out.print(" [" + nickname + ", " + username + ", " + host + "]");
         }*/
 
-        /*if (isReply()) {
-            System.out.print(", RPLY: " + reply);
+        if (isReply()) {
+            System.out.print(", RPLY=" + reply);
         } else {
-            System.out.print(", CMD: " + command);
-        }*/
+            System.out.print(", CMD=" + command);
+        }
 
-        //System.out.println(", Pa: " + params);
-        System.out.println("Data: " + data);
+        System.out.println(", PARAMS=" + params);
+        //System.out.println("Data: " + data);
         //System.out.println("");
 
     }

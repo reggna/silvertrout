@@ -45,15 +45,19 @@ import silvertrout.settings.NetworkSettings;
  */
 public class Network {
 
-    private final NetworkSettings networkSettings;
-    private final User me;
+    private final NetworkSettings      networkSettings;
+    private final User                 me;
     /** nickname -> user object */
-    private final Map<String, Channel> channels = new HashMap<String, Channel>();
-    private final Map<String, User> users = new HashMap<String, User>();
-    private final Map<String, Plugin> plugins = new ConcurrentHashMap<String, Plugin>();
-    private final IRC irc;
-    private final WorkerThread workerThread = new WorkerThread();
-    private final IRCConnection connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want
+    private final Map<String, Channel> channels         = new HashMap<String, Channel>();
+    private final Map<String, Channel> unjoinedChannels = new HashMap<String, Channel>();
+    
+    private final Map<String, User>    users            = new HashMap<String, User>();
+    private final Map<String, Plugin>  plugins          = new ConcurrentHashMap<String, Plugin>();
+    private final IRC                  irc;
+    private final IRCConnection        connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want
+    private final WorkerThread         workerThread     = new WorkerThread();
+
+    private       String               motd             = new String();
 
     /**
      * Create and connect to a new Network,
@@ -63,9 +67,9 @@ public class Network {
      * @throws IOException if connection could not be established to network
      */
     public Network(IRC irc, NetworkSettings networkSettings, User me) throws IOException {
-        this.irc = irc;
+        this.irc             = irc;
         this.networkSettings = networkSettings;
-        this.me = me;
+        this.me              = me;
         
         
         // Load plugins:
@@ -102,6 +106,19 @@ public class Network {
         }
         removeUser(me.getNickname());
     // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
+    }
+
+
+    void onNoMotd() {
+        onEndOfMotd();
+    }
+    
+    void onEndOfMotd() {
+        onConnect();
+    }
+    
+    void onMotd(String motdLine) {
+        motd += motdLine + "\n";
     }
 
     /**
@@ -232,34 +249,36 @@ public class Network {
      * @param nickname
      * @param message
      */
-    void onPrivmsg(String nickname, String message) {
-        // do not do run addUser() .. we have no idéa of tracking if user changes nickname later.
-        onPrivmsg(new User(nickname, this), message);
-    }
-
-    /**
-     * On a private message from a user
-     * @param user
-     * @param message
-     */
-    void onPrivmsg(User user, String message) {
-        for (Plugin plugin : plugins.values()) {
-            plugin.onPrivmsg(user, message);
+    void onPrivmsg(String from, String to, String message) {
+    
+        // Private message 
+        if(to.equals(getMyUser().getNickname())) {
+            User user = getUser(from);
+            // Unknown user
+            if(user == null) {
+                user = new User(from, this);
+            } 
+            for (Plugin plugin : plugins.values()) {
+                plugin.onPrivmsg(user, message);
+            }
+        // To channel
+        } else {
+            Channel channel = getChannel(to);
+            User    user    = getUser(from);
+            
+            if(user != null && channel != null) {
+                for (Plugin plugin : plugins.values()) {
+                    plugin.onPrivmsg(user, channel, message);
+                }   
+            } else {
+                // TODO: should not happend
+                System.out.println("Message from unkown person or to unknown channel");
+                return;
+            }
         }
     }
 
-    /**
-     * Message to channel
-     * @param user sender
-     * @param channel target
-     * @param message the messagte
-     */
-    void onPrivmsg(User user, Channel channel, String message) {
-        for (Plugin plugin : plugins.values()) {
-            plugin.onPrivmsg(user, channel, message);
-        }
-    }
-
+    
     /**
      * Someone quits the network
      * @param user
@@ -295,55 +314,58 @@ public class Network {
     }
 
     /**
-     * Unknown user joined a channel
+     * User joined a channel
      * @param user
      * @param channel
      */
-    void onJoin(String nickname, Channel channel) {
-        User u = new User(nickname, this);
-        addUser(u);
-        channel.addUser(u, new Modes());
+    void onJoin(String nickname, String channelName) {
+        
+        User    user    = getUser(nickname);
+        Channel channel = getChannel(channelName);
+    
+        // Its'a me mario! (It's me joining)
+        if (user == getMyUser()) {
+            // Add channel to unjoined channels
+            channel = new Channel(channelName, this);
+            unjoinedChannels.put(channelName, channel);
+        // Other user is joining
+        } else {
+            // Uknown channel (should not happend at all)
+            if (channel == null) {
+                // FAAAAIIL: TODO: error check, this should not happend
+                System.out.println("JOIN: Channel was null! " + channelName + ", user: " + nickname);
+                return;
+            // Known channel
+            } else {
 
-        for (Plugin plugin : plugins.values()) {
-            plugin.onJoin(u, channel);
-        }
-    }
-
-    /**
-     * Known user joined a channel
-     * @param channel
-     * @param user
-     */
-    void onJoin(User user, Channel channel) {
-        channel.addUser(user, new Modes());
-
-        for (Plugin plugin : plugins.values()) {
-            plugin.onJoin(user, channel);
-        }
-    }
-
-    /**
-     * We joined a channel
-     * @param channel
-     */
-    void onJoin(String channel) {
-        if (!existsChannel(channel)) { // ignore if we are already joined
-            Channel c = new Channel(channel, this);
-            System.out.println("adding channel");
-            addChannel(c);
-            for (Plugin plugin : plugins.values()) {
-                plugin.onJoin(c);
+                // Have not seen this user before
+                if (user == null) {
+                    user = new User(nickname, this);
+                    addUser(user);
+                }
+                
+                // Add user 
+                channel.addUser(user, new Modes());
+                // Tell our fine plugins about this joyus occation and let them
+                // rejoice and be happy.
+                for (Plugin plugin : plugins.values()) {
+                    plugin.onJoin(user, channel);
+                }
             }
-        }      
+        }    
     }
-
+    
     /**
      * Called when someone changes nickname
-     * @param user
+     * @param nickname
      * @param newNickname
      */
-    void onNick(User user, String newNickname) {
+    void onNick(String nickname, String newNickname) {
+
+        // TODO: can this happend without a valid user?
+        User   user        = getUser(nickname);
         String oldNickname = user.getNickname();
+        
         user.setNickname(newNickname);
 
         for (Plugin plugin : plugins.values()) {
@@ -356,13 +378,23 @@ public class Network {
      * @param channel
      * @param newTopic
      */
-    void onTopic(Channel channel, String newTopic) {
+    void onTopic(String channelName, String newTopic) {
+        Channel channel = getChannel(channelName);
+        
         if (channel != null) {
             String oldTopic = channel.getTopic();
             channel.setTopic(newTopic);
 
             for (Plugin plugin : plugins.values()) {
                 plugin.onTopic(me, channel, oldTopic);
+            }
+        } else {
+            // TODO: check unavaible list?
+            channel = unjoinedChannels.get(channel);
+            if(channel != null) {
+                channel.setTopic(newTopic);
+            } else {
+                System.out.println("Error: Topic for non joined and non unjoined channel " + channelName); 
             }
         }
     }
@@ -382,7 +414,13 @@ public class Network {
      * @param channel
      * @param nicksWithModes
      */
-    void onNames(Channel channel, String[] nicksWithModes) {
+    void onNames(String channelName, String[] nicksWithModes) {
+        Channel channel = getChannel(channelName);
+        
+        if(channel == null) {
+            channel = unjoinedChannels.get(channelName);
+        }
+        
         for (int i = 0; i < nicksWithModes.length; i++) {
             String nickname = nicksWithModes[i];
 
@@ -401,10 +439,21 @@ public class Network {
                 }
                 channel.addUser(getUser(nickname), new Modes());
             }
-        //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
+        //System.out.println("*** Added user " + user + " to c " + c.getName() + ".");
         }
 
         // Notify plugins?
+    }
+    
+    void onEndOfNames(String channelName) {
+        
+        // We are done joining
+        if(unjoinedChannels.containsKey(channelName)) {
+            Channel channel = unjoinedChannels.remove(channelName);
+            channels.put(channelName, channel);
+        }
+    
+        // TODO: fix
     }
 
     // TODO: User Manager? {

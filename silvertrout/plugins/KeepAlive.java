@@ -33,11 +33,13 @@ public class KeepAlive extends silvertrout.Plugin {
 
     @Override
     public void onPing(String id) {
+        System.out.println("KA: onPing(id) = (" + id + ")");
         getNetwork().getConnection().sendRaw("PONG " + id);
     }
 
     @Override
     public void onInvite(User nick, String channelName) {
+        System.out.println("KA: onInvite(n, c) = (" + nick + ", " + channelName + ")");
         getNetwork().getConnection().join(channelName);
     }
 }
