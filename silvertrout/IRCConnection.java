@@ -51,36 +51,21 @@ public class IRCConnection {
     private static final int FLOOD_MS_PER_MSG = 200;
     private AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
 
+    /**
+     * Create a new IRCConnection and connect to the server specified in network.getNetworkSettings()
+     * @param network
+     * @throws java.io.IOException
+     */
     public IRCConnection(Network network) throws IOException {
         this.network = network;
         connect();
     }
 
-    public void kick(Channel channel, User user, String reason) {
-        kick(channel.getName(), user.getNickname(), reason);
-    }
-
-    public void sendAction(Channel channel, String action) {
-        sendAction(channel.getName(), action);
-    }
-
-    public void sendPrivmsg(Channel channel, String message) {
-        sendPrivmsg(channel.getName(), message);
-    }
-
-    public void sendPrivmsg(User user, String message) {
-        sendPrivmsg(user.getNickname(), message);
-    }
-
-    public void setMode(Channel channel, User user, String mode) {
-        sendRaw("MODE " + channel.getName() + " " + mode + " " + user.getNickname());
-    }
-
-    public void part(Channel channel) {
-        part(channel.getName());
-    }
-
-    private void connect() throws UnknownHostException, IOException {
+    /**
+     * Setup the connection
+     * @throws java.io.IOException
+     */
+    private void connect() throws IOException {
         socket = new Socket(network.getNetworkSettings().getHost(), network.getNetworkSettings().getPort());
         Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), network.getNetworkSettings().getCharset()));
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), network.getNetworkSettings().getCharset()));
@@ -90,7 +75,7 @@ public class IRCConnection {
             writer.write("PASS " + network.getNetworkSettings().getPassword() + "\r\n");
         }
         writer.write("NICK " + network.getMyUser().getNickname() + "\r\n");
-        writer.write("USER " + network.getMyUser().getNickname() + " 0 * :" + network.getNetworkSettings().getRealname() + "\r\n");
+        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" + network.getNetworkSettings().getRealname() + "\r\n");
         writer.flush();
 
         // No error yet, probably means the connection was successful, start threads!
@@ -98,6 +83,61 @@ public class IRCConnection {
         senderThread.start();
         receiverThread = new ReceiverThread(reader);
         receiverThread.start();
+    }
+
+    /**
+     * Kick a user
+     * @param channel
+     * @param user
+     * @param reason
+     */
+    public void kick(Channel channel, User user, String reason) {
+        kick(channel.getName(), user.getNickname(), reason);
+    }
+
+    /**
+     * /me is coding
+     * @param channel
+     * @param action
+     */
+    public void sendAction(Channel channel, String action) {
+        sendAction(channel.getName(), action);
+    }
+
+    /**
+     * Send a message to a channel
+     * @param channel
+     * @param message
+     */
+    public void sendPrivmsg(Channel channel, String message) {
+        sendPrivmsg(channel.getName(), message);
+    }
+
+    /**
+     * Send a private message to a user
+     * @param user
+     * @param message
+     */
+    public void sendPrivmsg(User user, String message) {
+        sendPrivmsg(user.getNickname(), message);
+    }
+
+    /**
+     * Set mode of user in channel
+     * @param channel
+     * @param user
+     * @param mode
+     */
+    public void setMode(Channel channel, User user, String mode) {
+        sendRaw("MODE " + channel.getName() + " " + mode + " " + user.getNickname());
+    }
+
+    /**
+     * Leave a channel
+     * @param channel
+     */
+    public void part(Channel channel) {
+        part(channel.getName());
     }
 
     /**
@@ -119,6 +159,7 @@ public class IRCConnection {
     }
 
     /**
+     * Force a close on the connection.
      * I don't know when to use this. Might be good for something... :)
      * Difference between this and close is that close waits for the current transmission if finshed (if there is any)
      */
@@ -132,7 +173,7 @@ public class IRCConnection {
     }
 
     /**
-     * Forcing a connetion close without sending QUIT
+     * Close a connection without sending QUIT
      * Waits for current transmission to finish but does not wai for output queue to finish
      * This method is thread safe.
      */
@@ -148,10 +189,17 @@ public class IRCConnection {
         notifyDisconnect();
     }
 
+    /**
+     * Send quit to network
+     */
     public void quit() {
         sendRaw("QUIT");
     }
 
+    /**
+     * Send a quit with a message
+     * @param message
+     */
     public void quit(String message) {
         sendRaw("QUIT " + message);
     }
@@ -274,13 +322,13 @@ public class IRCConnection {
 
         private void close() throws InterruptedException {
             if (!close.getAndSet(true)) { // only call once!
-                interrupt();                
+                interrupt();
                 closingSemaphore.acquire(); // wait for writer to close.
                 floodTimer.cancel(); // why not do it here? doesn't matter I guess
             }
         }
     }
-    
+
     private class ReceiverThread extends Thread {
 
         private final BufferedReader reader;
