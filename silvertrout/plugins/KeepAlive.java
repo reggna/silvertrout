@@ -27,16 +27,17 @@ public class KeepAlive extends silvertrout.Plugin {
 
     @Override
     public void onDisconnected() {
-        getNetwork().connect(getNetwork().getName(), getNetwork().getName(), getNetwork().getPort(), getNetwork().getMyUser());
+        // no such feature
+        //getNetwork().connect();
     }
 
     @Override
     public void onPing(String id) {
-        getNetwork().sendRaw("PONG " + id);
+        getNetwork().getConnection().sendRaw("PONG " + id);
     }
 
     @Override
     public void onInvite(User nick, String channelName) {
-        getNetwork().join(channelName);
+        getNetwork().getConnection().join(channelName);
     }
 }

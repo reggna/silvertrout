@@ -18,9 +18,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- */ 
+ */
 package silvertrout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import silvertrout.settings.NetworkSettings;
 import silvertrout.settings.Settings;
@@ -44,8 +45,12 @@ public class IRC {
         }
         networks = new ArrayList<Network>();
         for (NetworkSettings networkSettings : settings.getNetworks()) {
-            User me = new User(networkSettings.getNickname(), null, null, networkSettings.getUsername(), networkSettings.getRealname(), false);
-            connect(new Network(this, networkSettings.getName(), networkSettings.getHost(), networkSettings.getPort(), me));
+            try {
+                User me = new User(networkSettings.getNickname(), null, null, networkSettings.getUsername(), networkSettings.getRealname(), false);
+                connect(new Network(this, networkSettings, me));
+            } catch (IOException e) {
+                System.err.println("Could not connect to network " + networkSettings.getName() + ": " + e.getMessage());
+            }
         }
     }
 

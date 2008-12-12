@@ -102,7 +102,7 @@ public class Logger extends silvertrout.Plugin {
     public File getFile(Channel channel) {
         try {
             /* create the folder if the folder has been deleted */
-            String dir = "jbt/plugins/Logger/" + getNetwork().getName();
+            String dir = "jbt/plugins/Logger/" + getNetwork().getNetworkSettings().getName();
             (new File(dir)).mkdirs();
 
             String file = channel.getName().substring(1) + ".log";

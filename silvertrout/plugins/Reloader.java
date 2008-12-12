@@ -40,9 +40,9 @@ public class Reloader extends silvertrout.Plugin {
             if (parts.length > 2) {
                 if (cmd.equals("!reloadplugin")) {
                     getNetwork().unloadPlugin(parts[2]);
-                    getNetwork().sendPrivmsg(user.getNickname(), parts[2] + " har avaktiverats.");
+                    getNetwork().getConnection().sendPrivmsg(user.getNickname(), parts[2] + " har avaktiverats.");
                     getNetwork().loadPlugin(parts[2]);
-                    getNetwork().sendPrivmsg(user.getNickname(), parts[2] + " har laddats.");
+                    getNetwork().getConnection().sendPrivmsg(user.getNickname(), parts[2] + " har laddats.");
                 }
             }
 

@@ -51,7 +51,7 @@ public class TitleGiver extends silvertrout.Plugin {
 
     @Override
     public void onLoad() {
-        getNetwork().sendRaw("join #it06 60D15");
+        getNetwork().getConnection().sendRaw("join #it06 60D15");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TitleGiver extends silvertrout.Plugin {
             if (channel != null) {
                 channel.sendPrivmsg(t);
             } else {
-                getNetwork().sendPrivmsg(user.getNickname(), t);
+                getNetwork().getConnection().sendPrivmsg(user.getNickname(), t);
             }
         }
     }

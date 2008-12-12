@@ -128,7 +128,7 @@ public class Channel {
      * @return  TODO
      */
     public boolean changeTopic(String topic) {
-        network.sendRaw("TOPIC " + this.name + " " + topic);
+        network.getConnection().changeTopic(this, topic);
         return true;
     }
 
@@ -138,7 +138,7 @@ public class Channel {
      * @param  message  Message to send
      */
     public void sendPrivmsg(String message) {
-        network.sendRaw("PRIVMSG " + this.name + " :" + message);
+        network.getConnection().sendPrivmsg(this, message);
     }
 
     /**
@@ -148,7 +148,7 @@ public class Channel {
      * @param  message  Action to send
      */
     public void sendAction(String action) {
-        sendPrivmsg("ACTION " + action + "");
+        network.getConnection().sendAction(this, action);
     }
 
     // TODO: boolean and fail if no operator?
@@ -160,7 +160,7 @@ public class Channel {
      */
     public void giveVoice(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " +v " + user.getNickname());
+            network.getConnection().setMode(this, user, "+v");
         }
     }
 
@@ -172,7 +172,7 @@ public class Channel {
      */
     public void deVoice(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " -v " + user.getNickname());
+            network.getConnection().setMode(this, user, "-v");
         }
     }
 
@@ -184,7 +184,7 @@ public class Channel {
      */
     public void giveOp(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " +o " + user.getNickname());
+            network.getConnection().setMode(this, user, "+o");
         }
     }
 
@@ -196,7 +196,7 @@ public class Channel {
      */
     public void deOp(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " -o " + user.getNickname());
+            network.getConnection().setMode(this, user, "-o");
         }
     }
 
@@ -209,7 +209,7 @@ public class Channel {
      */
     public void kick(User user, String reason) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("KICK " + getName() + " " + user.getNickname() + " :" + reason);
+            network.getConnection().kick(this, user, reason);
         }
     }
 
@@ -217,7 +217,7 @@ public class Channel {
      * Part from (leave) the channel.
      */
     public void part() {
-        network.sendRaw("PART " + getName());
+        network.getConnection().part(this);
     }
 
     /**
@@ -228,7 +228,7 @@ public class Channel {
      */
     public void deHalfOp(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " -h " + user.getNickname());
+            network.getConnection().setMode(this, user, "-h");
         }
     }
 
@@ -240,7 +240,7 @@ public class Channel {
      */
     public void giveHalfOp(User user) {
         if (getUsers().containsKey(user)) {
-            network.sendRaw("MODE " + getName() + " +h " + user.getNickname());
+            network.getConnection().setMode(this, user, "+h");
         }
     }
 }

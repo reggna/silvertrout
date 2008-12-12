@@ -202,4 +202,58 @@ public abstract class Plugin {
      */
     public void onDisconnected() {
     }
+
+    /**
+     * When giver gives mode (+mode) to receiver
+     * @param giver
+     * @param channel
+     * @param receiver
+     * @param mode
+     */
+    void onGiveMode(User giver, Channel channel, User receiver, char mode) {
+    }
+
+    /**
+     * We joined a channel
+     * @param c the channel we joined
+     */
+    void onJoin(Channel c) {
+    }
+
+    /**
+     * Private notice from user.
+     * Note that user may not be known in network.
+     * @param user
+     * @param message
+     */
+    void onNotice(User user, String message) {
+
+    }
+
+    /**
+     * We parted a channel
+     * @param channel the channel we parted
+     * @param message our message
+     */
+    void onPart(Channel channel, String message) {
+    }
+
+    /**
+     * Private message from user received
+     * @param user
+     * @param message
+     */
+    void onPrivmsg(User user, String message) {
+
+    }
+
+    /**
+     * When giver takes mode (-mode) from receiver
+     * @param giver
+     * @param channel
+     * @param affectedUser 
+     * @param mode
+     */
+    void onTakeMode(User giver, Channel channel, User affectedUser, char mode) {
+    }
 }

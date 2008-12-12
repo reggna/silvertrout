@@ -34,13 +34,13 @@ public class FileGeifer extends silvertrout.Plugin {
         String dir = "/home/tigge/Photos/Pictures";
 
         if (message.startsWith("!list")) {
-            getNetwork().sendPrivmsg(from.getNickname(), "List of files in " + dir + "\n");
+            getNetwork().getConnection().sendPrivmsg(from.getNickname(), "List of files in " + dir + "\n");
 
             File file = new File(dir);
             String[] fileList = file.list();
 
             for (int i = 0; i < fileList.length; i++) {
-                getNetwork().sendPrivmsg(from.getNickname(), " * " + fileList[i]);
+                getNetwork().getConnection().sendPrivmsg(from.getNickname(), " * " + fileList[i]);
             }
 
         } else if (message.startsWith("!gief")) {

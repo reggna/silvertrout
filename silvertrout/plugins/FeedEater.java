@@ -152,7 +152,7 @@ public class FeedEater extends silvertrout.Plugin {
         String description = feedItem.description;
         String link = feedItem.link;
 
-        getNetwork().sendPrivmsg(feed.channel.getName(),
+        getNetwork().getConnection().sendPrivmsg(feed.channel.getName(),
                 title + ": " + description + " - " + link);
     }
 
@@ -232,21 +232,21 @@ public class FeedEater extends silvertrout.Plugin {
         if (parts.length == 1 && command.equals("!listfeeds")) {
             System.out.println("List feeds");
             for (int i = 0; i < feeds.size(); i++) {
-                getNetwork().sendPrivmsg(to.getName(), i + ". " + feeds.get(i).title + " (" + feeds.get(i).url + " = " + feeds.get(i).lastGuid + ") - " + feeds.get(i).description);
+                getNetwork().getConnection().sendPrivmsg(to.getName(), i + ". " + feeds.get(i).title + " (" + feeds.get(i).url + " = " + feeds.get(i).lastGuid + ") - " + feeds.get(i).description);
             }
         // Add feed:
         } else if (parts.length == 2 && command.equals("!addfeed")) {
             if (add(parts[1], to)) {
                 Feed feed = feeds.get(feeds.size() - 1);
-                getNetwork().sendPrivmsg(to.getName(), "Added feed: " + feed.title + " - " + feed.description + " - " + feed.url);
+                getNetwork().getConnection().sendPrivmsg(to.getName(), "Added feed: " + feed.title + " - " + feed.description + " - " + feed.url);
             } else {
-                getNetwork().sendPrivmsg(to.getName(), "Failed to add feed");
+                getNetwork().getConnection().sendPrivmsg(to.getName(), "Failed to add feed");
             }
         } else if (command.equals("!removefeed")) {
             if (remove(Integer.parseInt(parts[1]))) {
-                getNetwork().sendPrivmsg(to.getName(), "Removed feed");
+                getNetwork().getConnection().sendPrivmsg(to.getName(), "Removed feed");
             } else {
-                getNetwork().sendPrivmsg(to.getName(), "Failed to remove feed");
+                getNetwork().getConnection().sendPrivmsg(to.getName(), "Failed to remove feed");
             }
 
         }
@@ -268,7 +268,7 @@ public class FeedEater extends silvertrout.Plugin {
                     } // Spam stop. TODO: Do a better solution. In fact convert this for
                     // each loop to using an iterator or something better.
                     else if (i > 2) {
-                        getNetwork().sendPrivmsg(feed.channel.getName(),
+                        getNetwork().getConnection().sendPrivmsg(feed.channel.getName(),
                                 (feedItems.size() - i) + " more items are not printed to " + "prevent massive spam... Sorry!");
                         break;
                     }

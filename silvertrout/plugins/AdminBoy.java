@@ -73,52 +73,52 @@ public class AdminBoy extends silvertrout.Plugin {
       // Help commands:
       } else if(parts.length >= 2 && cmd.equals("!help")) {
         if(parts.length > 2) {
-          getNetwork().sendPrivmsg(user.getNickname(), getHelp(parts[2]));
+          getNetwork().getConnection().sendPrivmsg(user, getHelp(parts[2]));
         } else {
-          getNetwork().sendPrivmsg(user.getNickname(), getHelp());
+          getNetwork().getConnection().sendPrivmsg(user, getHelp());
         }
       // Single commands: (!listplugins, !channels, etc)
       } else if(parts.length == 2) {
         if(cmd.equals("!listplugins")) {
           int number = 1;
           for(String p: getNetwork().getPlugins().keySet()) {
-            getNetwork().sendPrivmsg(user.getNickname(), "#" + (number++) + " - " + p);
+            getNetwork().getConnection().sendPrivmsg(user, "#" + (number++) + " - " + p);
           }
         } else if(cmd.equals("!channels")) {
-          getNetwork().sendPrivmsg(user.getNickname(), "I am in " + getNetwork().getChannels().size() + " channels:");
+          getNetwork().getConnection().sendPrivmsg(user, "I am in " + getNetwork().getChannels().size() + " channels:");
           for(Channel c: getNetwork().getChannels()) {
-            getNetwork().sendPrivmsg(user.getNickname(), "* " + c.getName() + " (" + c.getTopic() + ")");
+            getNetwork().getConnection().sendPrivmsg(user, "* " + c.getName() + " (" + c.getTopic() + ")");
           }
         }
 
       // Network commands:
       } else if(parts.length > 2) {
         if(cmd.equals("!join")) {
-          getNetwork().join(parts[2]);
-          getNetwork().sendPrivmsg(user.getNickname(), "Jag mår bra när jag får vara i " + parts[2] + ".");
+          getNetwork().getConnection().join(parts[2]);
+          getNetwork().getConnection().sendPrivmsg(user, "Jag mår bra när jag får vara i " + parts[2] + ".");
         } else if(cmd.equals("!part")) {
-          getNetwork().part(parts[2]);
-          getNetwork().sendPrivmsg(user.getNickname(), "Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
+          getNetwork().getConnection().part(parts[2]);
+          getNetwork().getConnection().sendPrivmsg(user, "Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
         } else if(cmd.equals("!loadplugin")) {
           getNetwork().loadPlugin(parts[2]);
-          getNetwork().sendPrivmsg(user.getNickname(), parts[2] + " har laddats.");
+          getNetwork().getConnection().sendPrivmsg(user, parts[2] + " har laddats.");
         } else if(cmd.equals("!unloadplugin")) {
           getNetwork().unloadPlugin(parts[2]);
-          getNetwork().sendPrivmsg(user.getNickname(), parts[2] +" har avaktiverats.");
+          getNetwork().getConnection().sendPrivmsg(user, parts[2] +" har avaktiverats.");
         } else if(cmd.equals("!users")) {
             Channel chan = getNetwork().getChannel(parts[2]);
-            getNetwork().sendPrivmsg(user.getNickname(), chan.getName() + " har "
+            getNetwork().getConnection().sendPrivmsg(user, chan.getName() + " har "
                 + chan.getUsers().size() + " användare");
             String  usrlst  = "";
             for(Map.Entry<User, Modes> ue: chan.getUsers().entrySet()) {
               usrlst += ue.getKey().getNickname() + "[" + ue.getValue().get() + "], ";
             }
-            getNetwork().sendPrivmsg(user.getNickname(), usrlst);
+            getNetwork().getConnection().sendPrivmsg(user, usrlst);
           }
       
       // Unknown commands:
       } else {
-        getNetwork().sendPrivmsg(user.getNickname(), "Kommandot " + cmd + " kan inte hanteras av mig");
+        getNetwork().getConnection().sendPrivmsg(user, "Kommandot " + cmd + " kan inte hanteras av mig");
       }
     
     }

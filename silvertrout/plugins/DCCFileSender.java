@@ -83,7 +83,7 @@ public class DCCFileSender implements Runnable {
 
             String ctcpMessage = CTCP.quote(message);
 
-            network.sendPrivmsg(recipient.getNickname(), ctcpMessage);
+            network.getConnection().sendPrivmsg(recipient.getNickname(), ctcpMessage);
 
             System.out.println("DCCFileSender: Sent message: " + message);
 

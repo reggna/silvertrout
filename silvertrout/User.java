@@ -41,11 +41,11 @@ public class User {
      *
      * @param nickname - The nickname to set to the new User
      */
-    public User(String nickname) {
+    User(String nickname) {
         this.nickname = nickname;
     }
 
-    public User(String nickname, String hostname, String server, String username, String realname, boolean secureConnection) {
+    User(String nickname, String hostname, String server, String username, String realname, boolean secureConnection) {
         this.nickname = nickname;
         this.hostname = hostname;
         this.server = server;

@@ -84,10 +84,10 @@ public class Quizmaster extends silvertrout.Plugin {
         int newScore = scoreManager.getScore(nick);
 
         if (newScore % 100 == 0) {
-            getNetwork().sendPrivmsg(channelName, "Einen guten Job! " + printNick(nick));
+            getNetwork().getConnection().sendPrivmsg(channelName, "Einen guten Job! " + printNick(nick));
         }
 
-        getNetwork().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". " + nick + " (" + time + " sek) har nu " + newScore + "p.");
+        getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". " + nick + " (" + time + " sek) har nu " + newScore + "p.");
     }
 
     public void loadQuestions(File f) {
@@ -131,7 +131,7 @@ public class Quizmaster extends silvertrout.Plugin {
             }
         }
 
-        getNetwork().sendPrivmsg(channelName, "En ny omgång starts med 20 utvalda" + " frågor av " + questions.size() + " totalt.");
+        getNetwork().getConnection().sendPrivmsg(channelName, "En ny omgång starts med 20 utvalda" + " frågor av " + questions.size() + " totalt.");
         while (questions.size() > 20) {
             questions.removeLast();
         }
@@ -142,7 +142,7 @@ public class Quizmaster extends silvertrout.Plugin {
     }
 
     public void endRound() {
-        getNetwork().sendPrivmsg(channelName, "Omgången är slut. Skriv !start för att" + " starta en ny omgång.");
+        getNetwork().getConnection().sendPrivmsg(channelName, "Omgången är slut. Skriv !start för att" + " starta en ny omgång.");
         running = false;
     }
 
@@ -164,14 +164,14 @@ public class Quizmaster extends silvertrout.Plugin {
         }
         startTime = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
-        getNetwork().sendPrivmsg(channelName, "" + currentQuestion.question);
-        getNetwork().sendPrivmsg(channelName, currentAnswerString);
+        getNetwork().getConnection().sendPrivmsg(channelName, "" + currentQuestion.question);
+        getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
     }
 
     public void endQuestion(String winner) {
 
         if (winner == null) {
-            getNetwork().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". Ingen lyckades svara rätt.");
+            getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". Ingen lyckades svara rätt.");
             unanswerdQuestions++;
         } else {
 
@@ -202,7 +202,7 @@ public class Quizmaster extends silvertrout.Plugin {
                 lastone = "Du har " + score + " och ligger på placering #" + pos;
             }
         }
-        getNetwork().sendPrivmsg(channelName, "Top10: " + topten + lastone);
+        getNetwork().getConnection().sendPrivmsg(channelName, "Top10: " + topten + lastone);
     }
 
     @Override
@@ -228,7 +228,7 @@ public class Quizmaster extends silvertrout.Plugin {
                 }
             } else if (message.equals("!help")) {
                 if (currentTime - statTime > 60) {
-                    getNetwork().sendPrivmsg(channelName, "Jag gillar reggna");
+                    getNetwork().getConnection().sendPrivmsg(channelName, "Jag gillar reggna");
                 }
             }
         }
@@ -254,7 +254,7 @@ public class Quizmaster extends silvertrout.Plugin {
             endQuestion(null);
             newQuestion();
         } else {
-            getNetwork().sendPrivmsg(channelName, currentAnswerString);
+            getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
         }
     }
 
@@ -308,7 +308,7 @@ public class Quizmaster extends silvertrout.Plugin {
                         for (int j = i; j < f.size() && j < i + 4; j++) {
                             m += f.get(j);
                         }
-                        getNetwork().sendRaw("MODE " + channelName + " " + m);
+                        getNetwork().getConnection().sendRaw("MODE " + channelName + " " + m);
                     }
                 }
             }
@@ -339,7 +339,7 @@ public class Quizmaster extends silvertrout.Plugin {
     public void onConnected() {
         // Join quiz channel:
         if (!getNetwork().existsChannel(channelName)) {
-            getNetwork().join(channelName);
+            getNetwork().getConnection().join(channelName);
         }
     }
 }

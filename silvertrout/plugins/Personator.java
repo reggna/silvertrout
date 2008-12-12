@@ -33,9 +33,9 @@ public class Personator extends silvertrout.Plugin {
         if (parts.length == 4 && parts[0].equals("password")) {
             String command = parts[1].toLowerCase();
             if (command.equals("!say")) {
-                getNetwork().sendPrivmsg(parts[2], parts[3]);
+                getNetwork().getConnection().sendPrivmsg(parts[2], parts[3]);
             } else if (command.equals("!action")) {
-                getNetwork().sendAction(parts[2], parts[3]);
+                getNetwork().getConnection().sendAction(parts[2], parts[3]);
             }
         }
     }

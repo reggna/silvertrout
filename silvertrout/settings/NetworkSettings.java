@@ -35,6 +35,9 @@ public class NetworkSettings {
     private String username;
     private String nickname;
     private String realname;
+    private String password = null;
+    private String charset = "UTF-8";
+    private boolean secure = false;
 
     public NetworkSettings(String name, String host, int port, String username, String nickname, String realname) {
         this.name = name;
@@ -57,6 +60,15 @@ public class NetworkSettings {
         return nickname;
     }
 
+    /**
+     * Get the require password for this connection.
+     * If there is no password needed returns null
+     * @return password if needed, otherwise null
+     */
+    public String getPassword() {
+        return password;
+    }
+
     public int getPort() {
         return port;
     }
@@ -67,6 +79,14 @@ public class NetworkSettings {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public boolean isSecure() {
+        return secure;
     }
 
     @Override

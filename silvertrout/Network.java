@@ -21,139 +21,381 @@
  */
 package silvertrout;
 
-import java.util.HashSet;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.LinkedList;
-
-import java.net.SocketException;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import silvertrout.settings.NetworkSettings;
 
 /**
  * Network class that handles connection to the network. Sending and
  * 
  * 
  */
-public class Network implements Runnable {
+public class Network {
 
-    public enum State {
-
-        CONNECTED, DISCONNECTED
-    };
-    private String name;
-    private String host;
-    private int port;
-    private User me;
-    private ArrayList<Channel> channels;
+    private final NetworkSettings networkSettings;
+    private final User me;
+    private final ArrayList<Channel> channels = new ArrayList<Channel>();
     /** nickname -> user object */
-    private Map<String, User> users;
-    private Socket socket;
-    private PrintWriter out;
-    private BufferedReader in;
-    private LinkedList<String> outputQueue;
-    private Timer timer;
-    private int ticks;
-    private ConcurrentHashMap<String, Plugin> plugins;
-    private State state;
-    private IRC irc;
+    private final Map<String, User> users = new HashMap<String, User>();
+    private final Map<String, Plugin> plugins = new ConcurrentHashMap<String, Plugin>();
+    private final IRC irc;
+    private final WorkerThread workerThread = new WorkerThread();
+    private final IRCConnection connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want
 
     /**
      * Create and connect to a new Network,
      *
-     * @param irc  - Reference to the top
-     * @param name - The name of the Network
-     * @param host - The server's ip
-     * @param port - The port to connect to
+     * @param networkSettings the settings to use for the IRCConnection
      * @param me   - Contains settings for nickname, username, realname
+     * @throws IOException if connection could not be established to network
      */
-    public Network(IRC irc, String name, String host, int port, User me) {
+    public Network(IRC irc, NetworkSettings networkSettings, User me) throws IOException {
         this.irc = irc;
-
-        // Init variables:
-        this.plugins = new ConcurrentHashMap<String, Plugin>();
-        this.outputQueue = new LinkedList<String>();
+        this.networkSettings = networkSettings;
+        this.me = me;
 
         // Load plugins:
-        for (Entry<String, Map<String, String>> plugin : getIrc().getSettings().getPluginsFor(name).entrySet()) {
+        for (Entry<String, Map<String, String>> plugin : getIrc().getSettings().getPluginsFor(networkSettings.getName()).entrySet()) {
             // settings = entry.getValue();
             loadPlugin(plugin.getKey());
         }
 
-        // Ticks executes once every second:
-        ticks = 0;
-        timer = new Timer();
-        TimerTask ticker = new TimerTask() {
-
-            @Override
-            public void run() {
-                Network.this.tick();
-            }
-        };
-        timer.schedule(ticker, 0, 1000);
-
         // Connect to server
-        connect(name, host, port, me);
-    }
-
-    public void connect(String name, String host, int port, User me) {
-
-        this.name = name;
-        this.host = host;
-        this.port = port;
-        this.channels = new ArrayList<Channel>();
-        this.users = new HashMap<String, User>();
-        this.state = State.DISCONNECTED;
-        this.me = me;
-
-        this.users.put(this.me.getNickname(), this.me);
-
-        // Connect to Server:
-        try {
-            socket = new Socket(host, port);
-            out = new PrintWriter(socket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: " + host + ":" + port);
-            e.printStackTrace();
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection.");
-            e.printStackTrace();
-            System.exit(1);
+        if (networkSettings.isSecure()) {
+            throw new UnsupportedOperationException("Secure IRC connections are not implemented");
+        } else {
+            connection = new IRCConnection(this);
         }
 
-        // Login (TODO: fix name and stuff)
-        sendRaw("NICK " + this.me.getNickname());
-        sendRaw("USER " + this.me.getUsername() + " 0 * :" + this.me.getRealname());
-
-        // Start listening thread
-        new Thread(this).start();
+        workerThread.start();
+        workerThread.setName("Network \"" + getNetworkSettings().getName() + "\"  worker thread");
     }
 
-    public void disconnect() {
-        // Set state to disconnected:
-        state = State.DISCONNECTED;
-        try {
-            in.close();
-            out.close();
-            socket.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     * Connection notifies that it is unable to fullfill its job any more.
+     * Something went wrong and the connection to the IRC server failed.
+     * This method is not thread safe (not an exception) and should be invoked by the network thread
+     */
+    void onDisconnect() {
+        // stop worker thread
+        workerThread.cancel();
+        // notify plugins
+        for (Plugin plugin : plugins.values()) {
+            plugin.onDisconnected();
         }
+    // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
+    }
+
+    /**
+     * Someone did a +mode on user in a channel
+     * @param channel
+     * @param user
+     * @param mode
+     */
+    void onGiveMode(User giver, Channel channel, User receiver, char mode) {
+        channel.getUsers().get(receiver).giveMode(mode);
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onGiveMode(giver, channel, receiver, mode);
+        }
+    }
+
+    /**
+     * Invite received from known user
+     * @param channel
+     */
+    void onInvite(User user, String channel) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onInvite(user, channel);
+        }
+    }
+
+    /**
+     * Invite received from unknown user
+     * @param channel
+     */
+    void onInvite(String nickname, String channel) {
+        onInvite(new User(nickname), channel);
+    }
+
+    /**
+     * Someone did a kick
+     * @param kicker
+     * @param channel
+     * @param receiver
+     * @param message
+     */
+    void onKick(User kicker, Channel channel, User receiver, String message) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onKick(kicker, channel, receiver, message);
+        }
+    }
+
+    /**
+     * Notice to channel received from known user
+     * @param channel
+     * @param message
+     */
+    void onNotice(User user, Channel channel, String message) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onNotice(user, channel, message);
+        }
+    }
+
+    /**
+     * private notice from known user to us received
+     * @param user sender
+     * @param message
+     */
+    void onNotice(User user, String message) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onNotice(user, message);
+        }
+    }
+
+    /**
+     * notice to channel from unknown user (the user is not in the channel)
+     * @param nickname
+     * @param channel
+     * @param message
+     */
+    void onNotice(String nickname, Channel channel, String message) {
+        onNotice(new User(nickname), channel, message);
+    }
+
+    /**
+     * private notive from unknown user
+     * @param nickname
+     * @param message
+     */
+    void onNotice(String nickname, String message) {
+        onNotice(new User(nickname), message);
+    }
+
+    /**
+     * We parted a channel
+     * @param channel
+     * @param message
+     */
+    void onPart(Channel channel, String message) {
+        removeChannel(channel.getName());
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onPart(channel, message);
+        }
+    }
+
+    /**
+     * Someone leaves a channel
+     * @param user
+     * @param channel
+     * @param message
+     */
+    void onPart(User user, Channel channel, String message) {
+        channel.delUser(user);
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onPart(user, channel, message);
+        }
+    }
+
+    /**
+     * Ping question received
+     * @param target
+     */
+    void onPing(String target) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onPing(target);
+        }
+    }
+
+    /**
+     * Private message from unknown user
+     * @param nickname
+     * @param message
+     */
+    void onPrivmsg(String nickname, String message) {
+        // do not do run addUser() .. we have no idéa of tracking if user changes nickname later.
+        onPrivmsg(new User(nickname), message);
+    }
+
+    /**
+     * On a private message from a user
+     * @param user
+     * @param message
+     */
+    void onPrivmsg(User user, String message) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onPrivmsg(user, message);
+        }
+    }
+
+    /**
+     * Message to channel
+     * @param user sender
+     * @param channel target
+     * @param message the messagte
+     */
+    void onPrivmsg(User user, Channel channel, String message) {
+        for (Plugin plugin : plugins.values()) {
+            plugin.onPrivmsg(user, channel, message);
+        }
+    }
+
+    /**
+     * Someone quits the network
+     * @param user
+     * @param message
+     */
+    void onQuit(User user, String message) {
+        for (Channel channel : channels) {
+            channel.delUser(user);
+        }
+
+        removeChannel(user.getNickname());
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onQuit(user, message);
+        }
+    }
+
+    /**
+     * Called when someone removes a mode from a user in a channel
+     * @param channel
+     * @param user
+     * @param mode
+     */
+    void onTakeMode(User taker, Channel channel, User affectedUser, char mode) {
+        channel.getUsers().get(affectedUser).takeMode(mode);
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onTakeMode(taker, channel, affectedUser, mode);
+        }
+    }
+
+    /**
+     * Unknown user joined a channel
+     * @param user
+     * @param channel
+     */
+    void onJoin(String nickname, Channel channel) {
+        User u = new User(nickname);
+        addUser(u);
+        channel.addUser(u, new Modes());
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onJoin(u, channel);
+        }
+    }
+
+    /**
+     * Known user joined a channel
+     * @param channel
+     * @param user
+     */
+    void onJoin(User user, Channel channel) {
+        channel.addUser(user, new Modes());
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onJoin(user, channel);
+        }
+    }
+
+    /**
+     * We joined a channel
+     * @param channel
+     */
+    void onJoin(String channel) {
+        if (!existsChannel(channel)) { // ignore if we are already joined
+            Channel c = new Channel(channel, this);
+
+            addChannel(c);
+
+            for (Plugin plugin : plugins.values()) {
+                plugin.onJoin(c);
+            }
+        }
+    }
+
+    /**
+     * Called when someone changes nickname
+     * @param user
+     * @param newNickname
+     */
+    void onNick(User user, String newNickname) {
+        String oldNickname = user.getNickname();
+        user.setNickname(newNickname);
+
+        for (Plugin plugin : plugins.values()) {
+            plugin.onNick(user, oldNickname);
+        }
+    }
+
+    /**
+     * Called on topic change
+     * @param channel
+     * @param newTopic
+     */
+    void onTopic(Channel channel, String newTopic) {
+        if (channel != null) {
+            String oldTopic = channel.getTopic();
+            channel.setTopic(newTopic);
+
+            for (Plugin plugin : plugins.values()) {
+                plugin.onTopic(me, channel, oldTopic);
+            }
+        }
+    }
+
+    /**
+     * Called on connection successful
+     */
+    void onConnect() {
+        for (Plugin p : getPlugins().values()) {
+            p.onConnected();
+        }
+    }
+
+    /**
+     * Called when receiving a list of names from join or names command
+     * @param channel
+     * @param nicksWithModes
+     */
+    void onNames(Channel channel, String[] nicksWithModes) {
+        for (int i = 0; i < nicksWithModes.length; i++) {
+            String nickname = nicksWithModes[i];
+
+            if (nickname.startsWith("+") || nickname.startsWith("@") || nickname.startsWith("&") || nickname.startsWith("~")) {
+                if (!existsUser(nickname.substring(1))) {
+                    addUser(new User(nickname.substring(1)));
+                }
+                if (nickname.startsWith("+")) {
+                    channel.addUser(getUser(nickname.substring(1)), new Modes("v"));
+                } else if (nickname.startsWith("@") || nickname.startsWith("&") || nickname.startsWith("~")) {
+                    channel.addUser(getUser(nickname.substring(1)), new Modes("o"));
+                }
+            } else {
+                if (!existsUser(nickname)) {
+                    addUser(new User(nickname));
+                }
+                channel.addUser(getUser(nickname), new Modes());
+            }
+        //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
+        }
+
+        // Notify plugins?
     }
 
     // TODO: User Manager? {
@@ -189,10 +431,10 @@ public class Network implements Runnable {
     /**
      * Add a user to the Network
      *
-     * @param nickname - The nickname of the user to add
+     * @param u the user object
      */
-    public void addUser(String nickname) {
-        users.put(nickname, new User(nickname));
+    void addUser(User u) {
+        users.put(u.getNickname(), u);
     }
 
     /**
@@ -225,35 +467,21 @@ public class Network implements Runnable {
     }
 
     /**
-     * Get the host the server tries to connect to
+     * Get the network settings for this connection
+     * This includes the name of the network,
+     * hostname and port of server and so on
      * @return
      */
-    public String getHost() {
-        return host;
+    public NetworkSettings getNetworkSettings() {
+        return networkSettings;
     }
 
     /**
      * Get the configured plugins for this network
      * @return the plugins
      */
-    public ConcurrentHashMap<String, Plugin> getPlugins() {
+    public Map<String, Plugin> getPlugins() {
         return plugins;
-    }
-
-    /**
-     * Get the network name
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Get the TCP port of the connection
-     * @return
-     */
-    public int getPort() {
-        return port;
     }
 
     /**
@@ -287,37 +515,22 @@ public class Network implements Runnable {
     }
 
     /**
-     * Set the topic of a channel with a specified name
+     * Add a channel in the Network.
      *
-     * @param channel - The name of the channel to change topic in
-     * @param topic - The topic to set in the channel
+     * @param channel - The the channel to add.
      */
-    /*public void setChannelTopic(String channel, String topic) {
-    for (Channel c : channels) {
-    if (c.getName().equals(channel)) {
-    c.setTopic(topic);
-    break;
-    }
-    }
-    }*/
-    /**
-     * Add and join a channel in the NetWork. If the channel previously been joined, no action is taking place.
-     *
-     * @param channel - The name of the channel to join.
-     */
-    public void addChannel(String channel) {
-        if (!existsChannel(channel)) {
-            channels.add(new Channel(channel, this));
-            System.out.println("Trying to join channel " + channel);
+    void addChannel(Channel channel) {
+        if (!existsChannel(channel.getName())) {
+            channels.add(channel);
         }
     }
 
     /**
-     * Remove and part a channel from the Network. If the user is not on the channel, no action is taking place.
+     * Remove a channel from the Network.
      *
-     * @param channel - The name of the channel to part from.
+     * @param channel - The name of the channel to remove from.
      */
-    public void removeChannel(String channel) {
+    void removeChannel(String channel) {
         for (Channel c : channels) {
             if (c.getName().equals(channel)) {
                 channels.remove(c);
@@ -382,258 +595,7 @@ public class Network implements Runnable {
         return false;
     }
 
-    /**
-     *Send a raw message to the network.
-     *
-     * @param message - the string to send to the Network
-     */
-    public synchronized void sendRaw(String message) {
-        //System.out.println("Sent packet: " + message);
-        outputQueue.add(message + "\r\n");
-    }
-
-    // Move a most of these to Channel och User: TODO TODO
-    /**
-     * Send a private message to either a user or a channel.
-     *
-     * @param to - The nick/name of the user/channel to send to
-     * @param message - The string to send
-     */
-    public synchronized void sendPrivmsg(String to, String message) {
-        sendRaw("PRIVMSG " + to + " :" + message);
-    }
-
-    /**
-     * Send an action to either a user or a channel. Trigged on the command /me action
-     *
-     * @param to - The nick/name of the user/channel to send to
-     * @param message - The action the user (you) are performing
-     */
-    public synchronized void sendAction(String to, String message) {
-        sendPrivmsg(to, "ACTION " + message + "");
-    }
-
-    /**
-     * Kick a user from a channel
-     *
-     * @param channel - The name of the Channel
-     * @param who - The nick of the user to kick from the channel
-     * @param message - The reason why the user is kicked
-     */
-    public synchronized void kick(String channel, String who, String message) {
-        sendRaw("KICK " + channel + " " + who + " :" + message);
-    }
-
-    /**
-     * Join a channel with the specified name
-     *
-     * @param channel - The name of the channel to join
-     */
-    public synchronized void join(String channel) {
-        sendRaw("JOIN " + channel);
-    }
-
-    /**
-     * Part from a channel with the specified name
-     *
-     * @param channel - The name of the channel to part from
-     */
-    public synchronized void part(String channel) {
-        sendRaw("PART " + channel);
-    }
-
-    /**
-     * Process a message to decide if the message is a commandline or a
-     * message to a channel.
-     *
-     * @param msg - The message to process.
-     */
-    public synchronized void process(Message msg) {
-
-        String cmd = msg.command;
-        User usr = getUser(msg.nickname);
-
-        // Handle replies / error (Possible TODO: move error handeling):
-        if (msg.isReply()) {
-            switch (msg.reply) {
-                case Message.RPL_TOPIC: {
-                    getChannel(msg.params.get(1)).setTopic(msg.params.get(2));
-                    break;
-                }
-                case Message.RPL_ENDOFMOTD:
-                case Message.ERR_NOMOTD: {
-                    System.out.println("!!! We are connected");
-                    // Change state of network to connected:
-                    state = State.CONNECTED;
-                    for (Plugin p : plugins.values()) {
-                        p.onConnected();
-                    }
-                    break;
-                }
-                case Message.RPL_NAMREPLY: {
-                    String[] namlist = msg.params.get(3).split("\\s");
-
-                    for (int i = 0; i < namlist.length; i++) {
-                        Channel channel = getChannel(msg.params.get(2));
-                        if (channel == null) {
-                            System.out.println("channel is null: " + msg.params.get(2) + " - " + namlist[i]);
-                            continue;
-                        }
-                        String user = namlist[i];
-
-                        if (user.startsWith("+") || user.startsWith("@") || user.startsWith("&") || user.startsWith("~")) {
-                            if (!existsUser(user.substring(1))) {
-                                addUser(user.substring(1));
-                            }
-                            if (user.startsWith("+")) {
-                                channel.addUser(getUser(user.substring(1)), new Modes("v"));
-                            } else if (user.startsWith("@") || user.startsWith("&") || user.startsWith("~")) {
-                                channel.addUser(getUser(user.substring(1)), new Modes("o"));
-                            }
-                        } else {
-                            if (!existsUser(user)) {
-                                addUser(user);
-                            }
-                            channel.addUser(getUser(user), new Modes());
-                        }
-                    //System.out.println("*** Added user " + user + " to channel " + channel.getName() + ".");
-                    }
-                    break;
-                }
-            }
-            return;
-
-        // Handle commands:
-        } else if (msg.isCommand()) {
-
-            // Pre stuff
-            // =================================================================
-            String oldTopic = new String();
-            String oldNickname = new String();
-            // Catch old topic and change it to the new one
-            if (cmd.equals("TOPIC")) {
-                Channel channel = getChannel(msg.params.get(0));
-                oldTopic = channel.getTopic();
-                channel.setTopic(msg.params.get(1));
-            // Add new user / channel
-            } else if (cmd.equals("JOIN")) {
-                if (usr == getMyUser()) {
-                    addChannel(msg.params.get(0));
-                } else {
-                    if (usr == null) {
-                        addUser(msg.nickname);
-                    }
-                    getChannel(msg.params.get(0)).addUser(getUser(msg.nickname), new Modes());
-                }
-            // Catch old nickname
-            } else if (cmd.equals("NICK")) {
-                oldNickname = usr.getNickname();
-                usr.setNickname(msg.params.get(0));
-            // TODO order, args, callback first or not?
-            } else if (cmd.equals("MODE")) {
-                // Channel
-                if (existsChannel(msg.params.get(0))) {
-                    Channel channel = getChannel(msg.params.get(0));
-                    for (int i = 1; i < msg.params.size(); i++) {
-                        if (msg.params.get(i).startsWith("+") || msg.params.get(i).startsWith("-")) {
-
-                            String modes = msg.params.get(i);
-                            int affects = modes.length() - 1;
-                            char sign = modes.charAt(0);
-
-                            for (int j = 0; j + i + 1 < msg.params.size() && j < modes.length() - 1; j++) {
-
-                                char mode = modes.charAt(j + 1);
-                                User user = getUser(msg.params.get(i + j + 1));
-
-                                /*System.out.println("trying to give " 
-                                + msg.params.get(i + j + 1) + " "
-                                + sign + " " + mode
-                                + " on channel "
-                                + channel.getName() + "(" + i
-                                + "," + j + ")");*/
-
-                                if (sign == '+') {
-                                    channel.getUsers().get(user).giveMode(mode);
-                                } else if (sign == '-') {
-                                    channel.getUsers().get(user).takeMode(mode);
-                                }
-
-                            }
-                        }
-                    }
-                // User:
-                } else {
-                    //System.out.println(msg.params.get(0) + " is not a valid " + "channel?");
-                    // TODO.. or not?
-                }
-            }
-            // Call plugin functions
-            for (Plugin p : plugins.values()) {
-                try {
-                    if (cmd.equals("TOPIC")) {
-                        p.onTopic(usr, getChannel(msg.params.get(0)), oldTopic);
-                    } else if (cmd.equals("PING")) {
-                        p.onPing(msg.params.get(0));
-                    } else if (cmd.equals("NOTICE")) {
-                        p.onNotice(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    } else if (cmd.equals("PRIVMSG")) {
-                        p.onPrivmsg(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                    } else if (cmd.equals("INVITE")) {
-                        p.onInvite(usr, msg.params.get(1));
-                    } else if (cmd.equals("KICK")) {
-                        p.onKick(usr, getChannel(msg.params.get(0)),
-                                getUser(msg.params.get(1)), msg.params.get(2));
-                    } else if (cmd.equals("JOIN")) {
-                        p.onJoin(getUser(msg.nickname), getChannel(msg.params.get(0)));
-                    } else if (cmd.equals("PART")) {
-                        if (msg.params.size() > 1) {
-                            p.onPart(usr, getChannel(msg.params.get(0)), msg.params.get(1));
-                        } else {
-                            p.onPart(usr, getChannel(msg.params.get(0)), null);
-                        }
-                    } else if (cmd.equals("QUIT")) {
-                        p.onQuit(usr, msg.params.get(0));
-                    } else if (cmd.equals("NICK")) {
-                        p.onNick(usr, oldNickname);
-                    }
-                } catch (Exception e) {
-                    //System.out.println("Plugin crashed in " + cmd + " handler:");
-                    e.getMessage();
-                    e.printStackTrace();
-                }
-            }
-
-            // Post stuff
-            // =========================================================
-            // Part - We parted, or user parted from channel we are in
-            if (cmd.equals("PART")) {
-                if (usr == getMyUser()) {
-                    removeChannel(msg.params.get(0));
-                } else {
-                    getChannel(msg.params.get(0)).delUser(usr);
-                }
-            // Quit - User quit, TODO: could this be us?
-            } else if (cmd.equals("QUIT")) {
-                for (Channel c : channels) {
-                    c.delUser(usr);
-                }
-                users.remove(usr.getNickname());
-            }
-
-        }
-    }
-
-    private synchronized void tick() {
-
-
-        // Process output queue:
-        if (!outputQueue.isEmpty() && out != null) {
-            out.write(outputQueue.pop());
-            out.flush();
-        }
-
-        // Call on tick handler in plugins
+    private void onTick(int ticks) {
         for (Plugin p : plugins.values()) {
             try {
                 p.onTick(ticks);
@@ -643,46 +605,99 @@ public class Network implements Runnable {
                 e.printStackTrace();
             }
         }
-        ticks++;
     }
 
     /**
-     * SPRING!!!
-     *
-     *
+     * Get a handle for the worker thread. This should be used by caution since
+     * this exposes the inner "pricate" class workerthread.
+     * This is used by IRCconnection to add new incommin messages for handeling.
+     * @return
      */
-    @Override
-    public void run() {
-        try {
+    public WorkerThread getWorkerThread() {
+        return workerThread;
+    }
 
-            String tmp;
-            while ((tmp = in.readLine()) != null) {
-                synchronized (this) {
-                    this.process(new Message(tmp));
-                }
-            }
-        //System.out.println("Disconnected okayly :) - We or the server ended the communication");
+    /**
+     * Get the connection to this network.
+     * Use this to send messages and other stuff
+     * @return the connection to the network
+     */
+    public IRCConnection getConnection() {
+        return connection;
+    }
 
-        } catch (SocketException e) {
-            System.out.println("Disconnected by SocketException");
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Disconnected by IOException");
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Disconnected by other Exception");
-            e.printStackTrace();
+    public class WorkerThread extends Thread {
+
+        private final ConcurrentLinkedQueue<Runnable> tasks = new ConcurrentLinkedQueue<Runnable>();
+        private final Semaphore taskSempaphore = new Semaphore(0);
+        private final IRCProcessor processor = new IRCProcessor(Network.this);
+        private final Timer tickTimer = new Timer("Tick timer");
+        private int ticks = 0;
+        private boolean stop = false;
+
+        /**
+         * Put something in queue to be invoked by the network thread.
+         * @param task thing to do
+         */
+        public void invokeLater(Runnable task) {
+            tasks.add(task);
+            taskSempaphore.release();
         }
-        synchronized (this) {
-            disconnect();
-            // Clear channels and users:
-            this.channels.clear();
-            this.users.clear();
-            // Tell all plugins:
-            for (Plugin p : plugins.values()) {
-                p.onDisconnected();
+
+        /**
+         * Process an incoming message from the IRCConnection
+         * @param msg message to process
+         */
+        public void process(final Message msg) {
+            invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    processor.process(msg);
+                }
+            });
+        }
+
+        /**
+         * Terminates the worker thread and the tick timer.
+         * Does not let the workerthread process its queue.
+         * This method is not thread safe and should be invoked by the network thread.
+         */
+        public void cancel() {
+            stop = true;
+            tickTimer.cancel();
+            workerThread.interrupt(); // will this work? I dont think so. Cancel is run by the workerThread. Doesn't matter.
+        }
+
+        @Override
+        public void run() { // Wroker thread started!
+
+            TimerTask ticker = new TimerTask() {
+
+                @Override
+                public void run() { // Executed by timer
+
+                    invokeLater(new Runnable() { // Give network thread a new task
+
+                        @Override
+                        public void run() { // Executed by network thread
+                            onTick(ticks);
+                            ticks++;
+                        }
+                    });
+                }
+            };
+            tickTimer.schedule(ticker, 0, 1000);
+
+            for (;;) {
+                try {
+                    if (!stop) {
+                        taskSempaphore.acquire();
+                        tasks.poll().run();
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
