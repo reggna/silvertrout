@@ -30,11 +30,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 
+import java.net.URISyntaxException;
+
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.Modes;
 
 import silvertrout.commons.game.ScoreManager;
+import silvertrout.settings.Settings.ConfigurationParseException;
+import silvertrout.settings.Settings;
 
 public class Quizmaster extends silvertrout.Plugin {
 
@@ -48,8 +52,13 @@ public class Quizmaster extends silvertrout.Plugin {
     private Random rand;
     private Question currentQuestion;
     private String currentAnswerString;
-    private String channelName = "#superquiz";
+    private String channelName;
     private String[] grad = {
+        "Bewerber", "Anwärter", "Schütze",
+        "Oberschütze", "Sturmmann", "Rottenführer", 
+        "Unterscharführer", "Scharführer",
+        "Oberscharführer", "Hauptscharführer",
+        "Sturmscharführer", 
         "Untersturmführer", "Obersturmführer",
         "Hauptsturmführer", "Sturmbannführer",
         "Obersturmbannführer", "Standartenführer",
@@ -66,11 +75,23 @@ public class Quizmaster extends silvertrout.Plugin {
     private long startMiliTime;
     private boolean running;
 
-    public Quizmaster() {
+    public Quizmaster() throws URISyntaxException{
 
         questions = new LinkedList<Question>();
-        scoreManager = new ScoreManager(new File("/home/tigge/Personal" + "/Programming/jbt/plugins/Quizmaster_scores"));
-
+        try{
+            scoreManager = new ScoreManager(new File(
+                    this.getClass().getResource("/silvertrout/plugins/"
+                    + "Quizmaster/Scores/score").toURI()));
+            Settings settings = new Settings();
+        } catch (ConfigurationParseException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        } catch(URISyntaxException e) {
+             throw new URISyntaxException(
+                    "/silvertrout/plugins/Quizmaster/Scores/score",
+                        "The score file could not be parsed as a"
+                        + " URI reference");
+        }
         running = false;
         rand = new Random();
     }
@@ -84,10 +105,13 @@ public class Quizmaster extends silvertrout.Plugin {
         int newScore = scoreManager.getScore(nick);
 
         if (newScore % 100 == 0) {
-            getNetwork().getConnection().sendPrivmsg(channelName, "Einen guten Job! " + printNick(nick));
+            getNetwork().getConnection().sendPrivmsg(channelName, 
+                    "Einen guten Job! " + printNick(nick));
         }
 
-        getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". " + nick + " (" + time + " sek) har nu " + newScore + "p.");
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                "Rätt svar var \"" + currentQuestion.answer + "\". " 
+                + nick + " (" + time + " sek) har nu " + newScore + "p.");
     }
 
     public void loadQuestions(File f) {
@@ -112,26 +136,22 @@ public class Quizmaster extends silvertrout.Plugin {
         Collections.shuffle(questions);
     }
 
-    public void newRound() {
-
+    public void newRound() throws URISyntaxException {
+        try{
         File qdir = new File(
                 this.getClass().getResource(
-                "/jbt/plugins/Quizmaster/Questions/").getFile());
-        //System.out.println(qdir);
-
-        //System.out.println(qdir.isDirectory());
-        //System.out.println(qdir.exists());
-        //System.out.println(qdir.canRead());
+                "/silvertrout/plugins/Quizmaster/Questions/").toURI());
 
         File[] qfiles = qdir.listFiles();
-        //System.out.println(qfiles);
         for (int i = 0; i < qfiles.length; i++) {
             if (qfiles[i].getName().endsWith(".quiz")) {
                 loadQuestions(qfiles[i]);
             }
         }
 
-        getNetwork().getConnection().sendPrivmsg(channelName, "En ny omgång starts med 20 utvalda" + " frågor av " + questions.size() + " totalt.");
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                "En ny omgång starts med 20 utvalda frågor av " 
+                + questions.size() + " totalt.");
         while (questions.size() > 20) {
             questions.removeLast();
         }
@@ -139,10 +159,18 @@ public class Quizmaster extends silvertrout.Plugin {
         newQuestion();
         running = true;
         unanswerdQuestions = 0;
+        } catch(URISyntaxException e) {
+             throw new URISyntaxException(
+                    "/silvertrout/plugins/Quizmaster/Questions/",
+                    "The question folder could not be parsed as a"
+                    + " URI reference");
+        }
     }
 
     public void endRound() {
-        getNetwork().getConnection().sendPrivmsg(channelName, "Omgången är slut. Skriv !start för att" + " starta en ny omgång.");
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                "Omgången är slut. Skriv !start för att" 
+                + " starta en ny omgång.");
         running = false;
     }
 
@@ -164,14 +192,18 @@ public class Quizmaster extends silvertrout.Plugin {
         }
         startTime = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
-        getNetwork().getConnection().sendPrivmsg(channelName, "" + currentQuestion.question);
-        getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
+        getNetwork().getConnection().sendPrivmsg(channelName, "" 
+                + currentQuestion.question);
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                currentAnswerString);
     }
 
     public void endQuestion(String winner) {
 
         if (winner == null) {
-            getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar var \"" + currentQuestion.answer + "\". Ingen lyckades svara rätt.");
+            getNetwork().getConnection().sendPrivmsg(channelName, 
+                    "Rätt svar var \"" + currentQuestion.answer 
+                    + "\". Ingen lyckades svara rätt.");
             unanswerdQuestions++;
         } else {
 
@@ -186,12 +218,13 @@ public class Quizmaster extends silvertrout.Plugin {
         String topten = new String();
         String lastone = "Du har inga poäng. :(";
         ScoreManager.Score[] topList = scoreManager.getTop(10);
-
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < topList.length; i++) {
             if (topList[i].nick.equals(sender)) {
-                lastone = printNick(sender) + " har " + topList[i].score + ". Gut gemacht!";
+                lastone = printNick(sender) + " hat " + topList[i].score 
+                        + "p. Gut gemacht!";
             }
-            topten += "#" + (i + 1) + " " + topList[i].nick + " " + topList[i].score + "p - ";
+            topten += "#" + (i + 1) + " " + topList[i].nick + " " 
+                    + topList[i].score + "p - ";
         }
 
 
@@ -199,10 +232,12 @@ public class Quizmaster extends silvertrout.Plugin {
             int pos = scoreManager.getPosition(sender);
             int score = scoreManager.getPosition(sender);
             if (pos != -1) {
-                lastone = "Du har " + score + " och ligger på placering #" + pos;
+                lastone = "Du har " + score + " och ligger på placering #" 
+                        + pos;
             }
         }
-        getNetwork().getConnection().sendPrivmsg(channelName, "Top10: " + topten + lastone);
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                "Top10: " + topten + lastone);
     }
 
     @Override
@@ -217,7 +252,11 @@ public class Quizmaster extends silvertrout.Plugin {
                 }
             } else {
                 if (message.equals("!start")) {
-                    newRound();
+                    try{
+                        newRound();
+                    } catch (URISyntaxException e){
+                        e.printStackTrace();
+                    }
                 // Start round of x questions
                 }
             }
@@ -225,10 +264,13 @@ public class Quizmaster extends silvertrout.Plugin {
                 if (currentTime - statTime > 60) {
                     printStats(user.getNickname());
                     statTime = currentTime;
+                }else{
+                    System.out.println("Spam spam spam");
                 }
             } else if (message.equals("!help")) {
                 if (currentTime - statTime > 60) {
-                    getNetwork().getConnection().sendPrivmsg(channelName, "Jag gillar reggna");
+                    getNetwork().getConnection().sendPrivmsg(channelName, 
+                            "Hilfe bitte!");
                 }
             }
         }
@@ -246,7 +288,8 @@ public class Quizmaster extends silvertrout.Plugin {
                 h++;
                 continue;
             }
-            currentAnswerString = currentAnswerString.substring(0, p) + c + currentAnswerString.substring(p + 1, l);
+            currentAnswerString = currentAnswerString.substring(0, p) + c 
+                    + currentAnswerString.substring(p + 1, l);
 
         }
 
@@ -254,7 +297,8 @@ public class Quizmaster extends silvertrout.Plugin {
             endQuestion(null);
             newQuestion();
         } else {
-            getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
+            getNetwork().getConnection().sendPrivmsg(channelName, 
+                    currentAnswerString);
         }
     }
 
@@ -308,22 +352,15 @@ public class Quizmaster extends silvertrout.Plugin {
                         for (int j = i; j < f.size() && j < i + 4; j++) {
                             m += f.get(j);
                         }
-                        getNetwork().getConnection().sendRaw("MODE " + channelName + " " + m);
+                        getNetwork().getConnection().sendRaw("MODE " 
+                                + channelName + " " + m);
                     }
                 }
             }
         }
     }
-
-    /*private boolean isTopTen(String nick) {
-    for(int i = 0; i < 10; i++) {
-    if(scores.get(i).nick.equals(nick))
-    return true;
-    }
-    return false;
-    }*/
+    
     private String printNick(String nick) {
-
         int s = scoreManager.getScore(nick) / 100;
         if (s > 0) {
             if (s > grad.length) {
@@ -341,5 +378,12 @@ public class Quizmaster extends silvertrout.Plugin {
         if (!getNetwork().existsChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
+    }
+    
+    @Override
+    public void onLoad(Map<String,String> settings){
+        channelName = settings.get("channel");
+        if(channelName == null || !channelName.startsWith("#"))
+            channelName = "#superquiz";
     }
 }

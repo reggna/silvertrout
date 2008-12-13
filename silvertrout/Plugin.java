@@ -21,6 +21,8 @@
  */
 package silvertrout;
 
+import java.util.Map;
+
 /**
  * Abstract plugin class. All new plugins should inherit this class and 
  * overload the functions they want. As default the on* handlers do nothing.
@@ -179,7 +181,7 @@ public abstract class Plugin {
      * This is the onLoad handling function. The function gets called every time
      * the plugin is loaded.
      */
-    public void onLoad() {
+    public void onLoad(Map<String, String> settings) {
     }
 
     /**

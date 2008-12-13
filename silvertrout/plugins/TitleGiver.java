@@ -50,11 +50,6 @@ public class TitleGiver extends silvertrout.Plugin {
     private static final int maxContentLength = 4096;
 
     @Override
-    public void onLoad() {
-        getNetwork().getConnection().sendRaw("join #it06 60D15");
-    }
-
-    @Override
     public void onPrivmsg(User user, Channel channel, String message) {
         List<String> s = getTitles(message);
         for (String t : s) {

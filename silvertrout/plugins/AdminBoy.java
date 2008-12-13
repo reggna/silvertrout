@@ -31,7 +31,7 @@ import java.util.Map;
 public class AdminBoy extends silvertrout.Plugin {
 
   // Password for AdminBoy
-  private String password = "password";
+  private String password;
   
   @Override
   public void onPrivmsg(User user, String message) {
@@ -122,8 +122,13 @@ public class AdminBoy extends silvertrout.Plugin {
       }
     
     }
-
   }
+  
+    @Override
+    public void onLoad(Map<String,String> settings){
+        password = settings.get("password");
+        if(password == null) password = "password";
+    }
   
   private String getHelp() {
     return "Just nu finns följande kommandon tillgängliga: !join !part " +

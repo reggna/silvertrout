@@ -35,7 +35,6 @@ public class CandyMan extends silvertrout.Plugin {
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-System.out.println("GODIS!");
         // Only in channels:
         if (channel != null) {
 

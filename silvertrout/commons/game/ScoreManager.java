@@ -118,6 +118,7 @@ public class ScoreManager {
         }
         Score[] topScores = new Score[amount];
         for (int i = 0; i < amount; i++) {
+            System.out.println(i +"\t" + scores.get(i));
             topScores[i] = scores.get(i);
         }
         return topScores;

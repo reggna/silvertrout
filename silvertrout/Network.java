@@ -635,7 +635,7 @@ public class Network {
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
                         p.setNetwork(this);
-                        p.onLoad();
+                        p.onLoad(getIrc().getSettings().getPluginSettingsFor(getNetworkSettings().getName(),name));
                         plugins.put(name, p);
                         return true;
                     }
