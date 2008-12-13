@@ -278,7 +278,6 @@ public class Network {
         }
     }
 
-    
     /**
      * Someone quits the network
      * @param user
@@ -325,11 +324,13 @@ public class Network {
     
         // Its'a me mario! (It's me joining)
         if (user == getMyUser()) {
+            System.out.println("Half-joining channel " + channelName);
             // Add channel to unjoined channels
             channel = new Channel(channelName, this);
             unjoinedChannels.put(channelName, channel);
         // Other user is joining
         } else {
+
             // Uknown channel (should not happend at all)
             if (channel == null) {
                 // FAAAAIIL: TODO: error check, this should not happend
@@ -342,8 +343,9 @@ public class Network {
                 if (user == null) {
                     user = new User(nickname, this);
                     addUser(user);
+                    System.out.println("New unknown user joining channel " + channelName);
                 }
-                
+                System.out.println("New known user " + user + " joining channel " + channel);                
                 // Add user 
                 channel.addUser(user, new Modes());
                 // Tell our fine plugins about this joyus occation and let them
@@ -379,6 +381,9 @@ public class Network {
      * @param newTopic
      */
     void onTopic(String channelName, String newTopic) {
+    
+        System.out.println("New topic for " + channelName + " is " + newTopic);
+    
         Channel channel = getChannel(channelName);
         
         if (channel != null) {
@@ -390,7 +395,7 @@ public class Network {
             }
         } else {
             // TODO: check unavaible list?
-            channel = unjoinedChannels.get(channel);
+            channel = unjoinedChannels.get(channelName);
             if(channel != null) {
                 channel.setTopic(newTopic);
             } else {
@@ -446,9 +451,10 @@ public class Network {
     }
     
     void onEndOfNames(String channelName) {
-        
+
         // We are done joining
         if(unjoinedChannels.containsKey(channelName)) {
+            System.out.println("Done half-joining channel " + channelName);
             Channel channel = unjoinedChannels.remove(channelName);
             channels.put(channelName, channel);
         }
