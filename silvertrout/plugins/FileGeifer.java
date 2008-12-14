@@ -46,7 +46,8 @@ public class FileGeifer extends silvertrout.Plugin {
         } else if (message.startsWith("!gief")) {
             File file = new File(dir + "/" + message.substring(6));
             if (file.getParent().equals(dir)) {
-                new DCCFileSender(file, from, getNetwork());
+                DCCFileSender send = new DCCFileSender(file, from, getNetwork());
+                send.startSend();
             } else {
                 System.out.println(file.getAbsoluteFile() + " is not in " + dir);
                 System.out.println(file.getParent() + " != " + dir);

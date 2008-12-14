@@ -21,13 +21,17 @@
  */
 package silvertrout.plugins;
 
-import silvertrout.Network;
-import silvertrout.User;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.UUID;
+
+import silvertrout.Network;
+import silvertrout.User;
+import silvertrout.commons.Callback;
 
 public class DCCFileSender implements Runnable {
 
@@ -38,8 +42,13 @@ public class DCCFileSender implements Runnable {
     File file;
     OutputStream os;
     FileInputStream fis;
+    Callback cb;
+    UUID id;
 
-    public DCCFileSender(File file, User recipient, Network network) {
+    final static int SOCKET_TIMEOUT = 60000; // 60s in milliseconds
+    
+    public DCCFileSender(File file, User recipient, Network network, Callback cb) {
+    	this.cb = cb;
 
         if (file.exists() && file.isFile() && file.canRead()) {
             try {
@@ -47,8 +56,8 @@ public class DCCFileSender implements Runnable {
                 this.recipient = recipient;
                 this.network = network;
                 fis = new FileInputStream(file);
+                this.id = UUID.randomUUID();
 
-                new Thread(this).start();
             } catch (java.io.FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -59,8 +68,25 @@ public class DCCFileSender implements Runnable {
     }
     // TODO: use User instead
 
+	/**
+	 * Start sending the file.
+	 * @return Unique UUID for this session.
+	 */
+	public UUID startSend() {
+		new Thread(this).start();
+		return id;
+	}
+    
+    public DCCFileSender(String filename, User recipient, Network network, Callback cb) {
+        this(new File(filename), recipient, network, cb);
+    }
+
     public DCCFileSender(String filename, User recipient, Network network) {
-        this(new File(filename), recipient, network);
+        this(new File(filename), recipient, network, null);
+    }
+    
+    public DCCFileSender(File file, User recipient, Network network) {
+        this(file, recipient, network, null);
     }
 
     @Override
@@ -71,6 +97,7 @@ public class DCCFileSender implements Runnable {
             // Set up listener:
             serverSocket = new ServerSocket();
             serverSocket.bind(null, 1);
+            serverSocket.setSoTimeout(SOCKET_TIMEOUT);
             int listenPort = serverSocket.getLocalPort();
 
             // Inform user:
@@ -88,7 +115,17 @@ public class DCCFileSender implements Runnable {
             System.out.println("DCCFileSender: Sent message: " + message);
 
             // Try to get connection:
-            socket = serverSocket.accept();
+            try{
+            	socket = serverSocket.accept();
+            }catch(SocketTimeoutException e){
+                if(cb != null){
+                	String[] arg = {"ERROR","Timeout"};
+                	cb.callback(id,arg);
+                }
+                serverSocket.close();
+                return;
+            }
+            
             os = socket.getOutputStream();
             serverSocket.close();
 
@@ -104,6 +141,12 @@ public class DCCFileSender implements Runnable {
             }
 
             System.out.println("DCCFileSender: Done sending file");
+            
+            //Call the callback
+            if(cb != null){
+            	String[] arg = {"OK"};
+            	cb.callback(id,arg);
+            }
 
         } catch (java.io.IOException e) {
             e.printStackTrace();
