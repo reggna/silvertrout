@@ -3,7 +3,7 @@
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
  * 
- *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav Sothell
+ *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
+import java.io.IOException;
+
 public class ScoreManager {
 
     public class Score implements Comparable<Score> {
@@ -47,6 +49,15 @@ public class ScoreManager {
     private File scoreFile;
 
     public ScoreManager(File scoreFile) {
+        if(!scoreFile.exists()){
+            try{
+                scoreFile.getParentFile().mkdirs();
+                scoreFile.createNewFile();
+            } catch (IOException e){
+                System.out.println("Unable to create score file");
+                e.printStackTrace();
+            }
+        }
         this.scoreFile = scoreFile;
         this.scores = new LinkedList<Score>();
 

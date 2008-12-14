@@ -1,3 +1,24 @@
+/*   _______ __ __                    _______                    __   
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+ *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
+ *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
+ * 
+ *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package silvertrout.plugins;
 
 import java.util.Collections;
@@ -40,7 +61,7 @@ public class Quizmaster extends silvertrout.Plugin {
     private Question             currentQuestion;
     private String               currentAnswerString;
     
-    private String               channelName          = "#superquizNG";
+    private String               channelName;
     private String[]             grad = {
                                     "Untersturmführer", "Obersturmführer",
                                     "Hauptsturmführer", "Sturmbannführer",
@@ -185,30 +206,34 @@ public class Quizmaster extends silvertrout.Plugin {
     }
     
     public void newRound(java.util.Collection<String> categories) {
-    
-        File qdir = new File(this.getClass().getResource(
-                "/silvertrout/plugins/Quizmaster/Questions/").getFile());
+        try{
+            File qdir = new File(this.getClass().getResource(
+                    "/silvertrout/plugins/Quizmaster/Questions/").toURI());
 
-        for(File d: qdir.listFiles()) {
-            if(categories == null || categories.contains(d.getName())) {
-                if(d.isDirectory()) {
-                    for(File f: d.listFiles()) {
-                        if(f.getName().endsWith(".quiz")) {
-                            loadQuestions(f);
+            for(File d: qdir.listFiles()) {
+                System.out.println("Begin checking directory: " +d.getName());
+                if(categories == null || categories.contains(d.getName())) {
+                    if(d.isDirectory()) {
+                        System.out.println("Checking directory: " +d.getName());
+                        for(File f: d.listFiles()) {
+                            if(f.getName().endsWith(".quiz")) {
+                                loadQuestions(f);
+                                System.out.println("Added file: " + f.getName());
+                            }
                         }
                     }
                 }
             }
+            
+            getNetwork().getConnection().sendPrivmsg(channelName, "En ny omgång"
+                    + " startas. Totalt finns " + questions.size() + " frågor.");
+            
+            unanswerdQuestions = 0;
+            running            = true;
+            newQuestion();
+        }catch(URISyntaxException e) {
+            e.printStackTrace();
         }
-        
-        getNetwork().getConnection().sendPrivmsg(channelName, "En ny omgång"
-                + " startas med 20 utvalda frågor av " 
-                + questions.size() + " totalt.");
-        while(questions.size() > 20)questions.removeLast();
-        
-        unanswerdQuestions = 0;
-        running            = true;
-        newQuestion();
     }
     
     public void endRound() {
@@ -241,7 +266,6 @@ public class Quizmaster extends silvertrout.Plugin {
     
     
     public void endQuestion(String winner) {
-        
         if(winner == null) {
             getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar"
                     + " var \"" + currentQuestion.answer + "\". Ingen"
@@ -253,7 +277,6 @@ public class Quizmaster extends silvertrout.Plugin {
             awardScore(winner);
             unanswerdQuestions = 0;
         }
-    
     }
     
     public void printStats(String sender) {    
@@ -285,7 +308,7 @@ public class Quizmaster extends silvertrout.Plugin {
     
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-        System.out.println("Stuff");
+
         if(channel != null && channel.getName().equals(channelName)) {
         
             if(running) {
@@ -300,11 +323,12 @@ public class Quizmaster extends silvertrout.Plugin {
                 
                     String[] cat = message.substring(6).split("\\s");
                 
-                    if(cat.length > 0) {
+                    /*if(cat.length > 0) {
                         newRound(java.util.Arrays.asList(cat));
                     } else {
-                        newRound(null);                    
-                    }
+                        System.out.println("INGA ATTRIBUT");*/
+                        newRound(null);
+                    //}
 
                     // Start round of x questions
                 } 
@@ -446,5 +470,11 @@ public class Quizmaster extends silvertrout.Plugin {
         if(!getNetwork().existsChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
+    }
+    
+    @Override
+    public void onLoad(Map<String,String> settings){
+        channelName = settings.get("channel");
+        if(channelName == null || !channelName.startsWith("#")) channelName = "#superquizNG";
     }
 }

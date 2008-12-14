@@ -3,7 +3,7 @@
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
  * 
- *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav Sothell
+ *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -76,7 +76,6 @@ public class IRC {
      * @param args The command line arguments is not used in this program.
      */
     public static void main(String[] args) {
-        System.out.println("SilverTrout - Version unkown");
         IRC bot = new IRC();
     }
 }
