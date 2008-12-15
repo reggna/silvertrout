@@ -93,7 +93,7 @@ public class Settings {
     public void createTemplateConfig() throws IOException, ConfigurationParseException {
         String templateConfig =
                 "<silvertrout>\n" +
-                "   <network name=\"itstud\" host=\"irc.chalmers.it\" port=\"6667\" username=\"silvertrout\" nickname=\"silvertrout\" realname=\"silvertrout\" enabled=\"true\">\n" +
+                "   <network name=\"itstud\" host=\"irc.chalmers.it\" port=\"6667\" username=\"silvertrout\" nickname=\"silvertrout\" realname=\"silvertrout\" ssl=\"true\" charset=\"UTF-8\" password=\"\" enabled=\"true\">\n" +
                 "        <plugin name=\"KeepAlive\" />\n" +
                 "        <plugin name=\"AdminBoy\">\n" +
                 "            <password>password2</password>\n" +
@@ -149,6 +149,9 @@ public class Settings {
             Node usernameNode = nnm.getNamedItem("username");
             Node nickNode = nnm.getNamedItem("nickname");
             Node realNode = nnm.getNamedItem("realname");
+            Node sslNode = nnm.getNamedItem("ssl");
+            Node charsetNode = nnm.getNamedItem("charset");
+            Node passwordNode = nnm.getNamedItem("password");
 
             String name;
             String host;
@@ -156,6 +159,9 @@ public class Settings {
             String username;
             String nickname;
             String realname;
+            boolean ssl = false;
+            String charset = "ISO-8859-1";
+            String password = null;
 
             if (enabledNode != null && enabledNode.getNodeValue().length() > 0) {
                 if (!Boolean.parseBoolean(enabledNode.getNodeValue())) {
@@ -208,7 +214,20 @@ public class Settings {
                 realname = realNode.getNodeValue();
             }
 
-            NetworkSettings networkSetting = new NetworkSettings(name, host, port, username, nickname, realname);
+            if (sslNode != null && sslNode.getNodeValue().length() > 0 && !sslNode.getNodeValue().equalsIgnoreCase("false")) {
+                ssl = true;
+            }
+
+            if (charsetNode != null && charsetNode.getNodeValue().length() > 0) {
+                charset = charsetNode.getNodeValue();
+            }
+
+            if (passwordNode != null && passwordNode.getNodeValue().length() > 0) {
+                password = passwordNode.getNodeValue();
+            }
+
+
+            NetworkSettings networkSetting = new NetworkSettings(name, host, port, username, nickname, realname, password, charset, ssl);
             networks.add(networkSetting);
             // Done with network config.
 
@@ -295,7 +314,7 @@ public class Settings {
      */
     public Map<String, String> getPluginSettingsFor(String networkName, String pluginName) {
         Map<String, Map<String, String>> pluginsInNetwork = getPluginsFor(networkName);
-        if(pluginsInNetwork != null) {
+        if (pluginsInNetwork != null) {
             return pluginsInNetwork.get(pluginName);
         }
         return null;

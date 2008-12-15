@@ -28,7 +28,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -43,13 +42,13 @@ import java.util.logging.Logger;
  */
 public class IRCConnection {
 
-    private Network network;
-    private Socket socket;
+    protected Network network;
+    protected Socket socket;
     private SenderThread senderThread;
     private ReceiverThread receiverThread;
     private static final int FLOOD_BURST = 5;
     private static final int FLOOD_MS_PER_MSG = 200;
-    private AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
+    private final AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
 
     /**
      * Create a new IRCConnection and connect to the server specified in network.getNetworkSettings()
@@ -59,30 +58,43 @@ public class IRCConnection {
     public IRCConnection(Network network) throws IOException {
         this.network = network;
         connect();
+        setupConnection();
     }
 
     /**
-     * Setup the connection
+     * Setup the connection, register and start the threads
+     * 
      * @throws java.io.IOException
      */
-    private void connect() throws IOException {
+    protected void connect() throws IOException {
         socket = new Socket(network.getNetworkSettings().getHost(), network.getNetworkSettings().getPort());
+    }
+
+    /**
+     * Register and create the threads
+     * @throws java.io.IOException
+     */
+    private void setupConnection() throws IOException {
         Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), network.getNetworkSettings().getCharset()));
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), network.getNetworkSettings().getCharset()));
 
         // Do registration before we start any threads. This will enable some more notifications of connection failiures.
-        if (network.getNetworkSettings().getPassword() != null) {
-            writer.write("PASS " + network.getNetworkSettings().getPassword() + "\r\n");
-        }
-        writer.write("NICK " + network.getMyUser().getNickname() + "\r\n");
-        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" + network.getNetworkSettings().getRealname() + "\r\n");
-        writer.flush();
+        register(writer);
 
         // No error yet, probably means the connection was successful, start threads!
         senderThread = new SenderThread(writer);
         senderThread.start();
         receiverThread = new ReceiverThread(reader);
         receiverThread.start();
+    }
+
+    protected void register(Writer writer) throws IOException {
+        if (network.getNetworkSettings().getPassword() != null) {
+            writer.write("PASS " + network.getNetworkSettings().getPassword() + "\r\n");
+        }
+        writer.write("NICK " + network.getMyUser().getNickname() + "\r\n");
+        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" + network.getNetworkSettings().getRealname() + "\r\n");
+        writer.flush();
     }
 
     /**

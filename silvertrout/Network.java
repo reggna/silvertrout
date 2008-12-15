@@ -22,7 +22,6 @@
 package silvertrout;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -83,7 +82,7 @@ public class Network {
 
         // Connect to server
         if (networkSettings.isSecure()) {
-            throw new UnsupportedOperationException("Secure IRC connections are not implemented");
+            connection = new SecureIRCConnection(this);
         } else {
             connection = new IRCConnection(this);
         }

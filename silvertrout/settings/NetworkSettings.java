@@ -34,17 +34,32 @@ public class NetworkSettings {
     private String username;
     private String nickname;
     private String realname;
-    private String password = null;
-    private String charset = "UTF-8";
-    private boolean secure = false;
+    private String password;
+    private String charset;
+    private boolean secure;
 
-    public NetworkSettings(String name, String host, int port, String username, String nickname, String realname) {
+    /**
+     * Create a network setting
+     * @param name Name of the network
+     * @param host The host of the IRC server
+     * @param port The port of the IRC server
+     * @param username Username of user
+     * @param nickname Nickname
+     * @param realname "Real name" or "Ircname"
+     * @param password Password for connection, set null if no password
+     * @param charset charset of connection, eg. UTF-8 or iso-8859-1
+     * @param secure set to true to use SSL connection
+     */
+    public NetworkSettings(String name, String host, int port, String username, String nickname, String realname, String password, String charset, boolean secure) {
         this.name = name;
         this.host = host;
         this.port = port;
         this.username = username;
         this.nickname = nickname;
         this.realname = realname;
+        this.password = password;
+        this.charset = charset;
+        this.secure = secure;
     }
 
     public String getHost() {

@@ -43,7 +43,6 @@ public class IRCProcessor {
 
         // TODO: crash here makes bot unresponsive!
         String cmd = msg.command;
-        String nck = msg.nickname;
         User user = network.getUser(msg.nickname);
 
         // Handle replies / error (Possible TODO: move error handeling):
@@ -104,7 +103,7 @@ public class IRCProcessor {
                         if (msg.params.get(i).startsWith("+") || msg.params.get(i).startsWith("-")) {
 
                             String modes = msg.params.get(i);
-                            int affects = modes.length() - 1;
+                            //int affects = modes.length() - 1;
                             char sign = modes.charAt(0);
 
                             for (int j = 0; j + i + 1 < msg.params.size() && j < modes.length() - 1; j++) {
