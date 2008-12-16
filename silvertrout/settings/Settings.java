@@ -93,7 +93,7 @@ public class Settings {
     public void createTemplateConfig() throws IOException, ConfigurationParseException {
         String templateConfig =
                 "<silvertrout>\n" +
-                "   <network name=\"itstud\" host=\"irc.chalmers.it\" port=\"6667\" username=\"silvertrout\" nickname=\"silvertrout\" realname=\"silvertrout\" ssl=\"true\" charset=\"UTF-8\" password=\"\" enabled=\"true\">\n" +
+                "   <network name=\"itstud\" host=\"irc.chalmers.it\" port=\"9999\" username=\"silvertrout\" nickname=\"silvertrout\" realname=\"silvertrout\" ssl=\"true\" charset=\"UTF-8\" password=\"\" enabled=\"true\">\n" +
                 "        <plugin name=\"KeepAlive\" />\n" +
                 "        <plugin name=\"AdminBoy\">\n" +
                 "            <password>password2</password>\n" +
