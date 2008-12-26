@@ -44,19 +44,18 @@ import silvertrout.settings.NetworkSettings;
  */
 public class Network {
 
-    private final NetworkSettings      networkSettings;
-    private final User                 me;
-    /** nickname -> user object */
-    private final Map<String, Channel> channels         = new HashMap<String, Channel>();
+    private final NetworkSettings networkSettings;
+    private final User me;
+    private final Map<String, Channel> channels = new HashMap<String, Channel>();
     private final Map<String, Channel> unjoinedChannels = new HashMap<String, Channel>();
-    
-    private final Map<String, User>    users            = new HashMap<String, User>();
-    private final Map<String, Plugin>  plugins          = new ConcurrentHashMap<String, Plugin>();
-    private final IRC                  irc;
-    private final IRCConnection        connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want
-    private final WorkerThread         workerThread     = new WorkerThread();
-
-    private       String               motd             = new String();
+    private final Map<String, User> users = new HashMap<String, User>();
+    private final Map<String, Plugin> plugins = new ConcurrentHashMap<String, Plugin>();
+    private final IRC irc;
+    private final IRCConnection connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want
+    private WorkerThread workerThread;
+    private String motd = new String();
+    /** Indicator of exception frequenzy. 0 is good. Every exception adds one and one is removed every tick() */
+    private int exceptionFrequenzy = 0;
 
     /**
      * Create and connect to a new Network,
@@ -66,18 +65,19 @@ public class Network {
      * @throws IOException if connection could not be established to network
      */
     public Network(IRC irc, NetworkSettings networkSettings, User me) throws IOException {
-        this.irc             = irc;
+        this.irc = irc;
         this.networkSettings = networkSettings;
-        this.me              = me;
-        
-        
+        this.me = me;
+
+
         // Load plugins:
         for (Entry<String, Map<String, String>> plugin : getIrc().getSettings().getPluginsFor(networkSettings.getName()).entrySet()) {
             // settings = entry.getValue();
-            if(loadPlugin(plugin.getKey()))
+            if (loadPlugin(plugin.getKey())) {
                 System.out.println("Plugin loaded: " + plugin.getKey());
-            else
+            } else {
                 System.out.println("Unable to load plugin: " + plugin.getKey());
+            }
         }
 
         // Connect to server
@@ -87,14 +87,50 @@ public class Network {
             connection = new IRCConnection(this);
         }
 
-        workerThread.start();
+        createWorkerThread();
+    }
+
+    private void createWorkerThread() {
+        if (workerThread != null && !workerThread.isStop()) {
+            throw new IllegalStateException("Can only start one instance of workerthread for network \"" + getNetworkSettings().getName() + "\"!");
+        }
+
+        workerThread = new WorkerThread();
         workerThread.setName("Network \"" + getNetworkSettings().getName() + "\"  worker thread");
+
+        workerThread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                workerThread.cancel();
+                exceptionFrequenzy++;
+                System.out.println("*** Exception occured in network \"" + getNetworkSettings().getName() + "\": " + e);
+                System.out.println("*** Exception frequenzy: " + exceptionFrequenzy);
+
+                e.printStackTrace();
+
+                if(exceptionFrequenzy >= 3) { // number greater than 1. Number found by injecting errors by messages. 3 seem to be a good number.
+                    System.out.println("*** Too many exceptions! Closing network \"" + getNetworkSettings().getName() + "\"!");
+                    getConnection().forceClose();
+                    return;
+                }
+
+                System.out.println("*** Creating new worker thread...");
+
+                createWorkerThread();
+
+                System.out.println("*** New worker thread for network \"" + getNetworkSettings().getName() + "\" started!");
+            }
+        });
+
+        workerThread.start();
     }
 
     /**
      * Connection notifies that it is unable to fullfill its job any more.
      * Something went wrong and the connection to the IRC server failed.
      * This method is not thread safe (not an exception) and should be invoked by the network thread
+     * What happens if a thread cancels itself? exception?
      */
     void onDisconnect() {
         // stop worker thread
@@ -107,15 +143,14 @@ public class Network {
     // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
     }
 
-
     void onNoMotd() {
         onEndOfMotd();
     }
-    
+
     void onEndOfMotd() {
         onConnect();
     }
-    
+
     void onMotd(String motdLine) {
         motd += motdLine + "\n";
     }
@@ -249,26 +284,26 @@ public class Network {
      * @param message
      */
     void onPrivmsg(String from, String to, String message) {
-    
+
         // Private message 
-        if(to.equals(getMyUser().getNickname())) {
+        if (to.equals(getMyUser().getNickname())) {
             User user = getUser(from);
             // Unknown user
-            if(user == null) {
+            if (user == null) {
                 user = new User(from, this);
-            } 
+            }
             for (Plugin plugin : plugins.values()) {
                 plugin.onPrivmsg(user, message);
             }
         // To channel
         } else {
             Channel channel = getChannel(to);
-            User    user    = getUser(from);
-            
-            if(user != null && channel != null) {
+            User user = getUser(from);
+
+            if (user != null && channel != null) {
                 for (Plugin plugin : plugins.values()) {
                     plugin.onPrivmsg(user, channel, message);
-                }   
+                }
             } else {
                 // TODO: should not happend
                 System.out.println("Message from unkown person or to unknown channel");
@@ -287,7 +322,7 @@ public class Network {
         for (Channel channel : channels.values()) {
             channel.delUser(user);
         }
-        
+
         /* remove user from user list */
         removeUser(user.getNickname());
 
@@ -317,10 +352,10 @@ public class Network {
      * @param channel
      */
     void onJoin(String nickname, String channelName) {
-        
-        User    user    = getUser(nickname);
+
+        User user = getUser(nickname);
         Channel channel = getChannel(channelName);
-    
+
         // Its'a me mario! (It's me joining)
         if (user == getMyUser()) {
             System.out.println("Half-joining channel " + channelName);
@@ -344,7 +379,7 @@ public class Network {
                     addUser(user);
                     System.out.println("New unknown user joining channel " + channelName);
                 }
-                System.out.println("New known user " + user + " joining channel " + channel);                
+                System.out.println("New known user " + user + " joining channel " + channel);
                 // Add user 
                 channel.addUser(user, new Modes());
                 // Tell our fine plugins about this joyus occation and let them
@@ -353,9 +388,9 @@ public class Network {
                     plugin.onJoin(user, channel);
                 }
             }
-        }    
+        }
     }
-    
+
     /**
      * Called when someone changes nickname
      * @param nickname
@@ -364,9 +399,9 @@ public class Network {
     void onNick(String nickname, String newNickname) {
 
         // TODO: can this happend without a valid user?
-        User   user        = getUser(nickname);
+        User user = getUser(nickname);
         String oldNickname = user.getNickname();
-        
+
         user.setNickname(newNickname);
 
         for (Plugin plugin : plugins.values()) {
@@ -380,11 +415,11 @@ public class Network {
      * @param newTopic
      */
     void onTopic(String channelName, String newTopic) {
-    
+
         System.out.println("New topic for " + channelName + " is " + newTopic);
-    
+
         Channel channel = getChannel(channelName);
-        
+
         if (channel != null) {
             String oldTopic = channel.getTopic();
             channel.setTopic(newTopic);
@@ -395,10 +430,10 @@ public class Network {
         } else {
             // TODO: check unavaible list?
             channel = unjoinedChannels.get(channelName);
-            if(channel != null) {
+            if (channel != null) {
                 channel.setTopic(newTopic);
             } else {
-                System.out.println("Error: Topic for non joined and non unjoined channel " + channelName); 
+                System.out.println("Error: Topic for non joined and non unjoined channel " + channelName);
             }
         }
     }
@@ -420,11 +455,11 @@ public class Network {
      */
     void onNames(String channelName, String[] nicksWithModes) {
         Channel channel = getChannel(channelName);
-        
-        if(channel == null) {
+
+        if (channel == null) {
             channel = unjoinedChannels.get(channelName);
         }
-        
+
         for (int i = 0; i < nicksWithModes.length; i++) {
             String nickname = nicksWithModes[i];
 
@@ -446,19 +481,19 @@ public class Network {
         //System.out.println("*** Added user " + user + " to c " + c.getName() + ".");
         }
 
-        // Notify plugins?
+    // Notify plugins?
     }
-    
+
     void onEndOfNames(String channelName) {
 
         // We are done joining
-        if(unjoinedChannels.containsKey(channelName)) {
+        if (unjoinedChannels.containsKey(channelName)) {
             System.out.println("Done half-joining channel " + channelName);
             Channel channel = unjoinedChannels.remove(channelName);
             channels.put(channelName, channel);
         }
-    
-        // TODO: fix
+
+    // TODO: fix
     }
 
     // TODO: User Manager? {
@@ -481,13 +516,13 @@ public class Network {
     public User getUser(String nickname) {
         return users.get(nickname);
     }
-    
+
     /**
      * Remove a User from the user list
      *
      * @param nickname - The nickname of the user to delete
      */
-    private void removeUser(String nickname){
+    private void removeUser(String nickname) {
         users.remove(nickname);
     }
 
@@ -593,8 +628,9 @@ public class Network {
      * @param channel - The name of the channel to remove from.
      */
     void removeChannel(String channel) {
-        if(channels.remove(channel) != null)
+        if (channels.remove(channel) != null) {
             System.out.println("Parting from channel " + channel);
+        }
     }
     // } END CHANNEL MANAGER (TODO ? )
 
@@ -640,7 +676,7 @@ public class Network {
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
                         p.setNetwork(this);
-                        p.onLoad(getIrc().getSettings().getPluginSettingsFor(getNetworkSettings().getName(),name));
+                        p.onLoad(getIrc().getSettings().getPluginSettingsFor(getNetworkSettings().getName(), name));
                         plugins.put(name, p);
                         return true;
                     }
@@ -652,7 +688,20 @@ public class Network {
         return false;
     }
 
+    /**
+     * Get an indicator of the number of exceptions occuring in this network's working thread.
+     * 0 is good. Every exception adds one and every tick() removes one.
+     */
+    public int getExceptionFrequenzy() {
+        return exceptionFrequenzy;
+    }
+
+
     private void onTick(int ticks) {
+        if(exceptionFrequenzy > 0) {
+            exceptionFrequenzy--;
+        }
+
         for (Plugin p : plugins.values()) {
             try {
                 p.onTick(ticks);
@@ -726,6 +775,13 @@ public class Network {
             workerThread.interrupt(); // will this work? I dont think so. Cancel is run by the workerThread. Doesn't matter.
         }
 
+        /**
+         * Is the thread stopped?
+         */
+        public boolean isStop() {
+            return stop;
+        }
+
         @Override
         public void run() { // Wroker thread started!
 
@@ -744,16 +800,19 @@ public class Network {
                     });
                 }
             };
-            tickTimer.schedule(ticker, 0, 1000);
+            tickTimer.schedule(ticker, 1000, 1000); // wait one second before first tick to make the exceptionFrequenzy work.
 
             for (;;) {
                 try {
                     if (!stop) {
                         taskSempaphore.acquire();
                         tasks.poll().run();
+                    } else {
+                        return;
                     }
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+                    cancel(); // stop the thread and die...
                 }
             }
         }

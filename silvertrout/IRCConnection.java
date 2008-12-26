@@ -362,12 +362,14 @@ public class IRCConnection {
                     if (!close.get()) {
                         Logger.getLogger(IRCConnection.class.getName()).log(Level.SEVERE, null, ex);
                         notifyDisconnect();
+                        return;
                     } else {
                         try {
                             reader.close();
                         } catch (IOException ex1) {
                         } finally {
                             closingSemaphore.release(); // let close return
+                            return;
                         }
                     }
                 }
