@@ -133,6 +133,15 @@ public class IRCConnection {
     public void sendPrivmsg(User user, String message) {
         sendPrivmsg(user.getNickname(), message);
     }
+    
+    /**
+     * Send a notice to a user
+     * @param user
+     * @param message
+     */
+    public void sendNotice(User user, String message){
+    	sendNotice(user.getNickname(), message);
+    }
 
     /**
      * Set mode of user in channel
@@ -234,6 +243,15 @@ public class IRCConnection {
     public synchronized void sendPrivmsg(String to, String message) {
         sendRaw("PRIVMSG " + to + " :" + message);
     }
+    
+    /**
+     * Sends a notice to a user.
+     * @param to The nick to sent to
+     * @param message The message to send
+     */
+    public synchronized void sendNotice(String to, String message){
+    	sendRaw("NOTICE " + to + " :" + message);
+    }
 
     /**
      * Kick a user from a channel
@@ -246,6 +264,11 @@ public class IRCConnection {
         sendRaw("KICK " + channel + " " + who + " :" + message);
     }
 
+    /**
+     * Sets the topic of a channel
+     * @param channel The channel to change
+     * @param topic The new topic
+     */
     void changeTopic(Channel channel, String topic) {
         sendRaw("TOPIC " + channel.getName() + " " + topic);
     }

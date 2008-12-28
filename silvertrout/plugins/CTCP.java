@@ -21,6 +21,7 @@
  */
 package silvertrout.plugins;
 
+import silvertrout.BuildInfo;
 import silvertrout.Channel;
 import silvertrout.User;
 
@@ -108,6 +109,13 @@ public class CTCP extends silvertrout.Plugin {
 
                     new DCCFileReciever(name, size, host, port);
                 }
+            }else if(parts[0].equals("VERSION")){
+            	//For more detailed version reply:
+            	//Properties props = System.getProperties();
+            	//getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version + " using " + props.getProperty("java.vm.name") + " " + props.getProperty("java.vm.version") + " on " + props.getProperty("os.name") + " " + props.getProperty("os.version"))); //TODO
+            	
+            	//For normal version reply:
+            	getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version )); //TODO
             } else {
                 /*
                 case "ACTION"     :

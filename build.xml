@@ -1,0 +1,33 @@
+<!-- Generate a java class with the current svn revision number -->
+<project>
+	<!-- <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpath="C:\Program Files\eclipse\plugins\org.apache.ant_1.7.0.v200803061910\lib" /> -->
+	<echo>Generate build info class...</echo>
+	<taskdef resource="svntask.properties" />
+	<svn>
+		<status path="${basedir}\silvertrout\BuildInfo.java" revisionProperty="svn.revision" />
+	</svn>
+	<tstamp>
+	    <format property="TODAY" pattern="EEE, d-MMMM-yyyy HH:mm:ss z" locale="ENGLISH, GERMANY"/>
+	  </tstamp>
+	<echo>Virtual PVT Cell Revision: ${svn.revision}</echo>
+	<echo>Time stamp ${TODAY}</echo>
+	<echo>Write build info to file ${basedir}\silvertrout\BuildInfo.java</echo>
+	<!-- the source code of the java class -->
+	<echo file="${basedir}\silvertrout\BuildInfo.java">
+/**
+ * DONT EDIT THIS FILE DIRECTLY!
+ * Generated from ANT-script in build.xml
+ */
+package silvertrout;
+public class BuildInfo {
+	public static final String majorVersion = "1";
+	public static final String minorVersion = "0";
+	public static final String programName = "SilverTrout";
+	
+	public static final String revisionNumber="${svn.revision}";
+	public static final String timeStamp="${TODAY}";
+	
+	public static final String version = majorVersion + "." + minorVersion + "." + revisionNumber;
+}
+	</echo>
+</project>
