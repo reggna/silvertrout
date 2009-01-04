@@ -62,14 +62,19 @@ public class Quizmaster extends silvertrout.Plugin {
     private String               currentAnswerString;
     
     private String               channelName;
-    private String[]             grad = {
-                                    "Untersturmführer", "Obersturmführer",
-                                    "Hauptsturmführer", "Sturmbannführer",
-                                    "Obersturmbannführer", "Standartenführer",
-                                    "Oberführer", "Brigadeführer",
-                                    "Gruppenführer", "Obergruppenführer",
-                                    "Oberstgruppenführer", "Reichsführer-SS"
-                                 };
+    private String[] grad = {
+                                "Bewerber", "Anwärter", "Schütze",
+                                "Oberschütze", "Sturmmann", "Rottenführer", 
+                                "Unterscharführer", "Scharführer",
+                                "Oberscharführer", "Hauptscharführer",
+                                "Sturmscharführer", 
+                                "Untersturmführer", "Obersturmführer",
+                                "Hauptsturmführer", "Sturmbannführer",
+                                "Obersturmbannführer", "Standartenführer",
+                                "Oberführer", "Brigadeführer",
+                                "Gruppenführer", "Obergruppenführer",
+                                "Oberstgruppenführer", "Reichsführer-SS"
+    };
     private int                  questionTime         = 60;
     private int                  hintTime             = 10;
     private int                  startTime;
@@ -261,7 +266,6 @@ public class Quizmaster extends silvertrout.Plugin {
         startTime     = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
         getNetwork().getConnection().sendPrivmsg(channelName, "" + currentQuestion.question);
-        getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
     }
     
     
@@ -374,26 +378,30 @@ public class Quizmaster extends silvertrout.Plugin {
     }
     
     public void giveHint() {
-        int l = currentAnswerString.length();
-        int h = (int)Math.ceil((double)l / 16.0);
-
-        for(int i = 0; i < h && i < 150; i++) {
-            int    p = rand.nextInt(l);
-            char c = currentQuestion.answer.charAt(p);
-            
-            if(currentAnswerString.charAt(p) == c) {
-                h++; continue;
-            }
-            currentAnswerString = currentAnswerString.substring(0, p) + c
-                    + currentAnswerString.substring(p + 1, l);
-
-        }
-        
-        if(currentAnswerString.equals(currentQuestion.answer)) {
-            endQuestion(null);
-            newQuestion();
-        } else {
+        if(currentTime == startTime + hintTime){
             getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
+        } else {
+            int l = currentAnswerString.length();
+            int h = (int)Math.ceil((double)l / 16.0);
+
+            for(int i = 0; i < h && i < 150; i++) {
+                int    p = rand.nextInt(l);
+                char c = currentQuestion.answer.charAt(p);
+                
+                if(currentAnswerString.charAt(p) == c) {
+                    h++; continue;
+                }
+                currentAnswerString = currentAnswerString.substring(0, p) + c
+                        + currentAnswerString.substring(p + 1, l);
+
+            }
+            
+            if(currentAnswerString.equals(currentQuestion.answer)) {
+                endQuestion(null);
+                newQuestion();
+            } else {
+                getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
+            }
         }
     }
     
