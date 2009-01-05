@@ -1,0 +1,80 @@
+    _______ __ __                    _______                    __   
+   |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+   |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
+   |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
+  
+   Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
+  
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+  
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+  
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+ 
+What is SilverTrout?
+--------------------------------------------------------------------------------
+SilverTrout is a IRC bot written in java published under GNU General Public 
+License (read the state above). 
+This package contains all basic functionalities and an extensive potential 
+with its easy implemented plugin system. It also contains some prearranged 
+plugins with the most common functionalities.
+
+
+To build SilverTrout from source code:
+--------------------------------------------------------------------------------
+SilverTrout and its plugins are written in Java 6.0 you will need the 
+Java Development Kit (JDK) to compile the source code. The latest version of 
+JDK may be found at Sun Microsystem’s web page: 
+http://java.sun.com/javase/downloads/index.jsp
+
+When you have installed JDK and ensured that your PATH variable is correctly 
+configured run the make file that is created for your system:
+  Windows: make.bat
+  *nix   : make.sh
+
+
+Configure SilverTrout:
+--------------------------------------------------------------------------------
+Start SilverTrout by executing the command:
+  java silvertrout.IRC
+The first time SilverTrout is executed it will create a template configuration
+file called config.xml and by changing this file you may customize SilverTrout 
+to work as you want it to.
+The xml configuration file should only contain xml elements and attributes. By 
+looking in the template file you’ll get the grip on how the file should be 
+formatted.
+
+
+Configure plugins:
+--------------------------------------------------------------------------------
+Some plugins have extended configuration abilities and may take input from the 
+configuration file. Examples:
+
+ <plugin name="XDCCServer">
+  <folder>C:\Documents and Settings\Greger\name\Skrivbord\folder</folder>
+  <slots>3</slots>
+ </plugin>
+ <plugin name="Quizmaster">
+  <channel>#quizchannel</channel>
+ </plugin> 
+ <plugin name="AdminBoy">
+  <password>mypassword</password>
+ </plugin>
+
+
+Start SilverTrout:
+--------------------------------------------------------------------------------
+Starting SilverTrout works the same way in every system with java capabilities. 
+Simply run silvertrout.IRC by standing in the base directory and type:
+  java silvertrout.IRC
+
+
