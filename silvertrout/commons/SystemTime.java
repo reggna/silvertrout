@@ -29,7 +29,7 @@ public class SystemTime {
         /* get current time */
         GregorianCalendar c = new GregorianCalendar();
         return c.get(GregorianCalendar.YEAR) + "-" +
-                intToStringer(c.get(GregorianCalendar.MONTH)) + "-" +
+                intToStringer(c.get(GregorianCalendar.MONTH)+1) + "-" +
                 intToStringer(c.get(GregorianCalendar.DAY_OF_MONTH)) + " " +
                 intToStringer(c.get(GregorianCalendar.HOUR_OF_DAY)) + ":" +
                 intToStringer(c.get(GregorianCalendar.MINUTE)) + ":" +

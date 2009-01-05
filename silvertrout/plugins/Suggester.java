@@ -54,7 +54,7 @@ public class Suggester extends silvertrout.Plugin {
     private static final String connection = "http";
     private static final String server = "google.se";
     private static final String file = "/search?&q=";
-    /* Max content length (in bytes) to grab to check for header */
+    /* Max content length (in bytes) to grab to check for suggestions */
     private static final int maxContentLength = 16384;
     /* A list containing words that will not be checked */
     private HashSet<String> blackList;
@@ -74,16 +74,14 @@ public class Suggester extends silvertrout.Plugin {
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-        /* restrict to the channel #it06 for test purpose */
-        if (channel == null || !channel.getName().equals("#it06")) {
-            return;
-        }
         for (String s : message.split(" ")) {
             /* check if the message contains a username, if so: change the message */
             /* to something in the blacklist */
-            for (User u : channel.getUsers().keySet()) {
-                if (s.contains(u.getNickname())) {
-                    s = "hej";
+            if(channel != null){
+                for (User u : channel.getUsers().keySet()) {
+                    if (s.contains(u.getNickname())) {
+                        s = "hej";
+                    }
                 }
             }
 
@@ -103,7 +101,8 @@ public class Suggester extends silvertrout.Plugin {
 
             /* if we have found a suggestion, print it to the channel */
             if (t != null) {
-                channel.sendPrivmsg(t);
+                if(channel == null && user != null) user.sendPrivmsg(t);
+                else channel.sendPrivmsg(t);
             }
         }
     }

@@ -242,6 +242,7 @@ public class IRCConnection {
      */
     public synchronized void sendPrivmsg(String to, String message) {
         sendRaw("PRIVMSG " + to + " :" + message);
+        network.onPrivmsg(network.getMyUser().getNickname(), to, message);
     }
     
     /**
@@ -380,6 +381,7 @@ public class IRCConnection {
             for (;;) {
                 try {
                     String line = reader.readLine();
+                    if(network.getWorkerThread() != null)
                     network.getWorkerThread().process(new Message(line));
                 } catch (IOException ex) {
                     if (!close.get()) {

@@ -118,10 +118,10 @@ public class XDCCServer extends Plugin implements Callback{
 	}
 
 	private void sendList(User u){
-		getNetwork().getConnection().sendPrivmsg(u, "XDCC List:");
+		u.sendPrivmsg("XDCC List:");
 
 		for(Map.Entry<Integer, File> e : list.entrySet()){
-			getNetwork().getConnection().sendPrivmsg(u, "#" + e.getKey() + ": " + e.getValue().getName());
+			u.sendPrivmsg("#" + e.getKey() + ": " + e.getValue().getName());
 		}
 	}
 

@@ -284,7 +284,9 @@ public class Network {
      * @param message
      */
     void onPrivmsg(String from, String to, String message) {
-
+        /* ignore everything we send to ourself to prevent sending loops */
+        if(from == to) return;
+        
         // Private message 
         if (to.equals(getMyUser().getNickname())) {
             User user = getUser(from);
@@ -294,6 +296,14 @@ public class Network {
             }
             for (Plugin plugin : plugins.values()) {
                 plugin.onPrivmsg(user, message);
+            }
+        } else if(from.equals(getMyUser().getNickname())){
+            User user = getUser(to);
+            if(user == null){
+                user = new User(to, this);
+            }
+            for (Plugin plugin : plugins.values()) {
+                plugin.onSendmsg(user, message);
             }
         // To channel
         } else {

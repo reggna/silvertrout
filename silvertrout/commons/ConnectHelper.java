@@ -57,7 +57,7 @@ public class ConnectHelper {
             String patternContentType = "(?i)^([a-zA-Z0-9_\\-\\/]+)(?:;)+(?:\\s)*(?:" +
                     "charset=([a-zA-Z0-9_\\-]+))?+$";
             Pattern pc = Pattern.compile(patternContentType);
-            System.out.println(con.getContentType());
+
             Matcher mc = pc.matcher(con.getContentType());
             String charset = null;
             String contentType = null;
@@ -95,7 +95,7 @@ public class ConnectHelper {
                 e.printStackTrace();
                 return null;
             } catch (java.nio.BufferOverflowException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             // TODO: Work around
             }
 

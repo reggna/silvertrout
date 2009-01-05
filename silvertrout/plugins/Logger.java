@@ -38,14 +38,16 @@ public class Logger extends silvertrout.Plugin {
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
         if (channel != null) {
-            writeToLog(getFile(channel), "<" + user.getNickname() + "> " + message);
+            writeToLog(getFile(channel.getName()), "<" + user.getNickname() + "> " + message);
+        }else{
+            writeToLog(getFile(user.getNickname()), "<" + user.getNickname() + "> " + message);
         }
     }
 
     @Override
     public void onPart(User user, Channel channel, String partMessage) {
         if (channel != null) {
-            writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
+            writeToLog(getFile(channel.getName()), "-!- " + user.getNickname() + " " +
                     user.toString() + " has left " + channel.getName() + " (" + partMessage + ")");
         }
     }
@@ -53,7 +55,7 @@ public class Logger extends silvertrout.Plugin {
     @Override
     public void onJoin(User user, Channel channel) {
         if (channel != null) {
-            writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
+            writeToLog(getFile(channel.getName()), "-!- " + user.getNickname() + " " +
                     user.toString() + " has joined " + channel.getName());
         }
     }
@@ -65,7 +67,7 @@ public class Logger extends silvertrout.Plugin {
     public void onQuit(User user, String quitMessage) {
         for (Channel channel : getNetwork().getChannels()) {
             if (channel.getUsers().containsKey(user)) {
-                writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
+                writeToLog(getFile(channel.getName()), "-!- " + user.getNickname() + " " +
                         user.toString() + " has quit (" + quitMessage + ")");
             }
         }
@@ -74,7 +76,7 @@ public class Logger extends silvertrout.Plugin {
     @Override
     public void onKick(User user, Channel channel, User kicked, String kickReason) {
         if (channel != null) {
-            writeToLog(getFile(channel), "-!- " + user.getNickname() + " " +
+            writeToLog(getFile(channel.getName()), "-!- " + user.getNickname() + " " +
                     user.toString() + " has left " + channel.getName() + " (" +
                     kickReason + ")");
         }
@@ -83,7 +85,7 @@ public class Logger extends silvertrout.Plugin {
     @Override
     public void onTopic(User user, Channel channel, String oldTopic) {
         if (channel != null) {
-            writeToLog(getFile(channel), "-!- " + user.getNickname() +
+            writeToLog(getFile(channel.getName()), "-!- " + user.getNickname() +
                     " changed the topic of " + channel.getName() + " to: " +
                     channel.getTopic());
         }
@@ -93,19 +95,24 @@ public class Logger extends silvertrout.Plugin {
     public void onNick(User user, String oldNickname) {
         for (Channel channel : getNetwork().getChannels()) {
             if (channel.getUsers().containsKey(user)) {
-                writeToLog(getFile(channel), "-!- " + oldNickname +
+                writeToLog(getFile(channel.getName()), "-!- " + oldNickname +
                         " is now known as " + user.getNickname());
             }
         }
     }
+    
+    @Override
+    public void onSendmsg(User user, String message) {
+        writeToLog(getFile(user.getNickname()), "<" + getNetwork().getMyUser().getNickname() + "> " + message);
+    }
 
-    public File getFile(Channel channel) {
+    public File getFile(String s) {
         try {
             /* create the folder if the folder has been deleted */
-            String dir = "jbt/plugins/Logger/" + getNetwork().getNetworkSettings().getName();
+            String dir = "silvertrout/plugins/Logger/" + getNetwork().getNetworkSettings().getName();
             (new File(dir)).mkdirs();
 
-            String file = channel.getName().substring(1) + ".log";
+            String file = s + ".log";
             return new File(dir + "/" + file);
         } catch (Exception e) {
             e.printStackTrace();

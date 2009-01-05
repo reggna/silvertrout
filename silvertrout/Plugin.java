@@ -107,7 +107,10 @@ public abstract class Plugin {
      * a private message is sent to you privetly or to a channel you have joined.
      * <p>
      * NOTE: If channel is NULL then it is a private message directly to you. If
-     * not then the message was written in a channel.
+     *       not then the message was written in a channel.
+     *
+     * NOTE: This function is also called when silvertrout sends a message to a
+     *       channel, so if you do not want this check that user isn't yourself
      *
      * @param  user         User that wrote the message
      * @param  channel      Channel the message was written in (if any)
@@ -248,6 +251,14 @@ public abstract class Plugin {
      */
     public void onPrivmsg(User user, String message) {
         onPrivmsg(user, null, message);
+    }
+    
+    /**
+     * Private message was sent from the bot to a user 
+     * @param user The user that the message for
+     * @param message
+     */
+    public void onSendmsg(User user, String message) {
     }
 
     /**
