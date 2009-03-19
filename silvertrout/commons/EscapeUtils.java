@@ -126,5 +126,8 @@ public class EscapeUtils {
     public static String escapeXml(String source) {
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
+    public static String stripHtml(String source){
+        return source.replaceAll("\\<.*?>","");
+    }
 }
 
