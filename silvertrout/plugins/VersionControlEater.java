@@ -26,6 +26,10 @@ import java.util.Map;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+
+
 
 import silvertrout.commons.EscapeUtils;
 import silvertrout.Channel;
@@ -66,20 +70,63 @@ public class VersionControlEater extends silvertrout.Plugin {
             repository = r;
         }
         // TODO: SVN; use xml instead?
-        // TODO: SVN, support authentication (username, password)
-        // TODO: SVN, support svn+ssh
         // TODO: GIT, implement
         // TODO: CVS, implement
         public void run() {
         
             // SVN
             // =================================================================
+            // I reccommend using anonymous SVN, a public guest account with 
+            // read only access or a public svn key. These are safe the safe  
+            // choises. Other methods might not work or have security issues.
+            // Read on for more information about this.
+            //
+            //
+            // Tunneled SVN + SSH - This is only going to work with public keys. 
+            // When using password open ssh opens a password input prompt in 
+            // TTY. This is not trivial to solve, but a solution could be to use
+            // an external library like Trilead SSH or some other native Java 
+            // code library.
+            //
+            // There might also be possible to directly access the TTYwith some 
+            // kind of library or perhaps something that can be written from 
+            // scratch.
+            // 
+            // A third option might be to try to hack something together with 
+            // SSH_ASKPASS and stuff. One would need to make sure there is no 
+            // TTY present (no idea how to do that) and then set the SSH_ASKPASS
+            // and the DISPLAY environment variables to something.
+            //
+            // 
+            // Authorization for SVN - This works well altough there might be a 
+            // secrity issue with it. The password could be seen with a simple 
+            // comamnd like 'ps' due to the fact that it is sent as an argument
+            // to the svn program.
+            //
+            //
+            // Ordinary anonymous SVN - No problem here.
+            //
+            //
+            //
             if(repository.type.equals("SVN")) {
                 try {
-                    ProcessBuilder pb     = new ProcessBuilder(binarySVN, "log", repository.path, "--limit", "10", "--incremental");
+                    ProcessBuilder pb = null;
+                    
+
+                    if(repository.path.startsWith("svn+ssh")) {
+                        pb = new ProcessBuilder(binarySVN, "log", repository.path, "--limit", "10", "--incremental");
+                    } else if(repository.username != null && repository.password != null) {
+                        pb = new ProcessBuilder(binarySVN, "log", repository.path, "--limit", "10", "--incremental", 
+                                "--username", repository.username, "--password", repository.password);
+                    } else {
+                        pb = new ProcessBuilder(binarySVN, "log", repository.path, "--limit", "10", "--incremental");                    
+                    }
+                    
+                    pb = pb.redirectErrorStream(true);                    
                     Process        p      = pb.start();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     String newLastId      = null;
+                    
 
                     for(int item = 0; item < 10; item++) {
                         String line = reader.readLine();
@@ -106,7 +153,7 @@ public class VersionControlEater extends silvertrout.Plugin {
                                     
                                     if(newLastId == null)newLastId = String.valueOf(rev);
                                     // New item! - TODO
-                                    messages.add(rev + " - " + user + " - " + date
+                                    messages.add("r" + rev + " - " + user + " - " + date
                                             + message + "\n");
                                 } else {
                                     break;
@@ -180,9 +227,13 @@ public class VersionControlEater extends silvertrout.Plugin {
         for(CheckThread ct: threads) {
             // Thread is done:
             if(!ct.isAlive()) {
-                ct.repository.channel.sendPrivmsg("New commit in repository ?:\n");
-                for(String message: ct.messages) {            
-                    ct.repository.channel.sendPrivmsg(message);
+            
+                // Print messages (if any)
+                if(!ct.messages.isEmpty()) {
+                    ct.repository.channel.sendPrivmsg("New commit in repository:\n");
+                    for(String message: ct.messages) {            
+                        ct.repository.channel.sendPrivmsg(message);
+                    }
                 }
                 threads.remove(ct);
                 break; 
@@ -224,21 +275,5 @@ public class VersionControlEater extends silvertrout.Plugin {
         
         checkDoneMessages();
     }
-    
-    
-    public static void main(String[] args) {
-    
-        VersionControlEater vce = new VersionControlEater();
-        vce.addRepository("SVN", "http://silvertrout.googlecode.com/svn/trunk/", null, null, null);
-        
-        try {
-            for(int i = 0; i < 10000; i++) {
-                vce.onTick(i);
-                Thread.sleep(1000);
-            }
-        } catch(java.lang.InterruptedException e) {
-            e.printStackTrace();
-        }   
-    
-    }
+   
 }
