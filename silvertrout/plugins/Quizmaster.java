@@ -47,49 +47,71 @@ import silvertrout.commons.game.TrophyManager;
 
 public class Quizmaster extends silvertrout.Plugin {
 
-    public class Question {
+    private enum State { RUNNING, RUNNING_QUESTION, NOT_RUNNING };
+
+    private class Question {
         public String question;
         public String answer;
+        public String category;
     }
+
+    // Settings:
+    private final int                  voiceInterval        = 60;
+    private final int                  hintTime             = 7;
+    private final int                  hintCount            = 8;
+    private final int                  waitTime             = 3;
+    private final int                  rankInterval         = 50;    
     
-    private LinkedList<Question> questions     = new LinkedList<Question>();
-    private ScoreManager         scoreManager;
-    private TrophyManager        trophyManager;
+    // Variables:
     
-    private Random               rand          = new Random();;
+    private final LinkedList<Question> questions = new LinkedList<Question>();
+    private final Random               rand      = new Random();
+    private ScoreManager               scoreManager;
+    private TrophyManager              trophyManager;
+    private String                     channelName;
+        
+    private Question                   currentQuestion;
+    private String                     currentAnswerString;
+
+    private String[]                   grad = 
+            {
+            "\"Tought\"", "Cell", "Egg", "Embryo", "Fetus", "Neonate", 
+            "Toddler", "Child", 
+            
+            "Preschooler", "Lower Primary School Student", 
+            "Upper Primary School Student", "Lower Secondary School Student",
+            "Upper Secondary School Student", "Bachelor Student", 
+            "Master Student", 
+            
+            "Volunteer", "Intern", "Receptionist", "Personal Secretary", 
+            "Personal Assistant", "Clerk", "Executive Secretary", 
+            "Executive Assistant", "Foreman", "Supervisor", "Manager",
+            "Superintendent",
+            
+            "Associate Vice President", "Senior Vice President", 
+            "Executive Vice President", "Chief Officer", 
+            "Chief Executive Officer", "Chairman of the Board",
+            
+            "Apprentice", "Apprentice-Companion", "Brother",
+            "Commander", "Master", "Grand Master"
+            };
+            
+
     
-    private Question             currentQuestion;
-    private String               currentAnswerString;
+    private int                        startTime;
+    private int                        currentTime;
+    private int                        endTime;
     
-    private String               channelName;
-    private String[] grad = {
-                                "Bewerber", "Anwärter", "Schütze",
-                                "Oberschütze", "Sturmmann", "Rottenführer", 
-                                "Unterscharführer", "Scharführer",
-                                "Oberscharführer", "Hauptscharführer",
-                                "Sturmscharführer", 
-                                "Untersturmführer", "Obersturmführer",
-                                "Hauptsturmführer", "Sturmbannführer",
-                                "Obersturmbannführer", "Standartenführer",
-                                "Oberführer", "Brigadeführer",
-                                "Gruppenführer", "Obergruppenführer",
-                                "Oberstgruppenführer", "Reichsführer-SS"
-    };
-    private int                  questionTime         = 60;
-    private int                  hintTime             = 10;
-    private int                  startTime;
-    private int                  currentTime;
+    private int                        statTime             = 0;
     
-    private int                  statTime             = 0;
+    private int                        unanswerdQuestions   = 0;
     
-    private int                  unanswerdQuestions   = 0;
+    private int                        answerStreak         = 0;
+    private String                     answerStreakNickname = new String();
     
-    private int                  answerStreak         = 0;
-    private String               answerStreakNickname = new String();
+    private long                       startMiliTime;
     
-    private long                 startMiliTime;
-    
-    private boolean              running              = false;
+    private State                      state                = State.NOT_RUNNING;
 
     public Quizmaster() {
 
@@ -129,22 +151,22 @@ public class Quizmaster extends silvertrout.Plugin {
         }
         
         // Update scores:
-        int oldScore = scoreManager.getScore(nick);
+        int oldScore = scoreManager.getTotalScore(nick);
         int oldPos   = scoreManager.getPosition(nick);
-        scoreManager.addScore(nick, 1);
-        int newScore = scoreManager.getScore(nick);
+        scoreManager.addScore(nick, currentQuestion.category, 1);
+        int newScore = scoreManager.getTotalScore(nick);
         int newPos   = scoreManager.getPosition(nick);
         
         // New rank
-        if(newScore % 100 == 0)
+        if(newScore % rankInterval == 0)
             getNetwork().getConnection().sendPrivmsg(channelName, 
-                    "Einen guten Job! "+ printNick(nick));
+                    "Utmärkt jobbat! Din nya rank är: "+ printNick(nick));
             
         // Print message
         String msg = "Rätt svar var \"" + currentQuestion.answer + "\". ";
         if(answerStreak >= 3)    msg += "(" + answerStreak + " i rad) ";
-        if(oldPos == -1)         msg += "(in på listan på placering " + newPos + ")";
-        else if(oldPos < newPos) msg += "(upp " + (newPos-oldPos) + " placering(ar)) ";
+        if(oldPos == -1)         msg += "(In på listan på placering " + newPos + ") ";
+        else if(oldPos < newPos) msg += "(Upp " + (newPos-oldPos) + " placering(ar)) ";
         msg += nick + " (" + time +" sek) har nu " + newScore +"p.";
         getNetwork().getConnection().sendPrivmsg(channelName, msg);
         
@@ -198,7 +220,8 @@ public class Quizmaster extends silvertrout.Plugin {
             fr.readLine();
             while(true) {
                 Question q = new Question();
-                q.question = "[" + category + "] " + fr.readLine();
+                q.category = category;
+                q.question = fr.readLine();
                 q.answer   = fr.readLine();
                 fr.readLine();
                 if(q.question == null || q.answer == null)break;
@@ -216,14 +239,14 @@ public class Quizmaster extends silvertrout.Plugin {
                     "/silvertrout/plugins/Quizmaster/Questions/").toURI());
 
             for(File d: qdir.listFiles()) {
-                System.out.println("Begin checking directory: " +d.getName());
+                //System.out.println("Begin checking directory: " +d.getName());
                 if(categories == null || categories.contains(d.getName())) {
                     if(d.isDirectory()) {
-                        System.out.println("Checking directory: " +d.getName());
+                        //System.out.println("Checking directory: " +d.getName());
                         for(File f: d.listFiles()) {
                             if(f.getName().endsWith(".quiz")) {
                                 loadQuestions(f);
-                                System.out.println("Added file: " + f.getName());
+                                //System.out.println("Added file: " + f.getName());
                             }
                         }
                     }
@@ -234,9 +257,9 @@ public class Quizmaster extends silvertrout.Plugin {
                     + " startas. Totalt finns " + questions.size() + " frågor.");
             
             unanswerdQuestions = 0;
-            running            = true;
+            state              = State.RUNNING;
             newQuestion();
-        }catch(URISyntaxException e) {
+        } catch(URISyntaxException e) {
             e.printStackTrace();
         }
     }
@@ -244,7 +267,7 @@ public class Quizmaster extends silvertrout.Plugin {
     public void endRound() {
         getNetwork().getConnection().sendPrivmsg(channelName, "Omgången är"
                 + " slut. Skriv !start för att starta en ny omgång.");
-        running = false;
+        state = State.NOT_RUNNING;
     }
     
     public void newQuestion() {
@@ -265,7 +288,9 @@ public class Quizmaster extends silvertrout.Plugin {
         }
         startTime     = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
-        getNetwork().getConnection().sendPrivmsg(channelName, "" + currentQuestion.question);
+        getNetwork().getConnection().sendPrivmsg(channelName, "" + "[" 
+                + currentQuestion.category + "] " + currentQuestion.question);
+        state   = State.RUNNING_QUESTION;
     }
     
     
@@ -281,11 +306,13 @@ public class Quizmaster extends silvertrout.Plugin {
             awardScore(winner);
             unanswerdQuestions = 0;
         }
+        endTime = currentTime;
+        state   = State.RUNNING;
     }
     
     public void printStats(String sender) {    
-        String                             topten    = new String();
-        String                             lastone = "Du har inga poäng. :(";
+        String               topten  = new String();
+        String               lastone = "Du har inga poäng ='(";
         ScoreManager.Score[] topList = scoreManager.getTop(10);
         
         if(topList.length == 0) {
@@ -295,48 +322,39 @@ public class Quizmaster extends silvertrout.Plugin {
         
         for(int i = 0; i < topList.length; i++) {
             if(topList[i].nick.equals(sender))
-                lastone = printNick(sender) +" har " + topList[i].score + ". Gut gemacht!";
-            topten += "#" + (i+1) + " " + topList[i].nick + " " + topList[i].score + "p - ";
+                lastone = printNick(sender) +" har " + topList[i].getTotalScore() + ". Bra jobbat!";
+            topten += "#" + (i+1) + " " + topList[i].nick + " " + topList[i].getTotalScore() + "p - ";
         }
         
         
         if(topList.length > 10) {
             int pos   = scoreManager.getPosition(sender);
-            int score = scoreManager.getPosition(sender);
+            int score = scoreManager.getTotalScore(sender);
             if(pos != -1)lastone = "Du har " + score 
                     + " och ligger på placering #" + pos;
         }
-        getNetwork().getConnection().sendPrivmsg(channelName, "Top10: " 
+        getNetwork().getConnection().sendPrivmsg(channelName, "Top 10: " 
                 + topten + lastone);
     }
     
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
 
-        if(channel != null && channel.getName().equals(channelName)) {
-        
-            if(running) {
+        if(channel != null && channel.getName().equalsIgnoreCase(channelName)) {
+
+            if(state == State.RUNNING_QUESTION) {
+                // Answer to question
                 if(message.compareToIgnoreCase(currentQuestion.answer) == 0) {
                     endQuestion(user.getNickname());
-                    newQuestion();
                 }
-            } else {
-            
-            
+            } else if(state == State.NOT_RUNNING) {
+                // Start new round
                 if(message.startsWith("!start")) {
-                
                     String[] cat = message.substring(6).split("\\s");
-                
-                    /*if(cat.length > 0) {
-                        newRound(java.util.Arrays.asList(cat));
-                    } else {
-                        System.out.println("INGA ATTRIBUT");*/
-                        newRound(null);
-                    //}
-
-                    // Start round of x questions
-                } 
+                    newRound(null);
+                }
             }
+            
             if(message.equals("!stats")) {
                 if(currentTime - statTime > 20) {
                     printStats(user.getNickname());
@@ -350,7 +368,13 @@ public class Quizmaster extends silvertrout.Plugin {
                             + " se tio i topp-listan och din egna poäng. För"
                             + " att titta vilka trophies du har kan du använda"
                             + " !trophies. Om du vill visa denna hjälp, skriv"
-                            + " !help. (Jag gillar reggna)");
+                            + " !help.");
+            }
+            else if(message.startsWith("!suggest")) {
+                // TODO!
+            }
+            else if(message.startsWith("!report")) {
+                // TODO!
             }
             else if(message.equals("!trophies")) {
             
@@ -382,10 +406,10 @@ public class Quizmaster extends silvertrout.Plugin {
             getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
         } else {
             int l = currentAnswerString.length();
-            int h = (int)Math.ceil((double)l / 16.0);
+            int h = (int)Math.ceil((double)l / (hintCount * 2));
 
             for(int i = 0; i < h && i < 150; i++) {
-                int    p = rand.nextInt(l);
+                int  p = rand.nextInt(l);
                 char c = currentQuestion.answer.charAt(p);
                 
                 if(currentAnswerString.charAt(p) == c) {
@@ -398,7 +422,6 @@ public class Quizmaster extends silvertrout.Plugin {
             
             if(currentAnswerString.equals(currentQuestion.answer)) {
                 endQuestion(null);
-                newQuestion();
             } else {
                 getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
             }
@@ -408,33 +431,43 @@ public class Quizmaster extends silvertrout.Plugin {
     @Override
     public void onTick(int ticks) {
         currentTime = ticks;
-        
-        if(running) {
-            if(currentTime > startTime + questionTime) {
+        //System.out.println(currentTime + ": " + state);
+        if(state == State.RUNNING_QUESTION) {        
+            // If we have a question that no one have answered in a while
+            if(currentTime > startTime + hintTime * hintCount) {
                 endQuestion(null);
                 if(unanswerdQuestions >= 5) { 
                     endRound();
                 } else {
                     newQuestion();
                 }
+            // Or if it is time to give a hint
+            } else if(currentTime - startTime == hintTime * hintCount) {
+                endQuestion(null);
             } else if((currentTime - startTime) % hintTime == 0) {
                 giveHint();
-            }
+            }         
+        
+        } else if(state == State.RUNNING) {
+            // Time for a new question
+            if(currentTime - endTime == waitTime) {
+                newQuestion();
+            }            
         }
         
         // Do every minute
-        if(ticks % 60 == 0) {
+        if(ticks % voiceInterval == 0) {
             
             // Only voice if we are in the channel and are an operator
             if(getNetwork().existsChannel(channelName)) {
             
-                Channel channel    = getNetwork().getChannel(channelName);
-                User        myUser     = getNetwork().getMyUser();
+                Channel channel  = getNetwork().getChannel(channelName);
+                User    myUser   = getNetwork().getMyUser();
                 boolean operator = channel.getUsers().get(myUser).haveMode('o');
                 
                 if(operator) {
-                    LinkedList<String>    f         = new LinkedList<String>();
-                    Map<User, Modes>        users = channel.getUsers();
+                    LinkedList<String> f     = new LinkedList<String>();
+                    Map<User, Modes>   users = channel.getUsers();
                     
                     for(User u: users.keySet()) {
                         if(users.get(u).haveMode('v')){
@@ -462,7 +495,7 @@ public class Quizmaster extends silvertrout.Plugin {
     
     private String printNick(String nick){
 
-        int s = scoreManager.getScore(nick) / 100;
+        int s = scoreManager.getTotalScore(nick) / rankInterval;
         if(s > 0) {
             if(s > grad.length)
                 return grad[grad.length-1] + " " + nick;

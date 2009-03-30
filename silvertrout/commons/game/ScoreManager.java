@@ -23,6 +23,9 @@ package silvertrout.commons.game;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,19 +37,37 @@ import java.io.IOException;
 
 public class ScoreManager {
 
+    /**
+     *
+     */
     public class Score implements Comparable<Score> {
 
-        public String nick;
-        public int score;
+        public String                   nick;
+        public HashMap<String, Integer> score = new HashMap<String, Integer>();
 
         @Override
         public int compareTo(Score s) {
-            return s.score - score;
+            return s.getTotalScore() - getTotalScore();
+        };
+        
+        public int getTotalScore() {
+            int totalScore = 0;
+            for(int s: score.values()) {
+                totalScore += s;
+            }
+            return totalScore;
         }
-        ;
+        
+        public int getScore(String part) {
+            if(score.containsKey(part)) {
+                return score.get(part);
+            }        
+            return 0;
+        }
     }
-    private LinkedList<Score> scores;
-    private File scoreFile;
+    
+    private final LinkedList<Score> scores    = new LinkedList<Score>();
+    private       File              scoreFile;
 
     public ScoreManager(File scoreFile) {
         if(!scoreFile.exists()){
@@ -59,8 +80,6 @@ public class ScoreManager {
             }
         }
         this.scoreFile = scoreFile;
-        this.scores = new LinkedList<Score>();
-
         loadScores(this.scoreFile);
     }
 
@@ -69,18 +88,28 @@ public class ScoreManager {
             BufferedReader fr = new BufferedReader(new FileReader(f));
 
             while (true) {
-                String nick = fr.readLine();
-                String score = fr.readLine();
-                String x = fr.readLine();
-                if (nick == null || score == null || x == null) {
-                    break;
-                }
-
+                String nick = fr.readLine();                
+                if(nick == null || nick.equals(""))break;
+                
                 Score s = new Score();
                 s.nick = nick;
-                s.score = Integer.parseInt(score);
+                
+                System.out.println("'" + nick + "'");
+                
+                while(true) {
+                    String   score      = fr.readLine();
+                    if(score == null || score.equals("")) break;
+                    String[] scoreParts = score.split("\t");
+                    
+                    String   part       = scoreParts[0].trim();
+                    int      partScore  = Integer.parseInt(scoreParts[1].trim());
+                    
+                    s.score.put(part, partScore);
+                }
                 scores.add(s);
             }
+            System.out.println("loaded " + scores.size() + " scores");
+            
             fr.close();
 
         } catch (Exception e) {
@@ -95,7 +124,10 @@ public class ScoreManager {
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter(f));
             for (Score s : scores) {
-                fw.write(s.nick + "\n" + String.valueOf(s.score) + "\n\n");
+                fw.write(s.nick + "\n");
+                for(Map.Entry<String, Integer> e: s.score.entrySet()) {
+                    fw.write(e.getKey() + "\t" + e.getValue() + "\n");
+                }
             }
             fw.close();
         } catch (java.io.IOException e) {
@@ -103,11 +135,23 @@ public class ScoreManager {
         }
     }
 
-    public int getScore(String nickname) {
+    public int getScore(String nickname, String what) {
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
                 Score s = scores.get(i);
-                return s.score;
+                if(s.score.containsKey(what)) {
+                    return s.score.get(what);
+                }                
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalScore(String nickname) {
+        for (int i = 0; i < scores.size(); i++) {
+            if (scores.get(i).nick.equals(nickname)) {
+                Score s = scores.get(i);
+                return s.getTotalScore();
             }
         }
         return 0;
@@ -116,7 +160,6 @@ public class ScoreManager {
     public int getPosition(String nickname) {
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
-                Score s = scores.get(i);
                 return i + 1;
             }
         }
@@ -124,12 +167,11 @@ public class ScoreManager {
     }
 
     public Score[] getTop(int amount) {
-        if (scores.size() < amount) {
-            amount = scores.size();
-        }
+        // We cant fetch more then we have
+        if (scores.size() < amount)amount = scores.size();
+        // Fetching...
         Score[] topScores = new Score[amount];
         for (int i = 0; i < amount; i++) {
-            System.out.println(i +"\t" + scores.get(i));
             topScores[i] = scores.get(i);
         }
         return topScores;
@@ -147,18 +189,17 @@ public class ScoreManager {
         return false;
     }
 
-    public void addScore(String nickname, int score) {
-        setScore(nickname, score + getScore(nickname));
+    public void addScore(String nickname, String what, int score) {
+        setScore(nickname, what, score + getScore(nickname, what));
     }
 
-    public void setScore(String nickname, int score) {
+    public void setScore(String nickname, String what, int score) {
         // Update old score
         boolean found = false;
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
                 Score s = scores.get(i);
-                s.score = score;
-                scores.set(i, s);
+                s.score.put(what, score);
                 found = true;
                 break;
             }
@@ -167,11 +208,11 @@ public class ScoreManager {
         if (!found) {
             Score s = new Score();
             s.nick = nickname;
-            s.score = score;
+            s.score.put(what, score);
             scores.add(s);
         }
 
-        // Resort and save
+        // Re-sort and save
         Collections.sort(scores);
         saveScores(scoreFile);
     }
