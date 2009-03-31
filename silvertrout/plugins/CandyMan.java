@@ -22,6 +22,8 @@
 package silvertrout.plugins;
 
 import java.util.Random;
+import java.util.Map;
+
 import silvertrout.Channel;
 import silvertrout.User;
 
