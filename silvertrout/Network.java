@@ -60,6 +60,7 @@ public class Network {
     /**
      * Create and connect to a new Network,
      *
+     * @param irc
      * @param networkSettings the settings to use for the IRCConnection
      * @param me   - Contains settings for nickname, username, realname
      * @throws IOException if connection could not be established to network
@@ -648,6 +649,7 @@ public class Network {
      * Unload a plugin with the spicified name
      *
      * @param name - The name of the plugin to load
+     * @return
      */
     public synchronized boolean unloadPlugin(String name) {
         synchronized (plugins) {
@@ -676,6 +678,7 @@ public class Network {
      * Load plugin with the specified name from a file.
      *
      * @param  name  Name of the plugin to load
+     * @return
      */
     public synchronized boolean loadPlugin(String name) {
         if (!plugins.containsKey(name)) {
@@ -701,6 +704,7 @@ public class Network {
     /**
      * Get an indicator of the number of exceptions occuring in this network's working thread.
      * 0 is good. Every exception adds one and every tick() removes one.
+     * @return
      */
     public int getExceptionFrequenzy() {
         return exceptionFrequenzy;
@@ -742,6 +746,9 @@ public class Network {
         return connection;
     }
 
+    /**
+     *
+     */
     public class WorkerThread extends Thread {
 
         private final ConcurrentLinkedQueue<Runnable> tasks = new ConcurrentLinkedQueue<Runnable>();
@@ -787,6 +794,7 @@ public class Network {
 
         /**
          * Is the thread stopped?
+         * @return
          */
         public boolean isStop() {
             return stop;

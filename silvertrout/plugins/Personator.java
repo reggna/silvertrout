@@ -24,6 +24,10 @@ package silvertrout.plugins;
 import silvertrout.User;
 import silvertrout.Channel;
 
+/**
+ *
+ **
+ */
 public class Personator extends silvertrout.Plugin {
 
     @Override

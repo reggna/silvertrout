@@ -30,6 +30,10 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.OutputStreamWriter;
 
+/**
+ *
+ **
+ */
 public class ConnectHelper {
 
     // Content types the tile giver should check
@@ -38,6 +42,15 @@ public class ConnectHelper {
     // Charset to fall back to if none was found
     private static final String fallbackCharset = "iso-8859-1";
 
+    /**
+     *
+     * @param connectionType
+     * @param server
+     * @param file
+     * @param port
+     * @param maxContentLength
+     * @return
+     */
     public static String Connect(String connectionType, String server, String file, int port, int maxContentLength) {
         try {
             // Set up connection to disallow output and allow input. It should follow
@@ -124,7 +137,17 @@ public class ConnectHelper {
         }
     }
 
-    public static String Connect(String connectionType, String server, 
+    /**
+     *
+     * @param connectionType
+     * @param server
+     * @param file
+     * @param port
+     * @param maxContentLength
+     * @param postdata
+     * @return
+     */
+    public static String Connect(String connectionType, String server,
             String file, int port, int maxContentLength, String postdata) {
         try {
             // Set up connection to disallow output and allow input. It should follow

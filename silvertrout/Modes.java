@@ -30,28 +30,51 @@ public class Modes {
 
     private String modes;
 
+    /**
+     *
+     */
     public Modes() {
         this.modes = new String();
     }
 
+    /**
+     *
+     * @param modes
+     */
     public Modes(String modes) {
         this.modes = modes;
     }
 
+    /**
+     *
+     * @return
+     */
     public String get() {
         return this.modes;
     }
 
+    /**
+     *
+     * @param modes
+     */
     public void set(String modes) {
         this.modes = modes;
     }
 
+    /**
+     *
+     * @param m
+     */
     public void giveMode(char m) {
         if (!haveMode(m)) {
             this.modes += m;
         }
     }
 
+    /**
+     *
+     * @param m
+     */
     public void takeMode(char m) {
         String newModes = new String();
         for (int i = 0; i < this.modes.length(); i++) {
@@ -62,6 +85,11 @@ public class Modes {
         this.modes = newModes;
     }
 
+    /**
+     *
+     * @param m
+     * @return
+     */
     public boolean haveMode(char m) {
         return (this.modes.indexOf(m) >= 0);
     }

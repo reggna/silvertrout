@@ -29,6 +29,10 @@ public class IRCProcessor {
 
     private Network network;
 
+    /**
+     *
+     * @param network
+     */
     public IRCProcessor(Network network) {
         this.network = network;
     }

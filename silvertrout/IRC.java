@@ -27,9 +27,19 @@ import silvertrout.settings.NetworkSettings;
 import silvertrout.settings.Settings;
 import silvertrout.settings.Settings.ConfigurationParseException;
 
+/**
+ *
+ **
+ */
 public class IRC {
 
+    /**
+     *
+     */
     public ArrayList<Network> networks;
+    /**
+     *
+     */
     public Settings settings;
 
     /**
@@ -63,10 +73,18 @@ public class IRC {
         networks.add(n);
     }
 
+    /**
+     *
+     * @return
+     */
     public Settings getSettings() {
         return settings;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Network> getNetworks() {
         return networks;
     }

@@ -23,8 +23,16 @@ package silvertrout.commons;
 
 import java.util.GregorianCalendar;
 
+/**
+ *
+ **
+ */
 public class SystemTime {
 
+    /**
+     *
+     * @return
+     */
     public static String getCurrentTime() {
         /* get current time */
         GregorianCalendar c = new GregorianCalendar();
@@ -37,6 +45,11 @@ public class SystemTime {
 
     }
 
+    /**
+     *
+     * @param i
+     * @return
+     */
     public static String intToStringer(int i) {
         if (i < 10) {
             return "0" + i;

@@ -35,6 +35,10 @@ import java.io.BufferedWriter;
 
 import java.io.IOException;
 
+/**
+ *
+ **
+ */
 public class ScoreManager {
 
     /**
@@ -42,7 +46,13 @@ public class ScoreManager {
      */
     public class Score implements Comparable<Score> {
 
+        /**
+         *
+         */
         public String                   nick;
+        /**
+         *
+         */
         public HashMap<String, Integer> score = new HashMap<String, Integer>();
 
         @Override
@@ -50,6 +60,10 @@ public class ScoreManager {
             return s.getTotalScore() - getTotalScore();
         };
         
+        /**
+         *
+         * @return
+         */
         public int getTotalScore() {
             int totalScore = 0;
             for(int s: score.values()) {
@@ -58,6 +72,11 @@ public class ScoreManager {
             return totalScore;
         }
         
+        /**
+         *
+         * @param part
+         * @return
+         */
         public int getScore(String part) {
             if(score.containsKey(part)) {
                 return score.get(part);
@@ -69,6 +88,10 @@ public class ScoreManager {
     private final LinkedList<Score> scores    = new LinkedList<Score>();
     private       File              scoreFile;
 
+    /**
+     *
+     * @param scoreFile
+     */
     public ScoreManager(File scoreFile) {
         if(!scoreFile.exists()){
             try{
@@ -120,6 +143,10 @@ public class ScoreManager {
         }
     }
 
+    /**
+     *
+     * @param f
+     */
     public void saveScores(File f) {
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter(f));
@@ -135,6 +162,12 @@ public class ScoreManager {
         }
     }
 
+    /**
+     *
+     * @param nickname
+     * @param what
+     * @return
+     */
     public int getScore(String nickname, String what) {
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
@@ -147,6 +180,11 @@ public class ScoreManager {
         return 0;
     }
     
+    /**
+     *
+     * @param nickname
+     * @return
+     */
     public int getTotalScore(String nickname) {
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
@@ -157,6 +195,11 @@ public class ScoreManager {
         return 0;
     }
 
+    /**
+     *
+     * @param nickname
+     * @return
+     */
     public int getPosition(String nickname) {
         for (int i = 0; i < scores.size(); i++) {
             if (scores.get(i).nick.equals(nickname)) {
@@ -166,6 +209,11 @@ public class ScoreManager {
         return -1;
     }
 
+    /**
+     *
+     * @param amount
+     * @return
+     */
     public Score[] getTop(int amount) {
         // We cant fetch more then we have
         if (scores.size() < amount)amount = scores.size();
@@ -177,6 +225,12 @@ public class ScoreManager {
         return topScores;
     }
 
+    /**
+     *
+     * @param amount
+     * @param nick
+     * @return
+     */
     public boolean isTop(int amount, String nick) {
         if (scores.size() < amount) {
             amount = scores.size();
@@ -189,10 +243,22 @@ public class ScoreManager {
         return false;
     }
 
+    /**
+     *
+     * @param nickname
+     * @param what
+     * @param score
+     */
     public void addScore(String nickname, String what, int score) {
         setScore(nickname, what, score + getScore(nickname, what));
     }
 
+    /**
+     *
+     * @param nickname
+     * @param what
+     * @param score
+     */
     public void setScore(String nickname, String what, int score) {
         // Update old score
         boolean found = false;

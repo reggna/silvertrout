@@ -21,30 +21,70 @@
  */
 package silvertrout.commons.game;
 
+/**
+ *
+ **
+ */
 public class Trophy {
 
+    /**
+     *
+     */
     public enum Value {
 
-        PLATINUM, GOLD, SILVER, BRONZE
+        /**
+         * 
+         */
+        PLATINUM,
+        /**
+         *
+         */
+        GOLD,
+        /**
+         * 
+         */
+        SILVER,
+        /**
+         *
+         */
+        BRONZE
     };
     private String name;
     private String archivment;
     private Value value;
 
+    /**
+     *
+     * @param name
+     * @param archivment
+     * @param value
+     */
     public Trophy(String name, String archivment, Value value) {
         this.name = name;
         this.archivment = archivment;
         this.value = value;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getArchivment() {
         return this.archivment;
     }
 
+    /**
+     *
+     * @return
+     */
     public Value getValue() {
         return this.value;
     }

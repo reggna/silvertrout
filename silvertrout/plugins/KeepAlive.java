@@ -23,6 +23,10 @@ package silvertrout.plugins;
 
 import silvertrout.User;
 
+/**
+ *
+ **
+ */
 public class KeepAlive extends silvertrout.Plugin {
 
     @Override
@@ -37,6 +41,11 @@ public class KeepAlive extends silvertrout.Plugin {
         getNetwork().getConnection().sendRaw("PONG " + id);
     }
 
+    /**
+     *
+     * @param nick
+     * @param channelName
+     */
     @Override
     public void onInvite(User nick, String channelName) {
         System.out.println("KA: onInvite(n, c) = (" + nick + ", " + channelName + ")");

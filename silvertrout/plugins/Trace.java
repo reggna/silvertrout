@@ -46,22 +46,48 @@ import silvertrout.commons.Base64Coder;
  */
 public class Trace extends silvertrout.Plugin {
 
+    /**
+     *
+     * @param eniroInformation
+     * @return
+     */
     public static String getName(String eniroInformation) {
         return getStuff(eniroInformation, "(?is)fileas=\"([^\"]+)");
     }
 
+    /**
+     *
+     * @param eniroInformation
+     * @return
+     */
     public static String getAddress(String eniroInformation) {
         return getStuff(eniroInformation, "(?is)<span class=\"street-address\">([^<]+)");
     }
 
+    /**
+     *
+     * @param eniroInformation
+     * @return
+     */
     public static String getPostalCode(String eniroInformation) {
         return getStuff(eniroInformation, "(?is)<span class=\"postal-code\">([^<]+)").replaceAll("\\D", "");
     }
 
+    /**
+     *
+     * @param eniroInformation
+     * @return
+     */
     public static String getLocation(String eniroInformation) {
         return getStuff(eniroInformation, "(?is)<span class=\"locality\">([^<]+)").replaceAll("\\s+", "");
     }
 
+    /**
+     *
+     * @param m
+     * @param pattern
+     * @return
+     */
     public static String getStuff(String m, String pattern) {
         Matcher mt = Pattern.compile(pattern).matcher(m);
         if (mt.find()) {
@@ -71,15 +97,31 @@ public class Trace extends silvertrout.Plugin {
         }
     }
 
+    /**
+     *
+     * @param phoneNumber
+     * @return
+     */
     public static String getEniroInformation(String phoneNumber) {
         return ConnectHelper.Connect("http", "personer.eniro.se", "/query?search_word=" + phoneNumber, 80, 16384);
     }
 
+    /**
+     *
+     * @param upplysningarInformation
+     * @return
+     */
     public static String getSSN(String upplysningarInformation) {
         String ssn = Base64Coder.decodeString(getStuff(upplysningarInformation, "(?is)show\\.aspx\\?id=([^\"]+)")).replaceAll("\\D", "");
         return ssn.substring(0, 8) + "-" + ssn.substring(8);
     }
 
+    /**
+     *
+     * @param name
+     * @param location
+     * @return
+     */
     public static String getUpplysningarInformation(String name, String location) {
         return ConnectHelper.Connect("http", "www.upplysning.se", "/search.aspx?bs=S%F6k&what=" + name + "&where=" + location, 80, 16384);
     }

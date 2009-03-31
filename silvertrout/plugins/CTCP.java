@@ -25,8 +25,17 @@ import silvertrout.BuildInfo;
 import silvertrout.Channel;
 import silvertrout.User;
 
+/**
+ *
+ **
+ */
 public class CTCP extends silvertrout.Plugin {
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static String quote(String s) {
         String quotedString = "";
 
@@ -47,6 +56,11 @@ public class CTCP extends silvertrout.Plugin {
         return quotedString;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static String deQuote(String s) {
         String deQuotedString = "";
 
@@ -66,6 +80,11 @@ public class CTCP extends silvertrout.Plugin {
         return deQuotedString;
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static long ipToNumber(String n) {
         String[] parts = n.split(".");
         return (Long.parseLong(parts[0]) << 24) +
@@ -75,6 +94,11 @@ public class CTCP extends silvertrout.Plugin {
 
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static String ipToString(long n) {
         long a = (n & 0xFF000000) >> 24;
         long b = (n & 0x00FF0000) >> 16;

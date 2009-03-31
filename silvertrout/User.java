@@ -79,22 +79,42 @@ public class User {
         this.nickname = nickname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHostname() {
         return hostname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRealname() {
         return realname;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSecureConnection() {
         return secureConnection;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getServer() {
         return server;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }

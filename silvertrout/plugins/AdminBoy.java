@@ -28,6 +28,10 @@ import silvertrout.Modes;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ *
+ **
+ */
 public class AdminBoy extends silvertrout.Plugin {
 
   // Password for AdminBoy

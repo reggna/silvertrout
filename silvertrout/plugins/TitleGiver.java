@@ -61,6 +61,11 @@ public class TitleGiver extends silvertrout.Plugin {
         }
     }
 
+    /**
+     *
+     * @param message
+     * @return
+     */
     public static List<String> getTitles(String message) {
         java.util.ArrayList<String> r = new java.util.ArrayList<String>();
         Pattern p = Pattern.compile("(http|https):\\/\\/([\\w\\.-]+)(?:\\:" +
@@ -75,6 +80,15 @@ public class TitleGiver extends silvertrout.Plugin {
         return r;
     }
 
+    /**
+     *
+     * @param url
+     * @param connection
+     * @param server
+     * @param port
+     * @param file
+     * @return
+     */
     public static String getTitle(String url, String connection, String server, String port, String file) {
         if (port != null) {
             return getTitle(url, connection, server, Integer.parseInt(port), file);
@@ -83,6 +97,15 @@ public class TitleGiver extends silvertrout.Plugin {
         }
     }
 
+    /**
+     *
+     * @param url
+     * @param connection
+     * @param server
+     * @param port
+     * @param file
+     * @return
+     */
     public static String getTitle(String url, String connection, String server, int port, String file) {
 
         /* Set current port */

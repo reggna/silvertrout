@@ -41,6 +41,7 @@ public abstract class Plugin {
 
     /**
      * Set Network that loaded the plugin
+     * @param network
      */
     protected void setNetwork(Network network) {
         this.network = network;
@@ -48,6 +49,7 @@ public abstract class Plugin {
 
     /**
      * Return Network that loaded the plugin
+     * @return
      */
     public Network getNetwork() {
         return network;
@@ -85,6 +87,11 @@ public abstract class Plugin {
     }
 
     // TODO:
+    /**
+     *
+     * @param nick
+     * @param channelName
+     */
     public void onInvite(User nick, String channelName) {
     }
     /* public void onBan(...) { } */
@@ -175,7 +182,7 @@ public abstract class Plugin {
      * This is the onPing handling function. The function gets called every
      * time you are pinged.
      *
-     * @param  from  The user who sent the ping
+     * @param id
      */
     public void onPing(String id) {
     }
@@ -183,6 +190,7 @@ public abstract class Plugin {
     /**
      * This is the onLoad handling function. The function gets called every time
      * the plugin is loaded.
+     * @param settings
      */
     public void onLoad(Map<String, String> settings) {
     }

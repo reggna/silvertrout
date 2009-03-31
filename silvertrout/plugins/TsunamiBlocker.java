@@ -26,10 +26,17 @@ import java.util.HashMap;
 import silvertrout.Channel;
 import silvertrout.User;
 
+/**
+ *
+ **
+ */
 public class TsunamiBlocker extends silvertrout.Plugin {
 
     HashMap<User, Integer> scores;
 
+    /**
+     *
+     */
     public TsunamiBlocker() {
         scores = new HashMap<User, Integer>();
     }

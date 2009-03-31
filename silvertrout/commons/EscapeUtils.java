@@ -26,6 +26,10 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/**
+ *
+ **
+ */
 public class EscapeUtils {
 
     private static HashMap<String, String> xmlEnts;
@@ -91,6 +95,11 @@ public class EscapeUtils {
         htmlEnts.put("raquo", "\u00bb");
     }
 
+    /**
+     *
+     * @param source
+     * @return
+     */
     public static String unescapeHtml(String source) {
         String pattern = "(?i)(&([A-Za-z]+|[\\#0-9]+);)";
         Pattern p = Pattern.compile(pattern);
@@ -115,17 +124,37 @@ public class EscapeUtils {
         return sb.toString();
     }
 
+    /**
+     *
+     * @param source
+     * @return
+     */
     public static String unescapeXml(String source) {
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
 
+    /**
+     *
+     * @param source
+     * @return
+     */
     public static String escapeHtml(String source) {
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
 
+    /**
+     *
+     * @param source
+     * @return
+     */
     public static String escapeXml(String source) {
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
+    /**
+     *
+     * @param source
+     * @return
+     */
     public static String stripHtml(String source){
         return source.replaceAll("\\<.*?>","");
     }

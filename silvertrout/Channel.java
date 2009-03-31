@@ -144,7 +144,7 @@ public class Channel {
      * Send an action to this channel. This is a special form of private mesasge
      * that only adds special characters. Works like /me in many IRC programs.
      *
-     * @param  message  Action to send
+     * @param action
      */
     public void sendAction(String action) {
         network.getConnection().sendAction(this, action);

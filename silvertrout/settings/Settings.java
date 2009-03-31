@@ -89,6 +89,8 @@ public class Settings {
     /**
      * Creates a config template
      * WARNING: Deletes the old config if it exists!
+     * @throws IOException
+     * @throws ConfigurationParseException
      */
     public void createTemplateConfig() throws IOException, ConfigurationParseException {
         String templateConfig =
@@ -300,6 +302,7 @@ public class Settings {
     /**
      * Get all configured plugins for all networks
      * Network name -> *Plugin name -> *Config name -> *Config setting
+     * @return
      */
     public Map<String, Map<String, Map<String, String>>> getPlugins() {
         return plugins;
@@ -320,16 +323,32 @@ public class Settings {
         return null;
     }
 
+    /**
+     *
+     */
     public class ConfigurationParseException extends Exception {
 
+        /**
+         *
+         * @param message
+         */
         public ConfigurationParseException(String message) {
             super(message);
         }
 
+        /**
+         *
+         * @param cause
+         */
         public ConfigurationParseException(Throwable cause) {
             super(cause);
         }
 
+        /**
+         *
+         * @param message
+         * @param cause
+         */
         public ConfigurationParseException(String message, Throwable cause) {
             super(message, cause);
         }

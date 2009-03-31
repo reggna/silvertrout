@@ -45,30 +45,76 @@ import silvertrout.User;
 // TODO: Channel list for each feed?
 // TODO: move print of first item to onPrivmsg
 // TODO: make it more configurable. Use const for spam limit, update time, etc
+/**
+ *
+ **
+ */
 public class FeedEater extends silvertrout.Plugin {
 
+    /**
+     *
+     */
     public class Feed {
 
+        /**
+         *
+         */
         public String title;
+        /**
+         *
+         */
         public String description;
+        /**
+         *
+         */
         public URL url;
+        /**
+         *
+         */
         public String lastGuid;
+        /**
+         *
+         */
         public Channel channel;
     }
 
+    /**
+     *
+     */
     public class FeedItem {
 
+        /**
+         *
+         */
         public String title;
+        /**
+         *
+         */
         public String description;
+        /**
+         *
+         */
         public String guid;
+        /**
+         *
+         */
         public String link;
     }
     ArrayList<Feed> feeds;
 
+    /**
+     *
+     */
     public FeedEater() {
         feeds = new ArrayList<Feed>();
     }
 
+    /**
+     *
+     * @param url
+     * @param channel
+     * @return
+     */
     public boolean add(String url, Channel channel) {
 
         // Set up a new feed
@@ -139,6 +185,11 @@ public class FeedEater extends silvertrout.Plugin {
 
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public boolean remove(int index) {
         if (index > 0 && index < feeds.size()) {
             feeds.remove(index);

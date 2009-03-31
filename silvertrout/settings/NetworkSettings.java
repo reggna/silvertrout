@@ -62,14 +62,26 @@ public class NetworkSettings {
         this.secure = secure;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getHost() {
         return host;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNickname() {
         return nickname;
     }
@@ -83,22 +95,42 @@ public class NetworkSettings {
         return password;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPort() {
         return port;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRealname() {
         return realname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCharset() {
         return charset;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSecure() {
         return secure;
     }

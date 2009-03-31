@@ -106,6 +106,11 @@ public class Logger extends silvertrout.Plugin {
         writeToLog(getFile(user.getNickname()), "<" + getNetwork().getMyUser().getNickname() + "> " + message);
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public File getFile(String s) {
         try {
             /* create the folder if the folder has been deleted */
@@ -120,6 +125,12 @@ public class Logger extends silvertrout.Plugin {
         return null;
     }
 
+    /**
+     *
+     * @param f
+     * @param message
+     * @return
+     */
     public boolean writeToLog(File f, String message) {
         try {
             f.createNewFile();

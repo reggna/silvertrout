@@ -58,6 +58,7 @@ public class CandyMan extends silvertrout.Plugin {
      *
      * You can of course combine an onLoad function with a constructor. Just 
      * make sure you know what is not initialized when using the constructor.
+     * @param settings
      */
     public void onLoad(Map<String, String> settings) {
         r = new Random();

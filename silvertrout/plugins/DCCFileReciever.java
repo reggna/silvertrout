@@ -28,6 +28,10 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 
+/**
+ *
+ **
+ */
 public class DCCFileReciever implements Runnable {
 
     Socket socket;
@@ -39,6 +43,13 @@ public class DCCFileReciever implements Runnable {
     InputStream is;
     FileOutputStream fos;
 
+    /**
+     *
+     * @param name
+     * @param size
+     * @param host
+     * @param port
+     */
     public DCCFileReciever(String name, int size, String host, int port) {
 
         this.name = name;

@@ -32,6 +32,10 @@ import silvertrout.commons.ConnectHelper;
 import silvertrout.Channel;
 import silvertrout.User;
 
+/**
+ *
+ **
+ */
 public class Translator extends silvertrout.Plugin {
 
     // Max content length (in bytes) to grab to check for translations

@@ -31,6 +31,10 @@ import java.io.FileReader;
 import java.io.File;
 
 // TODO: heavy changes needed
+/**
+ *
+ **
+ */
 public class TrophyManager {
 
     private List<Trophy> trophyList;
@@ -39,6 +43,10 @@ public class TrophyManager {
     private File trophyListFile;
     private File trophyUserFile;
 
+    /**
+     *
+     * @param trophyDirectory
+     */
     public TrophyManager(File trophyDirectory) {
         this.trophyDirectory = trophyDirectory;
 
@@ -53,6 +61,11 @@ public class TrophyManager {
     }
 
     // Get trophies
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Trophy getTrophy(String name) {
         for (Trophy t : trophyList) {
             if (t.getName().equals(name)) {
@@ -62,10 +75,19 @@ public class TrophyManager {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Trophy> getTrophies() {
         return trophyList;
     }
 
+    /**
+     *
+     * @param nickname
+     * @return
+     */
     public List<Trophy> getTrophies(String nickname) {
         if (trophyUser.get(nickname) == null) {
             return new ArrayList<Trophy>();
@@ -73,6 +95,12 @@ public class TrophyManager {
         return trophyUser.get(nickname);
     }
 
+    /**
+     *
+     * @param t
+     * @param nickname
+     * @return
+     */
     public boolean haveTrophy(Trophy t, String nickname) {
         if (getTrophies(nickname).isEmpty()) {
             return false;
@@ -81,6 +109,11 @@ public class TrophyManager {
     }
 
     // Add trophies
+    /**
+     *
+     * @param t
+     * @param nickname
+     */
     public void addTrophy(Trophy t, String nickname) {
         if (trophyUser.get(nickname) == null) {
             List<Trophy> l = new ArrayList<Trophy>();
@@ -89,10 +122,19 @@ public class TrophyManager {
         trophyUser.get(nickname).add(t);
     }
 
+    /**
+     *
+     * @param name
+     * @param nickname
+     */
     public void addTrophy(String name, String nickname) {
         addTrophy(getTrophy(name), nickname);
     }
 
+    /**
+     *
+     * @param f
+     */
     public void loadTrophyList(File f) {
         try {
             BufferedReader fr = new BufferedReader(new FileReader(f));
@@ -122,10 +164,18 @@ public class TrophyManager {
         }
     }
 
+    /**
+     *
+     * @param f
+     */
     public void saveTrophyList(File f) {
         // Not implemented yet
     }
 
+    /**
+     *
+     * @param f
+     */
     public void loadTrophyUser(File f) {
         try {
             BufferedReader fr = new BufferedReader(new FileReader(f));
@@ -148,6 +198,9 @@ public class TrophyManager {
         }
     }
 
+    /**
+     *
+     */
     public void saveTrophyUser() {
         for (Map.Entry<String, List<Trophy>> e : trophyUser.entrySet()) {
             //TODO, print

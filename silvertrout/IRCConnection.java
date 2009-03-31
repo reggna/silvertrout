@@ -42,7 +42,13 @@ import java.util.logging.Logger;
  */
 public class IRCConnection {
 
+    /**
+     *
+     */
     protected Network network;
+    /**
+     *
+     */
     protected Socket socket;
     private SenderThread senderThread;
     private ReceiverThread receiverThread;
@@ -88,6 +94,11 @@ public class IRCConnection {
         receiverThread.start();
     }
 
+    /**
+     *
+     * @param writer
+     * @throws java.io.IOException
+     */
     protected void register(Writer writer) throws IOException {
         if (network.getNetworkSettings().getPassword() != null) {
             writer.write("PASS " + network.getNetworkSettings().getPassword() + "\r\n");

@@ -45,6 +45,10 @@ import silvertrout.commons.game.ScoreManager;
 import silvertrout.commons.game.Trophy;
 import silvertrout.commons.game.TrophyManager;
 
+/**
+ *
+ **
+ */
 public class Quizmaster extends silvertrout.Plugin {
 
     private enum State { RUNNING, RUNNING_QUESTION, NOT_RUNNING };
@@ -113,6 +117,9 @@ public class Quizmaster extends silvertrout.Plugin {
     
     private State                      state                = State.NOT_RUNNING;
 
+    /**
+     *
+     */
     public Quizmaster() {
 
         String scoresPath   = "/silvertrout/plugins/Quizmaster/Scores/Scores";
@@ -128,6 +135,8 @@ public class Quizmaster extends silvertrout.Plugin {
     
     /** Award trophy to user.
      *
+     * @param t
+     * @param nick
      */
     public void awardTrophy(Trophy t, String nick) {
         if(!trophyManager.haveTrophy(t, nick)) {
@@ -137,6 +146,10 @@ public class Quizmaster extends silvertrout.Plugin {
         }
     }
     
+    /**
+     *
+     * @param nick
+     */
     public void awardScore(String nick) {
         // Calculate answer time, in seconds:
         long miliSec = Calendar.getInstance().getTimeInMillis() - startMiliTime;
@@ -212,6 +225,10 @@ public class Quizmaster extends silvertrout.Plugin {
             awardTrophy(trophyManager.getTrophy("Endurance Master"), nick);
     }
     
+    /**
+     *
+     * @param f
+     */
     public void loadQuestions(File f) {
 
         try {
@@ -233,6 +250,10 @@ public class Quizmaster extends silvertrout.Plugin {
         Collections.shuffle(questions);
     }
     
+    /**
+     *
+     * @param categories
+     */
     public void newRound(java.util.Collection<String> categories) {
         try{
             File qdir = new File(this.getClass().getResource(
@@ -264,12 +285,18 @@ public class Quizmaster extends silvertrout.Plugin {
         }
     }
     
+    /**
+     *
+     */
     public void endRound() {
         getNetwork().getConnection().sendPrivmsg(channelName, "Omgången är"
                 + " slut. Skriv !start för att starta en ny omgång.");
         state = State.NOT_RUNNING;
     }
     
+    /**
+     *
+     */
     public void newQuestion() {
         try {
             currentQuestion = questions.removeFirst();
@@ -294,6 +321,10 @@ public class Quizmaster extends silvertrout.Plugin {
     }
     
     
+    /**
+     *
+     * @param winner
+     */
     public void endQuestion(String winner) {
         if(winner == null) {
             getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar"
@@ -310,7 +341,11 @@ public class Quizmaster extends silvertrout.Plugin {
         state   = State.RUNNING;
     }
     
-    public void printStats(String sender) {    
+    /**
+     *
+     * @param sender
+     */
+    public void printStats(String sender) {
         String               topten  = new String();
         String               lastone = "Du har inga poäng ='(";
         ScoreManager.Score[] topList = scoreManager.getTop(10);
@@ -401,6 +436,9 @@ public class Quizmaster extends silvertrout.Plugin {
         }
     }
     
+    /**
+     *
+     */
     public void giveHint() {
         if(currentTime == startTime + hintTime){
             getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);

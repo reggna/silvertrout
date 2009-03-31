@@ -39,6 +39,11 @@ import javax.net.ssl.X509TrustManager;
  */
 public class SecureIRCConnection extends IRCConnection {
 
+    /**
+     *
+     * @param network
+     * @throws java.io.IOException
+     */
     public SecureIRCConnection(Network network) throws IOException {
         super(network);
     }
@@ -49,12 +54,16 @@ public class SecureIRCConnection extends IRCConnection {
         socket = su.getSocketFactory().createSocket(network.getNetworkSettings().getHost(), network.getNetworkSettings().getPort());
     }
 
+    /**
+     *
+     */
     public final class SSLUtilities {
 
         private TrustManager[] trustManagers;
 
         /**
          * Get a socket factory that trusts all certificates.
+         * @return
          */
         public SocketFactory getSocketFactory() {
             SSLContext context;
@@ -70,18 +79,35 @@ public class SecureIRCConnection extends IRCConnection {
             return (context.getSocketFactory());
         }
 
+        /**
+         *
+         */
         public class TrustingX509TrustManager implements X509TrustManager {
 
             private final X509Certificate[] issuers = new X509Certificate[]{};
 
+            /**
+             *
+             * @param chain
+             * @param authType
+             */
             @Override
             public void checkClientTrusted(X509Certificate[] chain, String authType) {
             }
 
+            /**
+             *
+             * @param chain
+             * @param authType
+             */
             @Override
             public void checkServerTrusted(X509Certificate[] chain, String authType) {
             }
 
+            /**
+             * 
+             * @return
+             */
             @Override
             public X509Certificate[] getAcceptedIssuers() {
                 return issuers;

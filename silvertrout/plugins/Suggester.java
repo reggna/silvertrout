@@ -123,6 +123,10 @@ public class Suggester extends silvertrout.Plugin {
         return suggestion;
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args){
       System.out.println(getSuggestion(args[0]));
     }

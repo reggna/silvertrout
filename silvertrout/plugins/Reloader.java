@@ -25,6 +25,10 @@ import silvertrout.User;
 import silvertrout.Channel;
 
 
+/**
+ *
+ **
+ */
 public class Reloader extends silvertrout.Plugin {
 
     // Password for AdminBoy

@@ -37,6 +37,10 @@ import silvertrout.User;
 
 
 // TODO: save config
+/**
+ *
+ **
+ */
 public class VersionControlEater extends silvertrout.Plugin {
 
     // Check interval (in minutes)
@@ -52,6 +56,9 @@ public class VersionControlEater extends silvertrout.Plugin {
     // Thread list
     final ArrayList<CheckThread> threads = new ArrayList<CheckThread>();
 
+    /**
+     *
+     */
     public class Repository {
         String  type;
         String  path;
@@ -61,6 +68,9 @@ public class VersionControlEater extends silvertrout.Plugin {
         Channel channel;
     }
     
+    /**
+     *
+     */
     public class CheckThread extends Thread {
     
         final ArrayList<String> messages = new ArrayList<String>();
@@ -190,6 +200,9 @@ public class VersionControlEater extends silvertrout.Plugin {
 
     }
 
+    /**
+     *
+     */
     public VersionControlEater() {
 
     }
@@ -241,6 +254,14 @@ public class VersionControlEater extends silvertrout.Plugin {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param path
+     * @param username
+     * @param password
+     * @param channel
+     */
     public void addRepository(String type, String path, String username, String password, Channel channel) {
     
         Repository r    = new Repository();

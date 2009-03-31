@@ -47,6 +47,13 @@ public class DCCFileSender implements Runnable {
 
     final static int SOCKET_TIMEOUT = 60000; // 60s in milliseconds
     
+    /**
+     *
+     * @param file
+     * @param recipient
+     * @param network
+     * @param cb
+     */
     public DCCFileSender(File file, User recipient, Network network, Callback cb) {
     	this.cb = cb;
 
@@ -77,14 +84,33 @@ public class DCCFileSender implements Runnable {
 		return id;
 	}
     
+    /**
+     *
+     * @param filename
+     * @param recipient
+     * @param network
+     * @param cb
+     */
     public DCCFileSender(String filename, User recipient, Network network, Callback cb) {
         this(new File(filename), recipient, network, cb);
     }
 
+    /**
+     *
+     * @param filename
+     * @param recipient
+     * @param network
+     */
     public DCCFileSender(String filename, User recipient, Network network) {
         this(new File(filename), recipient, network, null);
     }
     
+    /**
+     *
+     * @param file
+     * @param recipient
+     * @param network
+     */
     public DCCFileSender(File file, User recipient, Network network) {
         this(file, recipient, network, null);
     }

@@ -27,6 +27,10 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/**
+ *
+ **
+ */
 public class CommandLine {
     
     /*
@@ -48,6 +52,10 @@ public class CommandLine {
     private String command;
     private Map<String, String> options = new HashMap<String, String>();
 
+    /**
+     *
+     * @param line
+     */
     public CommandLine(String line) {
         /* check that the first letter in the line is an exclamation point
         /* and save the command, else throw an exception*/
@@ -70,18 +78,36 @@ public class CommandLine {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCommand() {
         return command;
     }
 
+    /**
+     *
+     * @param s
+     * @return
+     */
     public boolean keyExist(String s) {
         return options.containsKey(s);
     }
 
+    /**
+     *
+     * @param key
+     * @return
+     */
     public String getParam(String key) {
         return options.get(key);
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         CommandLine c;
         try {
