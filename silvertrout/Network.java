@@ -56,6 +56,7 @@ public class Network {
     private String motd = new String();
     /** Indicator of exception frequenzy. 0 is good. Every exception adds one and one is removed every tick() */
     private int exceptionFrequenzy = 0;
+    private int tick;
 
     /**
      * Create and connect to a new Network,
@@ -710,8 +711,11 @@ public class Network {
         return exceptionFrequenzy;
     }
 
-
+    public int getTick(){
+        return tick;
+    }
     private void onTick(int ticks) {
+        tick = ticks;
         if(exceptionFrequenzy > 0) {
             exceptionFrequenzy--;
         }
