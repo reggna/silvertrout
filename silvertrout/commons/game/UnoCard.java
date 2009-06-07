@@ -81,7 +81,7 @@ public class UnoCard{
     public String toString(){
         if(color == -1){
             if(rank == 13) return Color.white("[")+Color.green("W")+Color.red("I")+Color.yellow("L")+Color.blue("D")+Color.white("]");
-            else if(rank == 14) return Color.white("[") + Color.green("W") + Color.red("D") + Color.green("_4") + Color.white("4]");
+            else if(rank == 14) return Color.white("[") + Color.green("W") + Color.red("D4") + Color.white("]");
             else return "[c"+color+"r"+rank+"]";
         }
         String s = "";

@@ -126,7 +126,7 @@ public class UNO extends silvertrout.Plugin {
                                 if(topCard.match(c)){
                                     switch(players.getFirst().cards.size()){
                                         case 1: endGame(); return;
-                                        case 2: channel.sendPrivmsg(user.getNickname() + " has UNO!");
+                                        case 2: channel.sendPrivmsg(user.getNickname() + " has " + Color.blue("U") + Color.red("N") + Color.green("O") + "!");
                                         default: handleCard(c);
                                     }
                                 }
@@ -138,9 +138,7 @@ public class UNO extends silvertrout.Plugin {
                     }else if(message.equals("d")){
                         if(drawnCards < maxDrawnCards){
                             drawnCards++;
-                            UnoCard c = deck.drawCard();
-                            players.getFirst().cards.add(c);
-                            players.getFirst().user.sendPrivmsg("You picked up: " +c.toString());
+                            drawCards(players.getFirst(), 1);
 /*                            if(drawnCards == 1)
                                 channel.sendPrivmsg(user.getNickname() + " has drawn "+ drawnCards +" card");
                             else
@@ -175,30 +173,28 @@ public class UNO extends silvertrout.Plugin {
 
     private void handleCard(UnoCard c){
         System.out.println(c + " is beeing handled");
+        latestTick = getNetwork().getTick();
         deck.throwCard(topCard);
         players.getFirst().cards.remove(c);
+        players.getFirst().sendHand();
         topCard = c;
         if(c.getRank() == 14){ /* wd4 */
-            UnoCard[] cards = { deck.drawCard(),deck.drawCard(),
-                deck.drawCard(), deck.drawCard() };
-            players.get(1).cards.addAll(Arrays.asList(cards));
-            players.get(1).user.sendPrivmsg("You picked up: "+ UnoCard.toString(cards));
+            if(reverse) drawCards(players.getLast(), 4);
+            else drawCards(players.get(1),4);
             getNetwork().getChannel(channelName).sendPrivmsg("Choose color: "+ Color.red("c r") + Color.white(",, ") + Color.blue("c b") + Color.white(",, ") + Color.yellow("c y") + Color.white(" or ") + Color.green("c g"));
         }else if(c.getRank() == 10){ /* skip */
             skip();
         } else if(c.getRank() == 11){ /* draw two and skip */
-            UnoCard[] cards = { deck.drawCard(), deck.drawCard() };
-            players.get(1).cards.addAll(Arrays.asList(cards));
-            players.get(1).user.sendPrivmsg("You picked up: "+ UnoCard.toString(cards));
+            if(reverse) drawCards(players.getLast(), 2);
+            else drawCards(players.get(1),2);
             skip();
         } else if(c.getRank() == 12){ /* reverse */
             reverse = !reverse;
-            if(players.size()==2){
-                skip();
-            }
+            drawnCards = 0;
             if(reverse) getNetwork().getChannel(channelName).sendPrivmsg("<--");
             else getNetwork().getChannel(channelName).sendPrivmsg("-->");
-            nextPlayer();
+            if(players.size()==2) play();
+            else nextPlayer();
         } else if(c.getRank() == 13){ /* wild */
             getNetwork().getChannel(channelName).sendPrivmsg("Choose color: "+ Color.red("c r") + ", " + Color.blue("c b") +", " + Color.yellow("c y") + " or "+ Color.green("c g"));
         }else{
@@ -217,7 +213,6 @@ public class UNO extends silvertrout.Plugin {
     }
 
     private void nextPlayer(){
-        players.getFirst().sendHand();
         drawnCards = 0;
         if(reverse){
             players.addFirst(players.removeLast());
@@ -233,15 +228,26 @@ public class UNO extends silvertrout.Plugin {
         nextPlayer();
     }
 
+    private void drawCards(Player p, int nr){
+        UnoCard[] cards = new UnoCard[nr];
+        for(int i = 0; i < nr; i++)
+            cards[i] = deck.drawCard();
+        p.user.sendPrivmsg(p +" + " + UnoCard.toString(cards));
+        if(nr!=1) getNetwork().getChannel(channelName).sendPrivmsg(p.user.getNickname()+ " picked up " + nr + " cards.");
+        p.cards.addAll(Arrays.asList(cards));
+    }
+
     private void play(){
         latestTick = getNetwork().getTick();
         getNetwork().getChannel(channelName).sendPrivmsg(players.getFirst().user.getNickname()+" is up: " +topCard);
-        //players.getFirst().sendHand();
-        
+        players.getFirst().sendHand();
     }
 
     private void endGame(){
-        getNetwork().getChannel(channelName).sendPrivmsg(players.getFirst().user.getNickname() +" has won the game.");
+        int sec = (getNetwork().getTick()-startTick)%60;
+        int min = (getNetwork().getTick()-startTick)/60;
+        if(min == 0) getNetwork().getChannel(channelName).sendPrivmsg(players.getFirst().user.getNickname() +" has won the game. Time: " + sec + " s");
+        else getNetwork().getChannel(channelName).sendPrivmsg(players.getFirst().user.getNickname() +" has won the game. Time: " + min + " min " + sec + " s");
         int score = 0;
         for(int i = 1; i < players.size(); i++){
             getNetwork().getChannel(channelName).sendPrivmsg(players.get(i).user.getNickname() +": " + players.get(i).toString() + " ("+ players.get(i).getTotalHandScore() + ")");
@@ -302,6 +308,7 @@ public class UNO extends silvertrout.Plugin {
                 if(players.get(i).user.equals(user)){
                     players.remove(i);
                     getNetwork().getChannel(channelName).sendPrivmsg(user.getNickname() + " has left the game.");
+                    if(players.size() <2) endGame();
                     return;
                 }
             }

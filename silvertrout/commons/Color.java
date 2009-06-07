@@ -39,7 +39,7 @@ public class Color{
     }
 
     public static String blue(String s){
-        return "\00311,1"+s+"\003";
+        return "\00312,1"+s+"\003";
     }
     public static String white(String s){
         return "\0030,1"+s+"\003";
