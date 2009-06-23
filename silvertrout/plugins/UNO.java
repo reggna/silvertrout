@@ -53,6 +53,12 @@ public class UNO extends silvertrout.Plugin {
     /* the name of the channel in which the game will run: */
     private String channelName;
 
+    /**
+     * IDLE - No game of UNO is currently active
+     * WAITING - A game has been initated, but the bot is still waiting for
+     * players to join
+     * GAME - A game is running and players may no longer join
+     */
     private enum State { IDLE, WAITING, GAME}
     private State state = State.IDLE;
 
@@ -64,15 +70,21 @@ public class UNO extends silvertrout.Plugin {
     /* is the turn order in reverse? */
     private boolean reverse = false;
 
+    /* a list of players, where the current player is the first in the list */
     private LinkedList<Player> players;
 
+    /* the card currently faced up in the card pile */
     private UnoCard topCard;
+
     private UnoDeck deck;
+    /* the number of cards the current player have drawn */
     private int drawnCards = 0;
+    /* the maximum number of cards a player may draw until he has to skip his trun */
     private final int maxDrawnCards = 1;
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
+        message = message.toLowerCase();
         if(message.equals("!unohelp")){
             user.sendPrivmsg("Type !uno to initiate a new game of UNO. This cann't be done while a game is still running. End the current game with !unoend.");
             user.sendPrivmsg("Playing UNO is easy. All you have to do is type 'p color rank' (eg 'p y 7' would play a yellow 7) to play a card.");
@@ -98,26 +110,30 @@ public class UNO extends silvertrout.Plugin {
                     //channel.giveVoice(user);
                 }
             }else if(state == State.GAME){
+                /* print the number of cards each player have */
                 if(message.equals("t")){
+                    String s = "";
                     for(Player p: players)
-                        channel.sendPrivmsg(p.user.getNickname()+ ": " + p.cards.size());
+                        s += p.user.getNickname()+ ": " + p.cards.size()+ "   ";
+                    channel.sendPrivmsg(s);
                 }
                 if(user.getNickname().equals(players.getFirst().user.getNickname())){
+                    /* is the current card a wild card with no color? */
                     if(topCard.getColor() == -1){
                         if(message.startsWith("c ")){
                             int color = UnoCard.getColor(message.charAt(2));
                             topCard.setColor(color);
+                            /* has the color change succeded? */
                             if(topCard.getColor() != -1){
-                                if(topCard.getRank()==14)
-                                    skip();
-                                else
-                                    nextPlayer();
+                                /* if the current card is a wd4, the next player should be skipped */
+                                if(topCard.getRank()==14) skip();
+                                else nextPlayer();
                             }
-                                
                         }
                         return;
                     }
-                    if(message.startsWith("p ")){ // someone is laying a card
+                    /* is the current player trying to play a card? */
+                    if(message.startsWith("p ")){
                         try{
                             UnoCard c = new UnoCard(message.substring(2));
                             /* check if the player have that card */
@@ -135,6 +151,7 @@ public class UNO extends silvertrout.Plugin {
                             //e.printStackTrace();
                             return;
                         }
+                    /* or does the current player draw a new card from the deck? */
                     }else if(message.equals("d")){
                         if(drawnCards < maxDrawnCards){
                             drawnCards++;
@@ -144,16 +161,21 @@ public class UNO extends silvertrout.Plugin {
                             else
                                 channel.sendPrivmsg(user.getNickname() + " has drawn "+ drawnCards +" card"); */
                         }
-                    }else if(message.equals("s")){
-                        if(drawnCards >= maxDrawnCards)
-                            nextPlayer();
+                    /* or does the current player say that he want to skip his turn? */
+                    }else if(message.equals("s") && drawnCards >= maxDrawnCards){
+                        nextPlayer();
                     }
-                    //channel.sendPrivmsg(message);
                 }
             }
         }
     }
 
+    /**
+     * Initiates a new round of UNO, reseting all variables (players, deck,
+     * reverse, &c. Sets the startTick and latestTick to the current network
+     * tick. Also set the current state to State.WAITING.
+     *
+     */
     private void startGame(){
         players = new LinkedList<Player>();
         deck = new UnoDeck();
@@ -171,6 +193,20 @@ public class UNO extends silvertrout.Plugin {
         state = State.WAITING;
     }
 
+    /**
+     * Called when a card is played by the current player (players.getFirst())
+     * Carry out different actions depending on what card that was played:
+     * [*] Draw cards if a WD4 or DT was played
+     * [*] Skip the next player if a S was played
+     * [*] Change the current direction if the Card is a R
+     * [*] &c.
+     *
+     * The card played will be removed from the current player's hand.
+     * If the card that was played is not a action card, handleCard will call
+     * nextPlayer()
+     *
+     * @param c - The card that was just played by the current player.
+     */
     private void handleCard(UnoCard c){
         System.out.println(c + " is beeing handled");
         latestTick = getNetwork().getTick();
@@ -202,6 +238,10 @@ public class UNO extends silvertrout.Plugin {
         }
     }
 
+    /**
+     * Add a player to the game, and give him/her 7 cards to start with.
+     * @param u - The User of the player that wants to join the game.
+     */
     private void addPlayer(User u){
         getNetwork().getChannel(channelName).sendPrivmsg(u.getNickname() + " has joined the game.");
         Player p = new Player(u);
@@ -212,15 +252,23 @@ public class UNO extends silvertrout.Plugin {
         players.add(p);
     }
 
+    /**
+     * Change the current player by removing the first player, or move the last
+     * player to the first, depending on if the game is in reverse or not.
+     * Will call play() when finnished.
+     *@see play()
+     */
     private void nextPlayer(){
         drawnCards = 0;
-        if(reverse){
-            players.addFirst(players.removeLast());
-        }else{
-            players.addLast(players.removeFirst());
-        }
+        if(reverse) players.addFirst(players.removeLast());
+        else players.addLast(players.removeFirst());
         play();
     }
+    /**
+     * Skip the current player
+     * Will call nextPlayer() when finnished
+     *@see nextPlayer()
+     */
     private void skip(){
         if(reverse) players.addFirst(players.removeLast());
         else players.addLast(players.removeFirst());
@@ -228,6 +276,11 @@ public class UNO extends silvertrout.Plugin {
         nextPlayer();
     }
 
+    /**
+     * Makes a Player draw a number of faced down cards from the deck.
+     * @param p - The player that will draw the cards
+     * @param nr - The number of cards that the player will draw
+     */
     private void drawCards(Player p, int nr){
         UnoCard[] cards = new UnoCard[nr];
         for(int i = 0; i < nr; i++)
@@ -237,12 +290,21 @@ public class UNO extends silvertrout.Plugin {
         p.cards.addAll(Arrays.asList(cards));
     }
 
+    /**
+     * Write to the channel what card is faced, and which player that if the
+     * current player.
+     * Also tells the current player his/her which card he/she has
+     */
     private void play(){
         latestTick = getNetwork().getTick();
         getNetwork().getChannel(channelName).sendPrivmsg(players.getFirst().user.getNickname()+" is up: " +topCard);
         players.getFirst().sendHand();
     }
 
+    /**
+     * Called when the current player has 0 cards left, printing various stats
+     * and the total score.
+     */
     private void endGame(){
         int sec = (getNetwork().getTick()-startTick)%60;
         int min = (getNetwork().getTick()-startTick)/60;
