@@ -22,6 +22,7 @@
 package silvertrout.commons.game;
 import silvertrout.commons.Color;
 public class UnoCard{
+    
     private static final String[] ranks = {"0","1","2","3","4","5","6","7","8","9","S","DT","R","WILD","WD4"};
     private static final String[] colors = {"green", "red", "blue", "yellow"};
     private int rank;

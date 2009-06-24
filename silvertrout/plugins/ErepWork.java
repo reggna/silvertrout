@@ -44,17 +44,22 @@ public class ErepWork extends silvertrout.Plugin {
     private Channel channel = null;
     private LinkedList<Worker> workers = new LinkedList<Worker>();
     private HashMap<Integer, Worker> workerz = new HashMap<Integer, Worker>();
+    private double rawStock = 0;
 
     @Override
     public void onTick(int ticks) {
         /* since the api only updates every half hour, we only check it each 30 minutes */
         if(ticks % 30*60 == 0){
             if(channel == null) channel = getNetwork().getChannel(channelName);
+            if(channel != null) channel.sendAction("has joined! \\o/");
             checkCompany();
         }
     }
     private void checkCompany(){
         String site = ConnectHelper.Connect(connection, server, file, port, maxContentLength);
+
+        double newRawStock = Double.valueOf(site.substring(site.indexOf("<raw-materials-in-stock>")+24,site.indexOf("</raw-materials-in-stock>")));
+
         LinkedList<Worker> newWorkers = new LinkedList<Worker>();
         while(site.indexOf("<employee>") != -1){
             Worker w = new Worker();
@@ -84,6 +89,14 @@ public class ErepWork extends silvertrout.Plugin {
                     channel.sendPrivmsg(worker.name + " has worked with skill " + worker.manu + " and wellness " + worker.wellness + ". With the current number of employees, this gives a total productivity of "+ productivity);
             }
         }
+
+        if(rawStock != newRawStock){
+            if(channel == null)
+                System.out.println("Raw materials in stock has changed from "+ rawStock +" to "+ newRawStock + " (" + newRawStock + " - " + rawStock + " = "+ (newRawStock-rawStock) + ")");
+            else
+                channel.sendPrivmsg("Raw materials in stock has changed from "+ rawStock +" to "+ newRawStock + " (" + newRawStock + " - " + rawStock + " = "+ (newRawStock-rawStock) + ")");
+            rawStock = newRawStock;
+        }
         workerz = new HashMap<Integer, Worker>();
         for(Worker w: newWorkers) workerz.put(w.id, w);
     }
@@ -92,7 +105,7 @@ public class ErepWork extends silvertrout.Plugin {
     public void onConnected() {
         // Join channel:
         if(!getNetwork().existsChannel(channelName)) {
-            getNetwork().getConnection().join(channelName);
+            //getNetwork().getConnection().join(channelName);
         }
     }
     private class Worker{
