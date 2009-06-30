@@ -27,11 +27,11 @@ package silvertrout.commons;
  */
 public class Color{
     public static String green(String s){
-        return "\0033,1"+s+"\003";
+        return "\0039,1"+s+"\003";
     }
 
     public static String red(String s){
-        return "\0035,1"+s+"\003";
+        return "\0034,1"+s+"\003";
     }
 
     public static String yellow(String s){
@@ -39,7 +39,7 @@ public class Color{
     }
 
     public static String blue(String s){
-        return "\00312,1"+s+"\003";
+        return "\00311,1"+s+"\003";
     }
     public static String white(String s){
         return "\0030,1"+s+"\003";

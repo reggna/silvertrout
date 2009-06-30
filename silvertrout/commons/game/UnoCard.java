@@ -105,7 +105,7 @@ public class UnoCard{
     public static String toString(Object[] cards){
         String s ="";
         for(Object c: cards){
-            s +=c+Color.white(" ");
+            s += c + Color.white(" ");
         }
         return s;
     }
