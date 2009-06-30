@@ -83,7 +83,6 @@ public class ErepWork extends silvertrout.Plugin {
             w.wellness = getWellness(w.id);
 
             newWorkers.add(w);
-           // site = site.substring(site.indexOf("</employee>"));
         }
 
         /* check each worker to see if he/she has worked since last check */
