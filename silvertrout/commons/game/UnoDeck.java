@@ -37,17 +37,17 @@ public class UnoDeck{
             for(int c = 0; c < 4; c++){
                 /* common cards */
                 for(int r = 0; r <= 9; r++){
-                    for(int i = 0; i < 19; i++)
+                    for(int i = 0; i < 2; i++)
                         cards.add(new UnoCard(c,r));
                 }
                 /* r, s and dt */
-                for(int i = 0; i < 8; i++)
+                for(int i = 0; i < 2; i++)
                     for(int r = 10; r < 13; r++)
                         cards.add(new UnoCard(c,r));
             }
             /* WILD and WD4 */
             for(int i = 13; i <= 14; i++){
-                for(int j = 0; j < 8; j++){
+                for(int j = 0; j < 4; j++){
                     cards.add(new UnoCard(-1,i));
                 }
             }
