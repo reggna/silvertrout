@@ -60,28 +60,30 @@ public class ErepWork extends silvertrout.Plugin {
         double newRawStock = Double.valueOf(fetch(site, "<raw-materials-in-stock>", "</raw-materials-in-stock>"));
 
         LinkedList<Worker> newWorkers = new LinkedList<Worker>();
-        while(site.indexOf("<employee>") != -1){
+        String[] workers = site.split("</employee>");
+        for(int j = 0; j < workers.length-1; j++){
+            String s = workers[j];
             Worker w = new Worker();
             /* set id of current worker */
-            w.id = Integer.valueOf(fetch(site, "<citizen-id>", "</citizen-id>"));
+            w.id = Integer.valueOf(fetch(s, "<citizen-id>", "</citizen-id>"));
 
             /* set the current skill values of the woker */
-            site = site.substring(site.indexOf("<skills>"));
-            while(site.indexOf("</skills>") > 10){ /* here be dragons */
-                double d = Double.valueOf(fetch(site, "<value>", "</value>"));
-                String domain = fetch(site, "<domain>", "</domain>");
+            String[] skills = s.substring(s.indexOf("<skills>")).split("</skill>");
+            for(int i = 0; i< skills.length-1; i++){
+                String ss = skills[i];
+                double d = Double.valueOf(fetch(ss, "<value>", "</value>"));
+                String domain = fetch(ss, "<domain>", "</domain>");
                 if(domain.equals("manufacturing")) w.manu = d;
                 else if(domain.equals("land")) w.land = d;
                 else if(domain.equals("constructions")) w.cons = d;
-                site = site.substring(site.indexOf("</skill>")+8);
             }
-
+            
             /* set name and wellness */
-            w.name = fetch(site, "<citizen-name>", "</citizen-name>");
+            w.name = fetch(s, "<citizen-name>", "</citizen-name>");
             w.wellness = getWellness(w.id);
 
             newWorkers.add(w);
-            site = site.substring(site.indexOf("</employee>"));
+           // site = site.substring(site.indexOf("</employee>"));
         }
 
         /* check each worker to see if he/she has worked since last check */
