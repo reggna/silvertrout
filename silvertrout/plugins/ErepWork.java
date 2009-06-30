@@ -51,7 +51,6 @@ public class ErepWork extends silvertrout.Plugin {
         /* since the api only updates every half hour, we only check it each 30 minutes */
         if(ticks % 30*60 == 0){
             if(channel == null) channel = getNetwork().getChannel(channelName);
-            if(channel != null) channel.sendAction("has joined! \\o/");
             checkCompany();
         }
     }

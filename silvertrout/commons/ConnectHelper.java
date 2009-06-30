@@ -87,7 +87,9 @@ public class ConnectHelper {
 
             // Check for content type. Only accept web pages.
             if (!okContentType(contentType)) {
-                return null;
+                if(contentType.contains(";"))
+                    contentType = contentType.substring(0,contentType.indexOf(";"));
+                else return null;
             }
 
             // Byte buffer (from content length):
