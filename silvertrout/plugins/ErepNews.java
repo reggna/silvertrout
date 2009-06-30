@@ -62,7 +62,7 @@ public class ErepNews extends silvertrout.Plugin {
                 if(updated.equals(lastUpdated)){
                     lastUpdated = newUpdated;
                     return;
-                }else if(title.contains("USA"))
+                }else if(title.contains("Sweden"))
                     //System.out.println(name + " - " + title + " - " + link);
                     channel.sendPrivmsg(name + " - " + title + " - " + link);
             }catch(Exception e){}
