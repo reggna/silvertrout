@@ -375,13 +375,12 @@ public class Quizmaster extends silvertrout.Plugin {
         int newScore = scoreManager.getTotalScore(nick);
         int newPos   = scoreManager.getPosition(nick);
 
-
-        // HERE BE DRAGONS (TODO)
-        for(int i = oldScore; i <= newScore; i++){
-            // New rank
-            if(newScore % rankInterval == 0)
-                getNetwork().getConnection().sendPrivmsg(channelName,
-                        "Utmärkt jobbat! Din nya rank är: "+ printNick(nick));
+        // New rank
+        if(oldScore / rankInterval < newScore / rankInterval)
+        {
+            getNetwork().getConnection().sendPrivmsg(channelName,
+                    "Utmärkt jobbat! Din nya rank är: " 
+                    + grad[newScore / rankInterval]);
         }
 
         // Print message
@@ -400,7 +399,7 @@ public class Quizmaster extends silvertrout.Plugin {
         int hour  = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min   = Calendar.getInstance().get(Calendar.MINUTE);
         // First blood trophy
-        if(newScore == 1)
+        if(oldScore == 0 && newScore >= 1)
             awardTrophy(trophyManager.getTrophy("First Blood"), nick);
         // Speedster trophy
         if(time < 3.0 && question.hintLine.length() > 5)
@@ -415,7 +414,7 @@ public class Quizmaster extends silvertrout.Plugin {
         if(answerStreak >= 30)
             awardTrophy(trophyManager.getTrophy("Chain Overdose"), nick);
         // Elite!
-        if(newScore == 1337)
+        if(oldScore < 1337 && newScore >= 1337)
             awardTrophy(trophyManager.getTrophy("Elite!"), nick);
         // Top Ten
         if(newScore > 100 && newPos <= 10)
@@ -515,7 +514,7 @@ public class Quizmaster extends silvertrout.Plugin {
         // Construct hints from hint line (if there are hints missing)
         // TODO, improve
         int generate = question.hintCount - question.hints.size();
-        System.out.println("Generating " + generate + " questions (-1, all dots)");
+        //System.out.println("Generating " + generate + " questions (-1, all dots)");
         if(generate > 0) {
             int chars = 0;
             String base = new String();
@@ -528,7 +527,7 @@ public class Quizmaster extends silvertrout.Plugin {
                     base += question.hintLine.charAt(i);
                 }
             }
-            System.out.println("hintline contains " + chars + " chars");
+            //System.out.println("hintline contains " + chars + " chars");
             // Add base (only dots)
             Question.Hint h = question.new Hint();
             h.hint = base;
@@ -539,7 +538,7 @@ public class Quizmaster extends silvertrout.Plugin {
 
             double reveal     = ((double)chars * percentage) / (double)generate;
             double revealLeft = 0;
-            System.out.println("revealing " + reveal);
+            //System.out.println("revealing " + reveal + ", r+rl: " + (reveal + revealLeft));
             for(int g = 0; g < generate; g++) {
                 for(int r = 1, b = 0; r < reveal + revealLeft && b < 100;) {
                     int index = rand.nextInt(question.hintLine.length());
@@ -549,15 +548,20 @@ public class Quizmaster extends silvertrout.Plugin {
                     }
                     b++;
                 }
+                
+                if(reveal + revealLeft > 1) {
+                    Question.Hint hi = question.new Hint();
+                    hi.hint     = base;
+                    question.hints.add(hi);
+                    //System.out.print("(Added) ");
+                }
+                //System.out.print(base + " - old left " + revealLeft + ", reveal " + reveal);
                 revealLeft = reveal + revealLeft - Math.floor(reveal + revealLeft);
-                System.out.println(base + " - new left " + revealLeft);
-                Question.Hint hi = question.new Hint();
-                hi.hint     = base;
-                question.hints.add(hi);
+                //System.out.println(" - new left " + revealLeft);
             }
-            System.out.println("y");
+            //System.out.println("y");
         }
-        System.out.println("x");
+        //System.out.println("x");
         currentHint   = 0;
         startTime     = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
@@ -628,9 +632,18 @@ public class Quizmaster extends silvertrout.Plugin {
                 int    score        = 0;
                 for(Question.Answer answer: question.answers) {
                     // TODO: check surroundings, only non alphanum char surrounds word
-                    if(uanswer.indexOf(answer.answer.toLowerCase()) >= 0) {
+                    String cans = answer.answer.toLowerCase();
+                    int pos = uanswer.indexOf(cans);
+                    char before = pos <= 0 ? ' ': uanswer.charAt(pos - 1);
+                    char after  = pos + cans.length() >= uanswer.length() ? ' ': uanswer.charAt(pos + cans.length());
+                    
+                    //System.out.println(cans + "/" + uanswer + " = " + pos + ", " + before + ", " + after);
+                    
+                    if(pos >= 0 && !Character.isLetterOrDigit(before) && 
+                                !Character.isLetterOrDigit(after)) { 
                         score += answer.score;
                         uanswerCount++;
+                        
                     } else {
                         if(answer.required) {
                             //getNetwork().getConnection().sendPrivmsg(channelName, "missing req answer: " + answer.answer);
@@ -641,7 +654,7 @@ public class Quizmaster extends silvertrout.Plugin {
                 if(uanswerCount >= question.required) {
                     for(int i = 0; i < currentHint; i++)
                        score -= question.hints.get(i).scoredec;
-                    awardScore(user.getNickname(), score);
+                    awardScore(user.getNickname(), Math.max(1, score));
                     endQuestion(true);
 
                 } else {
@@ -806,6 +819,6 @@ public class Quizmaster extends silvertrout.Plugin {
     @Override
     public void onLoad(Map<String,String> settings){
         channelName = settings.get("channel");
-        if(channelName == null || !channelName.startsWith("#")) channelName = "#superquizNG";
+        if(channelName == null || !channelName.startsWith("#")) channelName = "#superquiz";
     }
 }

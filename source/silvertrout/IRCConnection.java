@@ -63,7 +63,9 @@ public class IRCConnection {
      */
     public IRCConnection(Network network) throws IOException {
         this.network = network;
+        System.err.println("connection..");
         connect();
+        System.err.println("setup..");
         setupConnection();
     }
 

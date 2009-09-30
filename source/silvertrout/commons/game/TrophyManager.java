@@ -120,6 +120,7 @@ public class TrophyManager {
      * @param nickname
      */
     public void addTrophy(Trophy t, String nickname) {
+        System.out.println("Adding trophy " + t + ", " + nickname);
         if (trophyUser.get(nickname) == null) {
             List<Trophy> l = new ArrayList<Trophy>();
             trophyUser.put(nickname, l);
@@ -198,6 +199,7 @@ public class TrophyManager {
                     addTrophy(trophyName, nickname);
                 }
             }
+            fr.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -209,7 +211,7 @@ public class TrophyManager {
      * @param f
      */
     public void saveTrophyUser(File f) {
-
+        System.out.println("Saving trophies to " + f);
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter(f));
             for (Map.Entry<String, List<Trophy>> e : trophyUser.entrySet()) {
@@ -219,6 +221,7 @@ public class TrophyManager {
                 }
                 fw.write("\n");
             }
+            fw.close();
         } catch (IOException ex) {
             Logger.getLogger(TrophyManager.class.getName()).log(Level.SEVERE, null, ex);
         }
