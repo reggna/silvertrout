@@ -1,0 +1,48 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kultur" subcategory="Musik">
+
+  <question>
+    <line>Den berömde österrikiske tonsättaren Wolfgang Amadeus Mozart avled i Wien 1791. Vilket var hans sista verk?</line>
+    <answers>
+      <answer>Requiem</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter tonsättaren till operan Trollflöjten?</line>
+    <answers>
+      <answer>Wolfgang Amadeus Mozart</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Under vilket århundrade skrevs musiken till EU.s nationalsång?</line>
+    <answers>
+      <answer>1800-talet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>1830 skrev den franske tonsättaren Hector Berlioz ett verk med undertiteln "Episode ur en artists liv". Verket uruppfördes i Paris samma år. Vad är huvudtiteln till verket?</line>
+    <answers>
+      <answer>Symphonie Fantastique</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter tonsättaren som utvecklade "tolvtonssystemet"?</line>
+    <answers>
+      <answer>Arnold Schönberg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken stad föddes tonsättaren Antonio Vivaldi som var berömd för sina konserter för violin och orkester "De fyra årstiderna"?</line>
+    <answers>
+      <answer>Venedig</answer>
+    </answers>
+  </question>
+
+</questions>

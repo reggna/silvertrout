@@ -1,0 +1,132 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Samhälle" subcategory="Ismer">
+
+  <question>
+    <line>Vad kallas uppfattningen om att det endast finns en gud?</line>
+    <answers>
+      <answer>Monoteism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken politisk riktning har som syfte att avskaffa statsmakten?</line>
+    <answers>
+      <answer>Anarkismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kalls den lite udda avantgardistiska konstinrikningen inom modernismen?</line>
+    <answers>
+      <answer>Dadaism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken realsocialistisk form som var tidigare vanlig i Sovjetunionen?</line>
+    <answers>
+      <answer>Stalinismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det när man driver ut onda andar?</line>
+    <answers>
+      <answer>Exorcism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Kan kamratuppfostran också kallas?</line>
+    <answers>
+      <answer>Pennalism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas tron på att världen har tillkommit på övernaturlig väg?</line>
+    <answers>
+      <answer>Kreationism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den abstrakta konststil som skapades på 1900-talet av bland annat Pablo Picasso?</line>
+    <answers>
+      <answer>Kubismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan överdriven och fanatisk patriotism också kallas?</line>
+    <answers>
+      <answer>Chauvinism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan inställningen att män är överlägsna kvinnor kallas?</line>
+    <answers>
+      <answer>Manschauvinism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas religionen som sägs vara grundad av Siddhartha Gautama?</line>
+    <answers>
+      <answer>Buddhism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas blottning med ett annat ord?</line>
+    <answers>
+      <answer>Exhibitionism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sexuella läggning där en person får sexuell njutning av smärta?</line>
+    <answers>
+      <answer>Masochism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas idéen att alla egendommar i ett samhälle bör vara gemensamt ägda?</line>
+    <answers>
+      <answer>Kommunism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är benämningen för verksamhet som omfattar människors aktivitet när de reser till andra platser?</line>
+    <answers>
+      <answer>Turism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan könsrassism kallas med annat ord?</line>
+    <answers>
+      <answer>Sexism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas uppfattningen att det finns flera gudar?</line>
+    <answers>
+      <answer>Polyteism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sexuella läggning som sägs vara uppkallad efter Markis Donatien Alphonse François?</line>
+    <answers>
+      <answer>Sadism</answer>
+    </answers>
+  </question>
+
+</questions>

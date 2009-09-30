@@ -29,22 +29,27 @@ import silvertrout.User;
 
 /**
  * CandyMan - Example plugin for Silvertrout IRC bot framework.
- *
+ * <p>
  * This is a rather useless plugin but it demonstrates some vital parts of the
  * framework so its at least a good example on how to do things. The plugin is
  * still a work in progress.
- *
- * To create a plugin you create a class that extends silvertrout.Plugin and
- * override (with @Override) the on-methods you want to implement. There are
- * many methods like this. A few examples are onTick, onPrivmsg, onMode, onLoad
- * and onQuit. Make sure you put your plugin in the silvertrout.plugins package
- * too.
- *
+ * <p>
+ * To create a plugin you create a class that extends {@link silvertrout.Plugin} 
+ * and override (with @Override) the on-methods you want to implement. There are
+ * many methods like this. A few examples are 
+ * {@link silvertrout.Plugin#onTick onTick}, 
+ * {@link silvertrout.Plugin#onPrivmsg onPrivmsg},
+ * {@link silvertrout.Plugin#onGiveMode onGiveMode},
+ * {@link silvertrout.Plugin#onLoad onLoad} and
+ * {@link silvertrout.Plugin#onQuit onQuit}.
+ * Make sure you put your plugin in the {@link silvertrout.plugins} package too.
+ * <p>
  * If you plan to do computation or run external programs or something that may
  * take more then a 10th of second or so you may want to use threads so your 
  * plugin do not disrupt what the bot is otherwise doing.
  *
  * @see silvertrout.Plugin
+ * @see silvertrout.plugins
  */
 public class CandyMan extends silvertrout.Plugin {
 
@@ -54,16 +59,29 @@ public class CandyMan extends silvertrout.Plugin {
      * This function gets called when loading the plugin. You could also use the
      * constructor but if you instead use the onLoad function you get your 
      * settings and you can be sure that the plugin is connected to a network
-     * - fetch with getNetwork().
-     *
+     * - fetch with {@link #getNetwork()}.
+     * <p>
      * You can of course combine an onLoad function with a constructor. Just 
      * make sure you know what is not initialized when using the constructor.
-     * @param settings
+     * <p>
+     * <b>Documentation from Plugin:</b>
+     * {@inheritDoc}
+     *
+     * @param  settings  A map with String String pairs containing settings. 
+     *                   This is read from the configuration file config.xml.
      */
+    @Override
     public void onLoad(Map<String, String> settings) {
         r = new Random();
     }
     
+    /**
+     * This functions get called every time someone write something in a channel
+     * or a private chat. 
+     * <p>
+     * <b>Documentation from Plugin:</b>
+     * {@inheritDoc}
+     */
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
         // Only in channels - as an alternative here we could instead overload

@@ -1,0 +1,181 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Djur och natur" subcategory="Landskapsdjur">
+
+  <question>
+    <line>Vad har Blekinge för landskapsdjur?</line>
+    <answers>
+      <answer>Ekoxe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Bohuslän för landskapsdjur?</line>
+    <answers>
+      <answer>Knubbsäl</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Dalarna för landskapsdjur?</line>
+    <answers>
+      <answer>Berguv</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Dalsland för landskapsdjur?</line>
+    <answers>
+      <answer>Korp</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Gotland för landskapsdjur?</line>
+    <answers>
+      <answer>Igelkott</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Gästrikland för landskapsdjur?</line>
+    <answers>
+      <answer>Tjäder</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Halland för landskapsdjur?</line>
+    <answers>
+      <answer>Lax</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Hälsingland för landskapsdjur?</line>
+    <answers>
+      <answer>Lodjur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Härjedalen för landskapsdjur?</line>
+    <answers>
+      <answer>Brunbjörn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Jämtland för landskapsdjur?</line>
+    <answers>
+      <answer>Älg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Lappland för landskapsdjur?</line>
+    <answers>
+      <answer>Fjällräv</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Medelpad för landskapsdjur?</line>
+    <answers>
+      <answer>Skogshare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Norrbotten för landskapsdjur?</line>
+    <answers>
+      <answer>Lavskrika</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Närke för landskapsdjur?</line>
+    <answers>
+      <answer>Hasselmus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Skåne för landskapsdjur?</line>
+    <answers>
+      <answer>Kronhjort</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Småland för landskapsdjur?</line>
+    <answers>
+      <answer>Utter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Södermanland för landskapsdjur?</line>
+    <answers>
+      <answer>Fiskgjuse</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Uppland för landskapsdjur?</line>
+    <answers>
+      <answer>Havsörn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Värmland för landskapsdjur?</line>
+    <answers>
+      <answer>Varg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västerbotten för landskapsdjur?</line>
+    <answers>
+      <answer>Storspov</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västergötland för landskapsdjur?</line>
+    <answers>
+      <answer>Trana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västmanland för landskapsdjur?</line>
+    <answers>
+      <answer>Rådjur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Ångermanland för landskapsdjur?</line>
+    <answers>
+      <answer>Bäver</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Öland för landskapsdjur?</line>
+    <answers>
+      <answer>Näktergal</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Östergötland för landskapsdjur?</line>
+    <answers>
+      <answer>Knölsvan</answer>
+    </answers>
+  </question>
+
+</questions>

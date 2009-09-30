@@ -1,0 +1,97 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
+        category="Kultur" subcategory="Monty Python">
+
+  <question>
+    <line>What is your quest?</line>
+    <answers>
+      <answer>To seek the Holy Grail</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem yppade "Better get a bucket. I'm gonna throw up."</line>
+    <answers>
+      <answer>Mr. Creosote</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken delikatess finns att köpa i strut på arenan i Life of Brian?</line>
+    <answers>
+      <answer>Utternosar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken fågel säljs i pausen under Monty Python i Hollywood?</line>
+    <answers>
+      <answer>Albatross</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många vingslag per sekund behöver en svala producera för att bibehålla flyghastighet?</line>
+    <answers>
+      <answer>43</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hände med det tredje träsk-slottet?</line>
+    <answers>
+      <answer>Det brann ner, välte och sjönk ner i träsket</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>We are now no longer the Knights who say Ni. We are now the Knights who say _____?</line>
+    <answers>
+      <answer>Ekki-Ekki-Ekki-Ekki-PTANG Zoom-Boing</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Flyter kyrkor?</line>
+    <answers>
+      <answer>Ja</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sir Lancelots vapendragare?</line>
+    <answers>
+      <answer>Concorde</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket verktyg är lämpligast att hugga ner stora träd med?</line>
+    <answers>
+      <answer>En sill</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Coventry City last won the FA Cup in what year?</line>
+    <answers>
+      <answer>Coventry City have never won the FA Cup</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>The struggle of class against class is a what struggle?</line>
+    <answers>
+      <answer>A political struggle</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Who won the Cup Final in 1949?</line>
+    <answers>
+      <answer>Wolverhampton Wanderers</answer>
+    </answers>
+  </question>
+
+</questions>

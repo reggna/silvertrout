@@ -1,0 +1,125 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat" subcategory="Såser">
+
+  <question>
+    <line>Vad heter den berömda såsen som ofta används till fisk och sparris som kocken Auguste Escoffier har med på sin lista över grundsåser?</line>
+    <answers>
+      <answer>Hollandaisesås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den vita såsen som sägs vara uppfunnen av Ludvig XIV av Frankrikes hovmästare?</line>
+    <answers>
+      <answer>Béchamelsås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken känd vanlig sås som består av bland annat smör, äggulor, schalottenlök, dragon och vinäger?</line>
+    <answers>
+      <answer>Bearnaisesås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den grekiska vitlöks- och gurksåsen?</line>
+    <answers>
+      <answer>Tzatziki</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den kända kalla mexikanska gröna såsen som är kryddad bland annat koriander, chili och vitlök?</line>
+    <answers>
+      <answer>Guacamole</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den världskända såsen som bland annat används som bas för Remouladsås?</line>
+    <answers>
+      <answer>Majonnäs</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter såsen gjord på majonnäs, ättiksgurka, kapris, dill och gräslök som ofta används till fisk och rostbiff?</line>
+    <answers>
+      <answer>Remouladsås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en lite avlång rundad skål med stor pip avsedd att servera sås i?</line>
+    <answers>
+      <answer>Såssnipa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås (eller röra) som man ofta gör av riven pecorino, vitlök, basilika mejram, pinjenötter och olivolja?</line>
+    <answers>
+      <answer>Pesto</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken söt sås framställer man genom att koka grädde och socker?</line>
+    <answers>
+      <answer>Kolasås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås med dill som vanligtvis äts till gravad lax?</line>
+    <answers>
+      <answer>Hovmästarsås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås med stark röksmak som tillverkas i Birmingham i England?</line>
+    <answers>
+      <answer>HP Sauce</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den starka latinamerikanska tomatbaserade såsen?</line>
+    <answers>
+      <answer>Salsa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås, som man framställer genom att koka en viss sjölevande varelese och som används ofta i kinesisk, thailändsk och filippinsk matlagning?</line>
+    <answers>
+      <answer>Ostronsås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås som baseras på steksky eller buljong och har fått sitt namn från dess tämligen bruna färg?</line>
+    <answers>
+      <answer>Brunsås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sås som introducerades i Genève under 1930-talet och vars originalrecept fortfarande hålls hemligt?</line>
+    <answers>
+      <answer>Café de Paris-sås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den sås som huvudsakligen baseras på ädelost?</line>
+    <answers>
+      <answer>Ädelostsås</answer>
+    </answers>
+  </question>
+
+</questions>

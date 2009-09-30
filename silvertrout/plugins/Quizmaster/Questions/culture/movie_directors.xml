@@ -1,0 +1,153 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Film" subcategory="Regissörer">
+
+  <question>
+    <line>Vem har regisserat filmen The Godfather?</line>
+    <answers>
+      <answer>Francis Ford Coppola</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen The Shawshank Redemption?</line>
+    <answers>
+      <answer>Frank Darabont</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Il Buono, il brutto, il cattivo?</line>
+    <answers>
+      <answer>Sergio Leone</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Pulp Fiction?</line>
+    <answers>
+      <answer>Quentin Tarantino</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Schindler's List?</line>
+    <answers>
+      <answer>Steven Spielberg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen One Flew Over the Cuckoo's Nest?</line>
+    <answers>
+      <answer>Milos Forman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Casablanca?</line>
+    <answers>
+      <answer>Michael Curtiz</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Shichinin no samurai?</line>
+    <answers>
+      <answer>Akira Kurosawa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen 12 Angry Men?</line>
+    <answers>
+      <answer>Sidney Lumet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Vertigo?</line>
+    <answers>
+      <answer>Alfred Hitchcock</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Goodfellas?</line>
+    <answers>
+      <answer>Martin Scorsese</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Raiders of the Lost Ark?</line>
+    <answers>
+      <answer>Steven Spielberg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen The Usual Suspects?</line>
+    <answers>
+      <answer>Bryan Singer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka har regisserat filmen The Matrix?</line>
+    <answers>
+      <answer>Andy och Larry Wachowski</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Taxi Driver?</line>
+    <answers>
+      <answer>Martin Scorsese</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Lawrence of Arabia?</line>
+    <answers>
+      <answer>David Lean</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Fight Club?</line>
+    <answers>
+      <answer>David Fincher</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Memento?</line>
+    <answers>
+      <answer>Christopher Nolan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen The Silence of the Lambs?</line>
+    <answers>
+      <answer>Jonathan Demme</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Citizen Kane?</line>
+    <answers>
+      <answer>Orson Welles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har regisserat filmen Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb?</line>
+    <answers>
+      <answer>Stanley Kubrick</answer>
+    </answers>
+  </question>
+
+</questions>

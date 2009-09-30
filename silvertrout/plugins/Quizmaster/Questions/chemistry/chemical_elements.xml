@@ -1,0 +1,832 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kemi" subcategory="Grundämnen">
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ac?</line>
+    <answers>
+      <answer>Aktinium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ag?</line>
+    <answers>
+      <answer>Silver</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Al?</line>
+    <answers>
+      <answer>Aluminium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Am?</line>
+    <answers>
+      <answer>Americium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ar?</line>
+    <answers>
+      <answer>Argon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen As?</line>
+    <answers>
+      <answer>Arsenik</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen At?</line>
+    <answers>
+      <answer>Astat</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Au?</line>
+    <answers>
+      <answer>Guld</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen B?</line>
+    <answers>
+      <answer>Bor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ba?</line>
+    <answers>
+      <answer>Barium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Be?</line>
+    <answers>
+      <answer>Beryllium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Bh?</line>
+    <answers>
+      <answer>Bohrium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Bi?</line>
+    <answers>
+      <answer>Vismut</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Bk?</line>
+    <answers>
+      <answer>Berkelium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Br?</line>
+    <answers>
+      <answer>Brom</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen C?</line>
+    <answers>
+      <answer>Kol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ca?</line>
+    <answers>
+      <answer>Kalcium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cd?</line>
+    <answers>
+      <answer>Kadmium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ce?</line>
+    <answers>
+      <answer>Cerium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cf?</line>
+    <answers>
+      <answer>Californium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cl?</line>
+    <answers>
+      <answer>Klor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cm?</line>
+    <answers>
+      <answer>Curium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Co?</line>
+    <answers>
+      <answer>Kobolt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cr?</line>
+    <answers>
+      <answer>Krom</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cs?</line>
+    <answers>
+      <answer>Cesium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Cu?</line>
+    <answers>
+      <answer>Koppar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Db?</line>
+    <answers>
+      <answer>Dubnium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ds?</line>
+    <answers>
+      <answer>Darmstadtium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Dy?</line>
+    <answers>
+      <answer>Dysprosium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Er?</line>
+    <answers>
+      <answer>Erbium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Es?</line>
+    <answers>
+      <answer>Einsteinium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Eu?</line>
+    <answers>
+      <answer>Europium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen F?</line>
+    <answers>
+      <answer>Fluor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Fe?</line>
+    <answers>
+      <answer>Järn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Fm?</line>
+    <answers>
+      <answer>Fermium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Fr?</line>
+    <answers>
+      <answer>Francium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ga?</line>
+    <answers>
+      <answer>Gallium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Gd?</line>
+    <answers>
+      <answer>Gadolinium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ge?</line>
+    <answers>
+      <answer>Germanium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen H?</line>
+    <answers>
+      <answer>Väte</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen He?</line>
+    <answers>
+      <answer>Helium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Hf?</line>
+    <answers>
+      <answer>Hafnium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Hg?</line>
+    <answers>
+      <answer>Kvicksilver</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ho?</line>
+    <answers>
+      <answer>Holmium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Hs?</line>
+    <answers>
+      <answer>Hassium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen I?</line>
+    <answers>
+      <answer>Jod</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen In?</line>
+    <answers>
+      <answer>Indium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ir?</line>
+    <answers>
+      <answer>Iridium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen K?</line>
+    <answers>
+      <answer>Kalium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Kr?</line>
+    <answers>
+      <answer>Krypton</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen La?</line>
+    <answers>
+      <answer>Lantan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Li?</line>
+    <answers>
+      <answer>Litium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Lr?</line>
+    <answers>
+      <answer>Lawrencium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Lu?</line>
+    <answers>
+      <answer>Lutetium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Md?</line>
+    <answers>
+      <answer>Mendelevium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Mg?</line>
+    <answers>
+      <answer>Magnesium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Mn?</line>
+    <answers>
+      <answer>Mangan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Mo?</line>
+    <answers>
+      <answer>Molybden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Mt?</line>
+    <answers>
+      <answer>Meitnerium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen N?</line>
+    <answers>
+      <answer>Kväve</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Na?</line>
+    <answers>
+      <answer>Natrium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Nb?</line>
+    <answers>
+      <answer>Niob</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Nd?</line>
+    <answers>
+      <answer>Neodym</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ne?</line>
+    <answers>
+      <answer>Neon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ni?</line>
+    <answers>
+      <answer>Nickel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen No?</line>
+    <answers>
+      <answer>Nobelium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Np?</line>
+    <answers>
+      <answer>Neptunium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen O?</line>
+    <answers>
+      <answer>Syre</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Os?</line>
+    <answers>
+      <answer>Osmium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen P?</line>
+    <answers>
+      <answer>Fosfor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pa?</line>
+    <answers>
+      <answer>Protaktinium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pb?</line>
+    <answers>
+      <answer>Bly</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pd?</line>
+    <answers>
+      <answer>Palladium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pm?</line>
+    <answers>
+      <answer>Prometium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Po?</line>
+    <answers>
+      <answer>Polonium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pr?</line>
+    <answers>
+      <answer>Praseodym</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pt?</line>
+    <answers>
+      <answer>Platina</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Pu?</line>
+    <answers>
+      <answer>Plutonium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ra?</line>
+    <answers>
+      <answer>Radium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Rb?</line>
+    <answers>
+      <answer>Rubidium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Re?</line>
+    <answers>
+      <answer>Rhenium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Rf?</line>
+    <answers>
+      <answer>Rutherfordium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Rg?</line>
+    <answers>
+      <answer>Röntgenium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Rh?</line>
+    <answers>
+      <answer>Rodium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Rn?</line>
+    <answers>
+      <answer>Radon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ru?</line>
+    <answers>
+      <answer>Rutenium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen S?</line>
+    <answers>
+      <answer>Svavel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sb?</line>
+    <answers>
+      <answer>Antimon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sc?</line>
+    <answers>
+      <answer>Skandium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Se?</line>
+    <answers>
+      <answer>Selen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sg?</line>
+    <answers>
+      <answer>Seaborgium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Si?</line>
+    <answers>
+      <answer>Kisel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sm?</line>
+    <answers>
+      <answer>Samarium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sn?</line>
+    <answers>
+      <answer>Tenn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Sr?</line>
+    <answers>
+      <answer>Strontium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ta?</line>
+    <answers>
+      <answer>Tantal</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Tb?</line>
+    <answers>
+      <answer>Terbium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Tc?</line>
+    <answers>
+      <answer>Teknetium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Te?</line>
+    <answers>
+      <answer>Tellur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Th?</line>
+    <answers>
+      <answer>Torium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Ti?</line>
+    <answers>
+      <answer>Titan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Tl?</line>
+    <answers>
+      <answer>Tallium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Tm?</line>
+    <answers>
+      <answer>Tulium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen U?</line>
+    <answers>
+      <answer>Uran</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uub?</line>
+    <answers>
+      <answer>Ununbium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uuh?</line>
+    <answers>
+      <answer>Ununhexium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uuo?</line>
+    <answers>
+      <answer>Ununoctium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uup?</line>
+    <answers>
+      <answer>Ununpentium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uuq?</line>
+    <answers>
+      <answer>Ununquadium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uus?</line>
+    <answers>
+      <answer>Ununseptium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Uut?</line>
+    <answers>
+      <answer>Ununtrium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen V?</line>
+    <answers>
+      <answer>Vanadin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen W?</line>
+    <answers>
+      <answer>Volfram</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Xe?</line>
+    <answers>
+      <answer>Xenon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Y?</line>
+    <answers>
+      <answer>Yttrium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Yb?</line>
+    <answers>
+      <answer>Ytterbium</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Zn?</line>
+    <answers>
+      <answer>Zink</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket grundämne har beteckningen Zr?</line>
+    <answers>
+      <answer>Zirkonium</answer>
+    </answers>
+  </question>
+
+</questions>

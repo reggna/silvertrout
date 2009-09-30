@@ -1,0 +1,48 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="questions.xsd"
+        category="Politik" subcategory="Svenska statsministrar">
+
+  <question>
+    <line>Vad heter skånes landskapsblomma?</line>
+    <answers>
+      <answer>Prästkrage</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad blir x^2 + 10x?</line>
+    <answers>
+      <answer>0</answer>
+      <answer>-10</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Nämn minst en lösning till x^2 + 10x?</line>
+    <hints>
+      <hint score-decrease="1">x^2 + 10x = x(x + 10)</hint>
+      <line hints="4">0 och -10</line>
+    </hints>  
+    <answers attempts="2" required="1">
+      <answer>0</answer>
+      <answer>-10</answer>
+    </answers>
+  </question>  
+  
+  <question>
+    <line>Vad heter statsministern född 1860 som har ett torg uppkallat efter sig i Köpenhamn?</line>
+    <hints>
+      <hint score-decrease="1">Han var statsminister för tre regeringar under åren 1920 till 1925.</hint>
+      <hint score-decrease="2">Han blev sveriges förste socialdemokratiske statsminister.</hint>
+      <hint score-decrease="3">Han tilldelades Nobels fredspris år 1921, tillsammans med Christian Lange.</hint>
+      <line hints="3">Hjalmar Branting</line>
+    </hints>  
+    <answers attempts="5" required="1">
+      <answer score="5">Karl</answer>
+      <answer score="5">Hjalmar</answer>
+      <answer score="5" required="true">Branting</answer>
+    </answers>
+  </question>
+  
+</questions>

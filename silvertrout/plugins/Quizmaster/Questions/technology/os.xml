@@ -1,0 +1,27 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Datorer" subcategory="Operativsystem">
+
+  <question>
+    <line>Vad heter operativsystemet som från början skapades av IBM och Microsoft men som IBM sedan själv fortsatte att utveckla?</line>
+    <answers>
+      <answer>OS/2</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter operativsystemet som skapades vid Bell Labs (efter Unix) och designades som ett nätverksbaserat operativsystem med inbyggd stöd för grafik?</line>
+    <answers>
+      <answer>Plan 9</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter GNUs egna kärna, som fortfarande är under utveckling?</line>
+    <answers>
+      <answer>GNU Hurd</answer>
+    </answers>
+  </question>
+
+</questions>

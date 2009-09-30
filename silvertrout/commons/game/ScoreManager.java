@@ -37,7 +37,7 @@ import java.io.IOException;
 
 /**
  *
- **
+ *
  */
 public class ScoreManager {
 
@@ -62,7 +62,7 @@ public class ScoreManager {
         
         /**
          *
-         * @return
+         * @return  The total score
          */
         public int getTotalScore() {
             int totalScore = 0;
@@ -74,8 +74,8 @@ public class ScoreManager {
         
         /**
          *
-         * @param part
-         * @return
+         * @param   part  Part to return score of
+         * @return        Score for the specified part
          */
         public int getScore(String part) {
             if(score.containsKey(part)) {
@@ -155,6 +155,7 @@ public class ScoreManager {
                 for(Map.Entry<String, Integer> e: s.score.entrySet()) {
                     fw.write(e.getKey() + "\t" + e.getValue() + "\n");
                 }
+                fw.write("\n");
             }
             fw.close();
         } catch (java.io.IOException e) {
@@ -166,7 +167,7 @@ public class ScoreManager {
      *
      * @param nickname
      * @param what
-     * @return
+     * @return   The specified user's score for the part
      */
     public int getScore(String nickname, String what) {
         for (int i = 0; i < scores.size(); i++) {
@@ -183,7 +184,7 @@ public class ScoreManager {
     /**
      *
      * @param nickname
-     * @return
+     * @return   The specified user's total score
      */
     public int getTotalScore(String nickname) {
         for (int i = 0; i < scores.size(); i++) {
@@ -198,7 +199,7 @@ public class ScoreManager {
     /**
      *
      * @param nickname
-     * @return
+     * @return   The specified user's position
      */
     public int getPosition(String nickname) {
         for (int i = 0; i < scores.size(); i++) {
@@ -212,7 +213,7 @@ public class ScoreManager {
     /**
      *
      * @param amount
-     * @return
+     * @return  The specified top list
      */
     public Score[] getTop(int amount) {
         // We cant fetch more then we have
@@ -229,7 +230,7 @@ public class ScoreManager {
      *
      * @param amount
      * @param nick
-     * @return
+     * @return  True if user is on the specified top list
      */
     public boolean isTop(int amount, String nick) {
         if (scores.size() < amount) {

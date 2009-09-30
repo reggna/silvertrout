@@ -1,0 +1,69 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat och dryck" subcategory="Chips">
+
+  <question>
+    <line>Estrella och OLW är störst på den svenska chipsmarknaden. Vilket märke kommer på tredje plats?</line>
+    <answers>
+      <answer>Pringles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad betyder ordet ESTRELLA?</line>
+    <answers>
+      <answer>Stjärna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket år gjordes de första chipsen?</line>
+    <answers>
+      <answer>1853</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter potatischips i England?</line>
+    <answers>
+      <answer>Crisps</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad betyder OLW?</line>
+    <answers>
+      <answer>Old London Wasa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket potatis går det åt till ett kilo chips?</line>
+    <answers>
+      <answer>ca 4 kilo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lyder OLW:s reklamslogan?</line>
+    <answers>
+      <answer>Har ni fest, eller?</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lyder Estrellas slogan?</line>
+    <answers>
+      <answer>Ett lätt sätt att umgås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken sorts chips äter vi mest av i Sverige?</line>
+    <answers>
+      <answer>Sourcream/Onion-chips</answer>
+    </answers>
+  </question>
+
+</questions>

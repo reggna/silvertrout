@@ -1,0 +1,342 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Historia" subcategory="Andra världskriget">
+
+  <question>
+    <line>Vad kallades de tyska störtbombare, med kort räckvidd, som användes vid fronten var formella beteckning var Junkers Ju 87?</line>
+    <answers>
+      <answer>Stuka</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>3 dagar efter Japans attack mot Pearl Harbor sänktes två Brittiska slagskepp utanför Malaysias kust. Hur sänktes de?</line>
+    <answers>
+      <answer>Torpeder från flygplan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Tyskland försökte i juli 1943 gå till motangrepp mot Röda armén i 2:a världskriget största pansarslag med c:a 6000 tanks inblandade. Var stod slaget?</line>
+    <answers>
+      <answer>Kursk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken tysk ledare ledde de tyska styrkorna i Nordafika med stor framgång men besegrades till sist av Britternas Montgomery 1942 vid El Alamein?</line>
+    <answers>
+      <answer>Erwin Rommel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den 23 augusti 1939 slöt Sovjetunionen en icke-angreppspakt med Tyskland. Vem representerade Tyskland i dessa förhandlingar?</line>
+    <answers>
+      <answer>Joachim von Ribbentrop</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Stalin lär ha blivit helt överrumplad och handlingsförlamad när Tyskland invaderade Sovjetunionen i juni 1941. Vad var kodnamnet för operationen?</line>
+    <answers>
+      <answer>Barbarossa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Britterna hade en "ointaglig" fästning för att säkra passagen mellan Stilla Havet och Indiska Oceanen. Enda problemet var att alla kanoner var riktade mot vattnet när fienden kom genom djungeln på fastlandet. Vilken stad låg denna fästning i?</line>
+    <answers>
+      <answer>Singapore</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Under april och maj 1941 erövrade Tyskland Jugoslavien och Grekland. I Jugoslavien fanns dock under hela ockupationen en påtaglig, vänsterorienterad, gerillaverksamhet mot Tyskland. Vad kallades dessa rebeller?</line>
+    <answers>
+      <answer>Partisaner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En tillämpning av en tämligen ny uppfinning fick stor betydelse för Englands förmåga att försvara sina kuster mot tyska bombflyg. Den gjorde så att britterna kunde upptäcka det tyska flyget på långt håll. Vad kallas uppfinningen?</line>
+    <answers>
+      <answer>Radar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Tyskland angrep Holland, Frankrike, Belgien och Luxemburg den 10 maj 1940. Det tog 11 dagar för de främsta Tyska pansarstyrkorna att nå Atlanten och kriget blev kort. För att förödmjuka Frankrike fick man skriva på kapitulationen på samma ställe som vapenstilleståndet efter 1:a världskriget tecknades. Var?</line>
+    <answers>
+      <answer>I en tågvagn i Compiègneskogen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var skedde den första (i juli 1943) betydande lyckade landstigningen av allierade trupper på Europas fastland?</line>
+    <answers>
+      <answer>Italien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ungefär hur många judar och andra avvikande avrättas under Hitlers tid vid makten?</line>
+    <answers>
+      <answer>9000000</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Sommaren 1942 fösökte Japan med ett nytt överraskningsanfall i Stilla Havet, men denna gång var USA beredda och vann slaget. Var stod detta slag ?</line>
+    <answers>
+      <answer>Midway</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Japan gjorde fortsatt starkt motstånd och USA ansåg sig tvingade att ta till ett nytt oerhört kraftfullt vapen för att tvinga Japan till kapitulation. Vilken stad blev först utsatt för detta vapens fasor?</line>
+    <answers>
+      <answer>Hiroshima</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket år blev Hitler rikskansler i Tyskland ?</line>
+    <answers>
+      <answer>1933</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När Tyskland inte lyckades erövra luftherraväldet, försökte de från och med hösten 1940 en ny taktik. De gjorde snabba räder med mindre antal plan mot stora befolkningscentra. Vad kallar engelsmän detta taktik?</line>
+    <answers>
+      <answer>The Blitz</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I maj 1945 kapitulerade till sist Tyskland. 6 års krig hade lett till uppskattningsvis över 30 miljoner döda människor. Dagen efter Hitlers självmord tog hans propagandaministrer sitt liv. Vad hette han?</line>
+    <answers>
+      <answer>Joseph Goebbels</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den 1 september 1939 angrep Tyskland Polen och kriget hade startat. Det snabba anfallet skedde med en nya taktik. Vad kallades denna typ av krig?</line>
+    <answers>
+      <answer>Blitzkrieg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Många menar att freden med hård villkor för Tyskland efter Första världskriget var en huvudförklaring till utvecklingen som ledde till det andra världskriget. Denna fred slöts i en stad som gett namn åt fredsfördraget. Vilken var staden?</line>
+    <answers>
+      <answer>Versailles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>På senhösten 1941 var Tyska trupper så nära Moskva att artillerielden hördes in till staden. En för Tyskland obehaglig överraskning var att möta Sovjets nya stridsvagn som på flera sätt var tekniskt överlägsen Tyskarnas pansar. Vad hette den?</line>
+    <answers>
+      <answer>T-34</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>7 december 1941 anföll överraskande Japan USA's flottbas vid Pearl Harbor. Vid vilken ö-grupp låg Pearl Harbor?</line>
+    <answers>
+      <answer>Hawaii</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När gick Tyskland till angrepp mot Norge och Danmark ?</line>
+    <answers>
+      <answer>9 april 1940</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Det största slaget under sommarens offensiv 1941 mot Sovjetunionen stod vid en stad där striden slutade med att c:a 650.000 krigsfångar togs. Vad heter staden ?</line>
+    <answers>
+      <answer>Kiev</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades Montgomerys plan för hur man snabbt skulle ta sig över Rhen?</line>
+    <answers>
+      <answer>Operation Market Garden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den 6 augusti 1945 fällde USA den första atombomben över Japan och Hiroshima fick 75 % av sin bebyggelse raserad. Den bomben hette 'Little boy' men vad hette den som 3 dagar senare släpptes över Nagasaki?</line>
+    <answers>
+      <answer>Fat man</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Efter stora framgångar i inledningen av operation Barbarossa kom tyska armégrupp nord fram till Leningrad i september 1941. Hitler såg en snabb seger framför sig, men istället blev det en lång belägring av staden. Hur länge varade den?</line>
+    <answers>
+      <answer>Ca 900 dagar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När inleddes den tyska operationen Barbarossa?</line>
+    <answers>
+      <answer>22 juni 1941</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Världens genom tiderna största pansarslag stod vid Kursk i juli 1943. Hitler planerade att slå tillbaka den sovjetiska armén som var på frammarsch och återigen ta tillbaka initiativet på östfronten. Vad kallades operationen?</line>
+    <answers>
+      <answer>Zitadelle</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Australiensarna kämpade under svåra och tuffa förhållanden på Nya Guinea under 1942 för att hindra japanerna att nå Port Moresby och erövra den australiska provinsen. Striderna och förflyttningarna skedde längs en otillgänglig led som gick över 4000 m höga regnskogsbeklädda berg med branta sluttningar, och denna led kom att kallas...</line>
+    <answers>
+      <answer>Kokodastigen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Slaget vid el-Alamein juli-november 1942, var början till slutet för den tyska afrikakåren. General Harold Alexander var överbefälhavare för de brittiska styrkorna, och den brittiska 8:e armén fick i augusti en ny chef, nämligen generalmajor...</line>
+    <answers>
+      <answer>Bernard Montgomery</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ett starkt kritiserat allierat bombanfall skedde över ett berg där benediktinordens moderkloster var beläget. Vad hette det italienska berget?</line>
+    <answers>
+      <answer>Monte Cassino</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I november 1942 landstiger amerikaner och britter i Nordafrika för att öppna en andra front i ökenkriget mot tyskarnas Afrikakår. Vad kallades denna operation?</line>
+    <answers>
+      <answer>Torch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den som låg bakom planeringen av anfallet på Pearl Harbor var amiral Isoroku Yamamato. Det sägs att han blev stärkt i sin övertygelse om att det var en bra plan av en annan händelse någon månad tidigare. Vilken?</line>
+    <answers>
+      <answer>Britternas anfall mot Taranto</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Tysklands befälhavare över den 6:e armén vid Stalingrad var general, senare generalfältmarsalk, Friedrich Paulus. Vad var speciellt med honom?</line>
+    <answers>
+      <answer>Han var den förste tyske fältmarsalk som kapitulerat</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den första allierade invasionen av europeisk mark, ägde rum i juli 1943 under namnet 'operation Husky'. Var skedde den landstigning som var startskottet på invasionen?</line>
+    <answers>
+      <answer>På Sicilien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När man nämner invasionen av Normandie 6 juni 1944 tänker de flesta på när amerikanerna landstiger på Omaha beach där striderna var som hårdast, men även britter och kanadensare deltog i landstigningen. Vid vilken strand landsteg i huvudsak kanadensare?</line>
+    <answers>
+      <answer>Juno</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>HMS Hood var en brittisk slagkryssare från 1918 och sin tids största örlogsfartyg. Vad hette det tyska slagskepp som 1941 sänkte HMS Hood?</line>
+    <answers>
+      <answer>Bismarck</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I augusti 1942 försökte sig de allierade sig på en landstigningsoperation vid en fransk stad. Det blev ett stort misslyckande, men gav värdefull information som senare användes vid invasionen av Normandie. Vad hette denna stad?</line>
+    <answers>
+      <answer>Dieppe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I oktober 1944 stiger amerikanska styrkor iland på Filippinerna för att återta ögruppen från japanerna. Japanerna svarar med operation Sho-1 som var en plan för att slå ut flera av de amerikanska örlogsfartygen. Allt slutar i ett stort sjöslag strax öster om Filippinerna. Var stod detta slag?</line>
+    <answers>
+      <answer>Leytebukten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Två sovjetiska befälhavare tävlade om äran att få stå som 'erövrare av Berlin' 1945. En var befälhavaren för den ukrainska 1:a fronten och den andre var befälhavaren för den 1:a vitryska fronten. Den senare fick äran att inta riksdagshuset. Vad hette han?</line>
+    <answers>
+      <answer>Georgij Zjukov</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I september 1941 ockuperade von Mannsteins tyska trupper hela Krimhalvön vid Svarta havet, utom Sevastopol och Kertjhalvön. Tyskarna ville inta Sevastopol för att den vägen kunna ta in förnödenheter sjövägen, men Sevastopol försvarades av ett antal starkt befästa fort. För att mala ner försvaret av Sevastopol användes den största kanon som tillverkats och använts i strid. Vad hette den?</line>
+    <answers>
+      <answer>Schwere Gustav</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I december 1944 inleder Hitler sin sista stora motoffensiv på västfronten. Den sker på ett ställe där de allierade trott att terrängen skulle vara för otillgänglig för så stora trupprörelser. Var skedde detta?</line>
+    <answers>
+      <answer>Ardennerna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Operation Merkur var en tysk luftlandsättningsoperation i maj 1941. Målet var att ta kontroll över en ö i Medelhavet. Vilken?</line>
+    <answers>
+      <answer>Kreta</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Det första slaget mellan USA och Japan efter Pearl Harbor tog plats i ett hav utanför Australiens nordöstra kust i maj 1942. Vad kallades slaget?</line>
+    <answers>
+      <answer>Slaget om Korallhavet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>32 km sydöst om Rom gjorde de allierade i januari 1944 en landstigning för att kringgå det tyska försvaret. Var skedde denna landstigning?</line>
+    <answers>
+      <answer>Anzio</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Under 1950-talet arbetade Adolf Eichmann inom olika yrkeskategorier. Vad försörjde han sig bland annat på?</line>
+    <answers>
+      <answer>Uppfödning av kaniner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket land var först i strid med ett jetdrivet jaktflygplan?</line>
+    <answers>
+      <answer>Tyskland</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette det första jetdrivna jaktflygplanet som användes i strid?</line>
+    <answers>
+      <answer>Messerschmitt Me 262</answer>
+    </answers>
+  </question>
+
+</questions>

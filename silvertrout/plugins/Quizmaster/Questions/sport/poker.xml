@@ -1,0 +1,279 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Sport" subcategory="Poker">
+
+  <question>
+    <line>Vad kallas en olaglig insats där man vid pokerbordet lägger in markerna i flera omgångar utan att säga tydligt vad man vill satsa</line>
+    <answers>
+      <answer>String bet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Det blir rundpass på Rivern, vem får visa sitt kort först?</line>
+    <answers>
+      <answer>Den vänster till dealern</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har vunnit mest turneringspengar i 'World Series Of Poker' genom tiderna?</line>
+    <answers>
+      <answer>Joe Hachem</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om du får upp två åttor på handen, hur stor är då chansen att träffa en till åtta på floppen?</line>
+    <answers>
+      <answer>11,8%</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>2003:s världsmästerskap i poker vann Chris som lyckades kvalificera sig genom flera sateliter och vinna potten på cirka $2.500.000. Han betalade sammanlagt $39 för att vara med. Vad heter Chris i efternamn?</line>
+    <answers>
+      <answer>Moneymaker</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Handen Ess och 8, också kallad "Dead man's hand" i Texas Hold'em, har blivit känd för att en pokerlegend blev skjuten just när han hade denna handen. Vem var det?</line>
+    <answers>
+      <answer>Wild Bill Hickok</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem vann poker-VM både 1987 och 1988 och var nära att vinna även 1989, då han kom tvåa?</line>
+    <answers>
+      <answer>Johnny Chan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om någon i Texas Hold'em betar, en annan höjer och du synar, vad har du gjort då?</line>
+    <answers>
+      <answer>Cold call</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om man har bästa möjliga hand (i kombination med bordet) så har man ...?</line>
+    <answers>
+      <answer>Nötterna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad menas med "fixed limit"?</line>
+    <answers>
+      <answer>Satsningarna är reglerade till en bestämd insatsgräns</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om man har fått in en "nut flush" då har man?</line>
+    <answers>
+      <answer>Färg med ess på topp</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om man är "on the button" vad är man då?</line>
+    <answers>
+      <answer>Man är dealer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur måste du fördela korten i en Omaha-hand?</line>
+    <answers>
+      <answer>2 kort från hand, 3 från bordet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är ett annat namn för 7 card Low?</line>
+    <answers>
+      <answer>Razz</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>"Ducks" är...?</line>
+    <answers>
+      <answer>Två 2:or</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Måste en Royal Straight Flush vara i Hjärter?</line>
+    <answers>
+      <answer>Nej</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken hand kallas Big Slick i Texas Holdem</line>
+    <answers>
+      <answer>Ess och Kung</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken svensk vann WPT-tävlingen 2004?</line>
+    <answers>
+      <answer>Martin de Knijff</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Programledarna till WPT heter Mike Sexton och...?</line>
+    <answers>
+      <answer>Vince van Patten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om du fått "Cowboys" på handen vad har du då?</line>
+    <answers>
+      <answer>Två Kungar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om du har fått 'Big Slick' på hand när du spelar Hold'em så har du vad?</line>
+    <answers>
+      <answer>Ess och Kung</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En av världens bästa Pokerspelare heter Gus Hansen, vilket land kommer han ifrån?</line>
+    <answers>
+      <answer>Danmark</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka har vunnit WSOP 3 gånger?</line>
+    <answers>
+      <answer>Stuey Ungar och Johnny Moss</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Doyle Brunsons för smeknamn?</line>
+    <answers>
+      <answer>Texas Dolly</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem vann WSOP 2005 och kammade hem det dåtills största pokerpriset i VMs historia?</line>
+    <answers>
+      <answer>Joe Hachem</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om du får fyra kort till färg på floppen, hur stor sannolikhet är det att din färg kommer på någon av de två nästföljande korten?</line>
+    <answers>
+      <answer>35%</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur stor sannolikhet är det att du får par i ess på hand i Texas Hold'em?</line>
+    <answers>
+      <answer>1 på 221</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas stegen A-2-3-4-5 i pokersammanhang?</line>
+    <answers>
+      <answer>The Wheel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Varför brukar pokerspelare lägga spelmarker över sina kort?</line>
+    <answers>
+      <answer>För att skydda handen från att dödas</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas par i knektar på hand?</line>
+    <answers>
+      <answer>Fish Hooks</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den summa pengar som huset tar på ett casino?</line>
+    <answers>
+      <answer>Rake</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas han som vann World Series of Poker main event 2004?</line>
+    <answers>
+      <answer>Fossilman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Varför är handen 10 2 ihopkopplad med Doyle Brunson?</line>
+    <answers>
+      <answer>Han avgjorde World Series of Poker två år i rad med den handen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken hand kallas för Doyle Brunson?</line>
+    <answers>
+      <answer>10 2</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem kom tvåa i WSOP main event 2004?</line>
+    <answers>
+      <answer>David Williams</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket vann Joseph Hachem för sin vinst i WSOP main event 2005?</line>
+    <answers>
+      <answer>$7500000</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket casino grundade World Series of Poker?</line>
+    <answers>
+      <answer>Binions Horseshoe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har man under det understa kortet i kortleken när man delar ut korten?</line>
+    <answers>
+      <answer>Ett cut-card</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem vann World Series of Poker main event 2003?</line>
+    <answers>
+      <answer>Chris Moneymaker</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,104 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Film" subcategory="Barnfilm">
+
+  <question>
+    <line>Vad heter Emil i Lönnebergas lillasyster ?</line>
+    <answers>
+      <answer>Ida</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette de 7 dvärgarna?</line>
+    <answers>
+      <answer>Kloker, Toker, Prosit, Glader, Butter, Trötter och Blyger</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är Pippi Långstrumps hela namn?</line>
+    <answers>
+      <answer>Pippilotta Viktualia Rullgardina Krusmynta Efraimsdotter Låstrump</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter pingvinen som blir hjälte i filmen Pingvinen och lyckostenen?</line>
+    <answers>
+      <answer>Hubbe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>På vilken ögrupp i Stilla havet bor Lilo &amp; Stich?</line>
+    <answers>
+      <answer>Hawaii</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter prinssesan i Shrek?</line>
+    <answers>
+      <answer>Fiona</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem yttrade "Mot oändligheten och vidare"?</line>
+    <answers>
+      <answer>Buzz Lightyear</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Hercules pappa?</line>
+    <answers>
+      <answer>Zeus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter flickan i "Skönheten och Odjuret"?</line>
+    <answers>
+      <answer>Belle</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Pippi Långstrumps apa?</line>
+    <answers>
+      <answer>Herr Nilsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den lilla kaninen i filmerna om Bamse?</line>
+    <answers>
+      <answer>Lille Skutt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem yttrade: "Livet är så orättvist. Jag blir aldrig kung!"?</line>
+    <answers>
+      <answer>Scar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken stad bor Pelle Svanslös?</line>
+    <answers>
+      <answer>Uppsala</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket farligt cirkusnummer utförde insekterna i filmen "Ett småkryps liv"?</line>
+    <answers>
+      <answer>Dödsflamman</answer>
+    </answers>
+  </question>
+
+</questions>

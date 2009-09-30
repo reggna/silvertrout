@@ -21,14 +21,19 @@
  */
 package silvertrout.commons.game;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.File;
+import java.io.FileWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // TODO: heavy changes needed
 /**
@@ -120,6 +125,7 @@ public class TrophyManager {
             trophyUser.put(nickname, l);
         }
         trophyUser.get(nickname).add(t);
+        saveTrophyUser(trophyUserFile);
     }
 
     /**
@@ -200,15 +206,23 @@ public class TrophyManager {
 
     /**
      *
+     * @param f
      */
-    public void saveTrophyUser() {
-        for (Map.Entry<String, List<Trophy>> e : trophyUser.entrySet()) {
-            //TODO, print
-            for (Trophy t : e.getValue()) {
-                // TODO, print
+    public void saveTrophyUser(File f) {
+
+        try {
+            BufferedWriter fw = new BufferedWriter(new FileWriter(f));
+            for (Map.Entry<String, List<Trophy>> e : trophyUser.entrySet()) {
+                fw.write(e.getKey() + "\n");
+                for (Trophy t : e.getValue()) {
+                    fw.write(t.getName() + "\n");
+                }
+                fw.write("\n");
             }
-        // TODO print empty line
+        } catch (IOException ex) {
+            Logger.getLogger(TrophyManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 }
 

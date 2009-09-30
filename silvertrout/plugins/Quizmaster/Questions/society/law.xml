@@ -1,0 +1,272 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Samhälle" subcategory="Juridik">
+
+  <question>
+    <line>Vad betyder lex lata (de lege lata)?</line>
+    <answers>
+      <answer>Gällande rätt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innebär denuntiation?</line>
+    <answers>
+      <answer>Underättelse</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om någon olovligen tar 1.500 kronor från dig, men i ögonblicket han tar pengarna ångrar sig och lägger tillbaka pengarna, vilket brott har han gjorts sig skyldig?</line>
+    <answers>
+      <answer>Stöld</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om en domstol sägs vara inkvisitorisk innebär det att den skall...</line>
+    <answers>
+      <answer>Efterforska sanningen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En talan vid domstol som går ut på att domstolen skall faställa att ett visst rättsförhållande föreligger kallas?</line>
+    <answers>
+      <answer>Fastställelsetalan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många grundlagar finns det i Sverige?</line>
+    <answers>
+      <answer>4 st</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Sverige för grundlagar?</line>
+    <answers>
+      <answer>Regeringsformen, Tryckfrihetsförordningen, Yttrandefrihetsgrundlagen och Succesionsordningen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det man ska ha för att låta någon handla å ens vägnar?</line>
+    <answers>
+      <answer>Fullmakt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem stiftar förordningar?</line>
+    <answers>
+      <answer>Regeringen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem är generalsekreterare för Sveriges advokatsamfund?</line>
+    <answers>
+      <answer>Anne Ramberg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Avtal där båda parter är förpliktade av prestationer som uppväger varandra kallas?</line>
+    <answers>
+      <answer>Onerösa avtal</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas bland annat lagar, förordningar och föreskrifter med ett samlingsnamn?</line>
+    <answers>
+      <answer>Författning</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket är det högsta beslutande organet i ett aktiebolag?</line>
+    <answers>
+      <answer>Bolagsstämman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När måste den tilltalade i brottmål avge vittnesed?</line>
+    <answers>
+      <answer>Aldrig</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Juridiken talar ofta om latinets dolus och culpa. Vad betyder de?</line>
+    <answers>
+      <answer>Uppsåt och vårdslöshet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är lös egendom?</line>
+    <answers>
+      <answer>Allt som inte är fast egendom</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad betyder kausualitet?</line>
+    <answers>
+      <answer>Orsakssamband</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken titel har en domare i Högsta domstolen?</line>
+    <answers>
+      <answer>Justitieråd</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den som blir stämd i ett tvistemål?</line>
+    <answers>
+      <answer>Svarande</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem stiftar lagar i Sverige?</line>
+    <answers>
+      <answer>Riksdagen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken lag förkortas PuL?</line>
+    <answers>
+      <answer>Personuppgiftslagen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas förmögenhetsrättigheter som måste respekteras inte enbart av motpart utan även av tredjeman?</line>
+    <answers>
+      <answer>Sakrätt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter domstolen som prövar juridiska tvister inom EU?</line>
+    <answers>
+      <answer>EG-domstolen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad betyder jura novit curia?</line>
+    <answers>
+      <answer>Domstolen känner lagen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Teleologisk lagtolkning innebär att man...</line>
+    <answers>
+      <answer>Tolkar lagen ur ett ändamålsperspektiv</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Dödstraffet avskaffades i fredstid 1921 men när avskaffades dödstraffet i krigstid?</line>
+    <answers>
+      <answer>1973</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du har haft hantverkare hemma och får en räkning för arbetet hemskickad. På räkningen står att den ska betalas inom sju dagar. Om inget mer speciellt är avtalat, hur länge kan du vänta med att betala utan att behöva betala någon dröjsmålsränta?</line>
+    <answers>
+      <answer>En månad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du är gift, men överens med din make om att ni ska skiljas. Ni har två barn som är 14 och 17 år. När går skilsmässan igenom efter att ni lämnat in papperen till tingsrätten?</line>
+    <answers>
+      <answer>Efter sex månaders betänketid, på grund av barnen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Via internet beställer du hem en ny träningsmaskin från en postorderfirma. När maskinen levereras någon vecka senare, har du ångrat köpet. Har du någon laglig rätt att skicka tillbaka maskinen och få tillbaka dina pengar?</line>
+    <answers>
+      <answer>Ja, du har 14 dagars ångerrätt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Din sambo avlider. Ni har inga barn. Sambon har två helsyskon som närmaste släktingar. Vem ärver sambons sparade pengar (om inget testamente finns)?</line>
+    <answers>
+      <answer>Syskonen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du är gift och din make har ett barn från tidigare förhållande. Hur fördelas arvet när din make dör (testamente saknas)?</line>
+    <answers>
+      <answer>Arvet fördelas lika mellan barnet och dig</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du skriver ett eget testamente och undertecknar det med ditt namn. Krävs det, normalt sett, något mer för att testamentet ska kunna vara juridiskt giltigt?</line>
+    <answers>
+      <answer>Ja, det ska bevittnas av två personer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du köper en ny tv i din lokala tv- och radiobutik. Ett par dagar senare upptäcker du att en likadan tv säljs mycket billigare i en affär i närheten. Har du enligt lagen rätt att ångra ditt första köp, lämna tillbaka tvn och få pengarna tillbaka?</line>
+    <answers>
+      <answer>Nej</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du har ett fast arbete sedan några år tillbaka, men vill ta tjänstledigt för att studera. Har du laglig rätt att kräva tjänstledigt?</line>
+    <answers>
+      <answer>Ja, om studierna inte är av hobbykaraktär</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du lånar en cd-skiva från din närmaste kompis. Riskerar du att begå något brott om du kopierar skivan (ej kopieringsspärrad) och behåller ett eget exemplar?</line>
+    <answers>
+      <answer>Nej, man får göra enstaka kopior</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Din trettonårige son kastar sten mot en fönsterruta i skolan. Rutan går sönder. Vem är lagligen betalningsskyldig?</line>
+    <answers>
+      <answer>Sonen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ditt barn går fram och klappar en hund, som sitter bunden utanför en affär. Hunden biter barnet. Kan hundägaren bli skadeståndsskyldig i detta fall?</line>
+    <answers>
+      <answer>Ja, hundägaren har alltid ansvaret</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Du talar i telefon och spelar in samtalet, utan att tala om det för den andre. Är detta tillåtet enligt lag?</line>
+    <answers>
+      <answer>Ja, om den som spelar in själv deltar i samtalet</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,363 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Sport" subcategory="Olympiska spelen">
+
+  <question>
+    <line>Vad hette den tjekoslovakiske löpare som 1952 tog guld i både maraton, 5000 meter, 10 000 meter?</line>
+    <answers>
+      <answer>Emil Zátopek</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den tennisspelare som fullföljde sin Grand Slam med att också vinna OS-guld i Seoul 1988?</line>
+    <answers>
+      <answer>Steffi Graf</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var den svenska simmerskan som tog silver i 400 m frisim vid Rom-OS 1960?</line>
+    <answers>
+      <answer>Jane Cederqvist</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den australiske roddaren Henry Pearce vann guld vid Amsterdam OS 1928 trots en liten incident i mitten av hans kvartsfinal. Vad var det som hände?</line>
+    <answers>
+      <answer>Han stannade in för att inte köra på en ankfamilj</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den jamaicafödde boxare som tog guld i tungviktsboxning i Moskva 1980?</line>
+    <answers>
+      <answer>Teófilo Stevenson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken stad hölls sommarspelen 1992?</line>
+    <answers>
+      <answer>Barcelona</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hon tog medalj i 5 friidrottsgrenar under OS i Sydney 2000 men blev några år senare av med medljerna då hon erkände att hon varit dopad. Vad heter hon?</line>
+    <answers>
+      <answer>Marion Jones</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>1912 hölls de Olympiska spelen i Stockholm men en gren på programmet fick strykas eftersom den var förbjuden i Sverige, vilken?</line>
+    <answers>
+      <answer>Boxning</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Konståkning stod faktiskt på programmet vid sommarspelen i London 1908. En känd svensk vars namn givit upphov till ett begrepp som fortfarande används i konståkningssammanhang vann guld. Vad hette han?</line>
+    <answers>
+      <answer>Ulrich Salchow</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vid OS 1984 i Los Angeles tog en rumänsk gymnast 3 guld och ett silver individuellt, men också ett lagguld. Vem var det?</line>
+    <answers>
+      <answer>Ecaterina Szabo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vid OS i Sydney 2000 vann en svenska guld i lerduveskytte. Vad heter hon?</line>
+    <answers>
+      <answer>Pia Hansen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många guld vann Jesse Owens under OS 1936?</line>
+    <answers>
+      <answer>4 st</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken stad hölls de första olympiska spelen i modern tid?</line>
+    <answers>
+      <answer>Aten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En 72-årig skytt var med och vann silver vid OS 1920 i Antwerpen. Han är därmed den äldsta medaljören genom tiderna. Vad hette han?</line>
+    <answers>
+      <answer>Oscar Swahn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken gren tog Maria De Lurdes Mutola från Moçambique guld vid spelen i Sydney?</line>
+    <answers>
+      <answer>800 m</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket dopingpreparat var det kanadensaren Ben Johnson ertappades med att ha tagit vid Seoul OS 1988?</line>
+    <answers>
+      <answer>Stanozolol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken gren tog tog Leander Paes Indiens enda medalj i Atlanta OS 1996?</line>
+    <answers>
+      <answer>Tennis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Sverige kom tvåa i medaljligan i Stockholm 1912 med 24 guldmedaljer. Vilket land kom etta?</line>
+    <answers>
+      <answer>USA</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Micheline Ostermeyer från Frankrike vann både kulstötningen och diskus i London OS 1948. Vad hade hon för annan sysselsättning förutom friidrott?</line>
+    <answers>
+      <answer>Hon var konsertpianist</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Bob Beamon vann längdhoppet överlägset vid Mexico OS 1968 med att sätta ett världsrekord som stod sig i 22 år. Hur långt hoppade han?</line>
+    <answers>
+      <answer>8,90 m</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>OS 1956 hölls i Melbourne men på grund av australiska karantänsbestämmelser så hölls alla ryttartävlingar i Europa. I vilken stad hölls ryttartävlingarna?</line>
+    <answers>
+      <answer>Stockholm</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallade USA det basketlag de skickade till OS 1992 i Barcelona bestående av bland andra Magic Johnson, Michael Jordan och Larry Bird?</line>
+    <answers>
+      <answer>Dream Team</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den amerikanske simmerskan Gertrude Ederle vann brons vid Paris OS 1924 i 100 meter frisim. Hon är även känd för en annan bedrift, vilken?</line>
+    <answers>
+      <answer>Hon var första kvinna att simma över engelska kanalen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den turkiske tyngdlyftare som, endast 1,47 m lång, vann guld vid Atlanta OS 1996?</line>
+    <answers>
+      <answer>Naim Suleymanoglu</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 2004?</line>
+    <answers>
+      <answer>Aten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1988?</line>
+    <answers>
+      <answer>Seoul</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 2008?</line>
+    <answers>
+      <answer>Peking</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1932?</line>
+    <answers>
+      <answer>Los Angeles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1964?</line>
+    <answers>
+      <answer>Tokyo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1912?</line>
+    <answers>
+      <answer>Stockholm</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1920?</line>
+    <answers>
+      <answer>Antwerpen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad skulle ha arrangerat sommarspelen 1944?</line>
+    <answers>
+      <answer>London</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1908?</line>
+    <answers>
+      <answer>London</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1948?</line>
+    <answers>
+      <answer>London</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1952?</line>
+    <answers>
+      <answer>Helsingfors</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1900?</line>
+    <answers>
+      <answer>Paris</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1936?</line>
+    <answers>
+      <answer>Berlin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1960?</line>
+    <answers>
+      <answer>Rom</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1968?</line>
+    <answers>
+      <answer>Mexico City</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1972?</line>
+    <answers>
+      <answer>München</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1976?</line>
+    <answers>
+      <answer>Montreal</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1904?</line>
+    <answers>
+      <answer>St Louis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad skulle ha arrangerat sommarspelen 1916?</line>
+    <answers>
+      <answer>Berlin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1956?</line>
+    <answers>
+      <answer>Melbourne</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1980?</line>
+    <answers>
+      <answer>Moskva</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1928?</line>
+    <answers>
+      <answer>Amsterdam</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1984?</line>
+    <answers>
+      <answer>Los Angeles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1996?</line>
+    <answers>
+      <answer>Atlanta</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 2000?</line>
+    <answers>
+      <answer>Sidney</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1924?</line>
+    <answers>
+      <answer>Paris</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad arrangerade sommarspelen 1896?</line>
+    <answers>
+      <answer>Aten</answer>
+    </answers>
+  </question>
+
+</questions>

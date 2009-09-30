@@ -1,0 +1,216 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Religion" subcategory="Gregisk mytologi">
+
+  <question>
+    <line>Vad kallades moder Jord i den grekiska mytologin?</line>
+    <answers>
+      <answer>Gaia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken gudinna var Olympens drottning och Zeus syster?</line>
+    <answers>
+      <answer>Hera</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades Uranos siste son som senare kom att mörda sin fader med en lie?</line>
+    <answers>
+      <answer>Kronos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de människoätande jättarna som var avkommor från Uranos och Gaia?</line>
+    <answers>
+      <answer>Cykloperna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den gudinna som rövades bort och tvingades gifta sig med dödsguden Hades, vilket kom att leda till de fyra årstiderna?</line>
+    <answers>
+      <answer>Persefone</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem ansvarade för att föra de dödas själar över floden Styx in i dödens rike?</line>
+    <answers>
+      <answer>Charon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem vaktar ingången till dödsriket?</line>
+    <answers>
+      <answer>Den trehövdade hunden Kerberos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter jordbävningarnas och hästarnas gud enligt grekisk mytologi?</line>
+    <answers>
+      <answer>Poseidon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket djur levde i en grotta nära Nemea och ströps av Herakles som ett av hans tolv stordåd?</line>
+    <answers>
+      <answer>Det nemeiska lejonet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette Herakles hustru som av misstag dödade sin man?</line>
+    <answers>
+      <answer>Deianeira</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad var Nessos för mytologisk varelse?</line>
+    <answers>
+      <answer>En kentaur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var var Minos kung?</line>
+    <answers>
+      <answer>På Kreta</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den mytologiska varelsen som i grekisk mytologi består av hälften människa och hälften tjur?</line>
+    <answers>
+      <answer>Minotaur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette Herakles tvillingbror?</line>
+    <answers>
+      <answer>Iphikles</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades draken som vaktade hesperidernas gyllene äpplen?</line>
+    <answers>
+      <answer>Ladon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många huvuden har draken som vaktar hesperidernas gyllene äpplen?</line>
+    <answers>
+      <answer>Hundra</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den jägare som efter sin död förvandlades till en stjärnbild?</line>
+    <answers>
+      <answer>Orion</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var skådespelets gud i grekisk mytologi?</line>
+    <answers>
+      <answer>Dionysos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var far till Zeus i Grekisk mytologi?</line>
+    <answers>
+      <answer>Kronos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var jaktens gudinna i Grekisk mytologi?</line>
+    <answers>
+      <answer>Artemis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem förvandlade Orion till en stjärnbild?</line>
+    <answers>
+      <answer>Apollon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka kunde, i den grekiska mytologin, förstena den som såg dem?</line>
+    <answers>
+      <answer>Gorgonerna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur dog Bellerofon?</line>
+    <answers>
+      <answer>Han föll av pegasos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka tre djurhuvuden hade den mytiska Chimairan?</line>
+    <answers>
+      <answer>Lejon, get och orm</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken skepnad hade Zeus när han parade sig med Europa?</line>
+    <answers>
+      <answer>En örns</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem sa cyklopen Polyfemos hade förblindat honom?</line>
+    <answers>
+      <answer>Ingen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur motstod Odysseus söjmän sirenernas sång?</line>
+    <answers>
+      <answer>De hade vax i öronen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var sökte Odysseus Teiresias råd?</line>
+    <answers>
+      <answer>I dödsriket</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette malströmmen i vilken Odysseus förlorade sitt skepp och sina mannar?</line>
+    <answers>
+      <answer>Karybdis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur föddes Pegasus?</line>
+    <answers>
+      <answer>Medusas blod blandas med havsskum</answer>
+    </answers>
+  </question>
+
+</questions>

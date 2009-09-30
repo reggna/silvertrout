@@ -1,0 +1,69 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Historia" subcategory="Trettioåriga kriget">
+
+  <question>
+    <line>Vad kallades det fredsfördrag som till slut avslutade det trettioåriga kriget?</line>
+    <answers>
+      <answer>Westfaliska freden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Mellan vilka år utspelades det trettioåriga kriget?</line>
+    <answers>
+      <answer>1618 och 1648</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken svensk kung dog i slaget vid Lützen i det trettioåriga kriget?</line>
+    <answers>
+      <answer>Gustav II Adolf</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem övertog makten i Sverige efter att Gustav II Adolf stupat i Lützen 1632?</line>
+    <answers>
+      <answer>Axel Oxenstierna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var utspelades huvudsakligen det trettioåriga kriget?</line>
+    <answers>
+      <answer>Tyskland</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades den infanteribrigad som bestod av skotska regementen som krigade för Sverige under trettioåriga kriget?</line>
+    <answers>
+      <answer>Gröna brigaden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilken infanteribrigad kom de soldater som förde kungens lik till Wolgast efter slaget vid Lützen?</line>
+    <answers>
+      <answer>Gula brigaden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades det militära och politiska förbund som bildades mellan katolska furstar och prelater på initiativ av hertig Maximilian I av Bayern 1609?</line>
+    <answers>
+      <answer>Katolska ligan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades de kända finska ryttare som bland annat deltog i trettioåriga kriget?</line>
+    <answers>
+      <answer>Hakkapeliter</answer>
+    </answers>
+  </question>
+
+</questions>

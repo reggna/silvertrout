@@ -1,0 +1,433 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Religion" subcategory="Nordisk mytologi">
+
+  <question>
+    <line>Vad kallas i asatron för "makternas mörker" och börjar med den tre år långa fimbulvintern?</line>
+    <answers>
+      <answer>Ragnarök</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken sorts djur drog enligt berättelserna åskguden Tors vagn?</line>
+    <answers>
+      <answer>Getter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Mimers träd med ett vanligare namn?</line>
+    <answers>
+      <answer>Yggdrasil</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter bockarna som drar åskguden Tors vagn?</line>
+    <answers>
+      <answer>Tanngnjóstr och Tanngrisnir</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas åskguden Tors hammare?</line>
+    <answers>
+      <answer>Mjölner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas skeppet som enligt Snorres Edda byggs av döda människors naglar?</line>
+    <answers>
+      <answer>Nagelfar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken gud gav sitt ena öga i utbyte mot stor visdom?</line>
+    <answers>
+      <answer>Oden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Odens spjut?</line>
+    <answers>
+      <answer>Gunger</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Odens två korpar?</line>
+    <answers>
+      <answer>Hugin och Munin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas inom asatron den åttafotade hästen som Oden red?</line>
+    <answers>
+      <answer>Sleipner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas enligt asatron Odens två vargar?</line>
+    <answers>
+      <answer>Gere och Freke</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken växt var den enda som inte lovade att inte skada Balder?</line>
+    <answers>
+      <answer>Misteln</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad inträffar enligt asatron när Lokes hustru Sigyn tömmer skålen med gift så att etter hinner droppa ner på honom?</line>
+    <answers>
+      <answer>Jordskalv</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem är Sleipners mor?</line>
+    <answers>
+      <answer>Loke</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var pappa till Fenrisulven och Midgårdsormen?</line>
+    <answers>
+      <answer>Loke</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades Odens ring som var nionde natt skapade nio snarlika av sig själv?</line>
+    <answers>
+      <answer>Draupner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette Balders fru?</line>
+    <answers>
+      <answer>Nanna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter draken som enligt asatron gnager på Yggdrasils rötter?</line>
+    <answers>
+      <answer>Nidhögg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har fått sin hand avbiten av Fenrisulven?</line>
+    <answers>
+      <answer>Tyr</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den kedja, tillverkad av dvärgarna, som asarna till sist använde för att kedja Fenrisulven?</line>
+    <answers>
+      <answer>Gleipner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Odens söner?</line>
+    <answers>
+      <answer>Ville och Ve</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det tomma utrymmet mellan Muspelheim och Nifelheim?</line>
+    <answers>
+      <answer>Ginnungagap</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette urkon som uppstod ur rimfrostens droppar i skapelsemyten?</line>
+    <answers>
+      <answer>Audhumbla</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad skapades av jätten Ymers hjärna?</line>
+    <answers>
+      <answer>Moln</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette de första människorna?</line>
+    <answers>
+      <answer>Ask och Embla</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Heimdalls berömda horn?</line>
+    <answers>
+      <answer>Gjallarhornet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den häst som guden Natt red och som var upphov till morgondaggen?</line>
+    <answers>
+      <answer>Rimfaxe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den galt som födde einhärjarna i Valhall och kunde slaktas om och om igen?</line>
+    <answers>
+      <answer>Särimner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den häst som guden Dag red?</line>
+    <answers>
+      <answer>Skinfaxe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Tors magiska kraftbälte?</line>
+    <answers>
+      <answer>Megingjord</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken källa drack Oden ur för att få sin visdom?</line>
+    <answers>
+      <answer>Mimers brunn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de stupade krigarnas hall som också var Odens hemvist i Asgård?</line>
+    <answers>
+      <answer>Valhall</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter "den flammande bron" som ledde från jorden till Asgård?</line>
+    <answers>
+      <answer>Bifrost</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas eldens värld som bevakas av jätten Surt?</line>
+    <answers>
+      <answer>Muspelheim</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas köldens rike där källan Vergelmer ligger?</line>
+    <answers>
+      <answer>Nifelheim</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter de två människor som överlever ragnarök?</line>
+    <answers>
+      <answer>Liv och Livtrasir</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem av asarna har tänder av guld och bär Gjallarhornet?</line>
+    <answers>
+      <answer>Heimdall</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem skall efter ragnarök komma tillbaka från dödsriket och styra världen?</line>
+    <answers>
+      <answer>Balder</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Balders skepp?</line>
+    <answers>
+      <answer>Ringhorne</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem knuffade ut Ringhorne med Balders och Nannas kropp efter att de dött?</line>
+    <answers>
+      <answer>Hyrrokkin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter de tre nornorna som bor vid Yggrdrasils rötter?</line>
+    <answers>
+      <answer>Urd, Skuld och Verdandi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken sorts träd är Yggdrasil?</line>
+    <answers>
+      <answer>En ask</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter brunnen som Nornorna tar vatten ur för att vattna Yggdrasil?</line>
+    <answers>
+      <answer>Urdarbrunnen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter nornorna som spinner ödets trådar?</line>
+    <answers>
+      <answer>Urd, Verdandi och Skuld</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken av nornorna sägs representera det gångna?</line>
+    <answers>
+      <answer>Urd</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken av nornorna sägs representera det varande?</line>
+    <answers>
+      <answer>Verdandi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken av nornorna sägs representera det kommande?</line>
+    <answers>
+      <answer>Skuld</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka väver ödestrådarna som sägs styra varje männniskas liv?</line>
+    <answers>
+      <answer>Nornorna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de kvinnliga andeväsen som vid slagfälten i Midgård väljer ut det krigare som ska dö och för dem med sig till Valhall?</line>
+    <answers>
+      <answer>Valkyrior</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de fallna krigare som förs till Valhall?</line>
+    <answers>
+      <answer>Einhärjare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter kocken som varje kväll tillagar Särimner i kitteln Eldrimner till einhärjarna?</line>
+    <answers>
+      <answer>Andrimner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas kitteln som gudakocken Andrimner använder för att tillaga Särimners kött i?</line>
+    <answers>
+      <answer>Eldrimner</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter geten som betar på Yggdrasil ur vars juver mjöd tas till einhärjarna?</line>
+    <answers>
+      <answer>Heidrun</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem följde med på Tors fiskefärd när han fångade Midgårdsormen?</line>
+    <answers>
+      <answer>Hymer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem bevakade vishetens källa?</line>
+    <answers>
+      <answer>Mimer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter havsguden och jätten som sägs bo i ett guldskimrande palats?</line>
+    <answers>
+      <answer>Ägir</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad livnärde sig Ymer på strax efter världens skapelse?</line>
+    <answers>
+      <answer>Mjölk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas borgen i Jotunheim dit Loke och Tjalve åker och deltar i tre tvekamper?</line>
+    <answers>
+      <answer>Utgård</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter världsdelen där jättarna bor?</line>
+    <answers>
+      <answer>Jotunheim</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken byggnad har Oden sin tron?</line>
+    <answers>
+      <answer>Gladsheim</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas bron över älven Gjöll i Hel?</line>
+    <answers>
+      <answer>Gjallarbron</answer>
+    </answers>
+  </question>
+
+</questions>

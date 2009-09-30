@@ -1,0 +1,111 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat och dryck" subcategory="Drinkar">
+
+  <question>
+    <line>Vad får du om du blandar 4-6cl bourbon, angostura bitter, 1 sockerbit och eventuellt soda?</line>
+    <answers>
+      <answer>Old fashioned</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drink Innehåller 4-6cl vodka , apelsinjuice och 1cl galliano?</line>
+    <answers>
+      <answer>Harvey Wallbanger</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drink består av 4cl bourbon, 1cl grand marnier rouge, 1cl cointreau, 1cl torr vermouth och citronskal?</line>
+    <answers>
+      <answer>42nd street</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bacardis fyra smaksatta Rom?</line>
+    <answers>
+      <answer>Limon, Razz ,Apple och Grand Melón</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter drinken som kallas för "välkomstdrinkens konung", och som består av gin och vermouth?</line>
+    <answers>
+      <answer>Dry Martini</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Världens största företag inom alkoholdrycker?</line>
+    <answers>
+      <answer>Bacardi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur fick Licor 43 sitt namn?</line>
+    <answers>
+      <answer>Efter antalet ingridienser</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Denna drink består av 4cl kanadensisk whisky (eller bourbon), 2 cl Martini Rosso och ett par stänk Angostura bitter och är en av New Yorks stadsdelar?</line>
+    <answers>
+      <answer>Manhattan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drink innehåller 6cl gin och 3cl lime och serveras i martiniglas?</line>
+    <answers>
+      <answer>Gimlet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drink blandas genom 3cl ljus rom, 2cl lime citronliqueur, 1/2 krossad apelsin och grapetonic?</line>
+    <answers>
+      <answer>Alegria</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var ligger merparten av tillverkningen av Absolut Vodka?</line>
+    <answers>
+      <answer>Åhus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur länge måste en cognac lagras för att få kallas en XO?</line>
+    <answers>
+      <answer>6 år</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I filmen 'The Big Lebowski' får vi följa karaktären 'the Dude'. The Dude har en favoritdryck som består av 1 del kahlua 1.5 del vodka och en skvätt mjölk eller grädde. Vad heter drinken?</line>
+    <answers>
+      <answer>White Russian</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En klassiker bestående av 4-6cl vodka, några stänk worcestersås, salt, peppar, citron, några stänk tabasco och tomatjuice?</line>
+    <answers>
+      <answer>Bloody Mary</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken spritsort innehåller drinken Caipirinha?</line>
+    <answers>
+      <answer>Cachaça</answer>
+    </answers>
+  </question>
+
+</questions>

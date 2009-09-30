@@ -1,0 +1,69 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="IT" subcategory="Google">
+
+  <question>
+    <line>När grundades Google Inc?</line>
+    <answers>
+      <answer>4 september 1998</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Googles grundare?</line>
+    <answers>
+      <answer>Sergey Brin och Larry Page</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Googles högkvarter?</line>
+    <answers>
+      <answer>Googleplex</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var ligger Googles högkvarter?</line>
+    <answers>
+      <answer>I Mountain View, Kalifornien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas Googles webbläsare som lanserades den andra september 2008?</line>
+    <answers>
+      <answer>Google Chrome</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Googles två grundare, samt företagets nuvarnade VD, i årslön?</line>
+    <answers>
+      <answer>1 USD</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är Googles informella slogan?</line>
+    <answers>
+      <answer>Don't be evil</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket är en googol?</line>
+    <answers>
+      <answer>10^100</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När börsintroducerades Google Inc?</line>
+    <answers>
+      <answer>19 augusti 2004</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,118 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Samhälle" subcategory="Kända svenska brott">
+
+  <question>
+    <line>Under vilket namn är mannen som bara lyckades döda 1 person under totalt 10 vapenattacker mot 11 personer i Stockolmområdet 1991 - 1992 känd?</line>
+    <answers>
+      <answer>Lasermannen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette prästen och kyrkoherden som dödade tre personer 1864 genom att blanda arsenik i nattvardsvinet?</line>
+    <answers>
+      <answer>Anders Lindbäck</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var skedde natten till den 17 maj år 1900 det Svenska massmordet där fem personer dödades?</line>
+    <answers>
+      <answer>På en ångbåt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de mord där poliserna Olov Borén och Robert Karlström sköts till döds?</line>
+    <answers>
+      <answer>Malexandermorden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken känd person sköts till döds i Sverige den 28 februari 1986?</line>
+    <answers>
+      <answer>Olof Palme</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades det rånargäng som under femton månader 1985 - 1986 begick ett 20-tal rån och kom över mer än fyra miljoner kronor?</line>
+    <answers>
+      <answer>Maskeradligan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den mycket medialt uppmärksammade bolagspludringen som inträffade 1997 i Sverige?</line>
+    <answers>
+      <answer>Trustorhärvan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken känd svensk företagsledare kidnappades och återfanns senare den 3 februari i Slottsskogen i Göteborg?</line>
+    <answers>
+      <answer>Fabian Bengtsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades den kriminella organisation som ägnade sig åt smugling i slutet av 1970-talet och början av 1980-talet och som leddes av Kivork Vartanian?</line>
+    <answers>
+      <answer>Skomakarligan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades i folkmun den division som bland annat omhändertog Osmo Vallo och enligt flera källor misshandlade denne till döds?</line>
+    <answers>
+      <answer>Basebolligan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var utspelade sig mordet som hade anknytning till en filadelfiaförsamlingen och inträffade under våren 2004?</line>
+    <answers>
+      <answer>Knutby</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den typ av kupp där man, som exempelvis rånet mot Moderna muséet 1993 där verk av bl a Pablo Picasso stals, kommer in genom ett hål i taket?</line>
+    <answers>
+      <answer>Rififikupp</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det psykologiska tillstånd som psykiatern Nils Bejerot namngav efter det berömda Norrmalmstorgsdramat 1973?</line>
+    <answers>
+      <answer>Stockholmsyndromet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades Rolf Johansson som växte upp utanför Tumba i Stockholm och som blev utnämnd till landets farligaste förbrytare?</line>
+    <answers>
+      <answer>Tumba-Tarzan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter juristen som är huvudmisstänkt i Trustorhärvan och som 2004 släpte boken 'Internationellt efterlyst - mitt liv efter Trustor'?</line>
+    <answers>
+      <answer>Joachim Posener</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den våldtäktsman som under flera år i slutet av 90-talet och början av 2000 våldtog minst sex kvinnor i Umeå-trakten?</line>
+    <answers>
+      <answer>Hagamannen</answer>
+    </answers>
+  </question>
+
+</questions>

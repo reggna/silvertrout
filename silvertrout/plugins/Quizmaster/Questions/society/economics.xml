@@ -1,0 +1,97 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Samhälle" subcategory="Ekonomi">
+
+  <question>
+    <line>Ett företags konkurrensmedel består av 5 st P, plats, pris, promotion, personal och...?</line>
+    <answers>
+      <answer>Produkt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Om ett företag kombinerar sina konkurrensmedel kan försäljningen bli högre än om företaget använt konkurrensmedlen var för sig. Vad kallas denna effekt?</line>
+    <answers>
+      <answer>Synergieffekt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vid inköp av varor används kontona varuinköp, ingående moms och...?</line>
+    <answers>
+      <answer>Leverantörsskulder</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan man utläsa ur en likviditetsbudget?</line>
+    <answers>
+      <answer>Inbetalningar och utbetalningar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur definierar en ekonom ordet ekonomi?</line>
+    <answers>
+      <answer>Hushållning med begränsade resurser</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är ett annat ord för realkapital?</line>
+    <answers>
+      <answer>Investeringar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Av vilka delar består en affärsidé?</line>
+    <answers>
+      <answer>Kundbehov, kundgrupp, produktidé, resurser</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många ägare kan det som lägst vara i ett aktiebolag?</line>
+    <answers>
+      <answer>1</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är en kontoplan?</line>
+    <answers>
+      <answer>Sammanställning av konton</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Kontonumret för Postgiro är 1920. Vilken information ger den första siffran i 1920?</line>
+    <answers>
+      <answer>Kontot är en tillgång</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken marknadsföringsguru förknippas med de 5 P:na?</line>
+    <answers>
+      <answer>Philip Kotler</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många svenskar har belönats med Sveriges Riksbanks pris i ekonomisk vetenskap till Alfred Nobels minne?</line>
+    <answers>
+      <answer>2 st</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vid försäljning används kontona varuförsäljning, utgående moms och.............?</line>
+    <answers>
+      <answer>Kundfordringar</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="questions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="question" type="questionType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="category" type="xs:string" use="required"/>
+            <xs:attribute name="subcategory" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="questionType">
+        <xs:sequence>
+            <xs:element name="line" type="xs:string"/>
+            <xs:element name="hints" type="hints" minOccurs="0" maxOccurs="1"/>
+            <xs:choice>
+                <xs:element name="answers" type="answerMultiple"/>
+                <!--<xs:element name="answer-multiple" type="answerMultiple"/>-->
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+   
+    <!-- hint types -->
+    <xs:complexType name="hints">  
+        <xs:sequence>
+            <xs:element name="hint" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="score-decrease" type="xs:integer"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="line" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                        <xs:attribute name="hints" type="xs:integer" default="7"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- answer types -->
+    <xs:complexType name="answerMultiple">        
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="answer">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="required" type="xs:boolean" default="false"/>
+                            <xs:attribute name="score" type="xs:integer" default="5"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="attempts" type="xs:integer" default="100"/>
+        <xs:attribute name="required" type="xs:integer" default="1"/>
+    </xs:complexType>
+
+</xs:schema>

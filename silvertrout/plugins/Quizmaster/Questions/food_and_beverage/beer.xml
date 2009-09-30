@@ -1,0 +1,167 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat och dryck" subcategory="Öl">
+
+  <question>
+    <line>Från vilken stad kommer ölet "Ottakringer"?</line>
+    <answers>
+      <answer>Wien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka är de fyra huvudingredienserna i öl?</line>
+    <answers>
+      <answer>Malt, humle, jäst och vatten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Världens mest kända ölhall ligger i München. Vad heter den?</line>
+    <answers>
+      <answer>Hofbräuhaus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilket land härstammar ölet San Miguel?</line>
+    <answers>
+      <answer>Filippinerna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad tillsätts i de Belgiska Trapist-ölen för att höja alkoholhalten?</line>
+    <answers>
+      <answer>Socker</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilket land bryggs den största mängden öl per år?</line>
+    <answers>
+      <answer>USA</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket är Australiens största Bryggeri?</line>
+    <answers>
+      <answer>Bond</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Varifrån kommer ölet Gösser?</line>
+    <answers>
+      <answer>Österrike</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilket land kommer det mörkt bruna ölet Black Boss?</line>
+    <answers>
+      <answer>Polen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilket land kommer ölet Cobra?</line>
+    <answers>
+      <answer>Indien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det speciella öl som bryggs på Gotland?</line>
+    <answers>
+      <answer>Gotlandsdricke</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilket land bryggs Nastro Azzurro?</line>
+    <answers>
+      <answer>Italien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är namnet på den Flandriske Sagokung som sägs ha uppfunnit konsten att brygga öl?</line>
+    <answers>
+      <answer>Gambrinus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var kommer Kronenbourg från?</line>
+    <answers>
+      <answer>Frankrike</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilket land bryggs ölet Olvi?</line>
+    <answers>
+      <answer>Finland</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad får du om de beställer en "Shandy" i England?</line>
+    <answers>
+      <answer>Öl med Sprite</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken Tjeckisk stad har givit pilsnern sitt namn?</line>
+    <answers>
+      <answer>Pilsen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Varför blir ett mörkt öl egentligen mörkt?</line>
+    <answers>
+      <answer>För att malten har rostats</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stad i världen har flest bryggerier?</line>
+    <answers>
+      <answer>Köln</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det speciella ölet från Köln?</line>
+    <answers>
+      <answer>Kölsch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innebär tyska "Reinheitsgebot"</line>
+    <answers>
+      <answer>Att endast vatten, malt och humle får användas vid ölframställningen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket är det äldsta existerande svenska ölvarumärket?</line>
+    <answers>
+      <answer>Carnegie</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När antogs tyska "Reinheitsgebot" i Bayern?</line>
+    <answers>
+      <answer>1516</answer>
+    </answers>
+  </question>
+
+</questions>

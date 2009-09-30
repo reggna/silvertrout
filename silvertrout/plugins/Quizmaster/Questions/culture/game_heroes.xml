@@ -1,0 +1,202 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kultur" subcategory="Tv- / Datorspelskaraktärer">
+
+  <question>
+    <line>Vad heter den gröna hjälten som vi först kom i kontakt med i spelet The Legend of Zelda?</line>
+    <answers>
+      <answer>Link</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter soldaten som är huvudperson i bland annat spelet Metal Gear Solid?</line>
+    <answers>
+      <answer>Solid Snake</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den kvinnliga spelhjälten i spelet Metroid och Metroid Prime?</line>
+    <answers>
+      <answer>Samus Aran</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter, den något galna, karaktären i Baldur's Gate som ansåg att sin hamster var en superintelligent ryndvarelse?</line>
+    <answers>
+      <answer>Minsc</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter antihjälten i spelen God of War och God of War II?</line>
+    <answers>
+      <answer>Kratos</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den något misslyckade wannabe-piraten man spelar i spelserien Monkey Island?</line>
+    <answers>
+      <answer>Guybrush Threepwood</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas elitsoldaten som är huvudpersonen i spelserien Halo?</line>
+    <answers>
+      <answer>Master Chief</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den (ibland gröna) dinosaurieliknande figur som Mario rider på i Super Mario World?</line>
+    <answers>
+      <answer>Yoshi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter spelkaraktären som man spelar i spelserien Tomb Raider?</line>
+    <answers>
+      <answer>Lara Croft</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den elektriska gula pokémonfiguren som blivit något av ett varumärke för Pokémonserien?</line>
+    <answers>
+      <answer>Pikachu</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter hjälten med stora svärd och spetsiga hårtoppar som man först får träffa i Final Fantasy VII?</line>
+    <answers>
+      <answer>Cloud Strife</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter hjälten från Black Mesa som aldrig säger något under hela Half-Life-serien?</line>
+    <answers>
+      <answer>Gordon Freeman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen i science ficion-spelet Deus Ex?</line>
+    <answers>
+      <answer>JC Denton</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen i Grand Theft Auto IV som ursprungligen kommer från Serbien?</line>
+    <answers>
+      <answer>Niko Bellic</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen i Final Fantasy VIII som slåss med ett så kallat gunblade?</line>
+    <answers>
+      <answer>Squall Leonhart</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den spelbara karaktär som tragiskt dör i spelet Final Fantasy VII?</line>
+    <answers>
+      <answer>Aerith Gainsborough</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter lönnmördaren och mästerklättraren från spelet Assasin's Creed?</line>
+    <answers>
+      <answer>Altaïr ibn La-Ahad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter lönnmördaren och mästerklättraren från spelet Assasin's Creed (på arabiska)?</line>
+    <answers>
+      <answer>الطائر ابن لا أحد</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter karaktären från Half-Life 2 som har en mekanisk hund vid namn "Dog"?</line>
+    <answers>
+      <answer>Alyx Vance</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen, och tillika lieman, från det humoristiska film noire-spelet Grim Fandango?</line>
+    <answers>
+      <answer>Manuel Calavera</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter protagonisten i Resident Evil 3 som kämpar tillsammans med Carlos Oliveira?</line>
+    <answers>
+      <answer>Jill Valentine</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen och tillika agenten i Tom Clancy's Splinter Cell?</line>
+    <answers>
+      <answer>Sam Fisher</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen som man spelar i det första Castlevania-spelet?</line>
+    <answers>
+      <answer>Simon Belmont</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter hjälten eller antihjälten som man spelar i Grand Theft Auto: San Andreas?</line>
+    <answers>
+      <answer>Carl Johnsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen i spelet Perfect Dark, där denne jobbar som agent för Carrington Institute?</line>
+    <answers>
+      <answer>Joanna Dark</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter antihjälten som man spelar i Grand Theft Auto: Vice City?</line>
+    <answers>
+      <answer>Thomas Vercetti</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter hjälten och blitzball-proffset från Final Fantasy X?</line>
+    <answers>
+      <answer>Tidus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter huvudpersonen i spelet Tales of Symphonia?</line>
+    <answers>
+      <answer>Lloyd Irving</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,41 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat och dryck" subcategory="Whiskey">
+
+  <question>
+    <line>Vilka ingredienser finns i whiskey?</line>
+    <answers>
+      <answer>Säd, jäst och vatten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lagras whiskey innan den säljs? (undantaget Bourbon whiskey)</line>
+    <answers>
+      <answer>På ekfat i minst 3 år</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har den skotska whiskyn "Cutty Sark" på sin etikett</line>
+    <answers>
+      <answer>En segelbåt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken amerikansk stat kommer Jack Daniels ifrån?</line>
+    <answers>
+      <answer>Tennessee</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket land kommer John Jameson från?</line>
+    <answers>
+      <answer>Irland</answer>
+    </answers>
+  </question>
+
+</questions>

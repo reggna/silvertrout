@@ -21,22 +21,31 @@
  */
 package silvertrout.plugins;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Map;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Calendar;
-import java.util.Comparator;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-
 import java.net.URISyntaxException;
 
+import java.net.URL;
+import java.util.Collections;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.XMLConstants;
+import javax.xml.transform.sax.SAXSource;
+import org.xml.sax.InputSource;
+
+import org.xml.sax.Locator;
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.Modes;
@@ -53,18 +62,212 @@ public class Quizmaster extends silvertrout.Plugin {
 
     private enum State { RUNNING, RUNNING_QUESTION, NOT_RUNNING };
 
-    private class Question {
-        public String question;
-        public String answer;
-        public String category;
+    /**
+     * Question for the Quizmaster plugin.
+     *
+     */
+    private static class Question {
+		// Location information (for report / debug)
+        String file         = null;
+		int    row          = -1;
+		// Category
+		String category     = null;
+        // Question and hint        
+        String questionLine = null;
+        String hintLine     = null;
+        // Max attempts 
+        int attempts        = 100;
+		// Required amount of answers
+        int required        = 1;
+        // Number of total hints
+        int hintCount       = 7;
+        
+		// Hint struct
+        class Hint {
+            String hint      = null;
+            int    scoredec  = 1; //?
+        }
+        // Hint collection
+		ArrayList<Hint>   hints   = new ArrayList<Hint>();
+		
+		// Answer struct
+        class Answer {
+            String  answer   = null;
+            int     score    = 5;
+            boolean required = false;
+        }
+		// Answer collection
+        ArrayList<Answer> answers = new ArrayList<Answer>();
+
     }
 
+    /**
+     * QuestionReader reads in question files for the Quizmaster plugin.
+     * 
+     */
+	private static class QuestionReader {
+        /**
+         * Question handler to convert xml-questions to java-question.
+         */
+		private static class QuestionHandler extends DefaultHandler {
+			
+			private String              category  = null;
+			private Question            question  = null;
+			private ArrayList<String>   tags      = new ArrayList<String>();
+			private ArrayList<Question> questions = new ArrayList<Question>();
+			private Locator             locator   = null;
+            private String              file      = null;
+			public QuestionHandler(String file) {
+				super();
+                this.file = file;
+			}
+			
+			public Collection<Question> getQuestions() {
+				return questions;
+			}
+			
+			private String currentTag() {
+				if(tags.size() == 0) {
+					return null;
+				} else {
+					return tags.get(tags.size() - 1);
+				}
+			}
+			
+			private String previousTag() {
+				if(tags.size() < 2) {
+					return null;
+				} else {
+					return tags.get(tags.size() - 2);
+				}
+			}
+            @Override
+            public void setDocumentLocator(Locator locator)
+            {
+                this.locator = locator;
+            }
+            @Override
+			public void startElement (String uri, String name, String qName, Attributes atts)
+			{
+				tags.add(qName);
+				
+				if(qName.equals("questions")) {
+					category = atts.getValue("category") + " - " + atts.getValue("subcategory");
+				} else if(qName.equals("question")) {
+					question = new Question();
+					question.category = category;
+                    question.file     = file;
+                    question.row      = locator.getLineNumber();
+				} else if(qName.equals("line")) {
+					if(previousTag().equals("hints")) {
+						if(atts.getValue("hints") != null)question.hintCount = Integer.parseInt(atts.getValue("hints")) + question.hints.size(); 
+					}
+				} else if(qName.equals("answers")) {
+					if(atts.getValue("attempts") != null)question.attempts = Integer.parseInt(atts.getValue("attempts"));
+					if(atts.getValue("required") != null)question.required = Integer.parseInt(atts.getValue("required"));
+				} else if(qName.equals("answer")) {
+                    //System.out.println(qName + " = " + atts.getValue("required"));
+					Question.Answer newAns = question.new Answer();
+					if(atts.getValue("required") != null
+                            && (atts.getValue("required").equals("1")
+                            || atts.getValue("required").equals("true")))newAns.required = true;
+					if(atts.getValue("score") != null)newAns.score = Integer.parseInt(atts.getValue("score"));
+					question.answers.add(newAns);
+				} else if(qName.equals("hints")) {
+				
+				} else if(qName.equals("hint")) {
+					Question.Hint newHint = question.new Hint();
+					if(atts.getValue("score-decrease") != null)newHint.scoredec = Integer.parseInt(atts.getValue("score-decrease"));
+					question.hints.add(newHint);
+				}
+			}
+            @Override
+			public void characters(char[] ch, int start, int length) {
+				String data = new String(ch, start, length).trim();
+				if(currentTag().equals("line")) {
+					if(previousTag().equals("question")) {
+						question.questionLine = data;
+					} else if(previousTag().equals("hints")) {
+						question.hintLine = data;
+					}
+				} else if(currentTag().equals("hint")) {
+					question.hints.get(question.hints.size() - 1).hint = data;
+				} else if(currentTag().equals("answer")) {
+					question.answers.get(question.answers.size() - 1).answer = data;
+				}
+			}
+
+
+            @Override
+			public void endElement (String uri, String name, String qName)
+			{
+				tags.remove(tags.size() - 1);
+				if(qName.equals("question")) {
+					// TODO: fix stuff
+					questions.add(question);
+				}
+			}
+		}
+	    
+		
+		public static Collection<Question> load(File file) {
+			
+			try {    
+				// Set up schema:
+				String        language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
+				SchemaFactory factory  = SchemaFactory.newInstance(language);
+                String        sPath    = "/silvertrout/plugins/Quizmaster/questions.xsd";
+                URL           sURL     = QuestionHandler.class.getResource(sPath);
+				Schema        schema   = factory.newSchema(sURL);
+				// Validate:
+				Validator validator = schema.newValidator();
+				SAXSource source = new SAXSource(new InputSource(new java.io.FileInputStream(file)));
+				validator.validate(source);
+				// Parse:
+				SAXParserFactory sf = SAXParserFactory.newInstance();
+				sf.setNamespaceAware(true); 
+				sf.setValidating(true);        
+				sf.setSchema(schema);
+				SAXParser       sp = sf.newSAXParser();
+				QuestionHandler qh = new QuestionHandler(file.toString());
+				sp.parse(file, qh);
+				
+				return qh.getQuestions();
+			
+			} catch (SAXParseException e) {
+                System.err.println("Error parsing file " + file);
+                System.err.println("At line " + e.getLineNumber() + ", column " + e.getColumnNumber());
+ 				System.err.println(e.getMessage());
+                System.err.println("==============================");
+                e.printStackTrace();
+            } catch(SAXException e) {
+                System.err.println("Error parsing file " + file);
+				System.err.println(e.getMessage());
+                System.err.println("==============================");
+                e.printStackTrace();
+			} catch(java.io.FileNotFoundException e) {
+				System.err.println(e.getMessage());
+                e.printStackTrace();
+			} catch(java.io.IOException e) {
+				System.err.println(e.getMessage());
+                e.printStackTrace();
+			} catch(javax.xml.parsers.ParserConfigurationException e) {
+				System.err.println(e.getMessage());
+                e.printStackTrace();
+			}
+            return null;
+		}
+
+        private QuestionReader() {
+        }
+	
+	}
+	
     // Settings:
     private final int                  voiceInterval        = 60;
     private final int                  hintTime             = 7;
-    private final int                  hintCount            = 8;
     private final int                  waitTime             = 3;
-    private final int                  rankInterval         = 50;    
+    private final int                  rankInterval         = 500;
     
     // Variables:
     
@@ -74,8 +277,9 @@ public class Quizmaster extends silvertrout.Plugin {
     private TrophyManager              trophyManager;
     private String                     channelName;
         
-    private Question                   currentQuestion;
-    private String                     currentAnswerString;
+    private Question                   question;
+    //private String                     currentAnswerString;
+    private int                        currentHint = 0;
 
     private String[]                   grad = 
             {
@@ -149,8 +353,9 @@ public class Quizmaster extends silvertrout.Plugin {
     /**
      *
      * @param nick
+     * @param score
      */
-    public void awardScore(String nick) {
+    public void awardScore(String nick, int score) {
         // Calculate answer time, in seconds:
         long miliSec = Calendar.getInstance().getTimeInMillis() - startMiliTime;
         double time  = ((double)miliSec / 1000.0);
@@ -166,23 +371,27 @@ public class Quizmaster extends silvertrout.Plugin {
         // Update scores:
         int oldScore = scoreManager.getTotalScore(nick);
         int oldPos   = scoreManager.getPosition(nick);
-        scoreManager.addScore(nick, currentQuestion.category, 1);
+        scoreManager.addScore(nick, question.category, score);
         int newScore = scoreManager.getTotalScore(nick);
         int newPos   = scoreManager.getPosition(nick);
-        
-        // New rank
-        if(newScore % rankInterval == 0)
-            getNetwork().getConnection().sendPrivmsg(channelName, 
-                    "Utmärkt jobbat! Din nya rank är: "+ printNick(nick));
-            
+
+
+        // HERE BE DRAGONS (TODO)
+        for(int i = oldScore; i <= newScore; i++){
+            // New rank
+            if(newScore % rankInterval == 0)
+                getNetwork().getConnection().sendPrivmsg(channelName,
+                        "Utmärkt jobbat! Din nya rank är: "+ printNick(nick));
+        }
+
         // Print message
-        String msg = "Rätt svar var \"" + currentQuestion.answer + "\". ";
+        String msg = "Rätt svar var \"" + question.hintLine + "\". ";
         if(answerStreak >= 3)    msg += "(" + answerStreak + " i rad) ";
         if(oldPos == -1)         msg += "(In på listan på placering " + newPos + ") ";
         else if(oldPos < newPos) msg += "(Upp " + (newPos-oldPos) + " placering(ar)) ";
-        msg += nick + " (" + time +" sek) har nu " + newScore +"p.";
+        msg += nick + " (" + time +" sek) fick " + score + "p och har nu " + newScore +"p.";
         getNetwork().getConnection().sendPrivmsg(channelName, msg);
-        
+
         // Check for trophies won
         int year  = Calendar.getInstance().get(Calendar.YEAR);
         int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
@@ -194,7 +403,7 @@ public class Quizmaster extends silvertrout.Plugin {
         if(newScore == 1)
             awardTrophy(trophyManager.getTrophy("First Blood"), nick);
         // Speedster trophy
-        if(time < 3.0 && currentQuestion.answer.length() > 5)
+        if(time < 3.0 && question.hintLine.length() > 5)
             awardTrophy(trophyManager.getTrophy("Speedster"), nick);
         // Chain Reaction
         if(answerStreak >= 5)
@@ -221,35 +430,10 @@ public class Quizmaster extends silvertrout.Plugin {
         if(month == 5 && day == 29)
             awardTrophy(trophyManager.getTrophy("Säg ett datum, vilket som helst!"), nick);
         // Endurance Master
-        if(currentQuestion.answer.length() >= 30)
+        if(question.hintLine.length() >= 30)
             awardTrophy(trophyManager.getTrophy("Endurance Master"), nick);
     }
-    
-    /**
-     *
-     * @param f
-     */
-    public void loadQuestions(File f) {
 
-        try {
-            BufferedReader fr = new BufferedReader(new FileReader(f));
-            String category = fr.readLine();
-            fr.readLine();
-            while(true) {
-                Question q = new Question();
-                q.category = category;
-                q.question = fr.readLine();
-                q.answer   = fr.readLine();
-                fr.readLine();
-                if(q.question == null || q.answer == null)break;
-                questions.add(q);
-            }
-        } catch(java.io.IOException e) {
-            e.printStackTrace();
-        }
-        Collections.shuffle(questions);
-    }
-    
     /**
      *
      * @param categories
@@ -265,14 +449,19 @@ public class Quizmaster extends silvertrout.Plugin {
                     if(d.isDirectory()) {
                         //System.out.println("Checking directory: " +d.getName());
                         for(File f: d.listFiles()) {
-                            if(f.getName().endsWith(".quiz")) {
-                                loadQuestions(f);
+                            if(f.getName().endsWith(".xml")) {
+                                System.out.println("Loading questions from " + f.getName());
+                                Collection<Question> qss = QuestionReader.load(f);
+                                questions.addAll(qss);
+								//TODO
                                 //System.out.println("Added file: " + f.getName());
                             }
                         }
                     }
                 }
             }
+            // Suffle the questions
+            Collections.shuffle(questions);
             
             getNetwork().getConnection().sendPrivmsg(channelName, "En ny omgång"
                     + " startas. Totalt finns " + questions.size() + " frågor.");
@@ -298,43 +487,98 @@ public class Quizmaster extends silvertrout.Plugin {
      *
      */
     public void newQuestion() {
+        // Pop of question from queue
         try {
-            currentQuestion = questions.removeFirst();
+            question = questions.removeFirst();
         } catch(java.util.NoSuchElementException e) {
             endRound();
             return;
         }
-
-        currentAnswerString = "";
-        for(int i = 0; i < currentQuestion.answer.length(); i++) {
-            if(Character.isLetterOrDigit(currentQuestion.answer.charAt(i))) {
-                currentAnswerString += '.';
-            } else {
-                currentAnswerString += currentQuestion.answer.charAt(i);
+        // Construct hint line from answers (if there is none)
+        if(question.hintLine == null) {
+            int requiredAnswers = 0;
+            question.hintLine = "";
+            for(Question.Answer answer: question.answers) {
+                if(answer.required)requiredAnswers++;
             }
+            for(Question.Answer answer: question.answers) {
+                if(answer.required) {
+                    question.hintLine += answer.answer + " ";
+                } else if(requiredAnswers >= 0) {
+                    requiredAnswers--;
+                    question.hintLine += answer.answer + " ";
+                }
+            }
+            question.hintLine = question.hintLine.trim();
         }
+
+        // Construct hints from hint line (if there are hints missing)
+        // TODO, improve
+        int generate = question.hintCount - question.hints.size();
+        System.out.println("Generating " + generate + " questions (-1, all dots)");
+        if(generate > 0) {
+            int chars = 0;
+            String base = new String();
+
+            for(int i = 0; i < question.hintLine.length(); i++) {
+                if(Character.isLetterOrDigit(question.hintLine.charAt(i))) {
+                    chars++;
+                    base += '.';
+                } else {
+                    base += question.hintLine.charAt(i);
+                }
+            }
+            System.out.println("hintline contains " + chars + " chars");
+            // Add base (only dots)
+            Question.Hint h = question.new Hint();
+            h.hint = base;
+            question.hints.add(h);
+            generate--;
+
+            final double percentage = 0.70;
+
+            double reveal     = ((double)chars * percentage) / (double)generate;
+            double revealLeft = 0;
+            System.out.println("revealing " + reveal);
+            for(int g = 0; g < generate; g++) {
+                for(int r = 1, b = 0; r < reveal + revealLeft && b < 100;) {
+                    int index = rand.nextInt(question.hintLine.length());
+                    if(base.charAt(index) == '.') {
+                        base = base.substring(0, index) + question.hintLine.charAt(index) + base.substring(index + 1);
+                        r++;
+                    }
+                    b++;
+                }
+                revealLeft = reveal + revealLeft - Math.floor(reveal + revealLeft);
+                System.out.println(base + " - new left " + revealLeft);
+                Question.Hint hi = question.new Hint();
+                hi.hint     = base;
+                question.hints.add(hi);
+            }
+            System.out.println("y");
+        }
+        System.out.println("x");
+        currentHint   = 0;
         startTime     = currentTime;
         startMiliTime = Calendar.getInstance().getTimeInMillis();
         getNetwork().getConnection().sendPrivmsg(channelName, "" + "[" 
-                + currentQuestion.category + "] " + currentQuestion.question);
+                + question.category + "] " + question.questionLine);
         state   = State.RUNNING_QUESTION;
     }
     
     
     /**
      *
-     * @param winner
+     * @param answered - true iff the question was correctly answered
      */
-    public void endQuestion(String winner) {
-        if(winner == null) {
+    public void endQuestion(boolean answered) {
+        if(!answered) {
             getNetwork().getConnection().sendPrivmsg(channelName, "Rätt svar"
-                    + " var \"" + currentQuestion.answer + "\". Ingen"
+                    + " var \"" + question.hintLine + "\". Ingen"
                     + " lyckades svara rätt.");
             unanswerdQuestions++;
             answerStreak = 0;
         } else {
-            // Award score
-            awardScore(winner);
             unanswerdQuestions = 0;
         }
         endTime = currentTime;
@@ -379,9 +623,31 @@ public class Quizmaster extends silvertrout.Plugin {
 
             if(state == State.RUNNING_QUESTION) {
                 // Answer to question
-                if(message.compareToIgnoreCase(currentQuestion.answer) == 0) {
-                    endQuestion(user.getNickname());
+                String uanswer      = message.toLowerCase().trim();
+                int    uanswerCount = 0;
+                int    score        = 0;
+                for(Question.Answer answer: question.answers) {
+                    // TODO: check surroundings, only non alphanum char surrounds word
+                    if(uanswer.indexOf(answer.answer.toLowerCase()) >= 0) {
+                        score += answer.score;
+                        uanswerCount++;
+                    } else {
+                        if(answer.required) {
+                            //getNetwork().getConnection().sendPrivmsg(channelName, "missing req answer: " + answer.answer);
+                            return;
+                        }
+                    }
                 }
+                if(uanswerCount >= question.required) {
+                    for(int i = 0; i < currentHint; i++)
+                       score -= question.hints.get(i).scoredec;
+                    awardScore(user.getNickname(), score);
+                    endQuestion(true);
+
+                } else {
+                    //getNetwork().getConnection().sendPrivmsg(channelName, "req answer " + question.required + " > " + uanswerCount);
+                }
+
             } else if(state == State.NOT_RUNNING) {
                 // Start new round
                 if(message.startsWith("!start")) {
@@ -440,30 +706,16 @@ public class Quizmaster extends silvertrout.Plugin {
      *
      */
     public void giveHint() {
-        if(currentTime == startTime + hintTime){
-            getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
+
+        if(currentHint == question.hints.size()) {
+            //getNetwork().getConnection().sendPrivmsg(channelName, "err, to few hints");
+            endQuestion(false);
         } else {
-            int l = currentAnswerString.length();
-            int h = (int)Math.ceil((double)l / (hintCount * 2));
-
-            for(int i = 0; i < h && i < 150; i++) {
-                int  p = rand.nextInt(l);
-                char c = currentQuestion.answer.charAt(p);
-                
-                if(currentAnswerString.charAt(p) == c) {
-                    h++; continue;
-                }
-                currentAnswerString = currentAnswerString.substring(0, p) + c
-                        + currentAnswerString.substring(p + 1, l);
-
-            }
-            
-            if(currentAnswerString.equals(currentQuestion.answer)) {
-                endQuestion(null);
-            } else {
-                getNetwork().getConnection().sendPrivmsg(channelName, currentAnswerString);
-            }
+            Question.Hint currentHintObj = question.hints.get(currentHint);
+            getNetwork().getConnection().sendPrivmsg(channelName, currentHintObj.hint);
+            currentHint++;
         }
+
     }
     
     @Override
@@ -472,16 +724,16 @@ public class Quizmaster extends silvertrout.Plugin {
         //System.out.println(currentTime + ": " + state);
         if(state == State.RUNNING_QUESTION) {        
             // If we have a question that no one have answered in a while
-            if(currentTime > startTime + hintTime * hintCount) {
-                endQuestion(null);
+            if(currentTime > startTime + hintTime * question.hintCount) {
+                endQuestion(false);
                 if(unanswerdQuestions >= 5) { 
                     endRound();
                 } else {
                     newQuestion();
                 }
             // Or if it is time to give a hint
-            } else if(currentTime - startTime == hintTime * hintCount) {
-                endQuestion(null);
+            } else if(currentTime - startTime == hintTime * question.hintCount) {
+                endQuestion(false);
             } else if((currentTime - startTime) % hintTime == 0) {
                 giveHint();
             }         

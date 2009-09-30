@@ -1,0 +1,216 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Fysik" subcategory="Astronomi">
+
+  <question>
+    <line>Ungefär hur långt färdas ljuset på 1 år</line>
+    <answers>
+      <answer>9,4 biljoner km</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lång tid tar det för månen att passera 1 varv runt jorden?</line>
+    <answers>
+      <answer>c:a 1 månad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Utanför vilken stad ligger rymdbasen "Esrange"?</line>
+    <answers>
+      <answer>Kiruna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ungefär hur många stjärnor uppskattar man att det finns i vår galax Vintergatan?</line>
+    <answers>
+      <answer>Mer än  100 miljarder</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stjärna ligger närmast jorden?</line>
+    <answers>
+      <answer>Solen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Kring vilken planet kretsar månen Titan</line>
+    <answers>
+      <answer>Saturnus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den sjunde planeten i vårt solsystem räknat från Solen</line>
+    <answers>
+      <answer>Uranus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken planet i vårt solsystem är närmast Jorden i storlek?</line>
+    <answers>
+      <answer>Venus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den största planeten i vårt solsystem?</line>
+    <answers>
+      <answer>Jupiter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket planet ligger närmast jorden?</line>
+    <answers>
+      <answer>Venus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det längdmått som har sitt ursprung i avståndet mellan jorden och solen?</line>
+    <answers>
+      <answer>Astronomisk Enhet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lång tid tar det för Solens ljus att nå Jorden?</line>
+    <answers>
+      <answer>Drygt 8 minuter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de stora gasmoln som ibland syns som stora eldslågor på solens rand?</line>
+    <answers>
+      <answer>Protuberanser</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ser vi alltid samma sida av månen?</line>
+    <answers>
+      <answer>Ja</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lång tid tar det för Pluto att fullborda ett varv runt solen?</line>
+    <answers>
+      <answer>248 år</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är Andromeda?</line>
+    <answers>
+      <answer>En galax</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är ett stjärnfall?</line>
+    <answers>
+      <answer>En meteor som brinner upp i jordens atmosfär</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den ryska rymdstation som låg i omloppsbana runt jorden mellan 1986 - 2001?</line>
+    <answers>
+      <answer>MIR</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket år skedde den första bemannade månlandningen?</line>
+    <answers>
+      <answer>1969</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallar man en planets månar?</line>
+    <answers>
+      <answer>Drabanter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad händer vid en solförmörkesle?</line>
+    <answers>
+      <answer>Månens skugga faller på jorden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var finns världens största teleskop?</line>
+    <answers>
+      <answer>I den chilenska Atacamaöknen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken var den första levande varelse som sändes upp i omloppsbana runt jorden</line>
+    <answers>
+      <answer>Hunden Laika</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket starkare lyser fullmånen än halvmånen?</line>
+    <answers>
+      <answer>Nio gånger starkare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken planet i vårt solsystem ligger närmast solen</line>
+    <answers>
+      <answer>Merkurius</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den första satellit som sköts upp i rymden från Sovjetunionen 1957?</line>
+    <answers>
+      <answer>Sputnik</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innebär en månförmörkelse?</line>
+    <answers>
+      <answer>Skuggan av Jorden syns på månen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Ett år på Merkurius är c:a 88 dygn, men hur lång är en dag?</line>
+    <answers>
+      <answer>176 dagar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket nummer var det på den raket i Apollo-serien som ledde till första månlandningen?</line>
+    <answers>
+      <answer>11</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Länge var människan övertygad om att Jorden var Universums medelpunkt och att alla himlakroppar roterade runt Jorden. Vad hette den polskfödde vetenskapsmannen som hävdade att Solen låg i solsystemets mitt?</line>
+    <answers>
+      <answer>Copernicus</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,181 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Djur och natur" subcategory="Landskapsblommor">
+
+  <question>
+    <line>Vad har Blekinge för landskapsblomma?</line>
+    <answers>
+      <answer>Ek</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Bohuslän för landskapsblomma?</line>
+    <answers>
+      <answer>Vildkaprifol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Dalarna för landskapsblomma?</line>
+    <answers>
+      <answer>Ängsklocka</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Dalsland för landskapsblomma?</line>
+    <answers>
+      <answer>Förgätmigej</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Gotland för landskapsblomma?</line>
+    <answers>
+      <answer>Murgröna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Gästrikland för landskapsblomma?</line>
+    <answers>
+      <answer>Liljekonvalj</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Halland för landskapsblomma?</line>
+    <answers>
+      <answer>Hårginst</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Hälsingland för landskapsblomma?</line>
+    <answers>
+      <answer>Lin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Härjedalen för landskapsblomma?</line>
+    <answers>
+      <answer>Mosippa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Jämtland för landskapsblomma?</line>
+    <answers>
+      <answer>Brunkulla</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Lappland för landskapsblomma?</line>
+    <answers>
+      <answer>Fjällsippa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Medelpad för landskapsblomma?</line>
+    <answers>
+      <answer>Gran</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Norrbotten för landskapsblomma?</line>
+    <answers>
+      <answer>Åkerbär</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Närke för landskapsblomma?</line>
+    <answers>
+      <answer>Gullviva</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Skåne för landskapsblomma?</line>
+    <answers>
+      <answer>Prästkrage</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Småland för landskapsblomma?</line>
+    <answers>
+      <answer>Linnea</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Södermanland för landskapsblomma?</line>
+    <answers>
+      <answer>Vit näckros</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Uppland för landskapsblomma?</line>
+    <answers>
+      <answer>Kungsängslilja</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Värmland för landskapsblomma?</line>
+    <answers>
+      <answer>Skogsstjärna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västerbotten för landskapsblomma?</line>
+    <answers>
+      <answer>Kung Karls spira</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västergötland för landskapsblomma?</line>
+    <answers>
+      <answer>Ljung</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Västmanland för landskapsblomma?</line>
+    <answers>
+      <answer>Mistel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Ångermanland för landskapsblomma?</line>
+    <answers>
+      <answer>Styvmorsviol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Öland för landskapsblomma?</line>
+    <answers>
+      <answer>Ölandssolvända</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har Östergötland för landskapsblomma?</line>
+    <answers>
+      <answer>Blåklint</answer>
+    </answers>
+  </question>
+
+</questions>

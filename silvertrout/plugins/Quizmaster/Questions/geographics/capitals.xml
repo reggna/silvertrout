@@ -1,0 +1,1371 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Geografi" subcategory="Huvudstäder">
+
+  <question>
+    <line>Vad heter Afghanistans huvudstad?</line>
+    <answers>
+      <answer>Kabul</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Albaniens huvudstad?</line>
+    <answers>
+      <answer>Tirana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Algeriets huvudstad?</line>
+    <answers>
+      <answer>Alger</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Andorras huvudstad?</line>
+    <answers>
+      <answer>Andorra la Vella</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Angolas huvudstad?</line>
+    <answers>
+      <answer>Luanda</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Antiguas och Barbuda huvudstad?</line>
+    <answers>
+      <answer>Saint John's</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Argentinas huvudstad?</line>
+    <answers>
+      <answer>Buenos Aires</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Armeniens huvudstad?</line>
+    <answers>
+      <answer>Jerevan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Australiens huvudstad?</line>
+    <answers>
+      <answer>Canberra</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Azerbajdzjans huvudstad?</line>
+    <answers>
+      <answer>Baku</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bahamas huvudstad?</line>
+    <answers>
+      <answer>Nassau</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bahrains huvudstad?</line>
+    <answers>
+      <answer>Manama</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bangladeshs huvudstad?</line>
+    <answers>
+      <answer>Dhaka</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Barbados huvudstad?</line>
+    <answers>
+      <answer>Bridgetown</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Belgiens huvudstad?</line>
+    <answers>
+      <answer>Bryssel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Belizes huvudstad?</line>
+    <answers>
+      <answer>Belmopan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Benins huvudstad?</line>
+    <answers>
+      <answer>Porto-Novo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bhutans huvudstad?</line>
+    <answers>
+      <answer>Thimphu</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bolivias huvudstäder?</line>
+    <answers>
+      <answer>La Paz och Sucre</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bosniens och Hercegovinas huvudstad?</line>
+    <answers>
+      <answer>Sarajevo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Botswanas huvudstad?</line>
+    <answers>
+      <answer>Gaborone</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Brasiliens huvudstad?</line>
+    <answers>
+      <answer>Brasília</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bruneis huvudstad?</line>
+    <answers>
+      <answer>Bandar Seri Begawan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Bulgariens huvudstad?</line>
+    <answers>
+      <answer>Sofia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Burkina Fasos huvudstad?</line>
+    <answers>
+      <answer>Ouagadougou</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Burmas huvudstad?</line>
+    <answers>
+      <answer>Naypyidaw</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Burundis huvudstad?</line>
+    <answers>
+      <answer>Bujumbura</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Centralafrikanska republikens huvudstad?</line>
+    <answers>
+      <answer>Bangui</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Chiles huvudstad?</line>
+    <answers>
+      <answer>Santiago de Chile</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Colombias huvudstad?</line>
+    <answers>
+      <answer>Santa Fé de Bogotá</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Costa Ricas huvudstad?</line>
+    <answers>
+      <answer>San José</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Cyperns huvudstad?</line>
+    <answers>
+      <answer>Nicosia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Danmarks huvudstad?</line>
+    <answers>
+      <answer>Köpenhamn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kongo-Kinshasas huvudstad?</line>
+    <answers>
+      <answer>Kinshasa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Djiboutis huvudstad?</line>
+    <answers>
+      <answer>Djibouti</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Dominicas huvudstad?</line>
+    <answers>
+      <answer>Roseau</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Dominikanska republikens huvudstad?</line>
+    <answers>
+      <answer>Santo Domingo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ecuadors huvudstad?</line>
+    <answers>
+      <answer>Quito</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Egyptens huvudstad?</line>
+    <answers>
+      <answer>Kairo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ekvatorialguineas huvudstad?</line>
+    <answers>
+      <answer>Malabo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter El Salvadors huvudstad?</line>
+    <answers>
+      <answer>San Salvador</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Elfenbenskustens huvudstad?</line>
+    <answers>
+      <answer>Abidjan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Eritreas huvudstad?</line>
+    <answers>
+      <answer>Asmara</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Estlands huvudstad?</line>
+    <answers>
+      <answer>Tallinn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Etiopiens huvudstad?</line>
+    <answers>
+      <answer>Addis Abeba</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Fijis huvudstad?</line>
+    <answers>
+      <answer>Suva</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Filippinernas huvudstad?</line>
+    <answers>
+      <answer>Manila</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Finlands huvudstad?</line>
+    <answers>
+      <answer>Helsingfors</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Frankrikes huvudstad?</line>
+    <answers>
+      <answer>Paris</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Färöarnas huvudstad?</line>
+    <answers>
+      <answer>Tórshavn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Förenade arabemiratens huvudstad?</line>
+    <answers>
+      <answer>Abu Dhabi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Gabons huvudstad?</line>
+    <answers>
+      <answer>Libreville</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Gambias huvudstad?</line>
+    <answers>
+      <answer>Banjul</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Georgiens huvudstad?</line>
+    <answers>
+      <answer>Tbilisi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ghanas huvudstad?</line>
+    <answers>
+      <answer>Accra</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Greklands huvudstad?</line>
+    <answers>
+      <answer>Aten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Grenadas huvudstad?</line>
+    <answers>
+      <answer>Saint George's</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Grönlands huvudstad?</line>
+    <answers>
+      <answer>Nuuk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Guatemalas huvudstad?</line>
+    <answers>
+      <answer>Guatemala City</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Guineas huvudstad?</line>
+    <answers>
+      <answer>Conakry</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Guinea-Bissaus huvudstad?</line>
+    <answers>
+      <answer>Bissau</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Guyanas huvudstad?</line>
+    <answers>
+      <answer>Georgetown</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Haitis huvudstad?</line>
+    <answers>
+      <answer>Port-au-Prince</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Honduras huvudstad?</line>
+    <answers>
+      <answer>Tegucigalpa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Indiens huvudstad?</line>
+    <answers>
+      <answer>New Delhi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Indonesiens huvudstad?</line>
+    <answers>
+      <answer>Jakarta</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Iraks huvudstad?</line>
+    <answers>
+      <answer>Bagdad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Irans huvudstad?</line>
+    <answers>
+      <answer>Teheran</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Irlands huvudstad?</line>
+    <answers>
+      <answer>Dublin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Islands huvudstad?</line>
+    <answers>
+      <answer>Reykjavik</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Israels huvudstad?</line>
+    <answers>
+      <answer>Jerusalem</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Italiens huvudstad?</line>
+    <answers>
+      <answer>Rom</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Jamaicas huvudstad?</line>
+    <answers>
+      <answer>Kingston</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Japans huvudstad?</line>
+    <answers>
+      <answer>Tokyo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Jordaniens huvudstad?</line>
+    <answers>
+      <answer>Amman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kambodjas huvudstad?</line>
+    <answers>
+      <answer>Phnom Penh</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kameruns huvudstad?</line>
+    <answers>
+      <answer>Yaoundé</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kanadas huvudstad?</line>
+    <answers>
+      <answer>Ottawa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kap Verdes huvudstad?</line>
+    <answers>
+      <answer>Praia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kazakstans huvudstad?</line>
+    <answers>
+      <answer>Astana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kenyas huvudstad?</line>
+    <answers>
+      <answer>Nairobi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kinas huvudstad?</line>
+    <answers>
+      <answer>Peking</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kirgizistans huvudstad?</line>
+    <answers>
+      <answer>Bisjkek</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kiribatis huvudstad?</line>
+    <answers>
+      <answer>Tarawa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Komorernas huvudstad?</line>
+    <answers>
+      <answer>Moroni</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kroatiens huvudstad?</line>
+    <answers>
+      <answer>Zagreb</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kubas huvudstad?</line>
+    <answers>
+      <answer>Havanna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Kuwaits huvudstad?</line>
+    <answers>
+      <answer>Kuwait City</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Laos huvudstad?</line>
+    <answers>
+      <answer>Vientiane</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Lesothos huvudstad?</line>
+    <answers>
+      <answer>Maseru</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Lettlands huvudstad?</line>
+    <answers>
+      <answer>Riga</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Libanons huvudstad?</line>
+    <answers>
+      <answer>Beirut</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Liberias huvudstad?</line>
+    <answers>
+      <answer>Monrovia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Libyens huvudstad?</line>
+    <answers>
+      <answer>Tripoli</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Liechtensteins huvudstad?</line>
+    <answers>
+      <answer>Vaduz</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Litauens huvudstad?</line>
+    <answers>
+      <answer>Vilnius</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Luxemburgs huvudstad?</line>
+    <answers>
+      <answer>Luxemburg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Madagaskars huvudstad?</line>
+    <answers>
+      <answer>Antananarivo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Makedoniens huvudstad?</line>
+    <answers>
+      <answer>Skopje</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Malawis huvudstad?</line>
+    <answers>
+      <answer>Lilongwe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Malaysias huvudstad?</line>
+    <answers>
+      <answer>Kuala Lumpur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Maldivernas huvudstad?</line>
+    <answers>
+      <answer>Male</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Malis huvudstad?</line>
+    <answers>
+      <answer>Bamako</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Maltas huvudstad?</line>
+    <answers>
+      <answer>Valetta</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Marockos huvudstad?</line>
+    <answers>
+      <answer>Rabat</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Marshallöarnas huvudstad?</line>
+    <answers>
+      <answer>Majuro</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Mauretaniens huvudstad?</line>
+    <answers>
+      <answer>Nouakchott</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Mauritius huvudstad?</line>
+    <answers>
+      <answer>Port Louis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Mexikos huvudstad?</line>
+    <answers>
+      <answer>Mexico City</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Mikronesiens federerade staters huvudstad?</line>
+    <answers>
+      <answer>Palikir</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Moçambiques huvudstad?</line>
+    <answers>
+      <answer>Maputo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Moldaviens huvudstad?</line>
+    <answers>
+      <answer>Chisinau</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Monacos huvudstad?</line>
+    <answers>
+      <answer>Monaco</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Mongoliets huvudstad?</line>
+    <answers>
+      <answer>Ulan Bator</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Montenegros huvudstad?</line>
+    <answers>
+      <answer>Podgorica</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Namibias huvudstad?</line>
+    <answers>
+      <answer>Windhoek</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Naurus huvudstad?</line>
+    <answers>
+      <answer>Yaren</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nederländernas huvudstad?</line>
+    <answers>
+      <answer>Amsterdam</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nepals huvudstad?</line>
+    <answers>
+      <answer>Katmandu</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nicaraguas huvudstad?</line>
+    <answers>
+      <answer>Managua</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nigers huvudstad?</line>
+    <answers>
+      <answer>Niamey</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nigerias huvudstad?</line>
+    <answers>
+      <answer>Abuja</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nordkoreas huvudstad?</line>
+    <answers>
+      <answer>Pyongyang</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Norges huvudstad?</line>
+    <answers>
+      <answer>Oslo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Nya Zeelands huvudstad?</line>
+    <answers>
+      <answer>Wellington</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Omans huvudstad?</line>
+    <answers>
+      <answer>Muskat</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Pakistans huvudstad?</line>
+    <answers>
+      <answer>Islamabad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Palaus huvudstad?</line>
+    <answers>
+      <answer>Melekeok</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Panamas huvudstad?</line>
+    <answers>
+      <answer>Panama City</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Papua Nya Guineas huvudstad?</line>
+    <answers>
+      <answer>Port Moresby</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Paraguays huvudstad?</line>
+    <answers>
+      <answer>Asunción</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Perus huvudstad?</line>
+    <answers>
+      <answer>Lima</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Polens huvudstad?</line>
+    <answers>
+      <answer>Warszawa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Portugals huvudstad?</line>
+    <answers>
+      <answer>Lissabon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Qatars huvudstad?</line>
+    <answers>
+      <answer>Doha</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Republiken Kongos huvudstad?</line>
+    <answers>
+      <answer>Brazzaville</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Rumäniens huvudstad?</line>
+    <answers>
+      <answer>Bukarest</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Rwandas huvudstad?</line>
+    <answers>
+      <answer>Kigali</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Rysslands huvudstad?</line>
+    <answers>
+      <answer>Moskva</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Saint Christophers och Nevis huvudstad?</line>
+    <answers>
+      <answer>Basseterre</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Saint Lucias huvudstad?</line>
+    <answers>
+      <answer>Castries</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Saint Vincents och Grenadinernas huvudstad?</line>
+    <answers>
+      <answer>Kingstown</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Salomonöarnas huvudstad?</line>
+    <answers>
+      <answer>Honiara</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Samoas huvudstad?</line>
+    <answers>
+      <answer>Apia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter San Marinos huvudstad?</line>
+    <answers>
+      <answer>San Marino</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Saudiarabiens huvudstad?</line>
+    <answers>
+      <answer>Riyadh</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Schweizs huvudstad?</line>
+    <answers>
+      <answer>Bern</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Senegals huvudstad?</line>
+    <answers>
+      <answer>Dakar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Serbiens huvudstad?</line>
+    <answers>
+      <answer>Belgrad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Seychellernas huvudstad?</line>
+    <answers>
+      <answer>Victoria</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sierra Leones huvudstad?</line>
+    <answers>
+      <answer>Freetown</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Singapores huvudstad?</line>
+    <answers>
+      <answer>Singapore</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Slovakiens huvudstad?</line>
+    <answers>
+      <answer>Bratislava</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sloveniens huvudstad?</line>
+    <answers>
+      <answer>Ljubljana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Somalias huvudstad?</line>
+    <answers>
+      <answer>Mogadishu</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Spaniens huvudstad?</line>
+    <answers>
+      <answer>Madrid</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sri Lankas huvudstad?</line>
+    <answers>
+      <answer>Colombo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Storbritanniens huvudstad?</line>
+    <answers>
+      <answer>London</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sudans huvudstad?</line>
+    <answers>
+      <answer>Khartoum</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Surinams huvudstad?</line>
+    <answers>
+      <answer>Paramaribo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sveriges huvudstad?</line>
+    <answers>
+      <answer>Stockholm</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Swazilands huvudstad?</line>
+    <answers>
+      <answer>Mbabane</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sydafrikas huvudstad?</line>
+    <answers>
+      <answer>Kapstaden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Sydkoreas huvudstad?</line>
+    <answers>
+      <answer>Söul</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Syriens huvudstad?</line>
+    <answers>
+      <answer>Damaskus</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tadzjikistans huvudstad?</line>
+    <answers>
+      <answer>Dusjanbe</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Taiwans huvudstad?</line>
+    <answers>
+      <answer>Taipei</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tanzanias huvudstad?</line>
+    <answers>
+      <answer>Dodoma</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tchads huvudstad?</line>
+    <answers>
+      <answer>N'Djamena</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Thailands huvudstad?</line>
+    <answers>
+      <answer>Bangkok</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tjeckiens huvudstad?</line>
+    <answers>
+      <answer>Prag</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Togos huvudstad?</line>
+    <answers>
+      <answer>Lomé</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tongas huvudstad?</line>
+    <answers>
+      <answer>Nuku'alofa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Trinidads och Tobagos huvudstad?</line>
+    <answers>
+      <answer>Port of Spain</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tunisiens huvudstad?</line>
+    <answers>
+      <answer>Tunis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Turkiets huvudstad?</line>
+    <answers>
+      <answer>Ankara</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Turkmenistans huvudstad?</line>
+    <answers>
+      <answer>Asjchabad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tuvalus huvudstad?</line>
+    <answers>
+      <answer>Fongafale</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Tysklands huvudstad?</line>
+    <answers>
+      <answer>Berlin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ugandas huvudstad?</line>
+    <answers>
+      <answer>Kampala</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ukrainas huvudstad?</line>
+    <answers>
+      <answer>Kiev</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Ungerns huvudstad?</line>
+    <answers>
+      <answer>Budapest</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Uruguays huvudstad?</line>
+    <answers>
+      <answer>Montevideo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter USAs huvudstad?</line>
+    <answers>
+      <answer>Washington DC</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Uzbekistans huvudstad?</line>
+    <answers>
+      <answer>Tasjkent</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Vanuatus huvudstad?</line>
+    <answers>
+      <answer>Vila</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Vatikanstatens huvudstad?</line>
+    <answers>
+      <answer>Vatikanstaden</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Venezuelas huvudstad?</line>
+    <answers>
+      <answer>Caracas</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Vietnams huvudstad?</line>
+    <answers>
+      <answer>Hanoi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Vitrysslands huvudstad?</line>
+    <answers>
+      <answer>Minsk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Yemens huvudstad?</line>
+    <answers>
+      <answer>Sana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Zambias huvudstad?</line>
+    <answers>
+      <answer>Lusaka</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Zimbabwes huvudstad?</line>
+    <answers>
+      <answer>Harare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Österrikes huvudstad?</line>
+    <answers>
+      <answer>Wien</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Östtimors huvudstad?</line>
+    <answers>
+      <answer>Dili</answer>
+    </answers>
+  </question>
+
+</questions>

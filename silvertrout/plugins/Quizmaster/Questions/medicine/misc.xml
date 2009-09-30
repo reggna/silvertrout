@@ -1,0 +1,41 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Naturvetenskap" subcategory="Medicin">
+
+  <question>
+    <line>Vad är den medicinska termen som beskriver rädslan för långa ord?</line>
+    <answers>
+      <answer>Hippopotomonstrosesquippedaliofobi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den psykiska sjukdom som innebär att en person medvetet gör sitt barn sjukt med syftet att sedan få vårda det?</line>
+    <answers>
+      <answer>Münchhausens syndrom by proxy</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innehåller Alvedon och Panodil för smärlindrande ämne?</line>
+    <answers>
+      <answer>Paracetamol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innehålkler Ipren för smärtlindrande ämne?</line>
+    <answers>
+      <answer>Ibuprofen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad innehåller Magnecyl och Treo för verksamt ämne?</line>
+    <answers>
+      <answer>Acetylsalicylsyra</answer>
+    </answers>
+  </question>
+
+</questions>

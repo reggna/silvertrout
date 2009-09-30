@@ -1,0 +1,202 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kultur" subcategory="Konst">
+
+  <question>
+    <line>Vilken konstnär blev berömd för sin målning av Campbells soppburk?</line>
+    <answers>
+      <answer>Andy Warhol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Till vilken stil hör målaren Renoir?</line>
+    <answers>
+      <answer>Impressionism</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Med vilket namn kunde konstnären van Rijn signera sina målningar?</line>
+    <answers>
+      <answer>Rembrandt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lång tid tog det för Leonardo Da Vinci att göra färdigt Mona Lisa?</line>
+    <answers>
+      <answer>4 år</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem målade tavlan Skriet?</line>
+    <answers>
+      <answer>Edvard Munch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken svensk prins kallades Målarprinsen?</line>
+    <answers>
+      <answer>Prins Eugen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette konstnären som omkom vid en båtolycka på Vättern 1918?</line>
+    <answers>
+      <answer>John Bauer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Braque och Picasso skapade en av våra konstinriktningar. Vilken?</line>
+    <answers>
+      <answer>Kubismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken konstnär skjuter sig, den 11 september 1902, i vänster hand med en revolver?</line>
+    <answers>
+      <answer>Edvard Munch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket misstag gjorde Michelangelo med sin staty av David?</line>
+    <answers>
+      <answer>Davidsstatyn är inte omskuren</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette kvinnan som man tror satt modell för Mona Lisa?</line>
+    <answers>
+      <answer>Lisa Gherardini del Giocondo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Viket yrke hade Henri Rousseau innan han helt ägnade sig åt konsten?</line>
+    <answers>
+      <answer>Tullare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken stil fick sitt genombrott på världsutställningen i Stockholm 1930?</line>
+    <answers>
+      <answer>Funktionalismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var kan man se den berömda statyn Venus från Milo?</line>
+    <answers>
+      <answer>I Louvren i Paris</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Degas, Manet och Monet representerar en viss konstinriktning. Vilken?</line>
+    <answers>
+      <answer>Impressionismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken konstinriktning förknippar man med Henri Rousseau?</line>
+    <answers>
+      <answer>Naivismen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en målning som görs på fuktig kalkputs?</line>
+    <answers>
+      <answer>Fresk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette egentligen "Döderhultarn"?</line>
+    <answers>
+      <answer>Axel Pettersson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var kan Michelangelos mästerverk Pietá beskådas?</line>
+    <answers>
+      <answer>I St. Peterskyrkan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem berättade i sin självbiografi planer på att knivmörda Strindberg?</line>
+    <answers>
+      <answer>Carl Larsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad sysslar man med om man använder en kavalett?</line>
+    <answers>
+      <answer>Skulptering</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>För vilket berömt konstverk stod Isabella Singer modell?</line>
+    <answers>
+      <answer>Frihetsgudinnan i New York</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem målade tavlan Damen med slöjan?</line>
+    <answers>
+      <answer>Alexander Roslin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem målade Den nakna Maja?</line>
+    <answers>
+      <answer>Goya</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan man se i ett glyptotek?</line>
+    <answers>
+      <answer>Skulpturer</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Nils Dardel lämnade Sverige för USA 1939 och reste sen vidare till Peru Guatemala och Mexiko. Var dog han?</line>
+    <answers>
+      <answer>I New York</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Michelangelo hade faktiskt ett efternamn. Vilket?</line>
+    <answers>
+      <answer>Buonarroti</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Babsan på riktigt?</line>
+    <answers>
+      <answer>Lars-Åke Wilhelmsson</answer>
+    </answers>
+  </question>
+
+</questions>

@@ -1,0 +1,125 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Blandat" subcategory="Chalmers Tekniska Högskola">
+
+  <question>
+    <line>Vad kalls de kvinnliga studenterna på Chalmers Tekniska Högskola?</line>
+    <answers>
+      <answer>Emilia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de manliga studenterna på Chalmers Tekniska Högskola?</line>
+    <answers>
+      <answer>Emil</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diameter har den stora discokulan som hänger i kårhuset?</line>
+    <answers>
+      <answer>1,2 meter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad fick Chalmers Studentkår av SJ år 2003?</line>
+    <answers>
+      <answer>En tågvagn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den städerska som blev så omtyckt av studenterna att hon senare fick en trappa uppkallad efter sig?</line>
+    <answers>
+      <answer>Olga</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad sägs geniknölen vara ingång till?</line>
+    <answers>
+      <answer>Helvetet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette Chalmers Studentkårs första kårhus?</line>
+    <answers>
+      <answer>Lopphuset</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket år grundades Chalmers?</line>
+    <answers>
+      <answer>1829</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den första kvinnliga teknologen på Chalmers?</line>
+    <answers>
+      <answer>Vera Sandberg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Har Chalmers Studentkår erkänt unionsupplösningen mellan Sverige och Norge?</line>
+    <answers>
+      <answer>Nej</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är det för färg på den "Lilla Gröna"?</line>
+    <answers>
+      <answer>Samma färg som sittande VO's sektionsfärg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många gånger har CS Bastun brunnit ner?</line>
+    <answers>
+      <answer>Två</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Chalmers Studentkårs PR-förrening?</line>
+    <answers>
+      <answer>Programkommittén PU</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den nu kända komikergrupp som bildades på Chalmers?</line>
+    <answers>
+      <answer>Galenskaparna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad var Chalmers Tekniska Högskolas första officiella namn?</line>
+    <answers>
+      <answer>Chalmerska Slöjdskolan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad var det förr?</line>
+    <answers>
+      <answer>Bättre</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När var det bättre?</line>
+    <answers>
+      <answer>Förr</answer>
+    </answers>
+  </question>
+
+</questions>
