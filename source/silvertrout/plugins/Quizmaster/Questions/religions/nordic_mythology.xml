@@ -26,8 +26,12 @@
 
   <question>
     <line>Vad heter bockarna som drar åskguden Tors vagn?</line>
-    <answers>
+    <hints>
       <answer>Tanngnjóstr och Tanngrisnir</answer>
+    </hints>
+    <answers>
+      <answer required="true">Tanngnjóstr</answer>
+      <answer required="true">Tanngrisnir</answer>
     </answers>
   </question>
 
@@ -61,8 +65,12 @@
 
   <question>
     <line>Vad kallas Odens två korpar?</line>
+    <hints>
+       <line>Hugin och Munin</line>
+    </hints>
     <answers>
-      <answer>Hugin och Munin</answer>
+      <answer required="true">Hugin</answer>
+      <answer required="true">Munin</answer>
     </answers>
   </question>
 
@@ -75,8 +83,12 @@
 
   <question>
     <line>Vad kallas enligt asatron Odens två vargar?</line>
+    <hints>
+      <line>Gere och Freke</line>
+    </hints>
     <answers>
-      <answer>Gere och Freke</answer>
+      <answer required="true">Gere</answer>
+      <answer required="true">Freke</answer>
     </answers>
   </question>
 
@@ -145,8 +157,12 @@
 
   <question>
     <line>Vad heter Odens söner?</line>
+    <hints>
+      <line>Ville och Ve</line>
+    </hints>
     <answers>
-      <answer>Ville och Ve</answer>
+      <answer required="true">Ville</answer>
+      <answer required="true">Ve</answer>
     </answers>
   </question>
 
@@ -173,8 +189,12 @@
 
   <question>
     <line>Vad hette de första människorna?</line>
+    <hints>
+      <line>Ask och Embla</line>
+    </hints>
     <answers>
-      <answer>Ask och Embla</answer>
+      <answer required="true">Ville</answer>
+      <answer required="true">Ve</answer>
     </answers>
   </question>
 
@@ -250,8 +270,12 @@
 
   <question>
     <line>Vad heter de två människor som överlever ragnarök?</line>
+    <hints>
+      <line>Liv och Livtrasir</line>
+    </hints>
     <answers>
-      <answer>Liv och Livtrasir</answer>
+      <answer required="true">Liv</answer>
+      <answer required="true">Livtrasir</answer>
     </answers>
   </question>
 
@@ -285,8 +309,13 @@
 
   <question>
     <line>Vad heter de tre nornorna som bor vid Yggrdrasils rötter?</line>
-    <answers>
+    <hints>
       <answer>Urd, Skuld och Verdandi</answer>
+    </hints>
+    <answers>
+      <answer required="true">Urd</answer>
+      <answer required="true">Skuld</answer>
+      <answer required="true">Verdandi</answer>
     </answers>
   </question>
 
@@ -306,8 +335,13 @@
 
   <question>
     <line>Vad heter nornorna som spinner ödets trådar?</line>
+    <hints>
+      <answer>Urd, Skuld och Verdandi</answer>
+    </hints>
     <answers>
-      <answer>Urd, Verdandi och Skuld</answer>
+      <answer required="true">Urd</answer>
+      <answer required="true">Skuld</answer>
+      <answer required="true">Verdandi</answer>
     </answers>
   </question>
 

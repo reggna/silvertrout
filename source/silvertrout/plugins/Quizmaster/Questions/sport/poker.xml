@@ -4,7 +4,7 @@
         category="Sport" subcategory="Poker">
 
   <question>
-    <line>Vad kallas en olaglig insats där man vid pokerbordet lägger in markerna i flera omgångar utan att säga tydligt vad man vill satsa</line>
+    <line>Vad kallas en olaglig insats där man vid pokerbordet lägger in markerna i flera omgångar utan att säga tydligt vad man vill satsa?</line>
     <answers>
       <answer>String bet</answer>
     </answers>
@@ -13,7 +13,7 @@
   <question>
     <line>Det blir rundpass på Rivern, vem får visa sitt kort först?</line>
     <answers>
-      <answer>Den vänster till dealern</answer>
+      <answer>Den vänster om dealern</answer>
     </answers>
   </question>
 

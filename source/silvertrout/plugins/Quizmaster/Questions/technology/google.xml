@@ -12,8 +12,12 @@
 
   <question>
     <line>Vad heter Googles grundare?</line>
+    <hints>
+      <line>Sergey Brin och Larry Page</line>
+    </hints>
     <answers>
-      <answer>Sergey Brin och Larry Page</answer>
+      <answer required="true">Sergey Brin</answer>
+      <answer required="true">Larry Page</answer>
     </answers>
   </question>
 
@@ -26,8 +30,12 @@
 
   <question>
     <line>Var ligger Googles högkvarter?</line>
+    <hints>
+      <line>I Mountain View, Kalifornien</line>
+    </hints>
     <answers>
-      <answer>I Mountain View, Kalifornien</answer>
+      <answer score="5">Mountain View</answer>
+      <answer score="5" required="true">Kalifornien</answer>
     </answers>
   </question>
 

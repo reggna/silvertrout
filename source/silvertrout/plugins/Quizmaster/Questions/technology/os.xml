@@ -24,4 +24,18 @@
     </answers>
   </question>
 
+  <question>
+    <line>Vad heter det öppna och fria operativsystemet som utvecklats sedan 2001 för att vara kompatibelt med BeOS?</line>
+    <answers>
+      <answer>Haiku</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket operativsystemfamilj har den söta figuren Beastie som maskot?</line>
+    <answers>
+      <answer>Haiku</answer>
+    </answers>
+  </question>
+
 </questions>

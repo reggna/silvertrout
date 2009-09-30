@@ -12,8 +12,17 @@
 
   <question>
     <line>Vad hette de 7 dvärgarna?</line>
-    <answers>
+    <hints>
       <answer>Kloker, Toker, Prosit, Glader, Butter, Trötter och Blyger</answer>
+    </hints>
+    <answers>
+      <answer required="true">Kloker</answer>
+      <answer required="true">Toker</answer>
+      <answer required="true">Prosit</answer>
+      <answer required="true">Glader</answer>
+      <answer required="true">Butter</answer>
+      <answer required="true">Trötter</answer>
+      <answer required="true">Blyger</answer>
     </answers>
   </question>
 

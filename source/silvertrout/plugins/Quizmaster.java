@@ -346,7 +346,7 @@ public class Quizmaster extends silvertrout.Plugin {
         if(!trophyManager.haveTrophy(t, nick)) {
             trophyManager.addTrophy(t, nick);
             getNetwork().getConnection().sendPrivmsg(channelName, nick 
-                + ": You have earned a trophy - " + t.getName());
+                + ": Du har fått en trofé - " + t.getName());
         }
     }
     
@@ -678,9 +678,10 @@ public class Quizmaster extends silvertrout.Plugin {
             else if(message.equals("!help")) {
                 if(currentTime - statTime > 20)
                     getNetwork().getConnection().sendPrivmsg(channelName, 
-                              "Skriv !start för att starta och !stats för att"
-                            + " se tio i topp-listan och din egna poäng. För"
-                            + " att titta vilka trophies du har kan du använda"
+                              user.getNickname()
+                            +  ", Skriv !start för att starta och !stats för"
+                            +  "att se tio i topp-listan och din egna poäng. För"
+                            + " att titta vilka troféer du har kan du använda"
                             + " !trophies. Om du vill visa denna hjälp, skriv"
                             + " !help.");
             }
@@ -695,7 +696,7 @@ public class Quizmaster extends silvertrout.Plugin {
                 int have = trophyManager.getTrophies(user.getNickname()).size();
                 int tot    = trophyManager.getTrophies().size();
             
-                String msg = "Du har trophéerna: ";
+                String msg = user.getNickname() + ", Du har troféerna: ";
                 for(Trophy t: trophyManager.getTrophies(user.getNickname())) {
                     msg += t.getName() + ", ";
                 }
@@ -705,7 +706,7 @@ public class Quizmaster extends silvertrout.Plugin {
             else if(message.equals("!listtrophies")) {
             
                 int tot    = trophyManager.getTrophies().size();
-                String msg = "Följande trophéer finns: ";
+                String msg = user.getNickname() + ", Följande troféer finns: ";
                 for(Trophy t: trophyManager.getTrophies()) {
                     msg += t.getName() + ", ";
                 }
