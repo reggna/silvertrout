@@ -27,7 +27,7 @@
   <question>
     <line>Vad heter bockarna som drar åskguden Tors vagn?</line>
     <hints>
-      <answer>Tanngnjóstr och Tanngrisnir</answer>
+      <line>Tanngnjóstr och Tanngrisnir</line>
     </hints>
     <answers>
       <answer required="true">Tanngnjóstr</answer>
@@ -310,7 +310,7 @@
   <question>
     <line>Vad heter de tre nornorna som bor vid Yggrdrasils rötter?</line>
     <hints>
-      <answer>Urd, Skuld och Verdandi</answer>
+      <line>Urd, Skuld och Verdandi</line>
     </hints>
     <answers>
       <answer required="true">Urd</answer>
@@ -336,7 +336,7 @@
   <question>
     <line>Vad heter nornorna som spinner ödets trådar?</line>
     <hints>
-      <answer>Urd, Skuld och Verdandi</answer>
+      <line>Urd, Skuld och Verdandi</line>
     </hints>
     <answers>
       <answer required="true">Urd</answer>

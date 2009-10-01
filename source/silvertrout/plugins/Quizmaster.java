@@ -452,7 +452,8 @@ public class Quizmaster extends silvertrout.Plugin {
                                 System.out.println("Loading questions from " + f.getName());
                                 Collection<Question> qss = QuestionReader.load(f);
                                 questions.addAll(qss);
-								//TODO
+                								// TODO: FIX CRASH ON GRAMMAR ERROR: INSTEAD
+                                // REPORT ERROR!!
                                 //System.out.println("Added file: " + f.getName());
                             }
                         }

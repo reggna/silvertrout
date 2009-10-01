@@ -13,7 +13,7 @@
   <question>
     <line>Vad hette de 7 dvärgarna?</line>
     <hints>
-      <answer>Kloker, Toker, Prosit, Glader, Butter, Trötter och Blyger</answer>
+      <line>Kloker, Toker, Prosit, Glader, Butter, Trötter och Blyger</line>
     </hints>
     <answers>
       <answer required="true">Kloker</answer>
@@ -41,7 +41,7 @@
   </question>
 
   <question>
-    <line>På vilken ögrupp i Stilla havet bor Lilo &amp; Stich?</line>
+    <line>På vilken ögrupp i Stilla havet bor Lilo och Stich?</line>
     <answers>
       <answer>Hawaii</answer>
     </answers>
