@@ -193,8 +193,8 @@
       <line>Ask och Embla</line>
     </hints>
     <answers>
-      <answer required="true">Ville</answer>
-      <answer required="true">Ve</answer>
+      <answer required="true">Ask</answer>
+      <answer required="true">Embla</answer>
     </answers>
   </question>
 
