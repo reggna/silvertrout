@@ -23,6 +23,7 @@ package silvertrout.plugins;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.List;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
@@ -590,39 +591,68 @@ public class Quizmaster extends silvertrout.Plugin {
         state   = State.RUNNING;
     }
     
+    
+    public void printTopTen(String sender) {
+        ScoreManager.Score[] topList      = scoreManager.getTop(10);
+        String               toptenString = new String();
+
+        if(topList.length == 0) {
+            toptenString  = "Ingen är på listan än. Quizza hårdare!";
+        }
+        
+        for(int i = 0; i < topList.length; i++) {
+            toptenString += "#" + (i+1) + " " + topList[i].nick + " " 
+                + topList[i].getTotalScore() + "p";
+            if(i != topList.length - 1)toptenString += "  -  ";
+        }
+        
+        getNetwork().getConnection().sendPrivmsg(channelName, 
+                "Top 10: " + toptenString);
+    }
+    
     /**
      *
      * @param sender
      */
     public void printStats(String sender) {
-        String               topten  = new String();
-        String               lastone = "Du har inga poäng ='(";
-        ScoreManager.Score[] topList = scoreManager.getTop(10);
         
-        if(topList.length == 0) {
-            topten  = "Ingen är på listan än. Quizza hårdare!";
-            lastone = "";
+        int          scorePos   = scoreManager.getPosition(sender);
+        int          score      = scoreManager.getTotalScore(sender);
+
+        int          trophyTot  = trophyManager.getTrophies().size();
+        List<Trophy> trophyList = trophyManager.getTrophies(sender);
+        int          trophy     = trophyList.size();
+        
+        String       msg        = sender + ", ";
+        
+        // Score part
+        if(scorePos == -1) {
+            msg += "Du har inga poäng, och  är inte med på topplistan.  ";
+        } else {
+            msg += "Du ligger på plats " + scorePos + ", med " + score + "p.  ";
         }
         
-        for(int i = 0; i < topList.length; i++) {
-            if(topList[i].nick.equals(sender))
-                lastone = printNick(sender) +" har " + topList[i].getTotalScore() + ". Bra jobbat!";
-            topten += "#" + (i+1) + " " + topList[i].nick + " " + topList[i].getTotalScore() + "p - ";
+        // Trophy part
+        if(trophy == 0) {
+            msg += "Du har inga troféer. ";
+        } else {
+            msg += "Du har " + trophy + " av " + trophyTot + " troféer: ";
+            
+            for(int i = 0; i < trophy; i++) {
+                msg += trophyList.get(i).getName();
+                if(i == trophy - 2) {
+                    msg += " och ";
+                } else if(i < trophy - 2) {
+                    msg += ", ";
+                }
+            }
         }
-        
-        
-        if(topList.length > 10) {
-            int pos   = scoreManager.getPosition(sender);
-            int score = scoreManager.getTotalScore(sender);
-            if(pos != -1)lastone = "Du har " + score 
-                    + " och ligger på placering #" + pos;
-        }
-        getNetwork().getConnection().sendPrivmsg(channelName, "Top 10: " 
-                + topten + lastone);
+        getNetwork().getConnection().sendPrivmsg(channelName, msg);
     }
     
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
+
 
         if(channel != null && channel.getName().equalsIgnoreCase(channelName)) {
 
@@ -664,6 +694,7 @@ public class Quizmaster extends silvertrout.Plugin {
 
             } else if(state == State.NOT_RUNNING) {
                 // Start new round
+                // TODO: what about categories?
                 if(message.startsWith("!start")) {
                     String[] cat = message.substring(6).split("\\s");
                     newRound(null);
@@ -676,42 +707,39 @@ public class Quizmaster extends silvertrout.Plugin {
                     statTime = currentTime;
                 }
             }
+            if(message.equals("!toplist")) {
+                if(currentTime - statTime > 20) {
+                    printTopTen(user.getNickname());
+                    statTime = currentTime;
+                }
+            }
             else if(message.equals("!help")) {
                 if(currentTime - statTime > 20)
                     getNetwork().getConnection().sendPrivmsg(channelName, 
                               user.getNickname()
-                            +  ", Skriv !start för att starta och !stats för"
-                            +  "att se tio i topp-listan och din egna poäng. För"
-                            + " att titta vilka troféer du har kan du använda"
-                            + " !trophies. Om du vill visa denna hjälp, skriv"
-                            + " !help.");
+                            + ", Skriv !start för att starta frågesproten och "
+                            + "!toplist för att se tio i topp-listan. För att "
+                            + "se dina egna poäng och titta på dina troféer, "
+                            + "skriv !stats. Du kan rapportera felaktiga "
+                            + "frågor genom att skriva !report num [reason]."
+                            + "Om du vill visa denna hjälp igen, skriv !help.");
             }
             else if(message.startsWith("!suggest")) {
                 // TODO!
             }
             else if(message.startsWith("!report")) {
+                getNetwork().getConnection().sendPrivmsg(channelName,
+                    user.getNickname() + ", Not implemented yet");
                 // TODO!
             }
             else if(message.equals("!trophies")) {
-            
-                int have = trophyManager.getTrophies(user.getNickname()).size();
-                int tot    = trophyManager.getTrophies().size();
-            
-                String msg = user.getNickname() + ", Du har troféerna: ";
-                for(Trophy t: trophyManager.getTrophies(user.getNickname())) {
-                    msg += t.getName() + ", ";
-                }
-                msg += have + "/" + tot + " - forsätt samla!";
-                getNetwork().getConnection().sendPrivmsg(channelName, msg);
-            }
-            else if(message.equals("!listtrophies")) {
-            
+                        
                 int tot    = trophyManager.getTrophies().size();
                 String msg = user.getNickname() + ", Följande troféer finns: ";
                 for(Trophy t: trophyManager.getTrophies()) {
                     msg += t.getName() + ", ";
                 }
-                msg +=tot + " stycken - samla alla!";
+                msg += tot + " stycken - samla alla!";
                 getNetwork().getConnection().sendPrivmsg(channelName, msg);
             }
         }
