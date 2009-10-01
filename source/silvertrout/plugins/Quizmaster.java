@@ -268,7 +268,7 @@ public class Quizmaster extends silvertrout.Plugin {
     private final int                  voiceInterval        = 60;
     private final int                  hintTime             = 7;
     private final int                  waitTime             = 3;
-    private final int                  rankInterval         = 500;
+    private final int                  rankInterval         = 100;
     
     // Variables:
     

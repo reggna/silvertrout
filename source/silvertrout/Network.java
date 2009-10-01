@@ -414,6 +414,10 @@ public class Network {
         User user = getUser(nickname);
         String oldNickname = user.getNickname();
 
+        // Move user in user hash map
+        users.remove(oldNickname);
+        users.put(newNickname, user);
+
         user.setNickname(newNickname);
 
         for (Plugin plugin : plugins.values()) {

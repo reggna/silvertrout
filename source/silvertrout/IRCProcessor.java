@@ -97,6 +97,7 @@ public class IRCProcessor {
             // Catch old nickname
             } else if (cmd.equals("NICK")) {
                 //oldNickname = user.getNickname();
+                System.out.println("NICK CHANGE " + msg.nickname + ", " + msg.params.get(0) + " = " + msg.params);
                 network.onNick(msg.nickname, msg.params.get(0));
             // TODO order, args, callback first or not?
             } else if (cmd.equals("MODE")) {
