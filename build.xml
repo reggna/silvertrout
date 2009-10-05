@@ -1,27 +1,55 @@
 <project name="Silvertrout" default="build">
-  <description>Silvertrout is a IRC bot</description>
+  <description>Silvertrout is an IRC bot</description>
   <property name="source.dir"  value="source"/>
   <property name="build.dir"   value="build"/>
   <property name="dist.dir"    value="distribution"/>  
   <property name="doc.dir"     value="documentation"/>
+  <property name="plugins.dir" value="plugins"/>
   <property name="javadoc.dir" value="${doc.dir}/javadoc"/>
   <property name="classes.dir" value="${build.dir}/classes"/>
   <property name="jar.dir"     value="${build.dir}/jar"/>
 
-  <target name="run" description="Run silvertrout">
-    <java classpath="${classes.dir};." classname="silvertrout.IRC"/>
+  <property name="debug"       value="true"/>
+
+  <target name="run" depends="build" description="Run silvertrout">
+    <java dir="${classes.dir}" fork="true" classname="silvertrout.IRC" />
   </target>
   
-  <target name="build" description="Standard build">
+  <target name="build" depends="build-silvertrout,build-plugins" />
+  
+  <target name="build-silvertrout" description="Standard build">
     <echo>Building silvertrout...</echo>
     <mkdir dir="${classes.dir}"/>
-    <javac srcdir="${source.dir}" destdir="${classes.dir}"/>
+    <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}">
+      <exclude name="silvertrout/plugins/**" />
+    </javac>
+  </target>
+  
+  <target name="build-plugins" depends="build-silvertrout" description="Build plugins">
+    <echo>Building silvertrout plugins...</echo>
+    <javac srcdir="${plugins.dir}" destdir="${classes.dir}" debug="${debug}">
+      <include name="*/source/**/*.java" />
+    </javac>
+    <copy preservelastmodified="true" includeEmptyDirs="true" todir="${classes.dir}">
+      <fileset dir="${plugins.dir}" includes="*/resources/**"/>
+      <regexpmapper from="^(.*)/resources/(.*)$$" to="silvertrout/plugins/\1/\2"/>
+    </copy>
   </target>
   
   <target name="jar" depends="build" description="Building jar file">
     <echo>Building silvertrout as a jar...</echo> 
     <mkdir dir="${jar.dir}"/>
-    <jar destfile="${jar.dir}/silvertrout.jar" basedir="${classes.dir}">
+    <jar destfile="${jar.dir}/silvertrout.jar">
+      <manifest>
+        <attribute name="Implementation-Title" value="Silvertrout"/>
+        <attribute name="Implementation-Version" value="Beta"/>
+
+        <attribute name="Built-By" value="${user.name}"/>
+
+        <attribute name="Main-Class" value="silvertrout.IRC"/>
+      </manifest>
+      
+      <fileset dir="${classes.dir}" />
 
     </jar>
   </target> 

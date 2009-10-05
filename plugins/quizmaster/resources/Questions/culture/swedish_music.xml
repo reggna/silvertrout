@@ -1,0 +1,63 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kultur" subcategory="Svensk musik">
+
+  <question>
+    <line>Vad heter Håkan Hellströms band när de inte spelar med honom?</line>
+    <answers>
+      <answer>Augustifolket</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter Winnerbäcks kompband som han bland spelade med på skivan Söndermarken?</line>
+    <answers>
+      <answer>Hovet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Nämn minst en av medlemmarna i bandet Hovet.</line>
+    <answers>
+      <answer>Idde Schultz</answer>
+      <answer>Anna Stadling</answer>
+      <answer>Josef Zackrisson</answer>
+      <answer>Norpan Eriksson</answer>
+      <answer>Jens Back</answer>
+      <answer>Staffan Andersson</answer>
+      <answer>Johan Persson</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vilket punkband spelar Hjalle och Heavy (kända från tvprogrammet På rymmen) i?</line>
+    <answers>
+      <answer>Mimikry</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Nämn ett av de tre punkband som Johan Johansson spelat i.</line>
+    <answers>
+      <answer>KSMB</answer>
+      <answer>Strindbergs</answer>
+      <answer>John Lenin</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vilket svenskt indieband debuterade med skivan Viskningar och Rop?</line>
+    <answers>
+      <answer>Peggy Lejonhjärta</answer>
+    </answers>
+  </question>  
+  
+  <question>
+    <line>Vilken artist har spelat både trummor och bas i Broder Daniel men som numer är mest är känd för sin solokarriär?</line>
+    <answers>
+      <answer>Håkan Hellström</answer>
+    </answers>
+  </question>  
+  
+</questions>

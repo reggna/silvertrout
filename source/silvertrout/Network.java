@@ -798,7 +798,8 @@ public class Network {
             synchronized (plugins) {
                 try {
                     PluginClassLoader pcl = new PluginClassLoader();
-                    Class<?> c = pcl.findClass("silvertrout.plugins." + name);
+                    Class<?> c = pcl.findClass("silvertrout.plugins." 
+                            + name.toLowerCase() + "." + name);
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
                         p.setNetwork(this);
