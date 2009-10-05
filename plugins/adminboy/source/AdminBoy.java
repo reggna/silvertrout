@@ -19,7 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
- package silvertrout.plugins.adminboy;
+
+package silvertrout.plugins.adminboy;
 
 import silvertrout.User;
 import silvertrout.Channel;
@@ -98,17 +99,35 @@ public class AdminBoy extends silvertrout.Plugin {
       // Network commands:
       } else if(parts.length > 2) {
         if(cmd.equals("!join")) {
-          getNetwork().getConnection().join(parts[2]);
-          user.sendPrivmsg("Jag mår bra när jag får vara i " + parts[2] + ".");
+        
+            if(!getNetwork().existsChannel(parts[2])) {
+                user.sendPrivmsg("Jag mår bra när jag får vara i " + parts[2] + ".");
+                getNetwork().getConnection().join(parts[2]);
+            } else {
+                user.sendPrivmsg("Jag är redan i " + parts[2] + ".");            
+            }
         } else if(cmd.equals("!part")) {
-          getNetwork().getConnection().part(parts[2]);
-          user.sendPrivmsg("Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
+            if(!getNetwork().existsChannel(parts[2])) {
+                user.sendPrivmsg("Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
+                getNetwork().getConnection().part(parts[2]);
+            } else {
+                user.sendPrivmsg("Jag är inte i " + parts[2] +".");
+            }
+
         } else if(cmd.equals("!loadplugin")) {
-          getNetwork().loadPlugin(parts[2]);
-          user.sendPrivmsg(parts[2] + " har laddats.");
+        
+            if(getNetwork().loadPlugin(parts[2])) {
+                user.sendPrivmsg(parts[2] + " har laddats.");
+            } else {
+                user.sendPrivmsg(parts[2] + " kunde inte laddas");
+            }              
         } else if(cmd.equals("!unloadplugin")) {
-          getNetwork().unloadPlugin(parts[2]);
-          user.sendPrivmsg(parts[2] +" har avaktiverats.");
+        
+            if(getNetwork().unloadPlugin(parts[2])) {
+                user.sendPrivmsg(parts[2] +" har avaktiverats.");
+            } else {
+                user.sendPrivmsg(parts[2] + " kunde inte laddas");
+            } 
         } else if(cmd.equals("!users")) {
             Channel chan = getNetwork().getChannel(parts[2]);
             user.sendPrivmsg(chan.getName() + " har "
