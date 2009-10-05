@@ -394,8 +394,10 @@ public class IRCConnection {
             for (;;) {
                 try {
                     String line = reader.readLine();
+                    if(line == null) 
+                      throw new IOException("Socket closed: end of stream reached in bufferreader");
                     if(network.getWorkerThread() != null)
-                    network.getWorkerThread().process(new Message(line));
+                      network.getWorkerThread().process(new Message(line));
                 } catch (IOException ex) {
                     if (!close.get()) {
                         Logger.getLogger(IRCConnection.class.getName()).log(Level.SEVERE, null, ex);

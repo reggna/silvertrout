@@ -139,7 +139,13 @@ public class Network {
         workerThread.cancel();
         // notify plugins
         for (Plugin plugin : plugins.values()) {
-            plugin.onDisconnected();
+            try {
+                plugin.onDisconnected();
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
         removeUser(me.getNickname());
     // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
@@ -166,8 +172,14 @@ public class Network {
     void onGiveMode(User giver, Channel channel, User receiver, char mode) {
         channel.getUsers().get(receiver).giveMode(mode);
 
-        for (Plugin plugin : plugins.values()) {
-            plugin.onGiveMode(giver, channel, receiver, mode);
+        for (Plugin plugin : plugins.values()) {    
+            try {
+                plugin.onGiveMode(giver, channel, receiver, mode);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -177,7 +189,13 @@ public class Network {
      */
     void onInvite(User user, String channel) {
         for (Plugin plugin : plugins.values()) {
-            plugin.onInvite(user, channel);
+            try {
+                plugin.onInvite(user, channel);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -198,7 +216,13 @@ public class Network {
      */
     void onKick(User kicker, Channel channel, User receiver, String message) {
         for (Plugin plugin : plugins.values()) {
-            plugin.onKick(kicker, channel, receiver, message);
+            try {
+                plugin.onKick(kicker, channel, receiver, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onKick handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -209,7 +233,13 @@ public class Network {
      */
     void onNotice(User user, Channel channel, String message) {
         for (Plugin plugin : plugins.values()) {
-            plugin.onNotice(user, channel, message);
+            try {
+                plugin.onNotice(user, channel, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onNotice handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -220,7 +250,13 @@ public class Network {
      */
     void onNotice(User user, String message) {
         for (Plugin plugin : plugins.values()) {
-            plugin.onNotice(user, message);
+            try {
+                plugin.onNotice(user, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onNotice handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -252,7 +288,13 @@ public class Network {
         removeChannel(channel.getName());
 
         for (Plugin plugin : plugins.values()) {
-            plugin.onPart(channel, message);
+            try {
+                plugin.onPart(channel, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onPart handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -266,7 +308,13 @@ public class Network {
         channel.delUser(user);
 
         for (Plugin plugin : plugins.values()) {
-            plugin.onPart(user, channel, message);
+            try {
+                plugin.onPart(user, channel, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onPart handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -276,7 +324,13 @@ public class Network {
      */
     void onPing(String target) {
         for (Plugin plugin : plugins.values()) {
-            plugin.onPing(target);
+            try {
+                plugin.onPing(target);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onPing handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -297,7 +351,13 @@ public class Network {
                 user = new User(from, this);
             }
             for (Plugin plugin : plugins.values()) {
-                plugin.onPrivmsg(user, message);
+                try {
+                    plugin.onPrivmsg(user, message);
+                } catch (Exception e) {
+                    System.out.println("Plugin " + plugin + "crashed in onPrivms handler:");
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }                
             }
         } else if(from.equals(getMyUser().getNickname())){
             User user = getUser(to);
@@ -305,7 +365,13 @@ public class Network {
                 user = new User(to, this);
             }
             for (Plugin plugin : plugins.values()) {
-                plugin.onSendmsg(user, message);
+                try {
+                    plugin.onSendmsg(user, message);
+                } catch (Exception e) {
+                    System.out.println("Plugin " + plugin + "crashed in onSendmsg handler:");
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }                
             }
         // To channel
         } else {
@@ -314,7 +380,13 @@ public class Network {
 
             if (user != null && channel != null) {
                 for (Plugin plugin : plugins.values()) {
-                    plugin.onPrivmsg(user, channel, message);
+                    try {
+                        plugin.onPrivmsg(user, channel, message);
+                    } catch (Exception e) {
+                        System.out.println("Plugin " + plugin + "crashed in onPrivms handler:");
+                        System.out.println(e.getMessage());
+                        e.printStackTrace();
+                    }     
                 }
             } else {
                 // TODO: should not happend
@@ -340,7 +412,13 @@ public class Network {
 
         /* run the onQuit in plugins */
         for (Plugin plugin : plugins.values()) {
-            plugin.onQuit(user, message);
+            try {
+                plugin.onQuit(user, message);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onQuit handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -354,7 +432,13 @@ public class Network {
         channel.getUsers().get(affectedUser).takeMode(mode);
 
         for (Plugin plugin : plugins.values()) {
-            plugin.onTakeMode(taker, channel, affectedUser, mode);
+            try {
+                plugin.onTakeMode(taker, channel, affectedUser, mode);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onTakeMode handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -397,7 +481,13 @@ public class Network {
                 // Tell our fine plugins about this joyus occation and let them
                 // rejoice and be happy.
                 for (Plugin plugin : plugins.values()) {
-                    plugin.onJoin(user, channel);
+                    try {
+                        plugin.onJoin(user, channel);
+                    } catch (Exception e) {
+                        System.out.println("Plugin " + plugin + "crashed in onJoin handler:");
+                        System.out.println(e.getMessage());
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -421,7 +511,13 @@ public class Network {
         user.setNickname(newNickname);
 
         for (Plugin plugin : plugins.values()) {
-            plugin.onNick(user, oldNickname);
+            try {
+                plugin.onNick(user, oldNickname);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onNick handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }            
         }
     }
 
@@ -441,7 +537,13 @@ public class Network {
             channel.setTopic(newTopic);
 
             for (Plugin plugin : plugins.values()) {
-                plugin.onTopic(me, channel, oldTopic);
+                try {
+                    plugin.onTopic(me, channel, oldTopic);
+                } catch (Exception e) {
+                    System.out.println("Plugin " + plugin + "crashed in onTopic handler:");
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
             }
         } else {
             // TODO: check unavaible list?
@@ -459,8 +561,14 @@ public class Network {
      */
     void onConnect() {
         addUser(me);
-        for (Plugin p : getPlugins().values()) {
-            p.onConnected();
+        for (Plugin plugin: getPlugins().values()) {
+            try {
+                plugin.onConnected();
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in onConnected handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
@@ -694,7 +802,8 @@ public class Network {
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
                         p.setNetwork(this);
-                        p.onLoad(getIrc().getSettings().getPluginSettingsFor(getNetworkSettings().getName(), name));
+                        p.onLoad(getIrc().getSettings().getPluginSettingsFor(
+                                getNetworkSettings().getName(), name));
                         plugins.put(name, p);
                         return true;
                     }
@@ -724,12 +833,12 @@ public class Network {
             exceptionFrequenzy--;
         }
 
-        for (Plugin p : plugins.values()) {
+        for (Plugin plugin : plugins.values()) {
             try {
-                p.onTick(ticks);
+                plugin.onTick(ticks);
             } catch (Exception e) {
-                System.out.println("Plugin crashed in onTick handler:");
-                e.getMessage();
+                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println(e.getMessage());
                 e.printStackTrace();
             }
         }
