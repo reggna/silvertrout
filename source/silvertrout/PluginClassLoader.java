@@ -26,6 +26,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
+
 
 /**
  * Classloader for plugins. 
@@ -59,7 +61,12 @@ class PluginClassLoader extends ClassLoader {
                 || name.startsWith("silvertrout.commons")) {
             name = name.replace('.', '/');
             try {
-                File f = new File(super.getResource(name + ".class").toURI());
+                URL  u = super.getResource(name + ".class");
+                if(u == null) {
+                    throw new ClassNotFoundException(
+                            "Class " + name + ".class does not exists");                
+                }
+                File f = new File(u.toURI());
                 if (f.exists()) {
                     byte[] bytes = new byte[(int) f.length()];
                     FileInputStream s = new FileInputStream(f);
