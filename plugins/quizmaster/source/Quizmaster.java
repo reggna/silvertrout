@@ -353,6 +353,20 @@ public class Quizmaster extends silvertrout.Plugin {
     
     /**
      *
+     * @param score
+     */
+    public String getRang(int score) {
+        int rang = score / rankInterval;
+        if(rang < grad.length) {
+            return grad[rang];
+        } else {
+            int umlevel = rang - grad.length + 2;
+            return "Über master (level " + umlevel + ")";
+        }
+    }
+    
+    /**
+     *
      * @param nick
      * @param score
      */
@@ -381,7 +395,7 @@ public class Quizmaster extends silvertrout.Plugin {
         {
             getNetwork().getConnection().sendPrivmsg(channelName,
                     "Utmärkt jobbat! Din nya rank är: " 
-                    + grad[newScore / rankInterval]);
+                    + getRang(newScore));
         }
 
         // Print message
@@ -647,6 +661,12 @@ public class Quizmaster extends silvertrout.Plugin {
                 }
             }
         }
+        
+        // Rank part
+        int nextrank = rankInterval - score % rankInterval;
+        msg += ". Din rank är: " + getRang(score) + " (" 
+                + nextrank + "p kvar till nästa rank).";
+        
         getNetwork().getConnection().sendPrivmsg(channelName, msg);
     }
     
@@ -662,13 +682,13 @@ public class Quizmaster extends silvertrout.Plugin {
                 int    uanswerCount = 0;
                 int    score        = 0;
                 for(Question.Answer answer: question.answers) {
-                    // TODO: check surroundings, only non alphanum char surrounds word
+
                     String cans = answer.answer.toLowerCase();
                     int pos = uanswer.indexOf(cans);
                     char before = pos <= 0 ? ' ': uanswer.charAt(pos - 1);
                     char after  = pos + cans.length() >= uanswer.length() ? ' ': uanswer.charAt(pos + cans.length());
                     
-                    //System.out.println(cans + "/" + uanswer + " = " + pos + ", " + before + ", " + after);
+                    System.out.println(cans + "/" + uanswer + " = " + pos + ", " + before + ", " + after);
                     
                     if(pos >= 0 && !Character.isLetterOrDigit(before) && 
                                 !Character.isLetterOrDigit(after)) { 
@@ -790,7 +810,6 @@ public class Quizmaster extends silvertrout.Plugin {
         
         // Do every minute
         if(ticks % voiceInterval == 0) {
-            
             // Only voice if we are in the channel and are an operator
             if(getNetwork().existsChannel(channelName)) {
             
@@ -799,28 +818,52 @@ public class Quizmaster extends silvertrout.Plugin {
                 boolean operator = channel.getUsers().get(myUser).haveMode('o');
                 
                 if(operator) {
-                    LinkedList<String> f     = new LinkedList<String>();
-                    Map<User, Modes>   users = channel.getUsers();
+
+                    LinkedList<String> voice   = new LinkedList<String>();
+                    LinkedList<String> devoice = new LinkedList<String>();                    
+                    Map<User, Modes>   users   = channel.getUsers();
                     
                     for(User u: users.keySet()) {
+                          
                         if(users.get(u).haveMode('v')){
                             // the user do have voice
                             if(!scoreManager.isTop(10, u.getNickname()))
-                                f.add("-v " + u.getNickname() + " ");
+                                devoice.add(u.getNickname());
                         } else {
                             // the user do not have voice
                             if(scoreManager.isTop(10, u.getNickname()))
-                                f.add("+v " + u.getNickname() + " ");
+                                voice.add(u.getNickname());
                         }
                     }
                     
-                    for(int i = 0; i < f.size(); i += 4) {
-                        String m = new String();
-                        for(int j = i; j < f.size() && j < i + 4; j++) {
-                            m += f.get(j);
+                    // TODO: combine or something. Move to the silvertrout 
+                    // mode thingy?
+                    while(!voice.isEmpty()) {
+                        String mode  = "+";
+                        String usrs = "";
+                        for(int i = 0; !voice.isEmpty() && i < 4; i++) {
+                            mode  += "v";
+                            usrs += voice.pop() + " ";
                         }
-                        getNetwork().getConnection().sendRaw("MODE " + channelName + " " + m);
+                        getNetwork().getConnection().sendRaw("MODE " + 
+                                channelName + " " + mode + " " + usrs);
+                        System.out.println("MODE " + 
+                                channelName + " " + mode + " " + usrs);
                     }
+                    
+                    while(!devoice.isEmpty()) {
+                        String mode  = "-";
+                        String usrs = "";
+                        for(int i = 0; !devoice.isEmpty() && i < 4; i++) {
+                            mode  += "v";
+                            usrs += devoice.pop() + " ";
+                        }
+                        getNetwork().getConnection().sendRaw("MODE " + 
+                                channelName + " " + mode + " " + usrs);
+                        System.out.println("MODE " + 
+                                channelName + " " + mode + " " + usrs);
+                    }
+
                 }
             }
         }
