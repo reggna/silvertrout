@@ -285,7 +285,7 @@ public class UNO extends silvertrout.Plugin {
         UnoCard[] cards = new UnoCard[nr];
         for(int i = 0; i < nr; i++)
             cards[i] = deck.drawCard();
-        getNetwork().getConnection().sendNotice(p.user, p +" + " + UnoCard.toString(cards));
+        getNetwork().getConnection().sendPrivmsg(p.user, p.toString() +" + " + UnoCard.toString(cards));
         //p.user.sendPrivmsg(p +" + " + UnoCard.toString(cards));
         if(nr!=1) getNetwork().getChannel(channelName).sendPrivmsg(p.user.getNickname()+ " picked up " + nr + " cards.");
         p.cards.addAll(Arrays.asList(cards));
@@ -345,8 +345,7 @@ public class UNO extends silvertrout.Plugin {
                 getNetwork().getChannel(channelName).sendPrivmsg("Time's up!");
                 UnoCard c = deck.drawCard();
                 players.getFirst().cards.add(c);
-                getNetwork().getConnection().sendNotice(players.getFirst().user, "You picked up: " +c.toString());
-                //players.getFirst().user.sendPrivmsg("You picked up: " +c.toString());
+                players.getFirst().user.sendPrivmsg("You picked up: " +c.toString());
                 nextPlayer();
             }
         }
@@ -391,10 +390,7 @@ public class UNO extends silvertrout.Plugin {
         }
 
         private void sendHand(){
-            if(user.getNickname().equals("reggna"))
-                user.sendPrivmsg(toString());
-            else
-            getNetwork().getConnection().sendNotice(user, toString());
+            user.sendPrivmsg(toString());
         }
         private int getTotalHandScore(){
             int i = 0;
