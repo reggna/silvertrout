@@ -14,6 +14,8 @@
 
   <path id="project.libs">
       <pathelement location="${lib.dir}/SQLiteJDBCv056/sqlitejdbc-v056.jar"/>
+      <pathelement location="${lib.dir}/HTMLParser/htmlparser.jar"/>
+      <pathelement location="${lib.dir}/HTMLParser/htmllexer.jar"/>
       <pathelement path="${classes.dir}"/>
   </path>
 
