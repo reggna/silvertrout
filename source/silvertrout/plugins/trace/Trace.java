@@ -52,7 +52,7 @@ public class Trace extends silvertrout.Plugin {
      * @return
      */
     public static String getName(String eniroInformation) {
-        return getStuff(eniroInformation, "(?is)fileas=\"([^\"]+)");
+        return getStuff(eniroInformation, "(?is)<span class=\"given-name\">([^<]+)") + " "+ getStuff(eniroInformation, "(?is)<span class=\"family-name\">([^<]+)");
     }
 
     /**
