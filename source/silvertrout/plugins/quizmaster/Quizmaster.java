@@ -217,7 +217,7 @@ public class Quizmaster extends silvertrout.Plugin {
 				// Set up schema:
 				String        language = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 				SchemaFactory factory  = SchemaFactory.newInstance(language);
-                String        sPath    = "/silvertrout/plugins/Quizmaster/questions.xsd";
+                String        sPath    = "questions.xsd";
                 URL           sURL     = QuestionHandler.class.getResource(sPath);
 				Schema        schema   = factory.newSchema(sURL);
 				// Validate:
@@ -454,8 +454,7 @@ public class Quizmaster extends silvertrout.Plugin {
      */
     public void newRound(java.util.Collection<String> categories) {
         try{
-            File qdir = new File(this.getClass().getResource(
-                    "/silvertrout/plugins/Quizmaster/Questions/").toURI());
+            File qdir = new File(this.getClass().getResource("Questions").toURI());
 
             for(File d: qdir.listFiles()) {
                 //System.out.println("Begin checking directory: " +d.getName());
