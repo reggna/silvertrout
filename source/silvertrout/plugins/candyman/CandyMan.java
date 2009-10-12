@@ -26,6 +26,8 @@ import java.util.Map;
 
 import silvertrout.Channel;
 import silvertrout.User;
+import silvertrout.commons.Database;
+import java.sql.*;
 
 /**
  * CandyMan - Example plugin for Silvertrout IRC bot framework.
@@ -114,6 +116,41 @@ public class CandyMan extends silvertrout.Plugin {
             } else {
                 channel.sendAction("ger " + user.getNickname() + " en " + what);
             }
+
+            /* we store the number of candy that all users has asked for */
+            try {
+                /* fetch the database connection */
+                Connection conn = Database.getInstance().getConnection();
+
+                /* if the table does not exist in the database, we have to */
+                /* create it */
+                Statement stat = conn.createStatement();
+                stat.executeUpdate("CREATE TABLE IF NOT EXISTS CandyWanter (nick, number);");
+
+                /* prepare a resutlt set and fetch the number of request done */
+                /* by a user */
+                ResultSet rs = stat.executeQuery("SELECT number FROM CandyWanter WHERE nick = \""+ user.getNickname() + "\" LIMIT 1;");
+                int ant = rs.getInt("number");
+                rs.close();
+
+                /* make a prepared statement to insert or update the value in */
+                /* the database */
+                PreparedStatement prep;
+                if(ant == 0){
+                     prep = conn.prepareStatement("insert into CandyWanter(number, nick) values (?, ?);");
+                } else {
+                    prep = conn.prepareStatement("update CandyWanter set number = ? where nick = ?;");
+                }
+                prep.setInt(1, ant++);
+                prep.setString(2, user.getNickname());
+                prep.executeUpdate();
+
+
+                channel.sendPrivmsg("Det här var godis #"+ ant + " som du har fått av mig.");
+            }catch(java.sql.SQLException e){
+                e.printStackTrace();
+            }
+            
         }
     }
 }

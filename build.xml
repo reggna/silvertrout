@@ -5,15 +5,20 @@
   <property name="dist.dir"      value="distribution"/>  
   <property name="doc.dir"       value="documentation"/>
   <property name="resources.dir" value="resources"/>
-  
+  <property name="lib.dir"       value="libraries"/>
   <property name="javadoc.dir"   value="${doc.dir}/javadoc"/>
   <property name="classes.dir"   value="${build.dir}/classes"/>
   <property name="jar.dir"       value="${build.dir}/jar"/>
 
   <property name="debug"         value="true"/>
 
+  <path id="project.libs">
+      <pathelement location="${lib.dir}/SQLiteJDBCv056/sqlitejdbc-v056.jar"/>
+      <pathelement path="${classes.dir}"/>
+  </path>
+
   <target name="run" depends="build" description="Run silvertrout">
-    <java dir="${classes.dir}" fork="true" classname="silvertrout.IRC" />
+    <java dir="${classes.dir}" fork="true" classname="silvertrout.IRC" classpathref="project.libs" />
   </target>
   
   <target name="build" depends="build-silvertrout,build-plugins" />
@@ -21,7 +26,7 @@
   <target name="build-silvertrout" description="Standard build">
     <echo>Building silvertrout...</echo>
     <mkdir dir="${classes.dir}"/>
-    <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}">
+    <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}" classpathref="project.libs">
       <exclude name="silvertrout/plugins/**" />
     </javac>
     <echo>Copying silvertrout resources...</echo>
@@ -32,7 +37,7 @@
   
   <target name="build-plugins" depends="build-silvertrout" description="Build plugins">
     <echo>Building silvertrout plugins...</echo>
-    <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}">
+    <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}" classpathref="project.libs">
       <include name="silvertrout/plugins/**/*.java" />
     </javac>
     <echo>Copying silvertrout plugin resources...</echo>

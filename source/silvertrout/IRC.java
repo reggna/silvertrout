@@ -29,7 +29,7 @@ import silvertrout.settings.Settings.ConfigurationParseException;
 
 /**
  *
- **
+ *
  */
 public class IRC {
 

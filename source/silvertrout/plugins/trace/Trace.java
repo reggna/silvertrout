@@ -141,7 +141,6 @@ public class Trace extends silvertrout.Plugin {
                     ret += getSSN(ui);
                 } catch (Exception e) {
                     e.printStackTrace();
-                //sret = "Need more intertubez!";
                 }
                 channel.sendPrivmsg(user.getNickname() + ": " + ret);
             }
