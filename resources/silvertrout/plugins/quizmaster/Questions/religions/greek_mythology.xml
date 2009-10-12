@@ -1,7 +1,7 @@
 <questions 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
         xsi:noNamespaceSchemaLocation="../questions.xsd" 
-        category="Religion" subcategory="Gregisk mytologi">
+        category="Religion" subcategory="Grekisk mytologi">
 
   <question>
     <line>Vad kallades moder Jord i den grekiska mytologin?</line>
