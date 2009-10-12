@@ -77,6 +77,10 @@ configuration file. Examples:
   <password>mypassword</password>
  </plugin>
 
+NOTE: If you store your config in resources/config.xml it will be copied to 
+the correct place and used everytime you run silvertrout. Your copy in 
+build/classes/config.xml will be removed each time you do 'ant clean' or 
+overwritten if there is a newer config.xml file in resources folder.
 
 Start SilverTrout:
 --------------------------------------------------------------------------------
