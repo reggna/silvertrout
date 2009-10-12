@@ -1,0 +1,178 @@
+<questions 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="questions.xsd"
+    category="Kultur" subcategory="NileCity 105,6">
+
+  <question>
+    <line>Vad händer om du förfryser drabantosten?</line>
+    <answers>
+      <answer>Den blir smulig när den tinar då</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Var har radiokanalen NileCity sitt högkvarter?</line>
+    <answers>
+      <answer>I två rum på Katarina brandstation</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur många bultar finns det i ölandsbron?</line>
+    <answers>
+      <answer>7428954</answer>
+      <answer>Sjumiljonerfyrahundratjugoåttatusenniohundrafemtiofyra</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Säg ett datum, vilket som helst!</line>
+    <answers>
+      <answer>29 maj</answer>
+      <answer>4 april</answer>
+      <answer>23 februari</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är det för speciellt med datumet 29 maj?</line>
+    <answers>
+      <answer>Det är Andres Lokkos födelsedag</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem är kåtast i kungsängen?</line>
+    <answers>
+      <answer>Nate Dogg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem blev segrare i den botaniska thaiboxningen?</line>
+    <answers>
+      <answer>Luddfingerörten</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem har med sig sina koreanska adoptivpäron?</line>
+    <answers>
+      <answer>Lol Tolhurst</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem blev besegrad i den botaniska thaiboxningen?</line>
+    <answers>
+      <answer>Bergsmyntan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter brandchefen?</line>
+    <answers attempts="2" required="1">
+      <answer score="5">Greger</answer>
+      <answer score="5" required="true">Hawkwind</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem segrade i batteritestet?</line>
+    <answers>
+      <answer>Duracell</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem blev besegrad i batteritestet?</line>
+    <answers>
+      <answer>Tudor</answer>
+    </answers>
+  </question>
+  
+   <question>
+    <line>Fortsätt citatet av Mick Talbot: "Den som bäddar..."</line>
+    <answers>
+      <answer>välter ofta liten tuva, om och om igen</answer>
+    </answers>
+  </question> 
+
+   <question>
+    <line>Fortsätt citatet av Mick Talbot: "Nu fick jag vatten..."</line>
+    <answers>
+      <answer>på mitt kuvert</answer>
+    </answers>
+  </question> 
+  
+     <question>
+    <line>Fortsätt citatet av Mick Talbot: "Den som gapar efter..."</line>
+    <answers>
+      <answer>galen fågel, ser inte skogen för alla ben</answer>
+    </answers>
+  </question> 
+  
+     <question>
+    <line>Fortsätt citatet av Mick Talbot: "Du anar ugglor..."</line>
+    <answers>
+      <answer>som får kläder</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Vilka framför låten "Laglöst land"?</line>
+    <answers>
+      <answer score="5" required="true">Nordman</answer>
+      <answer score="5" required="true">Syd-sydvästman</answer>
+      <answer score="5" required="true">Bordman</answer>
+      <answer score="5" required="true">Ostman</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Vad rekommenderar farbror Barbro till gravida 14-åringen Lena?</line>
+    <answers>
+      <answer>Ett nytt rengöringsmedel för CD-skivor</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Vad kostar Dennispaketet?</line>
+    <answers>
+      <answer>11000 kronor</answer>
+    </answers>
+  </question> 
+
+  <question>
+    <line>Vilka skådespelare är med i riksostteatern?</line>
+    <answers>
+      <answer>Sven Wolter</answer>
+      <answer>Robert Gustafsson</answer>
+    </answers>
+  </question> 
+
+  <question>
+    <line>Vilken tid börjar Weiron i ottan sina sändningar?</line>
+    <answers>
+      <answer>03.30</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Vad står det bak på Weiron i ottans gaffeltruck?</line>
+    <answers>
+      <answer>Arbetsfordon</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Vad har Weiran i ottan med sig till jobbet?</line>
+    <answers>
+      <answer required="true">Kaffe</answer>
+      <answer required="true">Vodka</answer>
+      <answer required="true">Snus</answer>
+      <answer required="true">Porrtidningar</answer>
+    </answers>
+  </question> 
+  
+</questions>
