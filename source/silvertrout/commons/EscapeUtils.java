@@ -40,14 +40,15 @@ public class EscapeUtils {
 
         // Complete list of XML entities
         xmlEnts = new HashMap<String, String>();
-        xmlEnts.put("&quot;",    "\"");
-        xmlEnts.put("&amp;",     "\u0026");
-        xmlEnts.put("&apos;",    "\u0027");
-        xmlEnts.put("&lt;",      "\u003c");
-        xmlEnts.put("&gt;",      "\u003e");
+        xmlEnts.put("quot",      "\"");
+        xmlEnts.put("amp",       "\u0026");
+        xmlEnts.put("apos",      "\u0027");
+        xmlEnts.put("lt",        "\u003c");
+        xmlEnts.put("gt",        "\u003e");
 
-        // Uncomplete list of HTML entities.
-        // TODO: should include all theses:
+        // Complete list of HTML entities.
+        //
+        // Includes all entities from
         // http://www.w3.org/TR/REC-html40/sgml/entities.html
         htmlEnts = new HashMap<String, String>();
         
@@ -334,19 +335,32 @@ public class EscapeUtils {
     }
 
     /**
+     * Takes an string and unescape all HTML entities found in it. You can 
+     * look at this function as a HTML to UTF-8 converter. Converts both 
+     * numerical entites (decimal and hexadecimal) and namned entities.
      *
-     * @param source
-     * @return
+     * @param   the string to unescape
+     * @return  the unescaped string
      */
     public static String unescapeHtml(String source) {
-        String pattern ="(?i)(&([A-Za-z]+|[\\#0-9]+);)";
+        String pattern = "(?i)(&([A-Za-z]+|\\#[0-9]+|\\#[xX][A-Fa-f0-9]+);)";
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(source);
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
+            // Numerical entity
             if (m.group(2).startsWith("#")) {
-                char c = (char) Integer.valueOf(m.group(2).substring(1)).intValue();
+                // TODO: What ranges are ok?
+                char c = '\0';
+                // Hexadecimal entity
+                if(m.group(2).charAt(1) == 'x' || m.group(2).charAt(1) == 'X') {
+                    c = (char) Integer.parseInt(m.group(2).substring(2), 16);
+                // Decimal entity
+                } else {
+                    c = (char) Integer.parseInt(m.group(2).substring(1));
+                }
                 m.appendReplacement(sb, Character.toString(c));
+            //String entity
             } else {
                 String value = htmlEnts.get(m.group(2));
                 if (value == null) {
@@ -368,6 +382,7 @@ public class EscapeUtils {
      * @return
      */
     public static String unescapeXml(String source) {
+        // TODO: simplify and reuse the html unescapeHtml
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
 

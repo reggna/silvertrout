@@ -18,12 +18,12 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
  
 What is SilverTrout?
 --------------------------------------------------------------------------------
 SilverTrout is a IRC bot written in java published under GNU General Public 
 License (read the state above). 
+
 This package contains all basic functionalities and an extensive potential 
 with its easy implemented plugin system. It also contains some prearranged 
 plugins with the most common functionalities.
@@ -36,19 +36,26 @@ Java Development Kit (JDK) to compile the source code. The latest version of
 JDK may be found at Sun Microsystem’s web page: 
 http://java.sun.com/javase/downloads/index.jsp
 
+To use the build system you need to have ANT intalled. The latest version of 
+ANT may be found at the Apache Ant's  web page:
+http://ant.apache.org/bindownload.cgi
+
 When you have installed JDK and ensured that your PATH variable is correctly 
-configured run the make file that is created for your system:
-  Windows: make.bat
-  *nix   : make.sh
+configured run the build script using ant:
+
+  ant build
 
 
 Configure SilverTrout:
 --------------------------------------------------------------------------------
 Start SilverTrout by executing the command:
-  java silvertrout.IRC
+
+  ant run
+
 The first time SilverTrout is executed it will create a template configuration
 file called config.xml and by changing this file you may customize SilverTrout 
 to work as you want it to.
+
 The xml configuration file should only contain xml elements and attributes. By 
 looking in the template file you’ll get the grip on how the file should be 
 formatted.
@@ -74,7 +81,8 @@ configuration file. Examples:
 Start SilverTrout:
 --------------------------------------------------------------------------------
 Starting SilverTrout works the same way in every system with java capabilities. 
-Simply run silvertrout.IRC by standing in the base directory and type:
-  java silvertrout.IRC
+Simply run the following command in the base directory:
+  
+  run ant
 
 
