@@ -1,0 +1,384 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Medicin" subcategory="Narkotika">
+
+  <question>
+    <line>Vad står förkortningen LSD för?</line>
+    <answers>
+      <answer>Lysergsyredietylamid</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur länge varar ett kokainrus?</line>
+    <answers>
+      <answer>Upp till en halvtimme</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket land är världens största producent av kokain?</line>
+    <answers>
+      <answer>Colombia</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det verksamma ämnet i ecstasy?</line>
+    <answers>
+      <answer>MDMA</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev ecstasy narkotikaklassat i sverige?</line>
+    <answers>
+      <answer>1987</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När kom LSD till sverige?</line>
+    <answers>
+      <answer>1970</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev LSD narkotikaklassat i sverige?</line>
+    <answers>
+      <answer>1966</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket är det främsta verksamma ämnet i hasch?</line>
+    <answers>
+      <answer>THC</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter marijuana på latin?</line>
+    <answers>
+      <answer>Cannabis sativa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev det förbjudet med innehav och försäljning av marijuana i sverige?</line>
+    <answers>
+      <answer>1930</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev det förbjudet att bruka marijuana i sverige?</line>
+    <answers>
+      <answer>Slutet av 1980-talet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kostar ett gram hasch i genomsnitt i sverige?</line>
+    <answers>
+      <answer>100 kronor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kostar ett gram vitt heroin i genomsnitt i sverige?</line>
+    <answers>
+      <answer>1000 kronor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kostar ett gram amfetamin i genomsnitt i sverige?</line>
+    <answers>
+      <answer>200 kronor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den mest förekommande illegala drogen i sverige?</line>
+    <answers>
+      <answer>cannabis</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den näst mest förekommande illegala drogen i sverige?</line>
+    <answers>
+      <answer>Amfetamin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När förbjöds GHB i sverige?</line>
+    <answers>
+      <answer>1 februari 2000</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är crack?</line>
+    <answers>
+      <answer>Gulvita klumpar av fribasen av kokain</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas filtret på en joint?</line>
+    <answers>
+      <answer>Roach</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev DXM narkotikaklassat i sverige?</line>
+    <answers>
+      <answer>7 juli 2008</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad står DXM för?</line>
+    <answers>
+      <answer>Dextrometorfan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad har lustgas för E-nummer?</line>
+    <answers>
+      <answer>E942</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är den största faran med att använda lustgas för berusning?</line>
+    <answers>
+      <answer>Den minskar mängden vitamin B12 i kroppen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När blev lustgas narkotikaklassat i sverige?</line>
+    <answers>
+      <answer>Den är inte narkotikaklassad</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den vanligaste psykadeliska svamp som växer i sverige?</line>
+    <answers>
+      <answer>Toppslätskivling</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilket land kommer 80% av allt opium?</line>
+    <answers>
+      <answer>Afghanistan</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för kola?</line>
+    <answers>
+      <answer>Kokain</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för gräs?</line>
+    <answers>
+      <answer>Marijuana</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för töj?</line>
+    <answers>
+      <answer>Hasch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för brunt?</line>
+    <answers>
+      <answer>Hasch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för syra?</line>
+    <answers>
+      <answer>LSD</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog kallas för tjack?</line>
+    <answers>
+      <answer>Amfetamin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad betyder "stukad" i drogsammanhang?</line>
+    <answers>
+      <answer>Att man är hög</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad står HBW för?</line>
+    <answers>
+      <answer>Hawaiian baby woodrose</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket verksamt ämne finns i HBW?</line>
+    <answers>
+      <answer>LSA</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är det svenska namnet på Hawaiian baby woodrose?</line>
+    <answers>
+      <answer>Elefantvinda</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken vanlig svensk blommas frön innehåller LSA?</line>
+    <answers>
+      <answer>Blomman för dagen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog, förutom kokain, finns i kokabusken?</line>
+    <answers>
+      <answer>Nikotin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den äldsta typen av alkoholdryck?</line>
+    <answers>
+      <answer>Øhl</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket koffein finns det i 1,5 dl vanligt starkt kaffe?</line>
+    <answers>
+      <answer>120 mg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket koffein finns det i en 33 cl burk svensk Jolt Cola?</line>
+    <answers>
+      <answer>50 mg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket koffein finns det i en 33 cl burk amerikansk Jolt Cola?</line>
+    <answers>
+      <answer>66 mg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket koffein finns det i en 33 cl burk Coca-Cola?</line>
+    <answers>
+      <answer>45 mg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur mycket koffein finns det i en 25 cl burk Red Bull?</line>
+    <answers>
+      <answer>80 mg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem upptäckte LSD?</line>
+    <answers>
+      <answer>Albert Hofmann</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem myntade uttrycket "Turn on, tune in, drop out"?</line>
+    <answers>
+      <answer>Timothy Leary</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket välkänt uttryck myntades av Timothy Leary?</line>
+    <answers>
+      <answer>Turn on, tune in, drop out</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken växt behövs för att framställa LSD?</line>
+    <answers>
+      <answer>Mjöldryga</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka droger är lagliga och socialt accepterade i sverige?</line>
+    <answers>
+      <answer>Koffein- och alkoholhaltiga drycker samt produkter av kakao och nikotin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka två droger är de mest spridda i världen?</line>
+    <answers>
+      <answer>nikotin och koffein</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog (som är narkotikaklassad i sverige) är i storbritannien klassad som en grönsak?</line>
+    <answers>
+      <answer>Khat</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kan långvarit missbruk av thinner medföra?</line>
+    <answers>
+      <answer>Hjärnskador</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad använde sibiriska schamaner för att uppnå ett förändrat medvetandetillstånd?</line>
+    <answers>
+      <answer>Röd flugsvamp</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken drog sägs ha gett namn åt det engelska ordet "assassin" (mördare)?</line>
+    <answers>
+      <answer>Cannabis</answer>
+    </answers>
+  </question>
+
+</questions>
