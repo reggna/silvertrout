@@ -21,11 +21,10 @@
  */
 package silvertrout.plugins.livescore;
 
-import java.util.Random;
-import java.util.Map;
-
+import java.util.ArrayList;
 import silvertrout.Channel;
 import silvertrout.User;
+import silvertrout.commons.Color;
 
 /**
  *
@@ -34,22 +33,130 @@ import silvertrout.User;
  */
 public class LiveScore extends silvertrout.Plugin {
 
+    ArrayList<FootballGame> games;
+    ArrayList<Follower> followers;
+
+    public ArrayList<FootballEvent> getNewEvents(FootballGame newgame, FootballGame oldgame) {
+        ArrayList<FootballEvent> oldEvents = oldgame.events;
+        ArrayList<FootballEvent> newEvents = newgame.events;
+        ArrayList<FootballEvent> updatedEvents = new ArrayList<FootballEvent>();
+        if (newgame.gametime.contains("FT") && !oldgame.gametime.contains("FT")) {
+            if (newgame.events.isEmpty()) {
+                updatedEvents.add(new FootballEvent("Game ended", "", "", ""));
+            } else {
+                updatedEvents = newgame.events;
+            }
+        } else if (newgame.gametime.contains("HT") && !oldgame.gametime.contains("HT")) {
+            if (newgame.events.isEmpty()) {
+                updatedEvents.add(new FootballEvent("Halftime", "", "", ""));
+            } else {
+                updatedEvents = newgame.events;
+            }
+        } else if (newgame.gametime.contains("'") && !oldgame.gametime.contains("'")) {
+            if (newgame.events.isEmpty()) {
+                updatedEvents.add(new FootballEvent("Game running", "", "", ""));
+            } else {
+                updatedEvents = newgame.events;
+            }
+        }
+        for (FootballEvent newEvent : newEvents) {
+            if (!oldEvents.contains(newEvent)) {
+                updatedEvents.add(newEvent);
+            }
+        }
+        return updatedEvents;
+    }
 
     public void onTick(int ticks) {
-        if (ticks%60 == 0){
-            ;
+        if (ticks % 60 == 0) {
+            LiveScoreParser p = new LiveScoreParser();
+            ArrayList<FootballGame> newGames = p.getGames();
+            ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
+            for (FootballGame newGame : newGames) {
+                for (FootballGame oldGame : games) {
+                    if (oldGame.hometeam.equals(newGame.hometeam)) {
+                        ArrayList<FootballEvent> events = getNewEvents(newGame, oldGame);
+                        if (!events.isEmpty()) {
+                            updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
+                        }
+                    }
+                }
+            }
+            games = newGames;
+            for (FootballGame updatedGame : updatedGames) {
+                for (Follower follower : followers) {
+                    ArrayList<String> watchlist = follower.getWatchList();
+                    for (String following : watchlist) {
+                        if (updatedGame.hometeam.contains(following) || updatedGame.awayteam.contains(following) || updatedGame.league.contains(following) || updatedGame.country.contains(following)) {
+                            String message = follower.getName() + ": ";//print out changes to follower
+                            message += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
+                            follower.getChannel().sendPrivmsg(message);
+                            ArrayList<FootballEvent> events = updatedGame.events;
+                            for (FootballEvent event : events) {
+                                message = event.matchtime + " " + Color.green(event.score);
+                                if (event.yellowcard) {
+                                    message += Color.yellow(event.playername);
+                                } else if (event.redcard) {
+                                    message += Color.red(event.playername);
+                                } else if (event.goal) {
+                                    message += Color.green(event.playername);
+                                }
+                                follower.getChannel().sendPrivmsg(message);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-    
+
     @Override
-    public void onPrivmsg(User user, Channel channel, String message) {
+    public void onPrivmsg(User user, Channel channel,
+            String message) {
 
         if (channel != null) {
 
 
-            if (message.equals("!glass")) {
+            if (message.startsWith("!watchlist")) {
+                String[] splitmess = message.split(" ");
+                if (splitmess.length < 2) {
+                    channel.sendPrivmsg("Gief parameters!");
+                    return;
+                }
+                if (splitmess[1].equals("add")) {
+                    if (splitmess.length < 3) {
+                        channel.sendPrivmsg(user.getNickname() + ": Nothing to add?");
+                        return;
+                    }
+                    ArrayList<String> watchlist = new ArrayList<String>();
+                    for (int i = 2; i < splitmess.length; i++){
+                        watchlist.add(splitmess[i]);
+                    }
+                    int index = followers.indexOf(user.getNickname());
+                    if (index > -1) {
+                        Follower f = followers.get(index);
+                        f.addToWatchlist(watchlist);
+                    } else {
+                        followers.add(new Follower(user.getNickname(),channel,watchlist));
+                    }
+                } else if (splitmess[1].equals("remove")) {
+                    if (splitmess.length < 3) {
+                        channel.sendPrivmsg(user.getNickname() + ": Nothing to remove?");
+                        return;
+                    }
+                    ArrayList<String> watchlist = new ArrayList<String>();
+                    for (int i = 2; i < splitmess.length; i++){
+                        watchlist.add(splitmess[i]);
+                    }
+                    int index = followers.indexOf(user.getNickname());
+                    if (index > -1) {
+                        Follower f = followers.get(index);
+                        f.removeFromWatchlist(watchlist);
+                    } else {
+                        channel.sendPrivmsg(user.getNickname() + ": You have no watchlist");
+                    }
+                }
 
-                channel.sendPrivmsg("meddelande");
 
             }
         }

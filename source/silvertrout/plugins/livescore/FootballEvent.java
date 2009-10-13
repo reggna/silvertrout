@@ -16,6 +16,7 @@ public class FootballEvent {
     boolean goal = false;
     boolean yellowcard = false;
     boolean redcard = false;
+    boolean gamestatechange = false;
 
     public FootballEvent(String matchtime, String score, String playername, String imglink) {
         this.matchtime = matchtime;
@@ -25,7 +26,9 @@ public class FootballEvent {
             goal = true;
         else if (imglink.endsWith("red.gif"))
             redcard = true;
-        else
+        else if (imglink.endsWith("yellow.gif"))
             yellowcard = true;
+        else
+            gamestatechange = true;
     }
 }

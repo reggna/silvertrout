@@ -49,7 +49,7 @@ public class LiveScoreParser {
                                 matchtime = string;
                             } else if (string.contains("[")) {
                                 score = string;
-                            } else if (string.contains(".")) {
+                            } else {
                                 playername = string;
                             }
                         } else if (innestTemp[k] instanceof Tag && ((Tag) innestTemp[k]).getAttribute("src") != null) {
