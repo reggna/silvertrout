@@ -83,6 +83,7 @@ public class LiveScore extends silvertrout.Plugin {
 
     public void onTick(int ticks) {
         if (ticks % 60 == 0) {
+            System.out.println("STARTSPAM");
             LiveScoreParser p = new LiveScoreParser();
             ArrayList<FootballGame> newGames = p.getGames();
             ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
@@ -145,6 +146,7 @@ public class LiveScore extends silvertrout.Plugin {
                     }
                 }
             }
+            System.out.println("ENDSPAM");
         }
     }
 
