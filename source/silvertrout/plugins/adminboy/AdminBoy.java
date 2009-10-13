@@ -54,7 +54,7 @@ public class AdminBoy extends silvertrout.Plugin {
           
         parts = message.split("\\s", 4);
           
-        if(getNetwork().existsChannel(parts[2])) {
+        if(getNetwork().isInChannel(parts[2])) {
           Channel chan = getNetwork().getChannel(parts[2]);
           User    usr  = getNetwork().getUser(parts[3]);
           String  rest = ""; if(parts.length > 4)rest = parts[4];
@@ -100,14 +100,14 @@ public class AdminBoy extends silvertrout.Plugin {
       } else if(parts.length > 2) {
         if(cmd.equals("!join")) {
         
-            if(!getNetwork().existsChannel(parts[2])) {
+            if(!getNetwork().isInChannel(parts[2])) {
                 user.sendPrivmsg("Jag mår bra när jag får vara i " + parts[2] + ".");
                 getNetwork().getConnection().join(parts[2]);
             } else {
                 user.sendPrivmsg("Jag är redan i " + parts[2] + ".");            
             }
         } else if(cmd.equals("!part")) {
-            if(!getNetwork().existsChannel(parts[2])) {
+            if(getNetwork().isInChannel(parts[2])) {
                 user.sendPrivmsg("Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
                 getNetwork().getConnection().part(parts[2]);
             } else {

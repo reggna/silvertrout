@@ -102,7 +102,7 @@ public class IRCProcessor {
             // TODO order, args, callback first or not?
             } else if (cmd.equals("MODE")) {
                 // Channel
-                if (network.existsChannel(msg.params.get(0))) {
+                if (network.isInChannel(msg.params.get(0))) {
                     Channel channel = network.getChannel(msg.params.get(0));
                     for (int i = 1; i < msg.params.size(); i++) {
                         if (msg.params.get(i).startsWith("+") || msg.params.get(i).startsWith("-")) {
@@ -145,7 +145,7 @@ public class IRCProcessor {
                 network.onPing(msg.params.get(0));
             } else if (cmd.equals("NOTICE")) {
                 //p.onNotice(user, getChannel(msg.params.get(0)), msg.params.get(1));
-                if (network.existsChannel(msg.params.get(0))) {
+                if (network.isInChannel(msg.params.get(0))) {
                     if(user == null) {
                         network.onNotice(msg.nickname, network.getChannel(msg.params.get(0)), msg.params.get(1));
                     } else {

@@ -678,9 +678,10 @@ public class Network {
     }
     // } END User Manager
 
+
     // TODO: Channel Manager? {
     /**
-     * Fetch a ArrayList containing all known channels on the Network
+     * Fetch a collection containing all joined channels on the Network
      *
      * @return all known channels on the Network
      */
@@ -690,7 +691,9 @@ public class Network {
 
     /**
      * Get a reference to the top level.
+     *
      * This is where the settings manage is available
+     *
      * @return the IRC object
      */
     public IRC getIrc() {
@@ -698,10 +701,12 @@ public class Network {
     }
 
     /**
-     * Get the network settings for this connection
-     * This includes the name of the network,
-     * hostname and port of server and so on
-     * @return
+     * Get the network settings for this connection.
+     *
+     * This includes the name of the network, hostname and port of server and
+     * so on...
+     *
+     * @return the network settings
      */
     public NetworkSettings getNetworkSettings() {
         return networkSettings;
@@ -709,27 +714,30 @@ public class Network {
 
     /**
      * Get the configured plugins for this network
-     * @return the plugins
+     *
+     * @return  the plugins
      */
     public Map<String, Plugin> getPlugins() {
         return plugins;
     }
 
     /**
-     * Search for a channel with the specified name
+     * Check whether silvertrout is in a specified channel.
      *
-     * @param name - The name of the channel to search for
-     * @return ture iff the channel with the specified name is known on this Network
+     * @param   name  The name of the channel to search for
+     * @return        True if the channel with the specified name is a channel
+     *                that silvertrout is in.
      */
-    public boolean existsChannel(String name) {
+    public boolean isInChannel(String name) {
         return channels.containsKey(name);
     }
 
     /**
-     * Returns a Channel with a specified name
+     * Returns a channel with a specified name
      *
-     * @param name - The name of the channel to search fo
-     * @return The channel with the specified name, if the Channel does not exist returns null
+     * @param  name The name of the channel to search fo
+     * @return      The channel with the specified name, orr null if the 
+     *              channel does not exist
      */
     public Channel getChannel(String name) {
         return channels.get(name);
@@ -741,7 +749,7 @@ public class Network {
      * @param channel - The the channel to add.
      */
     void addChannel(Channel channel) {
-        if (!existsChannel(channel.getName())) {
+        if (!isInChannel(channel.getName())) {
             channels.put(channel.getName(), channel);
         }
     }
@@ -759,10 +767,10 @@ public class Network {
     // } END CHANNEL MANAGER (TODO ? )
 
     /**
-     * Unload a plugin with the spicified name
+     * Unload a plugin with the spicified name.
      *
-     * @param name - The name of the plugin to load
-     * @return
+     * @param  name  The name of the plugin to unload
+     * @return       True if the plugin was unloaded, otherwise false
      */
     public synchronized boolean unloadPlugin(String name) {
         synchronized (plugins) {
@@ -771,6 +779,7 @@ public class Network {
                 plugins.remove(name);
 
                 // Clean up after us a bit (to allow reload)
+                // XXX: Is this really neccessary?
                 Runtime.getRuntime().runFinalization();
                 while (true) {
                     long freeMemory = Runtime.getRuntime().freeMemory();
@@ -791,7 +800,7 @@ public class Network {
      * Load plugin with the specified name from a file.
      *
      * @param  name  Name of the plugin to load
-     * @return
+     * @return       True if the plugin was loaded, otherwise false
      */
     public synchronized boolean loadPlugin(String name) {
         if (!plugins.containsKey(name)) {
@@ -819,7 +828,8 @@ public class Network {
     /**
      * Get an indicator of the number of exceptions occuring in this network's working thread.
      * 0 is good. Every exception adds one and every tick() removes one.
-     * @return
+     *
+     * @return The exception frequencey.
      */
     public int getExceptionFrequenzy() {
         return exceptionFrequenzy;
@@ -849,7 +859,8 @@ public class Network {
      * Get a handle for the worker thread. This should be used by caution since
      * this exposes the inner "pricate" class workerthread.
      * This is used by IRCconnection to add new incommin messages for handeling.
-     * @return
+     *
+     * @return  the worker thread
      */
     public WorkerThread getWorkerThread() {
         return workerThread;
@@ -858,7 +869,8 @@ public class Network {
     /**
      * Get the connection to this network.
      * Use this to send messages and other stuff
-     * @return the connection to the network
+     *
+     * @return  the connection to the network
      */
     public IRCConnection getConnection() {
         return connection;
@@ -878,7 +890,8 @@ public class Network {
 
         /**
          * Put something in queue to be invoked by the network thread.
-         * @param task thing to do
+         *
+         * @param  task  thing to do
          */
         public void invokeLater(Runnable task) {
             tasks.add(task);
@@ -887,7 +900,8 @@ public class Network {
 
         /**
          * Process an incoming message from the IRCConnection
-         * @param msg message to process
+         *
+         * @param  msg  message to process
          */
         public void process(final Message msg) {
             invokeLater(new Runnable() {
@@ -911,8 +925,9 @@ public class Network {
         }
 
         /**
-         * Is the thread stopped?
-         * @return
+         * Checks if the thread stopped.
+         *
+         * @return  True if the thread is stopped
          */
         public boolean isStop() {
             return stop;

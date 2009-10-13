@@ -596,7 +596,7 @@ public class Quizmaster extends silvertrout.Plugin {
         // Do every minute
         if(ticks % voiceInterval == 0) {
             // Only voice if we are in the channel and are an operator
-            if(getNetwork().existsChannel(channelName)) {
+            if(getNetwork().isInChannel(channelName)) {
             
                 Channel channel  = getNetwork().getChannel(channelName);
                 User    myUser   = getNetwork().getMyUser();
@@ -669,7 +669,7 @@ public class Quizmaster extends silvertrout.Plugin {
     @Override
     public void onConnected() {
         // Join quiz channel:
-        if(!getNetwork().existsChannel(channelName)) {
+        if(!getNetwork().isInChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
     }

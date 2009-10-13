@@ -78,7 +78,7 @@ public class ErepNews extends silvertrout.Plugin {
     @Override
     public void onConnected() {
         // Join channel:
-        if(!getNetwork().existsChannel(channelName)) {
+        if(!getNetwork().isInChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
     }
