@@ -106,7 +106,11 @@ public class LiveScoreParser {
                             }
                         } else if (str.contains("f")) {
                             Node[] tempnodes = tag.getChildren().toNodeArray();
-                            gametime = tempnodes[0].getFirstChild().getText().split(";")[1];
+                            String[] t = tempnodes[0].getFirstChild().getText().split(";");
+                            if (t.length > 1)
+                                gametime = t[1];
+                            else
+                                gametime = tempnodes[0].getFirstChild().getNextSibling().getNextSibling().getText();
                             hometeam = tempnodes[1].getFirstChild().getText();
                             awayteam = tempnodes[3].getFirstChild().getText();
                             //RESULTAT

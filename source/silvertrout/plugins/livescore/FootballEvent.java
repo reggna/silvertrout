@@ -31,4 +31,20 @@ public class FootballEvent {
         else
             gamestatechange = true;
     }
+    public boolean equals (Object o){
+        FootballEvent ev = (FootballEvent)o;
+        if(!this.matchtime.equals(ev.matchtime))
+            return false;
+        if (!this.score.equals(ev.score))
+            return false;
+        if ( (this.yellowcard && !ev.yellowcard) || (!this.yellowcard && ev.yellowcard) )
+            return false;
+        if ( (this.redcard && !ev.redcard) || (!this.redcard && ev.redcard) )
+            return false;
+        if ( (this.goal && !ev.goal) || (!this.goal && ev.goal) )
+            return false;
+        if ( (this.gamestatechange && !ev.gamestatechange) || (!this.gamestatechange && ev.gamestatechange) )
+            return false;
+        return true;
+    }
 }

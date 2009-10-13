@@ -32,31 +32,44 @@ import silvertrout.commons.Color;
  * @see silvertrout.plugins
  */
 public class LiveScore extends silvertrout.Plugin {
-
+    String channelName = "#sportit";
     ArrayList<FootballGame> games;
     ArrayList<Follower> followers;
-
+    public LiveScore(){
+        games = new ArrayList<FootballGame>();
+        followers = new ArrayList<Follower>();
+    }
     public ArrayList<FootballEvent> getNewEvents(FootballGame newgame, FootballGame oldgame) {
         ArrayList<FootballEvent> oldEvents = oldgame.events;
         ArrayList<FootballEvent> newEvents = newgame.events;
         ArrayList<FootballEvent> updatedEvents = new ArrayList<FootballEvent>();
         if (newgame.gametime.contains("FT") && !oldgame.gametime.contains("FT")) {
             if (newgame.events.isEmpty()) {
-                updatedEvents.add(new FootballEvent("Game ended", "", "", ""));
+                updatedEvents.add(new FootballEvent("Full time", "", "", ""));
             } else {
                 updatedEvents = newgame.events;
+                updatedEvents.add(new FootballEvent("Full time", "", "", ""));
             }
         } else if (newgame.gametime.contains("HT") && !oldgame.gametime.contains("HT")) {
             if (newgame.events.isEmpty()) {
                 updatedEvents.add(new FootballEvent("Halftime", "", "", ""));
             } else {
                 updatedEvents = newgame.events;
+                updatedEvents.add(new FootballEvent("Half time", "", "", ""));
+            }
+        } else if (newgame.gametime.contains("'") && oldgame.gametime.contains("HT")) {
+            if (newgame.events.isEmpty()) {
+                updatedEvents.add(new FootballEvent("Second Half", "", "", ""));
+            } else {
+                updatedEvents = newgame.events;
+                updatedEvents.add(new FootballEvent("Second Half", "", "", ""));
             }
         } else if (newgame.gametime.contains("'") && !oldgame.gametime.contains("'")) {
             if (newgame.events.isEmpty()) {
-                updatedEvents.add(new FootballEvent("Game running", "", "", ""));
+                updatedEvents.add(new FootballEvent("First Half", "", "", ""));
             } else {
                 updatedEvents = newgame.events;
+                updatedEvents.add(new FootballEvent("First Half", "", "", ""));
             }
         }
         for (FootballEvent newEvent : newEvents) {
@@ -65,6 +78,7 @@ public class LiveScore extends silvertrout.Plugin {
             }
         }
         return updatedEvents;
+        
     }
 
     public void onTick(int ticks) {
@@ -77,10 +91,12 @@ public class LiveScore extends silvertrout.Plugin {
             for (FootballGame newGame : newGames) {
                 addedGame = true;
                 for (FootballGame oldGame : games) {
-                    if (oldGame.hometeam.equals(newGame.hometeam)) {
+                    if (oldGame.hometeam.equals(newGame.hometeam) && oldGame.league.equals(newGame.league)) {
                         addedGame = false;
                         ArrayList<FootballEvent> events = getNewEvents(newGame, oldGame);
                         if (!events.isEmpty()) {
+                            updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
+                        } else if (!oldGame.result.equals(newGame.result)){
                             updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
                         }
                     }
@@ -96,6 +112,7 @@ public class LiveScore extends silvertrout.Plugin {
                         if (f.hometeam.contains(following) || f.awayteam.contains(following) || f.league.contains(following) || f.country.contains(following)) {
                             String message = follower.getName() + ": ";//print out changes to follower
                             message += f.gametime + " " + f.hometeam + " - " + f.awayteam;
+                            System.out.println(message);
                             follower.getChannel().sendPrivmsg(message);
                         }
                     }
@@ -116,11 +133,11 @@ public class LiveScore extends silvertrout.Plugin {
                             for (FootballEvent event : events) {
                                 message = event.matchtime + " " + Color.green(event.score);
                                 if (event.yellowcard) {
-                                    message += Color.yellow(event.playername);
+                                    message += Color.yellow(" YELLOW CARD " + event.playername);
                                 } else if (event.redcard) {
-                                    message += Color.red(event.playername);
+                                    message += Color.red(" RED CARD" + event.playername);
                                 } else if (event.goal) {
-                                    message += Color.green(event.playername);
+                                    message += Color.green(" GOAL " + event.playername);
                                 }
                                 follower.getChannel().sendPrivmsg(message);
                             }
@@ -136,7 +153,6 @@ public class LiveScore extends silvertrout.Plugin {
             String message) {
 
         if (channel != null) {
-
 
             if (message.startsWith("!watchlist")) {
                 String[] splitmess = message.split(" ");
@@ -160,6 +176,12 @@ public class LiveScore extends silvertrout.Plugin {
                     } else {
                         followers.add(new Follower(user.getNickname(),channel,watchlist));
                     }
+                    for (FootballGame f : games){
+                        for (String following : watchlist){
+                        if (f.hometeam.contains(following) || f.awayteam.contains(following) || f.league.contains(following) || f.country.contains(following)) {
+                           channel.sendPrivmsg(user.getNickname() + ": " + f.gametime + " " + f.hometeam + " - " + f.awayteam + " " + f.result);  
+                        }}
+                    }
                 } else if (splitmess[1].equals("remove")) {
                     if (splitmess.length < 3) {
                         channel.sendPrivmsg(user.getNickname() + ": Nothing to remove?");
@@ -180,6 +202,12 @@ public class LiveScore extends silvertrout.Plugin {
 
 
             }
+        }
+    }
+    public void onConnected() {
+        // Join channel:
+        if(!getNetwork().existsChannel(channelName)) {
+            getNetwork().getConnection().join(channelName);
         }
     }
 }

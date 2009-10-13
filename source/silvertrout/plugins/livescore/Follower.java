@@ -41,6 +41,10 @@ public class Follower {
         }
     }
     public boolean equals (Object o){
-        return this.name.equals(((Follower)o).name);
+        if (o instanceof Follower)
+            return this.name.equals(((Follower)o).name);
+        else if (o instanceof String)
+            return this.name.equals((String)o);
+        return false;
     }
 }
