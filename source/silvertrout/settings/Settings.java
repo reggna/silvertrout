@@ -57,6 +57,11 @@ public class Settings {
     private Map<String, Map<String, Map<String, String>>> plugins = new HashMap<String, Map<String, Map<String, String>>>();
 
     /**
+     * Network name -> *Channel name -> Password
+     */
+    private Map<String, Map<String, String>> channels = new HashMap<String, Map<String,String>>();
+
+    /**
      * Creates settings manager with default settings file name
      * @throws silvertrout.settings.Settings.ConfigurationParseException
      */
@@ -233,49 +238,55 @@ public class Settings {
             networks.add(networkSetting);
             // Done with network config.
 
-            // Find plugins for network
+            // Find plugins and channels for network
             Map<String, Map<String, String>> pluginMap = new HashMap<String, Map<String, String>>();
             plugins.put(name, pluginMap);
+            Map<String, String> channelMap = new HashMap<String, String>();
+            channels.put(name, channelMap);
 
             NodeList pluginNL = networkNode.getChildNodes();
             for (int j = 0; j < pluginNL.getLength(); j++) {
                 Node pluginNode = pluginNL.item(j);
-                if (!pluginNode.getNodeName().equals("plugin")) {
-                    // not a plugin... something else I guess...
-                    // are there other settings?
-                    // if there are not we should throw an exception.
-                    continue;
-                }
-                nnm = pluginNode.getAttributes();
-                enabledNode = nnm.getNamedItem("enabled");
-                if (enabledNode != null && enabledNode.getNodeValue().length() > 0) {
-                    if (!Boolean.parseBoolean(enabledNode.getNodeValue())) {
-                        // enabled exists  and  enabled != "true"  and  enabled != ""
-                        continue;
-                    }
-                }
+                /* add plugins */
+                if (pluginNode.getNodeName().equals("plugin")) {
 
-                String pluginName = null;
-                nameNode = nnm.getNamedItem("name");
-                if (nameNode == null || nameNode.getNodeValue().length() < 1) {
-                    throw new ConfigurationParseException("Plugin name was not specified in network \"" + name + "\".");
-                } else {
-                    pluginName = nameNode.getNodeValue();
-                }
-
-                Map<String, String> configMap = new HashMap<String, String>();
-                pluginMap.put(pluginName, configMap);
-
-                NodeList pluginConfigNL = pluginNode.getChildNodes();
-                for (int k = 0; k < pluginConfigNL.getLength(); k++) {
-                    Node configNode = pluginConfigNL.item(k);
-                    if (configNode.getNodeType() == Node.ELEMENT_NODE) {
-                        if (configNode.getFirstChild() != null) {
-                            configMap.put(configNode.getNodeName(), configNode.getFirstChild().getNodeValue());
-                        } else {
-                            configMap.put(configNode.getNodeName(), new String());
+                    nnm = pluginNode.getAttributes();
+                    enabledNode = nnm.getNamedItem("enabled");
+                    if (enabledNode != null && enabledNode.getNodeValue().length() > 0) {
+                        if (!Boolean.parseBoolean(enabledNode.getNodeValue())) {
+                            // enabled exists  and  enabled != "true"  and  enabled != ""
+                            continue;
                         }
                     }
+
+                    String pluginName = null;
+                    nameNode = nnm.getNamedItem("name");
+                    if (nameNode == null || nameNode.getNodeValue().length() < 1) {
+                        throw new ConfigurationParseException("Plugin name was not specified in network \"" + name + "\".");
+                    } else {
+                        pluginName = nameNode.getNodeValue();
+                    }
+
+                    Map<String, String> configMap = new HashMap<String, String>();
+                    pluginMap.put(pluginName, configMap);
+
+                    NodeList pluginConfigNL = pluginNode.getChildNodes();
+                    for (int k = 0; k < pluginConfigNL.getLength(); k++) {
+                        Node configNode = pluginConfigNL.item(k);
+                        if (configNode.getNodeType() == Node.ELEMENT_NODE) {
+                            if (configNode.getFirstChild() != null) {
+                                configMap.put(configNode.getNodeName(), configNode.getFirstChild().getNodeValue());
+                            } else {
+                                configMap.put(configNode.getNodeName(), new String());
+                            }
+                        }
+                    }
+                /* add channels */
+                } else if (pluginNode.getNodeName().equals("channel")) {
+                    nnm = pluginNode.getAttributes();
+                    nameNode = nnm.getNamedItem("name");
+                    passwordNode = nnm.getNamedItem("password");
+                    channelMap.put(nameNode.getNodeValue(), passwordNode.getNodeValue());
                 }
             }
         }
@@ -300,12 +311,30 @@ public class Settings {
     }
 
     /**
+     * Get a list of autojoin channels and their password for a specific network
+     * @param networkName the name of the network
+     * @return a list of all autojoin channels, or null if there is no such network
+     */
+    public Map<String, String> getChannelsFor(String networkName){
+        return channels.get(networkName);
+    }
+
+    /**
      * Get all configured plugins for all networks
      * Network name -> *Plugin name -> *Config name -> *Config setting
      * @return
      */
     public Map<String, Map<String, Map<String, String>>> getPlugins() {
         return plugins;
+    }
+
+    /**
+     * Get all configured channels for all networks
+     * Network name -> *Channel name -> Password
+     * @return all autojoin channels for all networks
+     */
+    public Map<String, Map<String, String>> getChannels(){
+        return channels;
     }
 
     /**

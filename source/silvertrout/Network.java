@@ -89,6 +89,12 @@ public class Network {
             connection = new IRCConnection(this);
         }
 
+        for (Map.Entry<String, String> entry : getIrc().getSettings().getChannelsFor(networkSettings.getName()).entrySet()) {
+            Channel c = new Channel(entry.getKey(),this);
+            c.password = entry.getValue();
+            unjoinedChannels.put(entry.getKey(),c);
+        }
+
         createWorkerThread();
     }
 
@@ -569,6 +575,9 @@ public class Network {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
+        }
+        for (Map.Entry<String, Channel> entry : unjoinedChannels.entrySet()) {
+            getConnection().join(entry.getKey(), entry.getValue().password);
         }
     }
 

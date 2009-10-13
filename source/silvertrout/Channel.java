@@ -38,6 +38,10 @@ public class Channel {
      */
     private String topic;
     /**
+     * The channel's password, null if not exist
+     */
+    public String password;
+    /**
      * Channel modes
      */
     private Modes modes;

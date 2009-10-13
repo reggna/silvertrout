@@ -17,7 +17,7 @@ public class Database {
     protected Database(){
         try{
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:test.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:silvertrout.db");
         }catch(ClassNotFoundException e){
             e.printStackTrace();
         }catch(SQLException e){

@@ -208,7 +208,7 @@ public class LiveScore extends silvertrout.Plugin {
     }
     public void onConnected() {
         // Join channel:
-        if(!getNetwork().existsChannel(channelName)) {
+        if(!getNetwork().isInChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
     }
