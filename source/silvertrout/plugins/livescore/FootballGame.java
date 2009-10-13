@@ -4,6 +4,8 @@
  */
 package silvertrout.plugins.livescore;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Hasse
@@ -17,14 +19,15 @@ public class FootballGame {
     String gametime = "";
     String link = null;
     String result = "";
+    ArrayList<FootballEvent> events;
 
-    public FootballGame(String country, String league, String hometeam, String awayteam, String gametime, String link, String result) {
+    public FootballGame(String country, String league, String hometeam, String awayteam, String gametime, ArrayList<FootballEvent> events, String result) {
         this.country = country;
         this.league = league;
         this.hometeam = hometeam;
         this.awayteam = awayteam;
         this.gametime = gametime;
-        this.link = link;
+        this.events = events;
         this.result = result;
     }
 }
