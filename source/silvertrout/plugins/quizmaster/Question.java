@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Question for the Quizmaster plugin.
  *
  */
-class Question {
+public class Question {
 	// Location information (for report / debug)
     String file         = null;
 	int    row          = -1;

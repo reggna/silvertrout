@@ -47,7 +47,7 @@ import org.xml.sax.Locator;
  * QuestionReader reads in question files for the Quizmaster plugin.
  * 
  */
-class QuestionReader {
+public class QuestionReader {
     /**
      * Question handler to convert xml-questions to java-question.
      */

@@ -25,7 +25,7 @@ package silvertrout;
  *
  * @author Gussoh
  */
-public class IRCProcessor {
+class IRCProcessor {
 
     private Network network;
 

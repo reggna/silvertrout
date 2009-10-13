@@ -148,7 +148,7 @@ public class Network {
             try {
                 plugin.onDisconnected();
             } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println("Plugin " + plugin + "crashed in onDisconnect handler:");
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
@@ -182,7 +182,7 @@ public class Network {
             try {
                 plugin.onGiveMode(giver, channel, receiver, mode);
             } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println("Plugin " + plugin + "crashed in onGiveMode handler:");
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
@@ -198,7 +198,7 @@ public class Network {
             try {
                 plugin.onInvite(user, channel);
             } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
+                System.out.println("Plugin " + plugin + "crashed in onInvite handler:");
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
@@ -844,9 +844,19 @@ public class Network {
         return exceptionFrequenzy;
     }
 
+    /** 
+     * Get the current tick.
+     *
+     * @return  the current tick (i.e. seconds since silvertrout started)
+     */
     public int getTick(){
         return tick;
     }
+    
+    /**
+     * 
+     *
+     */
     private void onTick(int ticks) {
         tick = ticks;
         if(exceptionFrequenzy > 0) {
@@ -871,7 +881,7 @@ public class Network {
      *
      * @return  the worker thread
      */
-    public WorkerThread getWorkerThread() {
+    WorkerThread getWorkerThread() {
         return workerThread;
     }
 
