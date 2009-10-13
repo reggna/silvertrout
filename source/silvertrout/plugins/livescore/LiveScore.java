@@ -72,17 +72,38 @@ public class LiveScore extends silvertrout.Plugin {
             LiveScoreParser p = new LiveScoreParser();
             ArrayList<FootballGame> newGames = p.getGames();
             ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
+            ArrayList<FootballGame> addedGames = new ArrayList<FootballGame>();
+            boolean addedGame = true;
             for (FootballGame newGame : newGames) {
+                addedGame = true;
                 for (FootballGame oldGame : games) {
                     if (oldGame.hometeam.equals(newGame.hometeam)) {
+                        addedGame = false;
                         ArrayList<FootballEvent> events = getNewEvents(newGame, oldGame);
                         if (!events.isEmpty()) {
                             updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
                         }
                     }
                 }
+                if (addedGame){
+                    addedGames.add(newGame);
+                }
             }
+            for (FootballGame f : addedGames){
+                for (Follower follower : followers) {
+                    ArrayList<String> watchlist = follower.getWatchList();
+                    for (String following : watchlist) {
+                        if (f.hometeam.contains(following) || f.awayteam.contains(following) || f.league.contains(following) || f.country.contains(following)) {
+                            String message = follower.getName() + ": ";//print out changes to follower
+                            message += f.gametime + " " + f.hometeam + " - " + f.awayteam;
+                            follower.getChannel().sendPrivmsg(message);
+                        }
+                    }
+                }
+            }
+            
             games = newGames;
+            
             for (FootballGame updatedGame : updatedGames) {
                 for (Follower follower : followers) {
                     ArrayList<String> watchlist = follower.getWatchList();
