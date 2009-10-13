@@ -56,6 +56,7 @@ public class LiveScoreParser {
                             t = (Tag) innestTemp[k];
                             imglink = t.getAttribute("src");
                             events.add(new FootballEvent(matchtime, score, playername, imglink));
+                            score = "";
                         }
                     }
                 }
