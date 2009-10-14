@@ -50,16 +50,18 @@ public class IRCConnection {
      *
      */
     protected Socket socket;
-    private SenderThread senderThread;
-    private ReceiverThread receiverThread;
-    private static final int FLOOD_BURST = 5;
-    private static final int FLOOD_MS_PER_MSG = 200;
-    private final AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
+    private   SenderThread senderThread;
+    private   ReceiverThread receiverThread;
+    private   static final int FLOOD_BURST = 5;
+    private   static final int FLOOD_MS_PER_MSG = 200;
+    private   final AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
 
     /**
-     * Create a new IRCConnection and connect to the server specified in network.getNetworkSettings()
-     * @param network
-     * @throws java.io.IOException
+     * Create a new IRCConnection and connect to the server specified in 
+     * network.getNetworkSettings()
+     *
+     * @param   network
+     * @throws  java.io.IOException
      */
     public IRCConnection(Network network) throws IOException {
         this.network = network;
@@ -75,7 +77,9 @@ public class IRCConnection {
      * @throws java.io.IOException
      */
     protected void connect() throws IOException {
-        socket = new Socket(network.getNetworkSettings().getHost(), network.getNetworkSettings().getPort());
+        System.err.println(" - Setting up socket");
+        socket = new Socket(network.getNetworkSettings().getHost(), 
+                network.getNetworkSettings().getPort());
     }
 
     /**
@@ -83,30 +87,47 @@ public class IRCConnection {
      * @throws java.io.IOException
      */
     private void setupConnection() throws IOException {
-        Writer writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), network.getNetworkSettings().getCharset()));
-        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), network.getNetworkSettings().getCharset()));
+        System.err.println(" - Creating writer");
+        Writer writer = new BufferedWriter(new OutputStreamWriter(
+                socket.getOutputStream(), 
+                network.getNetworkSettings().getCharset()));
+        System.err.println(" - Creating reader");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+                socket.getInputStream(), 
+                network.getNetworkSettings().getCharset()));
 
-        // Do registration before we start any threads. This will enable some more notifications of connection failiures.
+        // Do registration before we start any threads. This will enable some 
+        // more notifications of connection failiures.
+        System.err.println(" - Registering user");
         register(writer);
 
-        // No error yet, probably means the connection was successful, start threads!
+        // No error yet, probably means the connection was successful, 
+        // start threads!
+        System.err.println(" - Starting sender thread");
         senderThread = new SenderThread(writer);
         senderThread.start();
+        System.err.println(" - Starting receiver thread");
         receiverThread = new ReceiverThread(reader);
         receiverThread.start();
     }
 
     /**
+     * Register silvertrout as a user on the IRC network. This 
+     *
+     * TODO: No check for what happens if we get a nickname that is already
+     *       in use. This should be supported somehow.
      *
      * @param writer
      * @throws java.io.IOException
      */
     protected void register(Writer writer) throws IOException {
         if (network.getNetworkSettings().getPassword() != null) {
-            writer.write("PASS " + network.getNetworkSettings().getPassword() + "\r\n");
+            writer.write("PASS " + network.getNetworkSettings().getPassword() 
+                    + "\r\n");
         }
         writer.write("NICK " + network.getMyUser().getNickname() + "\r\n");
-        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" + network.getNetworkSettings().getRealname() + "\r\n");
+        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" 
+                + network.getNetworkSettings().getRealname() + "\r\n");
         writer.flush();
     }
 
@@ -182,6 +203,13 @@ public class IRCConnection {
      */
     private void notifyDisconnect() {
         if (!disconectionNotificationSent.getAndSet(true)) { // only do once!
+        
+            try {
+            senderThread.close();
+            receiverThread.close();
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
             network.getWorkerThread().invokeLater(new Runnable() {
 
                 @Override
@@ -194,8 +222,10 @@ public class IRCConnection {
 
     /**
      * Force a close on the connection.
+     *
      * I don't know when to use this. Might be good for something... :)
-     * Difference between this and close is that close waits for the current transmission if finshed (if there is any)
+     * Difference between this and close is that close waits for the current 
+     * transmission if finshed (if there is any)
      */
     public void forceClose() {
         try {
@@ -263,7 +293,7 @@ public class IRCConnection {
      * @param to The nick to sent to
      * @param message The message to send
      */
-    public synchronized void sendNotice(String to, String message){
+    public synchronized void sendNotice(String to, String message) {
     	sendRaw("NOTICE " + to + " :" + message);
     }
 
@@ -358,13 +388,16 @@ public class IRCConnection {
         public void run() {
             for (;;) {
                 try {
-                    outputQueueSempaphore.acquire(); // make this aquire first to not enable more burst messaegs than intended!
-                    floodProtectionSemaphore.acquire(); // if this is done first the floodTimer might have time to add one more permit before an actual sending
+                    // Make this aquire first to not enable more burst messages 
+                    // than intended!
+                    outputQueueSempaphore.acquire();
+                    // If this is done first the floodTimer might have time to
+                    // add one more permit before an actual sending
+                    floodProtectionSemaphore.acquire();
+                    
                     writer.write(outputQueue.poll());
                     writer.flush();
-                } catch (IOException ex) {
-                    Logger.getLogger(IRCConnection.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
+                } catch (Exception ex) {
                     if (!close.get()) {
                         Logger.getLogger(IRCConnection.class.getName()).log(Level.SEVERE, null, ex);
                         notifyDisconnect();
@@ -404,11 +437,12 @@ public class IRCConnection {
             for (;;) {
                 try {
                     String line = reader.readLine();
-                    if(line == null) 
+                    if(line == null) {
                       throw new IOException("Socket closed: end of stream reached in bufferreader");
-                    if(network.getWorkerThread() != null)
+                    } if(network.getWorkerThread() != null) {
                       network.getWorkerThread().process(new Message(line));
-                } catch (IOException ex) {
+                    }
+                } catch (Exception ex) {
                     if (!close.get()) {
                         Logger.getLogger(IRCConnection.class.getName()).log(Level.SEVERE, null, ex);
                         notifyDisconnect();

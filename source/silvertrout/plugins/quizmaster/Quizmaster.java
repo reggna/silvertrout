@@ -675,6 +675,11 @@ public class Quizmaster extends silvertrout.Plugin {
     }
     
     @Override
+    public void onDisconnected() {
+        state = State.NOT_RUNNING;
+    }    
+    
+    @Override
     public void onLoad(Map<String,String> settings){
         channelName = settings.get("channel");
         if(channelName == null || !channelName.startsWith("#")) channelName = "#superquiz";

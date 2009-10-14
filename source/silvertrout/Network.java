@@ -57,6 +57,7 @@ public class Network {
     /** Indicator of exception frequenzy. 0 is good. Every exception adds one and one is removed every tick() */
     private int exceptionFrequenzy = 0;
     private int tick;
+    private boolean connected = false;
 
     /**
      * Create and connect to a new Network,
@@ -94,7 +95,7 @@ public class Network {
             c.password = entry.getValue();
             unjoinedChannels.put(entry.getKey(),c);
         }
-
+        System.err.println("Creating worker thread");
         createWorkerThread();
     }
 
@@ -131,6 +132,7 @@ public class Network {
             }
         });
 
+        System.err.println(" - Starting thread");
         workerThread.start();
     }
 
@@ -141,6 +143,7 @@ public class Network {
      * What happens if a thread cancels itself? exception?
      */
     void onDisconnect() {
+        connected = false;
         // stop worker thread
         workerThread.cancel();
         // notify plugins
@@ -566,6 +569,7 @@ public class Network {
      * Called on connection successful
      */
     void onConnect() {
+        connected = false;
         addUser(me);
         for (Plugin plugin: getPlugins().values()) {
             try {
@@ -858,11 +862,15 @@ public class Network {
      *
      */
     private void onTick(int ticks) {
+    
+        if(!connected) {
+            return;
+        }
+    
         tick = ticks;
         if(exceptionFrequenzy > 0) {
             exceptionFrequenzy--;
         }
-
         for (Plugin plugin : plugins.values()) {
             try {
                 plugin.onTick(ticks);
