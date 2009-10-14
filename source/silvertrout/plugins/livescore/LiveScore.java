@@ -47,9 +47,18 @@ public class LiveScore extends silvertrout.Plugin {
 
     private boolean followThisGame(String following, FootballGame f) {
         String[] split = following.split("=");
-        System.out.println(split[0] + "::::" + split[1]);
         if (split.length < 2) {
             return false;
+        }
+        if (split.length == 2){
+            if(f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21")){
+                return false;
+            }
+        }
+        else{
+            if(!(f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21"))){
+                return false;
+            }
         }
         if (split[0].contains("team")) {
             return (f.hometeam.contains(split[1]) || f.awayteam.contains(split[1]));
@@ -103,6 +112,10 @@ public class LiveScore extends silvertrout.Plugin {
         else {
             for (int i = 0; i < newEvents.size(); i++) {
                 if (!oldEvents.contains(newEvents.get(i))) {
+                    if ( (newEvents.get(i).yellowcard && !newEvents.get(i).matchtime.contains("F"))
+                       || (newEvents.get(i).goal && (!newEvents.get(i).matchtime.contains("F")|| !newEvents.get(i).matchtime.contains("H")) ) ) {
+                        continue;
+                    }
                     updatedEvents.add(newEvents.get(i));
                 }
             }
@@ -113,9 +126,7 @@ public class LiveScore extends silvertrout.Plugin {
     }
 
     public void onTick(int ticks) {
-        System.out.println("INSPAM");
         if (ticks % 60 == 0) {
-            System.out.println("STARTSPAM");
             LiveScoreParser p = new LiveScoreParser();
             ArrayList<FootballGame> newGames = p.getGames();
             ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
@@ -165,9 +176,9 @@ public class LiveScore extends silvertrout.Plugin {
                             for (FootballEvent event : events) {
                                 message = event.matchtime + " " + Color.green(event.score);
                                 if (event.yellowcard) {
-                                    message += Color.yellow(" YELLOW CARD " + event.playername);
+                                    message = " " + Color.yellow(" YELLOW CARD " + event.playername);
                                 } else if (event.redcard) {
-                                    message += Color.red(" RED CARD" + event.playername);
+                                    message = " " + Color.red(" RED CARD" + event.playername);
                                 } else if (event.goal) {
                                     message += Color.green(" GOAL " + event.playername);
                                 }
@@ -177,7 +188,6 @@ public class LiveScore extends silvertrout.Plugin {
                     }
                 }
             }
-            System.out.println("ENDSPAM");
         }
     }
 
@@ -200,14 +210,28 @@ public class LiveScore extends silvertrout.Plugin {
                     }
                     HashSet<String> watchlist = new HashSet<String>();
                     String addToWatchlist = "";
-                    for (int i = 2; i < splitmess.length; i++) {
+                    int jump = 0;
+                    boolean u21 = false;
+                    if (splitmess[2].equals("u21")){
+                        jump++;
+                        u21 = true;
+                    }
+                    for (int i = 2+jump; i < splitmess.length; i++) {
                         addToWatchlist += splitmess[i];
                     }
+                    if (u21){
+                        addToWatchlist += "=u21";
+                    }
+                    Follower fo = null;
                     watchlist.add(addToWatchlist);
-                    int index = followers.indexOf(user.getNickname());
-                    if (index > -1) {
-                        Follower f = followers.get(index);
-                        f.addToWatchlist(watchlist);
+                    for (Follower follower : followers) {
+                        if (user.getNickname().equals(follower.name)) {
+                            fo = follower;
+                            break;
+                        }
+                    }
+                    if (fo != null) {
+                        fo.watchlist.add(addToWatchlist);
                     } else {
                         followers.add(new Follower(user.getNickname(), channel, watchlist));
                     }
@@ -224,19 +248,89 @@ public class LiveScore extends silvertrout.Plugin {
                         return;
                     }
                     HashSet<String> watchlist = new HashSet<String>();
+                    String addToWatchlist = "";
                     for (int i = 2; i < splitmess.length; i++) {
-                        watchlist.add(splitmess[i]);
+                        addToWatchlist += splitmess[i];
                     }
-                    int index = followers.indexOf(user.getNickname());
-                    if (index > -1) {
-                        Follower f = followers.get(index);
-                        f.removeFromWatchlist(watchlist);
+                    Follower fo = null;
+                    watchlist.add(addToWatchlist);
+                    for (Follower follower : followers) {
+                        if (user.getNickname().equals(follower.name)) {
+                            fo = follower;
+                            break;
+                        }
+                    }
+                    if (fo != null) {
+                        if (fo.removeFromWatchlist(watchlist)) {
+                            channel.sendPrivmsg(user.getNickname() + ": removed " + addToWatchlist + " from watchlist");
+                        } else {
+                            channel.sendPrivmsg(user.getNickname() + ": " + addToWatchlist + " did not exist in watchlist");
+                        }
+                        if (fo.watchlist.isEmpty()) {
+                            followers.remove(fo);
+                        }
+                    } else {
+                        channel.sendPrivmsg(user.getNickname() + ": You have no watchlist");
+                    }
+                } else if (splitmess[1].equals("show")) {
+                    Follower fo = null;
+                    for (Follower follower : followers) {
+                        if (user.getNickname().equals(follower.name)) {
+                            fo = follower;
+                            break;
+                        }
+                    }
+                    if (fo != null) {
+                        channel.sendPrivmsg(user.getNickname() + "s Watchlist:");
+                        for (String following : fo.watchlist) {
+                            channel.sendPrivmsg(following);
+                        }
                     } else {
                         channel.sendPrivmsg(user.getNickname() + ": You have no watchlist");
                     }
                 }
 
 
+            } else if (message.startsWith("!scores")) {
+                String[] split = message.split(" ");
+                if (split.length < 2) {
+                    channel.sendPrivmsg("what team/league/country?");
+                    return;
+                }
+                String addToWatchlist = "";
+                int jump = 0;
+                    boolean u21 = false;
+                    if (split[1].equals("u21")){
+                        jump++;
+                        u21 = true;
+                    }
+                    for (int i = 1+jump; i < split.length; i++) {
+                        addToWatchlist += split[i];
+                    }
+                    if (u21){
+                        addToWatchlist += "=u21";
+                    }
+                String following = addToWatchlist;
+                
+                for (FootballGame updatedGame : games) {
+                    if (followThisGame(following, updatedGame)) {
+                        String mess = user.getNickname() + ": ";//print out changes to follower
+                        mess += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
+                        channel.sendPrivmsg(mess);
+                        ArrayList<FootballEvent> events = updatedGame.events;
+                        for (FootballEvent event : events) {
+                            mess = event.matchtime + " " + Color.green(event.score);
+                            if (event.yellowcard) {
+                                mess = Color.yellow(" YELLOW CARD " + event.playername);
+                            } else if (event.redcard) {
+                                mess = Color.red(" RED CARD" + event.playername);
+                            } else if (event.goal) {
+                                mess += Color.green(" GOAL " + event.playername);
+                            }
+                            channel.sendPrivmsg(mess);
+                        }
+                    }
+                }
             }
         }
     }

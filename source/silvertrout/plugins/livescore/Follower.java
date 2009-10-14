@@ -37,10 +37,12 @@ public class Follower {
             this.watchlist.add(following);
         }
     }
-    public void removeFromWatchlist(HashSet<String> watchlist){
+    public boolean removeFromWatchlist(HashSet<String> watchlist){
+        boolean t = false;
         for (String following : watchlist){
-            this.watchlist.remove(following);
+            t = this.watchlist.remove(following);
         }
+        return t;
     }
     public boolean equals (Object o){
         if (o instanceof Follower)
