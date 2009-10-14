@@ -72,11 +72,18 @@ public class LiveScore extends silvertrout.Plugin {
                 updatedEvents.add(new FootballEvent("First Half", "", "", ""));
             }
         }
-        for (FootballEvent newEvent : newEvents) {
-            if (!oldEvents.contains(newEvent)) {
-                updatedEvents.add(newEvent);
+        //for (FootballEvent newEvent : newEvents) {
+        //    if (!oldEvents.contains(newEvent)) {
+        //        updatedEvents.add(newEvent);
+        //    }
+        //}
+        else{for (int i = 0; i < newEvents.size(); i++){
+            if (!oldEvents.contains(newEvents.get(i))) {
+                updatedEvents.add(newEvents.get(i));
             }
-        }
+        }}
+        System.out.println(updatedEvents.size());
+            
         return updatedEvents;
         
     }
