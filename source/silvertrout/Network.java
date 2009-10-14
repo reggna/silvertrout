@@ -569,7 +569,7 @@ public class Network {
      * Called on connection successful
      */
     void onConnect() {
-        connected = false;
+        connected = true;
         addUser(me);
         for (Plugin plugin: getPlugins().values()) {
             try {

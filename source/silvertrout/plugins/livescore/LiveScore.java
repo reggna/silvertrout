@@ -22,6 +22,7 @@
 package silvertrout.plugins.livescore;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.commons.Color;
@@ -32,13 +33,36 @@ import silvertrout.commons.Color;
  * @see silvertrout.plugins
  */
 public class LiveScore extends silvertrout.Plugin {
+
     String channelName = "#sportit";
     ArrayList<FootballGame> games;
     ArrayList<Follower> followers;
-    public LiveScore(){
+
+    public LiveScore() {
         games = new ArrayList<FootballGame>();
         followers = new ArrayList<Follower>();
+        LiveScoreParser p = new LiveScoreParser();
+        games = p.getGames();
     }
+
+    private boolean followThisGame(String following, FootballGame f) {
+        String[] split = following.split("=");
+        System.out.println(split[0] + "::::" + split[1]);
+        if (split.length < 2) {
+            return false;
+        }
+        if (split[0].contains("team")) {
+            return (f.hometeam.contains(split[1]) || f.awayteam.contains(split[1]));
+        }
+        if (split[0].contains("league")) {
+            return f.league.contains(split[1]);
+        }
+        if (split[0].contains("country")) {
+            return f.country.contains(split[1]);
+        }
+        return false;
+    }
+
     public ArrayList<FootballEvent> getNewEvents(FootballGame newgame, FootballGame oldgame) {
         ArrayList<FootballEvent> oldEvents = oldgame.events;
         ArrayList<FootballEvent> newEvents = newgame.events;
@@ -71,24 +95,25 @@ public class LiveScore extends silvertrout.Plugin {
                 updatedEvents = newgame.events;
                 updatedEvents.add(new FootballEvent("First Half", "", "", ""));
             }
-        }
-        //for (FootballEvent newEvent : newEvents) {
+        } //for (FootballEvent newEvent : newEvents) {
         //    if (!oldEvents.contains(newEvent)) {
         //        updatedEvents.add(newEvent);
         //    }
         //}
-        else{for (int i = 0; i < newEvents.size(); i++){
-            if (!oldEvents.contains(newEvents.get(i))) {
-                updatedEvents.add(newEvents.get(i));
+        else {
+            for (int i = 0; i < newEvents.size(); i++) {
+                if (!oldEvents.contains(newEvents.get(i))) {
+                    updatedEvents.add(newEvents.get(i));
+                }
             }
-        }}
-        System.out.println(updatedEvents.size());
-            
+        }
+
         return updatedEvents;
-        
+
     }
 
     public void onTick(int ticks) {
+        System.out.println("INSPAM");
         if (ticks % 60 == 0) {
             System.out.println("STARTSPAM");
             LiveScoreParser p = new LiveScoreParser();
@@ -104,36 +129,35 @@ public class LiveScore extends silvertrout.Plugin {
                         ArrayList<FootballEvent> events = getNewEvents(newGame, oldGame);
                         if (!events.isEmpty()) {
                             updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
-                        } else if (!oldGame.result.equals(newGame.result)){
+                        } else if (!oldGame.result.equals(newGame.result)) {
                             updatedGames.add(new FootballGame(newGame.country, newGame.league, newGame.hometeam, newGame.awayteam, newGame.gametime, events, newGame.result));
                         }
                     }
                 }
-                if (addedGame){
+                if (addedGame) {
                     addedGames.add(newGame);
                 }
             }
-            for (FootballGame f : addedGames){
+            for (FootballGame f : addedGames) {
                 for (Follower follower : followers) {
-                    ArrayList<String> watchlist = follower.getWatchList();
+                    HashSet<String> watchlist = follower.getWatchList();
                     for (String following : watchlist) {
-                        if (f.hometeam.contains(following) || f.awayteam.contains(following) || f.league.contains(following) || f.country.contains(following)) {
+                        if (followThisGame(following, f)) {
                             String message = follower.getName() + ": ";//print out changes to follower
                             message += f.gametime + " " + f.hometeam + " - " + f.awayteam;
-                            System.out.println(message);
                             follower.getChannel().sendPrivmsg(message);
                         }
                     }
                 }
             }
-            
+
             games = newGames;
-            
+
             for (FootballGame updatedGame : updatedGames) {
                 for (Follower follower : followers) {
-                    ArrayList<String> watchlist = follower.getWatchList();
+                    HashSet<String> watchlist = follower.getWatchList();
                     for (String following : watchlist) {
-                        if (updatedGame.hometeam.contains(following) || updatedGame.awayteam.contains(following) || updatedGame.league.contains(following) || updatedGame.country.contains(following)) {
+                        if (followThisGame(following, updatedGame)) {
                             String message = follower.getName() + ": ";//print out changes to follower
                             message += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
                             follower.getChannel().sendPrivmsg(message);
@@ -174,30 +198,33 @@ public class LiveScore extends silvertrout.Plugin {
                         channel.sendPrivmsg(user.getNickname() + ": Nothing to add?");
                         return;
                     }
-                    ArrayList<String> watchlist = new ArrayList<String>();
-                    for (int i = 2; i < splitmess.length; i++){
-                        watchlist.add(splitmess[i]);
+                    HashSet<String> watchlist = new HashSet<String>();
+                    String addToWatchlist = "";
+                    for (int i = 2; i < splitmess.length; i++) {
+                        addToWatchlist += splitmess[i];
                     }
+                    watchlist.add(addToWatchlist);
                     int index = followers.indexOf(user.getNickname());
                     if (index > -1) {
                         Follower f = followers.get(index);
                         f.addToWatchlist(watchlist);
                     } else {
-                        followers.add(new Follower(user.getNickname(),channel,watchlist));
+                        followers.add(new Follower(user.getNickname(), channel, watchlist));
                     }
-                    for (FootballGame f : games){
-                        for (String following : watchlist){
-                        if (f.hometeam.contains(following) || f.awayteam.contains(following) || f.league.contains(following) || f.country.contains(following)) {
-                           channel.sendPrivmsg(user.getNickname() + ": " + f.gametime + " " + f.hometeam + " - " + f.awayteam + " " + f.result);  
-                        }}
+                    for (FootballGame f : games) {
+                        for (String following : watchlist) {
+                            if (followThisGame(following, f)) {
+                                channel.sendPrivmsg(user.getNickname() + ": " + f.gametime + " " + f.hometeam + " - " + f.awayteam + " " + f.result);
+                            }
+                        }
                     }
                 } else if (splitmess[1].equals("remove")) {
                     if (splitmess.length < 3) {
                         channel.sendPrivmsg(user.getNickname() + ": Nothing to remove?");
                         return;
                     }
-                    ArrayList<String> watchlist = new ArrayList<String>();
-                    for (int i = 2; i < splitmess.length; i++){
+                    HashSet<String> watchlist = new HashSet<String>();
+                    for (int i = 2; i < splitmess.length; i++) {
                         watchlist.add(splitmess[i]);
                     }
                     int index = followers.indexOf(user.getNickname());
@@ -213,9 +240,10 @@ public class LiveScore extends silvertrout.Plugin {
             }
         }
     }
+
     public void onConnected() {
         // Join channel:
-        if(!getNetwork().isInChannel(channelName)) {
+        if (!getNetwork().isInChannel(channelName)) {
             getNetwork().getConnection().join(channelName);
         }
     }

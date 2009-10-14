@@ -6,6 +6,7 @@
 package silvertrout.plugins.livescore;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import silvertrout.Channel;
 
 /**
@@ -13,15 +14,16 @@ import silvertrout.Channel;
  * @author Hasse
  */
 public class Follower {
-    ArrayList<String> watchlist;
+    //ArrayList<String> watchlist;
+    HashSet<String> watchlist;
     Channel channel;
     String name;
-    public Follower(String name, Channel channel, ArrayList<String> watchlist){
+    public Follower(String name, Channel channel, HashSet<String> watchlist){
         this.name = name;
         this.channel = channel;
         this.watchlist = watchlist;
     }
-    public ArrayList<String> getWatchList(){
+    public HashSet<String> getWatchList(){
         return watchlist;
     }
     public String getName(){
@@ -30,12 +32,12 @@ public class Follower {
     public Channel getChannel(){
         return channel;
     }
-    public void addToWatchlist(ArrayList<String> watchlist){
+    public void addToWatchlist(HashSet<String> watchlist){
         for (String following : watchlist){
             this.watchlist.add(following);
         }
     }
-    public void removeFromWatchlist(ArrayList<String> watchlist){
+    public void removeFromWatchlist(HashSet<String> watchlist){
         for (String following : watchlist){
             this.watchlist.remove(following);
         }
