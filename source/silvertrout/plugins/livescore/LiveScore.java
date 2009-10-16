@@ -21,7 +21,9 @@
  */
 package silvertrout.plugins.livescore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import silvertrout.Channel;
 import silvertrout.User;
@@ -124,9 +126,19 @@ public class LiveScore extends silvertrout.Plugin {
         return updatedEvents;
 
     }
-
+    
+    public int getCurrentHour(){
+        Calendar cal = Calendar.getInstance();
+        final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+        String[] time = sdf.format(cal.getTime()).split(" ")[1].split(":");
+        int hours = Integer.parseInt(time[0]);
+        int minutes = Integer.parseInt(time[1]);
+        int seconds = Integer.parseInt(time[2]);
+        return hours;
+    }
     public void onTick(int ticks) {
-        if (ticks % 120 == 0) {
+        if (ticks % 120 == 0 && (getCurrentHour() > 12 || getCurrentHour() < 3)) {
             LiveScoreParser p = new LiveScoreParser();
             ArrayList<FootballGame> newGames = p.getGames();
             ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
@@ -222,6 +234,8 @@ public class LiveScore extends silvertrout.Plugin {
                         u21 = true;
                     }
                     for (int i = 2 + jump; i < splitmess.length; i++) {
+                        if (i>2)
+                            addToWatchlist += " ";
                         addToWatchlist += splitmess[i];
                     }
                     if (u21) {
