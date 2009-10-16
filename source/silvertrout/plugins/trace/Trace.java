@@ -21,10 +21,7 @@
  */
 package silvertrout.plugins.trace;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
-
+import java.io.UnsupportedEncodingException;
 
 import silvertrout.commons.EscapeUtils;
 import silvertrout.commons.ConnectHelper;
@@ -42,107 +39,99 @@ import silvertrout.commons.Base64Coder;
  *
  * @author reggna
  * @author tigge
- * @version Beta 3.0
  */
 public class Trace extends silvertrout.Plugin {
-
-    /**
-     *
-     * @param eniroInformation
-     * @return
-     */
-    public static String getName(String eniroInformation) {
-        return getStuff(eniroInformation, "(?is)<span class=\"given-name\">([^<]+)") + " "+ getStuff(eniroInformation, "(?is)<span class=\"family-name\">([^<]+)");
-    }
-
-    /**
-     *
-     * @param eniroInformation
-     * @return
-     */
-    public static String getAddress(String eniroInformation) {
-        return getStuff(eniroInformation, "(?is)<span class=\"street-address\">([^<]+)");
-    }
-
-    /**
-     *
-     * @param eniroInformation
-     * @return
-     */
-    public static String getPostalCode(String eniroInformation) {
-        return getStuff(eniroInformation, "(?is)<span class=\"postal-code\">([^<]+)").replaceAll("\\D", "");
-    }
-
-    /**
-     *
-     * @param eniroInformation
-     * @return
-     */
-    public static String getLocation(String eniroInformation) {
-        return getStuff(eniroInformation, "(?is)<span class=\"locality\">([^<]+)").replaceAll("\\s+", "");
-    }
-
-    /**
-     *
-     * @param m
-     * @param pattern
-     * @return
-     */
-    public static String getStuff(String m, String pattern) {
-        Matcher mt = Pattern.compile(pattern).matcher(m);
-        if (mt.find()) {
-            return EscapeUtils.unescapeHtml(mt.group(1));
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     *
-     * @param phoneNumber
-     * @return
-     */
-    public static String getEniroInformation(String phoneNumber) {
-        return ConnectHelper.Connect("http", "personer.eniro.se", "/query?search_word=" + phoneNumber, 80, 16384);
-    }
-
-    /**
-     *
-     * @param upplysningarInformation
-     * @return
-     */
-    public static String getSSN(String upplysningarInformation) {
-        String ssn = Base64Coder.decodeString(getStuff(upplysningarInformation, "(?is)show\\.aspx\\?id=([^\"]+)")).replaceAll("\\D", "");
-        return ssn.substring(0, 8) + "-" + ssn.substring(8);
-    }
-
-    /**
-     *
-     * @param name
-     * @param location
-     * @return
-     */
-    public static String getUpplysningarInformation(String name, String location) {
-        return ConnectHelper.Connect("http", "www.upplysning.se", "/search.aspx?bs=S%F6k&what=" + name + "&where=" + location, 80, 16384);
+    private String substring(String s, String start, String end){
+        s = s.substring(s.indexOf(start)+start.length());
+        return EscapeUtils.unescapeHtml(s.substring(0,s.indexOf(end)));
     }
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
+        String firstname, lastname, address, zipCode, locality, ssn, url = "";
         if (channel != null) {
-            String[] parts = message.split("\\s");
-            if (parts.length == 2 && parts[0].equals("!trace")) {
-                String ei = getEniroInformation(parts[1]);
-                String ret = "";
-                try {
-                    String location = getLocation(ei);
-                    ret = getName(ei) + ", " + getAddress(ei) + "   " + getPostalCode(ei) + " " + location + "    ";
-                    location = java.net.URLEncoder.encode(location, "iso-8859-1");
-                    String ui = getUpplysningarInformation(getName(ei).replaceAll(" ", "+"), getPostalCode(ei) + "+" + location);
-                    ret += getSSN(ui);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            if (message.startsWith("!trace")) {
+                message = message.substring(7);
+                try{
+                    url = "/query?search_word="
+                            + java.net.URLEncoder.encode(message,
+                            "iso-8859-1");
+                }catch(UnsupportedEncodingException e){ /* not possible  */}
+                /* fetch information from eniro */
+                String eniro = ConnectHelper.Connect("http", "www.eniro.se",
+                        url, 80, 16384);
+                System.out.println(url);
+                firstname = substring(eniro,
+                        "<span class=\"given-name\">","<");
+                lastname  = substring(eniro,
+                        "<span class=\"family-name\">","<");
+                address   = substring(eniro,
+                        "<span class=\"street-address\">", "<");
+                zipCode   = substring(eniro,
+                        "<span class=\"postal-code\">", "<");
+                locality  = substring(eniro,
+                        "<span class=\"locality\">", "<");
+
+                /* did something go wrong? */
+                if(firstname.contains("/")){
+                    try{
+                        url = "/SearchMixed.aspx?vad="
+                                + java.net.URLEncoder.encode(message,
+                                "iso-8859-1");
+                    }catch(UnsupportedEncodingException e){ /* not possible  */}
+                    /* then we try hitta */
+                    eniro = ConnectHelper.Connect("http", "hitta.se", url, 80,
+                            524288);
+                    System.out.println(url); 
+                    firstname = substring(eniro,"var tooltipText = '<strong>",
+                            " ");
+                    lastname  = substring(eniro, "var tooltipText = '<strong>"
+                            + firstname +"  ","<");
+                    address   = substring(eniro, "<strong>Adress:</strong><br>",
+                            "<");
+                    zipCode   = substring(eniro, "var zipCode = '", "'");
+                    locality  = substring(eniro, "var locality = \"", "\"");
                 }
-                channel.sendPrivmsg(user.getNickname() + ": " + ret);
+                
+                /* still no match, then return */
+                if(firstname.contains("/")){
+                    channel.sendPrivmsg(user.getNickname() + ": N.N.");
+                    return;
+                }
+                
+                /* fetch ssn from upplysning */
+                ssn = "";
+                try{
+                url = "/search.aspx?bs=S%F6k&what="
+                        + java.net.URLEncoder.encode(firstname + " "
+                        + lastname, "iso-8859-1") + "&where="
+                        + java.net.URLEncoder.encode(address
+                        + ", " + zipCode + " " + locality, "iso-8859-1");
+                }catch(UnsupportedEncodingException e){ /* not possible  */}
+                System.out.println(url);
+                String upplysning = ConnectHelper.Connect("http",
+                        "www.upplysning.se", url, 80, 16384);
+                if(!upplysning.contains("<a href=\"show.aspx?id=")){
+                    try{
+                        url = "/search.aspx?bs=S%F6k&what="
+                            + java.net.URLEncoder.encode(firstname + " "
+                            + lastname, "iso-8859-1") + "&where="
+                            + java.net.URLEncoder.encode(zipCode + " "
+                            + locality, "iso-8859-1");
+                    }catch(UnsupportedEncodingException e){ /* not possible  */}
+                    System.out.println(url);
+                    upplysning = ConnectHelper.Connect("http",
+                            "www.upplysning.se", url, 80, 16384);
+                }
+                if(upplysning.contains("<a href=\"show.aspx?id=")){
+                    ssn = Base64Coder.decodeString(substring(upplysning,
+                            "<a href=\"show.aspx?id=","\"")).replaceAll(
+                            "\\D", "");
+                    ssn = ssn.substring(0, 8) + "-" + ssn.substring(8);
+                }
+                channel.sendPrivmsg(user.getNickname() + ": " + firstname + " "
+                        + lastname + ", " + address + ", " + zipCode + " "
+                        + locality + " " + ssn);
             }
         }
     }

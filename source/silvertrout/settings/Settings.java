@@ -286,7 +286,10 @@ public class Settings {
                     nnm = pluginNode.getAttributes();
                     nameNode = nnm.getNamedItem("name");
                     passwordNode = nnm.getNamedItem("password");
-                    channelMap.put(nameNode.getNodeValue(), passwordNode.getNodeValue());
+                    if(passwordNode == null)
+                        channelMap.put(nameNode.getNodeValue(), null);
+                    else
+                        channelMap.put(nameNode.getNodeValue(), passwordNode.getNodeValue());
                 }
             }
         }

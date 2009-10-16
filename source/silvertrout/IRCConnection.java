@@ -330,6 +330,7 @@ public class IRCConnection {
      * Join a channel with the specified name
      *
      * @param channel - The name of the channel to join
+     * @param password the password of the channel, null of not exist
      */
     public void join(String channel, String password) {
         if(password == null) join(channel);
