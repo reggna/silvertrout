@@ -20,6 +20,7 @@ public class FootballGame {
     String link = null;
     String result = "";
     ArrayList<FootballEvent> events;
+    ArrayList<Follower> followers;
 
     public FootballGame(String country, String league, String hometeam, String awayteam, String gametime, ArrayList<FootballEvent> events, String result) {
         this.country = country;
@@ -29,5 +30,6 @@ public class FootballGame {
         this.gametime = gametime;
         this.events = events;
         this.result = result;
+        this.followers = null;
     }
 }

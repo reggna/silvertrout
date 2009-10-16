@@ -126,8 +126,8 @@ public class LiveScore extends silvertrout.Plugin {
         return updatedEvents;
 
     }
-    
-    public int getCurrentHour(){
+
+    public int getCurrentHour() {
         Calendar cal = Calendar.getInstance();
         final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
@@ -137,6 +137,7 @@ public class LiveScore extends silvertrout.Plugin {
         int seconds = Integer.parseInt(time[2]);
         return hours;
     }
+
     public void onTick(int ticks) {
         if (ticks % 120 == 0 && (getCurrentHour() > 12 || getCurrentHour() < 3)) {
             LiveScoreParser p = new LiveScoreParser();
@@ -167,6 +168,7 @@ public class LiveScore extends silvertrout.Plugin {
                     for (String following : watchlist) {
                         if (followThisGame(following, f)) {
                             String message = follower.getName() + ": ";//print out changes to follower
+
                             message += f.gametime + " " + f.hometeam + " - " + f.awayteam;
                             follower.getChannel().sendPrivmsg(message);
                         }
@@ -181,26 +183,43 @@ public class LiveScore extends silvertrout.Plugin {
                     HashSet<String> watchlist = follower.getWatchList();
                     for (String following : watchlist) {
                         if (followThisGame(following, updatedGame)) {
-                            String message = follower.getName() + ": ";//print out changes to follower
-                            message += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
-                            follower.getChannel().sendPrivmsg(message);
-                            ArrayList<FootballEvent> events = updatedGame.events;
-                            for (FootballEvent event : events) {
-                                message = event.matchtime + " ";
-                                if (event.yellowcard) {
-                                    message += Color.yellow(" YELLOW CARD " + event.playername);
-                                } else if (event.redcard) {
-                                    message += Color.red(" RED CARD " + event.playername);
-                                } else if (event.goal) {
-                                    message += Color.green(" GOAL " + event.score + " " + event.playername);
-                                }
-                                follower.getChannel().sendPrivmsg(message);
+                            if (updatedGame.followers == null) {
+                                updatedGame.followers = new ArrayList<Follower>();
                             }
+                            updatedGame.followers.add(follower);
                         }
                     }
                 }
             }
-        }
+                for (FootballGame updatedGame : updatedGames) {
+                    if (updatedGame.followers != null) {
+                        String message = "";
+                        HashSet<Channel>  channels = new HashSet<Channel>();
+                        Channel channel = null;
+                        for (Follower follower: updatedGame.followers){
+                            message += follower.getName() + " ";
+                            //channels.add(follower.getChannel());
+                            channel = follower.getChannel();
+                        }
+
+                        message += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
+                        channel.sendPrivmsg(message);
+                        ArrayList<FootballEvent> events = updatedGame.events;
+                        for (FootballEvent event : events) {
+                            message = event.matchtime + " ";
+                            if (event.yellowcard) {
+                                message += Color.yellow(" YELLOW CARD " + event.playername);
+                            } else if (event.redcard) {
+                                message += Color.red(" RED CARD " + event.playername);
+                            } else if (event.goal) {
+                                message += Color.green(" GOAL " + event.score + " " + event.playername);
+                            }
+                            channel.sendPrivmsg(message);
+                        }
+                    }
+                }
+            }
+
     }
 
     @Override
@@ -234,8 +253,9 @@ public class LiveScore extends silvertrout.Plugin {
                         u21 = true;
                     }
                     for (int i = 2 + jump; i < splitmess.length; i++) {
-                        if (i>2)
+                        if (i > 2) {
                             addToWatchlist += " ";
+                        }
                         addToWatchlist += splitmess[i];
                     }
                     if (u21) {
@@ -269,6 +289,9 @@ public class LiveScore extends silvertrout.Plugin {
                     HashSet<String> watchlist = new HashSet<String>();
                     String addToWatchlist = "";
                     for (int i = 2; i < splitmess.length; i++) {
+                        if (i > 2) {
+                            addToWatchlist += " ";
+                        }
                         addToWatchlist += splitmess[i];
                     }
                     Follower fo = null;
@@ -334,17 +357,18 @@ public class LiveScore extends silvertrout.Plugin {
                 for (FootballGame updatedGame : games) {
                     if (followThisGame(following, updatedGame)) {
                         String mess = user.getNickname() + ": ";//print out changes to follower
+
                         mess += updatedGame.gametime + " " + updatedGame.hometeam + " - " + updatedGame.awayteam + " " + updatedGame.result;
                         channel.sendPrivmsg(mess);
                         ArrayList<FootballEvent> events = updatedGame.events;
                         for (FootballEvent event : events) {
-                            mess = event.matchtime + " " + Color.green(event.score);
+                            mess = event.matchtime;
                             if (event.yellowcard) {
-                                mess = Color.yellow(" YELLOW CARD " + event.playername);
+                                mess += Color.yellow(" YELLOW CARD " + event.playername);
                             } else if (event.redcard) {
-                                mess = Color.red(" RED CARD" + event.playername);
+                                mess += Color.red(" RED CARD" + event.playername);
                             } else if (event.goal) {
-                                mess += Color.green(" GOAL " + event.playername);
+                                mess += " " + Color.green(event.score) + Color.green(" GOAL " + event.playername);
                             }
                             channel.sendPrivmsg(mess);
                         }
