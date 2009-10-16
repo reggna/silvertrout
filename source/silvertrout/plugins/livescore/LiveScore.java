@@ -37,12 +37,14 @@ public class LiveScore extends silvertrout.Plugin {
     String channelName = "#sportit";
     ArrayList<FootballGame> games;
     ArrayList<Follower> followers;
+    boolean firstTime;
 
     public LiveScore() {
         games = new ArrayList<FootballGame>();
         followers = new ArrayList<Follower>();
         LiveScoreParser p = new LiveScoreParser();
         games = p.getGames();
+        firstTime = true;
     }
 
     private boolean followThisGame(String following, FootballGame f) {
@@ -50,13 +52,12 @@ public class LiveScore extends silvertrout.Plugin {
         if (split.length < 2) {
             return false;
         }
-        if (split.length == 2){
-            if(f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21")){
+        if (split.length == 2) {
+            if (f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21")) {
                 return false;
             }
-        }
-        else{
-            if(!(f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21"))){
+        } else {
+            if (!(f.country.contains("Under 21") || f.country.contains("U21") || f.league.contains("Under 21") || f.league.contains("U21") || f.hometeam.contains("U21") || f.awayteam.contains("U21"))) {
                 return false;
             }
         }
@@ -112,8 +113,7 @@ public class LiveScore extends silvertrout.Plugin {
         else {
             for (int i = 0; i < newEvents.size(); i++) {
                 if (!oldEvents.contains(newEvents.get(i))) {
-                    if ( (newEvents.get(i).yellowcard && !newEvents.get(i).matchtime.contains("F"))
-                       || (newEvents.get(i).goal && (!newEvents.get(i).matchtime.contains("F")|| !newEvents.get(i).matchtime.contains("H")) ) ) {
+                    if ((newEvents.get(i).yellowcard && !newEvents.get(i).matchtime.contains("F")) || (newEvents.get(i).goal && (!newEvents.get(i).matchtime.contains("F") || !newEvents.get(i).matchtime.contains("H")))) {
                         continue;
                     }
                     updatedEvents.add(newEvents.get(i));
@@ -126,7 +126,7 @@ public class LiveScore extends silvertrout.Plugin {
     }
 
     public void onTick(int ticks) {
-        if (ticks % 60 == 0) {
+        if (ticks % 120 == 0) {
             LiveScoreParser p = new LiveScoreParser();
             ArrayList<FootballGame> newGames = p.getGames();
             ArrayList<FootballGame> updatedGames = new ArrayList<FootballGame>();
@@ -174,13 +174,13 @@ public class LiveScore extends silvertrout.Plugin {
                             follower.getChannel().sendPrivmsg(message);
                             ArrayList<FootballEvent> events = updatedGame.events;
                             for (FootballEvent event : events) {
-                                message = event.matchtime + " " + Color.green(event.score);
+                                message = event.matchtime + " ";
                                 if (event.yellowcard) {
-                                    message = " " + Color.yellow(" YELLOW CARD " + event.playername);
+                                    message += Color.yellow(" YELLOW CARD " + event.playername);
                                 } else if (event.redcard) {
-                                    message = " " + Color.red(" RED CARD" + event.playername);
+                                    message += Color.red(" RED CARD " + event.playername);
                                 } else if (event.goal) {
-                                    message += Color.green(" GOAL " + event.playername);
+                                    message += Color.green(" GOAL " + event.score + " " + event.playername);
                                 }
                                 follower.getChannel().sendPrivmsg(message);
                             }
@@ -198,6 +198,11 @@ public class LiveScore extends silvertrout.Plugin {
         if (channel != null) {
 
             if (message.startsWith("!watchlist")) {
+                if (firstTime) {
+                    WatchlistKeeper wlk = new WatchlistKeeper();
+                    followers = wlk.getWatchlist(channel);
+                    firstTime = false;
+                }
                 String[] splitmess = message.split(" ");
                 if (splitmess.length < 2) {
                     channel.sendPrivmsg("Gief parameters!");
@@ -212,14 +217,14 @@ public class LiveScore extends silvertrout.Plugin {
                     String addToWatchlist = "";
                     int jump = 0;
                     boolean u21 = false;
-                    if (splitmess[2].equals("u21")){
+                    if (splitmess[2].equals("u21")) {
                         jump++;
                         u21 = true;
                     }
-                    for (int i = 2+jump; i < splitmess.length; i++) {
+                    for (int i = 2 + jump; i < splitmess.length; i++) {
                         addToWatchlist += splitmess[i];
                     }
-                    if (u21){
+                    if (u21) {
                         addToWatchlist += "=u21";
                     }
                     Follower fo = null;
@@ -299,19 +304,19 @@ public class LiveScore extends silvertrout.Plugin {
                 }
                 String addToWatchlist = "";
                 int jump = 0;
-                    boolean u21 = false;
-                    if (split[1].equals("u21")){
-                        jump++;
-                        u21 = true;
-                    }
-                    for (int i = 1+jump; i < split.length; i++) {
-                        addToWatchlist += split[i];
-                    }
-                    if (u21){
-                        addToWatchlist += "=u21";
-                    }
+                boolean u21 = false;
+                if (split[1].equals("u21")) {
+                    jump++;
+                    u21 = true;
+                }
+                for (int i = 1 + jump; i < split.length; i++) {
+                    addToWatchlist += split[i];
+                }
+                if (u21) {
+                    addToWatchlist += "=u21";
+                }
                 String following = addToWatchlist;
-                
+
                 for (FootballGame updatedGame : games) {
                     if (followThisGame(following, updatedGame)) {
                         String mess = user.getNickname() + ": ";//print out changes to follower
@@ -331,6 +336,9 @@ public class LiveScore extends silvertrout.Plugin {
                         }
                     }
                 }
+            } else if (message.startsWith("!save")) {
+                WatchlistKeeper wlk = new WatchlistKeeper();
+                wlk.saveWatchlist(followers);
             }
         }
     }
