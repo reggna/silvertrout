@@ -132,11 +132,12 @@ public class User {
     /**
      * Returnes the user as a String
      *
-     * @return A string consisting of the user's nickname, hostname, realname and the server the user is connected to.
+     * @return  A string consisting of the user's nickname, hostname, realname 
+     *          and the server the user is connected to.
      */
     @Override
     public String toString() {
-        return "[" + nickname + "@" + hostname + " (" + server + ") " + realname + " : " + hashCode() + "]";
+        return "[User " + nickname + "@" + hostname + " (" + server + ") " + realname + " : " + hashCode() + "]";
     }
 
     /**

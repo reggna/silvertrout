@@ -607,8 +607,11 @@ public class Quizmaster extends silvertrout.Plugin {
                     LinkedList<String> voice   = new LinkedList<String>();
                     LinkedList<String> devoice = new LinkedList<String>();                    
                     Map<User, Modes>   users   = channel.getUsers();
-                    
+                    System.out.println("\n\n\nVoicing people!:");
                     for(User u: users.keySet()) {
+                        
+                        System.out.println(u);
+                        System.out.println(users.get(u));
                           
                         if(users.get(u).haveMode('v')){
                             // the user do have voice

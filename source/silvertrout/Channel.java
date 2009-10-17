@@ -246,4 +246,14 @@ public class Channel {
             network.getConnection().setMode(this, user, "+h");
         }
     }
+    
+    /**
+     * Returnes the channel as a String
+     *
+     * @return  A string consisting of the channels name and its usercount.
+     */
+    @Override
+    public String toString() {
+        return "[Channel " + getName() + ", " + users.size() + " users]";
+    }
 }

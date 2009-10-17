@@ -132,6 +132,13 @@ public class Trace extends silvertrout.Plugin {
                 channel.sendPrivmsg(user.getNickname() + ": " + firstname + " "
                         + lastname + ", " + address + ", " + zipCode + " "
                         + locality + " " + ssn);
+                
+                // Fetch operator for a number
+                String operator = OperatorFinder.getOperator(message);
+                if(operator != null) {
+                    channel.sendPrivmsg(user.getNickname() + ": " 
+                            + message + ": " + operator);
+                }
             }
         }
     }
