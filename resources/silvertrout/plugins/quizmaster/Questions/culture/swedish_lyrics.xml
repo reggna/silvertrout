@@ -22,20 +22,11 @@
   </question>
   
   <question>
-    <line>I vilken låt återfinns textraden "Bakom femton dubbla reglar, bakom femton dubbla lås,
-håller rikedomen hov i maktens salar"?</line>
+    <line>I vilken låt återfinns textraden "Bakom femton dubbla reglar, bakom femton dubbla lås, håller rikedomen hov i maktens salar"?</line>
     <answers>
       <answer>Keops pyramid</answer>
     </answers>
   </question>  
-  
-  <question>
-    <line>I vilken låt återfinns textraden "Bakom femton dubbla reglar, bakom femton dubbla lås,
-håller rikedomen hov i maktens salar"?</line>
-    <answers>
-      <answer>Keops pyramid</answer>
-    </answers>
-  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Jag skulle unna mig och drömma, hundra mil genom Europa, om en främling lika tillitsfull som du"?</line>
@@ -184,6 +175,5 @@ håller rikedomen hov i maktens salar"?</line>
       <answer required="true">Vapen &amp; ammunition</answer>
     </answers>
   </question>
-
 
 </questions>
