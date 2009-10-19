@@ -100,11 +100,11 @@ håller rikedomen hov i maktens salar"?</line>
   <question>
     <line>I vilken låt återfinns textraden "Du vet var det sitter och siktar tills du riktigt säkert vet att det hittar in - där ingen annan kommit in"? Vi söker dessutom artisten.</line>
     <hints>
-      <line>Magnus Krunegård med Du är en vampyr</line>
+      <line>Markus Krunegård med Jag är en vampyr</line>
     </hints>    
     <answers>
-      <answer required="true">Du är en vampyr</answer>
-      <answer required="true">Magnus Krunegård</answer>
+      <answer required="true">Jag är en vampyr</answer>
+      <answer required="true">Markus Krunegård</answer>
     </answers>
   </question>  
 
