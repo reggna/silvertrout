@@ -1,0 +1,78 @@
+<questions 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="questions.xsd"
+    category="Kultur" subcategory="Svensk poesi">
+    
+    
+  <question>
+    <line>Vad heter Harry Martinssons ryndempos?</line>
+    <answers>
+      <answer>Aniara</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken känd diktsamling innehåller texten "Vi följer ännu våra jordevanor och samma seder som i Doris dalar. Vi delar upp vår tid i dag och natt, vi låtsas gryning, skymmning, solnedgång", och vad heter författaren?</line>
+    <hints>
+      <line>Aniara, Harry Martinsson</line>
+    </hints>
+    <answers>
+      <answer required="true">Aniara</answer>
+      <answer required="true">Harry Martinsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken känd svenska har skrivit romanen Dvärgen, och fick Nobelpriset i litteratur år 1951?</line>
+    <answers>
+      <answer>Pär Lagerkvist</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diktare skrev "Det är vackrast när det skymmer. All den kärlek himlen rymmer ligger samlad i ett dunkelt ljus över jorden, över markens hus"?</line>
+    <answers>
+      <answer>Pär Lagerkvist</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diktare skrev "Jag drömde om svärd i natt. Jag drömde om strid i natt. Jag drömde jag stred vid din sida rustad och stark, i natt."?</line>
+    <answers>
+      <answer>Karin Boye</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diktare skrev "Ja visst gör det ont när knoppar brister. Men varför skulle annars våren tveka?"?</line>
+    <answers>
+      <answer>Karin Boye</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diktare skrev "Midvinternattens köld är hård, stjärnorna gnistra och glimma. Alla sova i enslig gård djupt under midnattstimma.", och vad heter dikten?</line>
+    <hints>
+      <line>Tomten av Viktor Rydberg</line>
+    </hints>
+    <answers>
+      <answer required="true">Tomten</answer>
+      <answer required="true">Viktor Rydberg</answer>
+    </answers>
+  </question>
+      
+  <question>
+    <line>Vilken diktare skrev "För mig var du en ljusgestalt i nattens tid upprunnen, vid morgonen försvunnen, jag minns dig som en stjärna, en saga, en sång"?</line>
+    <answers>
+      <answer>Gustaf Fröding</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken diktare skrev "Kärleken kommer och kärleken går, ingen kan tyda dess lagar. Men dig vill jag följa i vinter och vår, och alla minn levnads dagar"?</line>
+    <answers>
+      <answer>Nils Ferlin</answer>
+    </answers>
+  </question>
+        
+</questions>

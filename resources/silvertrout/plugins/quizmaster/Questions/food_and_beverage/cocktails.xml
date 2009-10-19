@@ -26,8 +26,14 @@
 
   <question>
     <line>Vad heter Bacardis fyra smaksatta Rom?</line>
+    <hints>
+      <line>Limon, Razz, Apple och Grand Melón</line>
+    </hints>
     <answers>
-      <answer>Limon, Razz ,Apple och Grand Melón</answer>
+      <answer required="true">Limon</answer>
+      <answer required="true">Razz</answer>
+      <answer required="true">Apple</answer>
+      <answer required="true">Grand Melón</answer> 
     </answers>
   </question>
 
@@ -95,7 +101,7 @@
   </question>
 
   <question>
-    <line>En klassiker bestående av 4-6cl vodka, några stänk worcestersås, salt, peppar, citron, några stänk tabasco och tomatjuice?</line>
+    <line>En klassiker bestående av 4-6 cl vodka, några stänk worcestersås, salt, peppar, citron, några stänk tabasco och tomatjuice?</line>
     <answers>
       <answer>Bloody Mary</answer>
     </answers>
