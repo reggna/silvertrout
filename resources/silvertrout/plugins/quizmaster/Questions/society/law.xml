@@ -193,37 +193,9 @@
   </question>
 
   <question>
-    <line>Du är gift, men överens med din make om att ni ska skiljas. Ni har två barn som är 14 och 17 år. När går skilsmässan igenom efter att ni lämnat in papperen till tingsrätten?</line>
-    <answers>
-      <answer>Efter sex månaders betänketid, på grund av barnen</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Via internet beställer du hem en ny träningsmaskin från en postorderfirma. När maskinen levereras någon vecka senare, har du ångrat köpet. Har du någon laglig rätt att skicka tillbaka maskinen och få tillbaka dina pengar?</line>
-    <answers>
-      <answer>Ja, du har 14 dagars ångerrätt</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Din sambo avlider. Ni har inga barn. Sambon har två helsyskon som närmaste släktingar. Vem ärver sambons sparade pengar (om inget testamente finns)?</line>
     <answers>
       <answer>Syskonen</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Du är gift och din make har ett barn från tidigare förhållande. Hur fördelas arvet när din make dör (testamente saknas)?</line>
-    <answers>
-      <answer>Arvet fördelas lika mellan barnet och dig</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Du skriver ett eget testamente och undertecknar det med ditt namn. Krävs det, normalt sett, något mer för att testamentet ska kunna vara juridiskt giltigt?</line>
-    <answers>
-      <answer>Ja, det ska bevittnas av två personer</answer>
     </answers>
   </question>
 
@@ -242,30 +214,9 @@
   </question>
 
   <question>
-    <line>Du lånar en cd-skiva från din närmaste kompis. Riskerar du att begå något brott om du kopierar skivan (ej kopieringsspärrad) och behåller ett eget exemplar?</line>
-    <answers>
-      <answer>Nej, man får göra enstaka kopior</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Din trettonårige son kastar sten mot en fönsterruta i skolan. Rutan går sönder. Vem är lagligen betalningsskyldig?</line>
     <answers>
       <answer>Sonen</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Ditt barn går fram och klappar en hund, som sitter bunden utanför en affär. Hunden biter barnet. Kan hundägaren bli skadeståndsskyldig i detta fall?</line>
-    <answers>
-      <answer>Ja, hundägaren har alltid ansvaret</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Du talar i telefon och spelar in samtalet, utan att tala om det för den andre. Är detta tillåtet enligt lag?</line>
-    <answers>
-      <answer>Ja, om den som spelar in själv deltar i samtalet</answer>
     </answers>
   </question>
 

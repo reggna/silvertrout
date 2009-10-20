@@ -11,13 +11,6 @@
   </question>
 
   <question>
-    <line>Det blir rundpass på Rivern, vem får visa sitt kort först?</line>
-    <answers>
-      <answer>Den vänster om dealern</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Vem har vunnit mest turneringspengar i 'World Series Of Poker' genom tiderna?</line>
     <answers>
       <answer>Joe Hachem</answer>
@@ -70,27 +63,6 @@
     <line>Vad menas med "fixed limit"?</line>
     <answers>
       <answer>Satsningarna är reglerade till en bestämd insatsgräns</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Om man har fått in en "nut flush" då har man?</line>
-    <answers>
-      <answer>Färg med ess på topp</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Om man är "on the button" vad är man då?</line>
-    <answers>
-      <answer>Man är dealer</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Hur måste du fördela korten i en Omaha-hand?</line>
-    <answers>
-      <answer>2 kort från hand, 3 från bordet</answer>
     </answers>
   </question>
 
@@ -200,13 +172,6 @@
   </question>
 
   <question>
-    <line>Varför brukar pokerspelare lägga spelmarker över sina kort?</line>
-    <answers>
-      <answer>För att skydda handen från att dödas</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Vad kallas par i knektar på hand?</line>
     <answers>
       <answer>Fish Hooks</answer>
@@ -224,13 +189,6 @@
     <line>Vad kallas han som vann World Series of Poker main event 2004?</line>
     <answers>
       <answer>Fossilman</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Varför är handen 10 2 ihopkopplad med Doyle Brunson?</line>
-    <answers>
-      <answer>Han avgjorde World Series of Poker två år i rad med den handen</answer>
     </answers>
   </question>
 
