@@ -1,0 +1,138 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../../questions.xsd" 
+        category="Sport" subcategory="Fotboll">
+
+  <question>
+    <line>Fredrik Ljungberg har i flera år varit proffs i ett engelskt lag med smeknamnet The Gunners. Vad heter laget egentligen?</line>
+    <answers>
+      <answer>Arsenal FC</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket fotbollsproffs kallas för Mackan?</line>
+    <answers>
+      <answer>Marcus Allbäck</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>På vilken plats i laget spelar fotbollsproffset Magnus Hedman?</line>
+    <answers>
+      <answer>Målvakt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I vilken stad hör AFC Ajax hemma, där bl a Zlatan spelat?</line>
+    <answers>
+      <answer>Amsterdam</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket svenskt herrfotbollslag har vunnit UEFA-cupen två gånger?</line>
+    <answers>
+      <answer>IFK Göteborg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den kände svenske fotbollsdomare som hoppade av karriären efter att ha blivit mordhotad?</line>
+    <answers>
+      <answer>Anders Frisk</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Många idrottsmän har blivit anklagade för att ta otillåtna medel. Vad kallas det?</line>
+    <answers>
+      <answer>Doping</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den person som för en fotbollsspelare räkning förhandlar med klubbarna om löner och transfers?</line>
+    <answers>
+      <answer>Spelaragent</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den bäste svenske manlige fotbollsspelare varje år, får utmärkelsen Guldbollen. Vad kallas damfotbollens motsvarighet?</line>
+    <answers>
+      <answer>Diamantbollen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Från vilket land kommer fotbollsspelaren Figo?</line>
+    <answers>
+      <answer>Portugal</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken är den finaste fotbollscup ett europeiskt klubblag kan vinna?</line>
+    <answers>
+      <answer>Champions League</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det Stockholmslag som Victoria Svensson vann SM-guld med 2003 och 2004?</line>
+    <answers>
+      <answer>Djurgården</answer>
+      <answer>Älvsjö</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken värmlänning har blivit vår internationellt mest kände tränare?</line>
+    <hints>
+      <line>Svennis</line>
+    </hints>
+    <answers>
+      <answer required="true">Svennis</answer>
+      <answer>Eriksson</answer>
+      <answer>Sven-Göran</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en fotbollsspelare som spelar i försvaret?</line>
+    <answers>
+      <answer>Back</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad blir domslutet om en utespelare spelar bollen över sin egen kortlinje?</line>
+    <answers>
+      <answer>Hörna</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur förkortas Internationella fotbollsförbundet?</line>
+    <answers>
+      <answer>FIFA</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>I den jättelika årliga fotbollsturnering för ungdomar i Göteborg kan man se många av morgondagens fotbollsproffs. Vad heter turneringen?</line>
+    <answers>
+      <answer>Gothia Cup</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det när en fotbollsspelare gör tre mål i rad i samma match?</line>
+    <answers>
+      <answer>Hat-trick</answer>
+    </answers>
+  </question>
+
+</questions>

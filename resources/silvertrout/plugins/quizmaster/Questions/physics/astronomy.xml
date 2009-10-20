@@ -9,11 +9,39 @@
       <answer>9,4 biljoner km</answer>
     </answers>
   </question>
+  
+  <question>
+    <line>Vad heter den ryska motsvarigheten till astronaut?</line>
+    <answers>
+      <answer>Kosmonaut</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter vår galax?</line>
+    <answers>
+      <answer>Vintergatan</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter Sveriges förste utbildade astronaut?</line>
+    <answers>
+      <answer>Christer Fuglesang</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad kallas en rymdfarkost som man använder flera gånger?</line>
+    <answers>
+      <answer>Rymdfärja</answer>
+    </answers>
+  </question>
 
   <question>
     <line>Hur lång tid tar det för månen att passera 1 varv runt jorden?</line>
     <answers>
-      <answer>c:a 1 månad</answer>
+      <answer>Ungefär 1 månad</answer>
     </answers>
   </question>
 

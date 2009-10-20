@@ -1,0 +1,276 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Tekink" subcategory="Motorfordon">
+
+  <question>
+    <line>Vad kallas de bilverkstäder som är auktoriserade att ta hand om vissa bilmärken?</line>
+    <answers>
+      <answer>Märkesverkstäder</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter den tv-kändis i förnamn som brukar kallas Bildoktorn?</line>
+    <answers>
+      <answer>Bosse</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>De flesta bilar drivs på bensin. Men vad är det näst vanligaste drivmedlet?</line>
+    <answers>
+      <answer>Disel</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Var sitter motorn på en Porsche 911</line>
+    <answers>
+      <answer>Baktill</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vilken sorts däck är det förbjudet att köra med på sommaren?</line>
+    <answers>
+      <answer>Dubbdäck</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad alstrar ett tändstift, som är nödvändigt för att motorn ska fungera?</line>
+    <answers>
+      <answer>Gnistor</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur många takter har en vanlig bilmotor?</line>
+    <answers>
+      <answer>Fyra</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter de två bröderna som är bilmekaniker i tv-serien Macken?</line>
+    <answers>
+      <answer>Roy och Roger</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter det statliga företag som regelbundet kontrollerar bilens kondition och miljösäkerhet?</line>
+    <answers>
+      <answer>Bilprovningen</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>I ficklampor har man ofta alkaliska batterier. Vilken sorts batteri sitter i en bil?</line>
+    <answers>
+      <answer>Blybatteri</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Nuförtiden har de flesta bilar direktinsprutning av bensinen i motorn. Vad hade man tidigare?</line>
+    <answers>
+      <answer>Förgasare</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter den anordning som gör att bilen går olika fort fast man har samma varvtal i motorn?</line>
+    <answers>
+      <answer>Växellåda</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>En hybridbil har två motorer. En drivs med bensin. Vad drivs den andra med?</line>
+    <answers>
+      <answer>El</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Förr tittade och lyssnade bilmekaniker mera efter fel i bilen. Vilket hjälpmedel används till nya bilar?</line>
+    <answers>
+      <answer>En dator</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad kallas det ljus man har på när man kör i mörer, men måste slå av när man möter andra bilar, eftersom det bländar?</line>
+    <answers>
+      <answer>Helljus</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad heter den anordning i bilen som laddar batteriet, och alltså alstrar ström?</line>
+    <answers>
+      <answer>Generator</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>>Vilka tre bokstäver brukar användas för att beteckna låsningsfria bromsar på en bil?</line>
+    <answers>
+      <answer>ABS</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Ett bilhjul består av ett gummidäck och metalldel. Vad kallas metalldelen?</line>
+    <answers>
+      <answer>Fälg</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Det finns två vanliga bromstyper på motorfordon. Det ena är trumbromsar. Vad kallas den andra sortens bromsar?</line>
+    <answers>
+      <answer>Skivbromsar</answer>
+    </answers>
+  </question>
+  
+    <question>
+    <line>Vilken är den högsta hastighet en tung lastbil får hålla på svenska vägar?</line>
+    <answers>
+      <answer>90 km/h</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter ett företag som driver yrkesmässig lastbilstrafik?</line>
+    <answers>
+      <answer>Åkeri</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket år fick vi högertrafik i Sverige?</line>
+    <answers>
+      <answer>1967</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Många företag sätter in en sorts spärr i sina biar, så att man inte kan köra om man har druckit alkohol. Vad kallas en sådan spärr?</line>
+    <answers>
+      <answer>Alkolås</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den samordning av trafiksignaler som gör att man får grönt vid flera på varandra följande korsningar?</line>
+    <answers>
+      <answer>Gröna vågen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken bokstav måste man ha i sitt körkort för att få köra tung lastbil?</line>
+    <answers>
+      <answer>C</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter de tyska motorvägarna?</line>
+    <answers>
+      <answer>Autobahn</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur lång får en lastbil som längst vara i Sverige?</line>
+    <answers>
+      <answer>24 meter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter de två stora svenska lastbilstillverkarna?</line>
+    <answers>
+      <answer>Scania och Volvo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad brukar man kalla det fenomen som medför att man underskattar sin hastighet, och alltså kör fortare än man ska?</line>
+    <answers>
+      <answer>Fartblindhet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad brukar man kalla det när lastbilschaufförer kör flera stycken i en lång rad tillsammans?</line>
+    <answers>
+      <answer>Konvoj</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det statliga verk som har hand om våra vägar och deras underhåll?</line>
+    <answers>
+      <answer>Vägverket</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den utrustning för registrering av ett fordons användande där hastighet, vägsträcka, körtid, uppehåll och förarbyten registreras, och som ska finnas i alla yrkesfordon?</line>
+    <answers>
+      <answer>Färdskrivare</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de körfält, fraför allt i storstäder, där bara buss och taxi får köra?</line>
+    <answers>
+      <answer>Kollektivkörfält</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilka två färger har alltid ett påbudsmärke i trafiken, t ex ett som visar cykelväg?</line>
+    <hints>
+      <line>Blå botten med vit symbol</line>
+    </hints>
+    <answers>
+      <answer>Blå botten</answer>
+      <answer>vit symbol</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Det har blivit vanligare på senare år att bygga små cirkulationsplatser. En del är så tånga att en buss eller lastbil har svårt att ta sig igenom. Vad kallas en cirkulationsplats också?</line>
+    <answers>
+      <answer>Rondell</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas med ett namn underredet med hjul och hjulupphängning på en buss, det som karossen vilar på?</line>
+    <answers>
+      <answer>Chassi</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas enbilolycka där bara ett fordon är inblandat?</line>
+    <answers>
+      <answer>Singelolycka</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det instrument som sitter i en taxi och som beräknar kostnaden för färden?</line>
+    <answers>
+      <answer>Taxameter</answer>
+    </answers>
+  </question>
+  
+</questions>

@@ -198,5 +198,167 @@
       <answer>Lars-Åke Wilhelmsson</answer>
     </answers>
   </question>
+  
+  <question>
+    <line>Vad kallas en konstnärs arbetslokal?</line>
+    <answers>
+      <answer>Atiljé</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En del konstnärer målar med vattenfärger. Vad kallas det också?</line>
+    <answers>
+      <answer>Gouache</answer>
+      <answer>Akvarell</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en bild av en person, med ett annat ord?</line>
+    <answers>
+      <answer>Porträtt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette den kände svenske konstnär som bodde på Sundborn i Dalarna och ofta avbildade sin familj?</line>
+    <answers>
+      <answer>Carl Larsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När en konstnär ställer ut sina tavlor, bjuds ofta gäster och tidningar in första dagen. Vad kallas det?</line>
+    <answers>
+      <answer>Vernissage</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Konstnärer målar ibland med en plastfärg som torkar den snabbt, är vattenlöslig, och kan blandas med tillsatser. Vad kallas färgen?</line>
+    <answers>
+      <answer>Akrylfärg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en person som har till yrke att bevara och återställa konstföremål till deras ursprung?</line>
+    <answers>
+      <answer>Konservator</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Går man på målarkurs får man ofta måla av arrangerade grupper av föremål t e frukter, blommor eller matvaror. Vad kallas en sådan målning?</line>
+    <answers>
+      <answer>Stilleben</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>De flesta som målar på väggar med sprayfärg åstadkommer bara klotter. Men vad kallas det som konstform när det är skickligt gjort?</line>
+    <answers>
+      <answer>Graffiti</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en utställnigslokal för konstverk, där man också kan köpa dem?</line>
+    <answers>
+      <answer>Galleri</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas konstnärer osom överför bilder till en yta av plåt, trä eller sten för att sedan göra avtryck på papper?</line>
+    <answers>
+      <answer>Grafiker</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En konstnär som arbetar med t ex gips eller lera, vad säger man att han eller hon gör med materialet?</line>
+    <answers>
+      <answer>Supterar</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är en muralmålning målad någonstans?</line>
+    <answers>
+      <answer>På en mur</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det konstnärsredskap som består av en tunn platta, ofta av trä, på vilken färgerna blandas?</line>
+    <answers>
+      <answer>Palett</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den papp som tavlan sitter på inuti ramen?</line>
+    <answers>
+      <answer>Passepartout</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad tecknar man av för något om man tecknar kroki?</line>
+    <answers>
+      <answer>En människa</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En del konstnärer målar med kniv, men vad använder de flesta?</line>
+    <answers>
+      <answer>Pensel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>En del ishockeymålvakter anlitar en konstnär. Vad vill de ha dekorerat?</line>
+    <answers>
+      <answer>Hjälmen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en konstnär som arbetar med att göra bilder till böcker?</line>
+    <answers>
+      <answer>Illustratör</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken konstnär och vetenskapsman målade Mona Lisa?</line>
+    <answers>
+      <answer>Leonardo da Vinci</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den ställning som en konstnär ställer sin målning på under arbetet?</line>
+    <answers>
+      <answer>Staffli</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas de tredelade målningar som finns i bl a kyrkor?</line>
+    <answers>
+      <answer>Triptyker</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den konstnär och mångsysslare som vi känner som bl a Stig Helmer och Trazan Apansson?</line>
+    <answers>
+      <answer>Lasse Åberg</answer>
+    </answers>
+  </question>
 
 </questions>

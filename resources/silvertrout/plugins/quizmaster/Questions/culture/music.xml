@@ -44,5 +44,173 @@
       <answer>Venedig</answer>
     </answers>
   </question>
+  
+  <question>
+    <line>Vilka instrument spelar en batterist?</line>
+    <answers>
+      <answer>Trummor</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en större orkester som oftast spelar klassisk musik?</line>
+    <answers>
+      <answer>Symfoniorkester</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Hur många stängar har en elbas?</line>
+    <answers>
+      <answer>Fyra</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Valthorn och trumpet är bleckblåsinstrument, men till vilken grupp hör klarinett och saxofon?</line>
+    <answers>
+      <answer>Träblåsinstrument</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När många människor sjunger tillsammans i en grupp, vad kallas den gruppen?</line>
+    <answers>
+      <answer>Kör</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är en kornett en sorts mindre variant av?</line>
+    <answers>
+      <answer>En trumpet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket instrument spelar oftast en kyrkomusiker på?</line>
+    <answers>
+      <answer>Orgel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det när en grupp musiker åker runt och spelar på olika ställen?</line>
+    <answers>
+      <answer>Turné</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det instrument som har ett skinn spänt över en cirkelrund ram med metallplattor som rasslar när man skakar på instrumentet?</line>
+    <answers>
+      <answer>Tamburin</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den som leder och instruerar en orkester?</line>
+    <answers>
+      <answer>Dirigent</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad för instrument kan också kallas ockordeon?</line>
+    <answers>
+      <answer>Dragspel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>På vilket bleckblåsinstrument ändrar man tonläget genom att dra en dragbygel fram och tillbaka?</line>
+    <answers>
+      <answer>Trombon // Dragbasun</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När två pianister spelar på samma instrument kan man kalla de à quantre mains. Vad säger vi på svenska?</line>
+    <answers>
+      <answer>Fyrhändigt</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilket redskap behöver man för att kunna spela på sin fiol?</line>
+    <answers>
+      <answer>En stråke</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det för att man sjunger, när två eller flera personer efter varandra upprepar samma text och melodi? Det är vanlig i sånger som t ex Broder Jakob.</line>
+    <answers>
+      <answer>Kanon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den sorts piano som ofta används på konserter, och där strängarna ligger vågrätt?</line>
+    <answers>
+      <answer>Flygel</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken sorts musik spelar grupper som Barbados, Arvingarna och Carina Jaarneks?</line>
+    <answers>
+      <answer>Dansbandsmusik</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vilken hederstitel får den musiker som erövrat Zornmärket i silver?</line>
+    <answers>
+      <answer>Riksspelman</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter det slaginstrument, med stämda stavar eller plattor av trä, som är ett av få ord i svenska som börjar på bokstaven X?</line>
+    <answers>
+      <answer>Xylofon</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Musiker jobbar ofta på uppdrag, utan att vara anställda. Vad kallas denna anställningsform?</line>
+    <answers>
+      <answer>Frilans</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Många musiker får sjukdomen tinnitus. I vilken kroppsdel märks den?</line>
+    <answers>
+      <answer>Öronen</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det för när man sjunger utan ackompanjemang av instrument?</line>
+    <answers>
+      <answer>A capella</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas det speciella skriftspråk som musiker använder för att kunna se hur en melodi låter?</line>
+    <answers>
+      <answer>Noter</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas en flöjt av bränd lera i form av en fågel?</line>
+    <answers>
+      <answer>Lergök</answer>
+    </answers>
+  </question>
 
 </questions>

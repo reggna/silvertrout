@@ -4,58 +4,9 @@
         category="Kemi" subcategory="Syror">
 
   <question>
-    <line>Om du blandar svavelsyra (H2SO4) och Natriumhydroxid (NaOH) av lika antal gram-mol, vad kommer då att hända?</line>
-    <answers>
-      <answer>Du får H20, Na2SO4 och svavelsyra</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vad innebär den kända lagen SIV?</line>
-    <answers>
-      <answer>Syran i vatten</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vilken jon kan du finna i samtliga syror?</line>
-    <answers>
-      <answer>Hydroniumjonen H3O+</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Hur blandar du till kungsvatten?</line>
-    <answers>
-      <answer>1 del salpetersyra och 3 delar saltsyra</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vad är en amfoterisk substans?</line>
-    <answers>
-      <answer>Någonting som kan bli både syra och bas.</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vad innebär pH egentligen?</line>
-    <answers>
-      <answer>Aktiviteten av vätejoner</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Då man tillsätter BTB (bromtymolblått) i vätskor får man en färg som indikerar om vätskan är sur eller ej. Vilken är färgen som indikerar sur vätska?</line>
     <answers>
       <answer>Gul</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vad skulle hända om du hällde saltsyra i ett rör, la i en bit magnesium, höll för öppningen med tummen och slutligen höll en tänd tändsticka ovanför samtidigt som du tog bort tummen ?</line>
-    <answers>
-      <answer>En knall skulle höras</answer>
     </answers>
   </question>
 
