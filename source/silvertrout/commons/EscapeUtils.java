@@ -403,13 +403,35 @@ public class EscapeUtils {
     public static String escapeXml(String source) {
         throw new java.lang.UnsupportedOperationException("Not implemented");
     }
+    
     /**
+     * Strip HTML/XML tags
+     *
+     * This function strips all tags found. The data inside the tags are left
+     * intact. This is function can be used to convert HTML pages to pure text.
+     * <p>
+     * Note that you still need to unescape HTML entities and perhaps normlize
+     * the whitespaces of you want to do this.
      *
      * @param source
      * @return
      */
     public static String stripHtml(String source){
         return source.replaceAll("\\<.*?>", "");
+    }
+    
+    /**
+     * Normilize whitespaces
+     *
+     * This function normalize whitespaces. It removes all groups of 
+     * whitespaces (spaces, tabs, and line breaks) and replaces them with
+     * just a single space.
+     *
+     * @param   source  The string to normalize
+     * @return          The normalized  
+     */
+    public static String normalizeSpaces(String source) {
+        return source.replaceAll("\\s+", " ");
     }
 }
 
