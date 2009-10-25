@@ -628,6 +628,16 @@ public class Network {
             System.out.println("Done half-joining channel " + channelName);
             Channel channel = unjoinedChannels.remove(channelName);
             channels.put(channelName, channel);
+
+            for (Plugin plugin : plugins.values()) {
+                try {
+                    plugin.onJoin(channel);
+                } catch (Exception e) {
+                    System.out.println("Plugin " + plugin + "crashed in onJoin handler:");
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            }
         }
 
     // TODO: fix
