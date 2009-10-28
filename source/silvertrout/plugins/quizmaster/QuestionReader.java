@@ -43,6 +43,7 @@ import javax.xml.transform.sax.SAXSource;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 
+import silvertrout.commons.*;
 /**
  * QuestionReader reads in question files for the Quizmaster plugin.
  * 
@@ -125,17 +126,19 @@ public class QuestionReader {
 		}
         @Override
 		public void characters(char[] ch, int start, int length) {
-			String data = new String(ch, start, length).trim();
+			String data = EscapeUtils.normalizeSpaces(
+			        new String(ch, start, length));
+			System.out.println("char data: '" + data + "'");
 			if(currentTag().equals("line")) {
 				if(previousTag().equals("question")) {
-					question.questionLine = data;
+					question.questionLine += data;
 				} else if(previousTag().equals("hints")) {
-					question.hintLine = data;
+					question.hintLine += data;
 				}
 			} else if(currentTag().equals("hint")) {
-				question.hints.get(question.hints.size() - 1).hint = data;
+				question.hints.get(question.hints.size() - 1).hint += data;
 			} else if(currentTag().equals("answer")) {
-				question.answers.get(question.answers.size() - 1).answer = data;
+				question.answers.get(question.answers.size() - 1).answer += data;
 			}
 		}
 

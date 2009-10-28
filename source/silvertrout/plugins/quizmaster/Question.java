@@ -32,10 +32,10 @@ public class Question {
     String file         = null;
 	int    row          = -1;
 	// Category
-	String category     = null;
+	String category     = "";
     // Question and hint        
-    String questionLine = null;
-    String hintLine     = null;
+    String questionLine = "";
+    String hintLine     = "";
     // Max attempts 
     int attempts        = 100;
 	// Required amount of answers
@@ -45,7 +45,7 @@ public class Question {
     
 	// Hint struct
     class Hint {
-        String hint      = null;
+        String hint      = "";
         int    scoredec  = 1; //?
     }
     // Hint collection
@@ -53,7 +53,7 @@ public class Question {
 	
 	// Answer struct
     class Answer {
-        String  answer   = null;
+        String  answer   = "";
         int     score    = 5;
         boolean required = false;
     }
