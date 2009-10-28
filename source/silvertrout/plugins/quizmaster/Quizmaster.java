@@ -413,29 +413,33 @@ public class Quizmaster extends silvertrout.Plugin {
      *
      * @param sender
      */
-    public void printStats(String sender) {
+    public void printStats(String sender, String lookup) {
         
-        int          scorePos   = scoreManager.getPosition(sender);
-        int          score      = scoreManager.getTotalScore(sender);
+        int          scorePos   = scoreManager.getPosition(lookup);
+        int          score      = scoreManager.getTotalScore(lookup);
 
         int          trophyTot  = trophyManager.getTrophies().size();
-        List<Trophy> trophyList = trophyManager.getTrophies(sender);
+        List<Trophy> trophyList = trophyManager.getTrophies(lookup);
         int          trophy     = trophyList.size();
         
         String       msg        = sender + ", ";
         
+        boolean      nickSame   = sender.equalsIgnoreCase(lookup);
+        String       nickSing   = nickSame ? "Du":  lookup;
+        String       nickPlur   = nickSame ? "Din": lookup.endsWith("s") ? lookup: lookup + "s";
+        
         // Score part
         if(scorePos == -1) {
-            msg += "Du har inga poäng, och  är inte med på topplistan.  ";
+            msg += nickSing + " har inga poäng, och  är inte med på topplistan.  ";
         } else {
-            msg += "Du ligger på plats " + scorePos + ", med " + score + "p.  ";
+            msg += nickSing + " ligger på plats " + scorePos + ", med " + score + "p.  ";
         }
         
         // Trophy part
         if(trophy == 0) {
-            msg += "Du har inga troféer. ";
+            msg += nickSing + " har inga troféer. ";
         } else {
-            msg += "Du har " + trophy + " av " + trophyTot + " troféer: ";
+            msg += nickSing + " har " + trophy + " av " + trophyTot + " troféer: ";
             
             for(int i = 0; i < trophy; i++) {
                 msg += trophyList.get(i).getName();
@@ -449,7 +453,7 @@ public class Quizmaster extends silvertrout.Plugin {
         
         // Rank part
         int nextrank = rankInterval - score % rankInterval;
-        msg += ". Din rank är: " + getRang(score) + " (" 
+        msg += ". " + nickPlur + " rank är: " + getRang(score) + " (" 
                 + nextrank + "p kvar till nästa rank).";
         
         getNetwork().getConnection().sendPrivmsg(channelName, msg);
@@ -506,9 +510,14 @@ public class Quizmaster extends silvertrout.Plugin {
                 }
             }
             
-            if(message.equals("!stats")) {
+            if(message.startsWith("!stats")) {
+                String[] parts = message.substring(1).split("\\s");
                 if(currentTime - statTime > 20) {
-                    printStats(user.getNickname());
+                    if(parts.length == 2) {
+                        printStats(user.getNickname(), parts[1]);
+                    } else {
+                        printStats(user.getNickname(), user.getNickname());
+                    }
                     statTime = currentTime;
                 }
             }

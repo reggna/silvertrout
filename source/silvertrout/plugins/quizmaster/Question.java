@@ -32,10 +32,10 @@ public class Question {
     String file         = null;
 	int    row          = -1;
 	// Category
-	String category     = "";
+	String category     = null;
     // Question and hint        
     String questionLine = "";
-    String hintLine     = "";
+    String hintLine     = null;
     // Max attempts 
     int attempts        = 100;
 	// Required amount of answers

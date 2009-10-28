@@ -128,12 +128,15 @@ public class QuestionReader {
 		public void characters(char[] ch, int start, int length) {
 			String data = EscapeUtils.normalizeSpaces(
 			        new String(ch, start, length));
-			System.out.println("char data: '" + data + "'");
 			if(currentTag().equals("line")) {
 				if(previousTag().equals("question")) {
 					question.questionLine += data;
 				} else if(previousTag().equals("hints")) {
-					question.hintLine += data;
+				    if(question.hintLine != null) {
+    					question.hintLine += data;
+					} else {
+						question.hintLine = data;
+					}
 				}
 			} else if(currentTag().equals("hint")) {
 				question.hints.get(question.hints.size() - 1).hint += data;
