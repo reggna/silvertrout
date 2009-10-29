@@ -44,6 +44,19 @@ import silvertrout.settings.NetworkSettings;
  */
 public class Network {
 
+    private static abstract class PluginCallback {
+        String callbackName;
+        
+        PluginCallback(String callbackName) {
+          this.callbackName = callbackName;
+        }
+        
+        abstract void   callback(Plugin plugin);
+        String getCallbackName() {
+            return callbackName;
+        }
+    }
+
     private final NetworkSettings networkSettings;
     private final User me;
     private final Map<String, Channel> channels = new HashMap<String, Channel>();
@@ -146,18 +159,14 @@ public class Network {
         connected = false;
         // stop worker thread
         workerThread.cancel();
+        
         // notify plugins
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onDisconnected();
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onDisconnect handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        callPlugin(new PluginCallback("onDisconnected") {
+            void callback(Plugin plugin) { plugin.onDisconnected(); };
+        });
+
         removeUser(me.getNickname());
-    // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
+        // destroy this Network instance. how? If we want to reconnect the easiest way is to create a new Network
     }
 
     void onNoMotd() {
@@ -178,34 +187,22 @@ public class Network {
      * @param user
      * @param mode
      */
-    void onGiveMode(User giver, Channel channel, User receiver, char mode) {
+    void onGiveMode(final User giver, final Channel channel, final User receiver, final char mode) {
         channel.getUsers().get(receiver).giveMode(mode);
 
-        for (Plugin plugin : plugins.values()) {    
-            try {
-                plugin.onGiveMode(giver, channel, receiver, mode);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onGiveMode handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        callPlugin(new PluginCallback("onGiveMode") {
+            void callback(Plugin plugin) { plugin.onGiveMode(giver, channel, receiver, mode); };
+        });
     }
 
     /**
      * Invite received from known user
      * @param channel
      */
-    void onInvite(User user, String channel) {
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onInvite(user, channel);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onInvite handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+    void onInvite(final User user, final String channel) {
+        callPlugin(new PluginCallback("onInvite") {
+            void callback(Plugin plugin) { plugin.onInvite(user, channel); };
+        });
     }
 
     /**
@@ -223,16 +220,10 @@ public class Network {
      * @param receiver
      * @param message
      */
-    void onKick(User kicker, Channel channel, User receiver, String message) {
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onKick(kicker, channel, receiver, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onKick handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+    void onKick(final User kicker, final Channel channel, final User receiver, final String message) {
+        callPlugin(new PluginCallback("onKick") {
+            void callback(Plugin plugin) { plugin.onKick(kicker, channel, receiver, message); };
+        });
     }
 
     /**
@@ -240,16 +231,10 @@ public class Network {
      * @param channel
      * @param message
      */
-    void onNotice(User user, Channel channel, String message) {
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onNotice(user, channel, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onNotice handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+    void onNotice(final User user, final Channel channel, final String message) {
+        callPlugin(new PluginCallback("onNotice") {
+            void callback(Plugin plugin) { plugin.onNotice(user, channel, message); };
+        });
     }
 
     /**
@@ -257,16 +242,10 @@ public class Network {
      * @param user sender
      * @param message
      */
-    void onNotice(User user, String message) {
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onNotice(user, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onNotice handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+    void onNotice(final User user, final String message) {
+        callPlugin(new PluginCallback("onNotice") {
+            void callback(Plugin plugin) { plugin.onNotice(user, message); };
+        });
     }
 
     /**
@@ -293,18 +272,12 @@ public class Network {
      * @param channel
      * @param message
      */
-    void onPart(Channel channel, String message) {
+    void onPart(final Channel channel, final String message) {
         removeChannel(channel.getName());
-
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onPart(channel, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onPart handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+        
+        callPlugin(new PluginCallback("onPart") {
+            void callback(Plugin plugin) { plugin.onPart(channel, message); };
+        });
     }
 
     /**
@@ -313,34 +286,22 @@ public class Network {
      * @param channel
      * @param message
      */
-    void onPart(User user, Channel channel, String message) {
+    void onPart(final User user, final Channel channel, final String message) {
         channel.delUser(user);
 
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onPart(user, channel, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onPart handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+        callPlugin(new PluginCallback("onPart") {
+            void callback(Plugin plugin) { plugin.onPart(user, channel, message); };
+        });
     }
 
     /**
      * Ping question received
      * @param target
      */
-    void onPing(String target) {
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onPing(target);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onPing handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+    void onPing(final String target) {
+        callPlugin(new PluginCallback("onPing") {
+            void callback(Plugin plugin) { plugin.onPing(target); };
+        });
     }
 
     /**
@@ -348,55 +309,30 @@ public class Network {
      * @param nickname
      * @param message
      */
-    void onPrivmsg(String from, String to, String message) {
+    void onPrivmsg(String from, String to, final String message) {
         /* ignore everything we send to ourself to prevent sending loops */
         if(from == to) return;
         
         // Private message 
         if (to.equals(getMyUser().getNickname())) {
-            User user = getUser(from);
-            // Unknown user
-            if (user == null) {
-                user = new User(from, this);
-            }
-            for (Plugin plugin : plugins.values()) {
-                try {
-                    plugin.onPrivmsg(user, message);
-                } catch (Exception e) {
-                    System.out.println("Plugin " + plugin + "crashed in onPrivms handler:");
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
-                }                
-            }
+            final User user = getUser(from) != null ? getUser(from): new User(from, this);
+            callPlugin(new PluginCallback("onPrivms") {
+                void callback(Plugin plugin) { plugin.onPrivmsg(user, message); };
+            });
         } else if(from.equals(getMyUser().getNickname())){
-            User user = getUser(to);
-            if(user == null){
-                user = new User(to, this);
-            }
-            for (Plugin plugin : plugins.values()) {
-                try {
-                    plugin.onSendmsg(user, message);
-                } catch (Exception e) {
-                    System.out.println("Plugin " + plugin + "crashed in onSendmsg handler:");
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
-                }                
-            }
+            final User user = getUser(to) != null ? getUser(to): new User(to, this);
+            callPlugin(new PluginCallback("onSendmsg") {
+                void callback(Plugin plugin) { plugin.onSendmsg(user, message); };
+            });
         // To channel
         } else {
-            Channel channel = getChannel(to);
-            User user = getUser(from);
+            final Channel channel = getChannel(to);
+            final User user = getUser(from);
 
             if (user != null && channel != null) {
-                for (Plugin plugin : plugins.values()) {
-                    try {
-                        plugin.onPrivmsg(user, channel, message);
-                    } catch (Exception e) {
-                        System.out.println("Plugin " + plugin + "crashed in onPrivms handler:");
-                        System.out.println(e.getMessage());
-                        e.printStackTrace();
-                    }     
-                }
+                callPlugin(new PluginCallback("onPrivmsg") {
+                    void callback(Plugin plugin) { plugin.onPrivmsg(user, channel, message); };
+                });
             } else {
                 // TODO: should not happend
                 System.out.println("Message from unkown person or to unknown channel");
@@ -410,7 +346,7 @@ public class Network {
      * @param user
      * @param message
      */
-    void onQuit(User user, String message) {
+    void onQuit(final User user, final String message) {
         /* remove the user from all channels */
         for (Channel channel : channels.values()) {
             channel.delUser(user);
@@ -420,15 +356,9 @@ public class Network {
         removeUser(user.getNickname());
 
         /* run the onQuit in plugins */
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onQuit(user, message);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onQuit handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+        callPlugin(new PluginCallback("onQuit") {
+            void callback(Plugin plugin) { plugin.onQuit(user, message); };
+        });
     }
 
     /**
@@ -437,18 +367,12 @@ public class Network {
      * @param user
      * @param mode
      */
-    void onTakeMode(User taker, Channel channel, User affectedUser, char mode) {
+    void onTakeMode(final User taker, final Channel channel, final User affectedUser, final char mode) {
         channel.getUsers().get(affectedUser).takeMode(mode);
 
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onTakeMode(taker, channel, affectedUser, mode);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onTakeMode handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        callPlugin(new PluginCallback("onTakeMode") {
+            void callback(Plugin plugin) { plugin.onTakeMode(taker, channel, affectedUser, mode); };
+        });
     }
 
     /**
@@ -489,15 +413,11 @@ public class Network {
                 channel.addUser(user, new Modes());
                 // Tell our fine plugins about this joyus occation and let them
                 // rejoice and be happy.
-                for (Plugin plugin : plugins.values()) {
-                    try {
-                        plugin.onJoin(user, channel);
-                    } catch (Exception e) {
-                        System.out.println("Plugin " + plugin + "crashed in onJoin handler:");
-                        System.out.println(e.getMessage());
-                        e.printStackTrace();
-                    }
-                }
+                final User    finalUser    = user;
+                final Channel finalChannel = channel;
+                callPlugin(new PluginCallback("onJoin") {
+                    void callback(Plugin plugin) { plugin.onJoin(finalUser, finalChannel); };
+                });
             }
         }
     }
@@ -510,8 +430,8 @@ public class Network {
     void onNick(String nickname, String newNickname) {
 
         // TODO: can this happend without a valid user?
-        User user = getUser(nickname);
-        String oldNickname = user.getNickname();
+        final User user = getUser(nickname);
+        final String oldNickname = user.getNickname();
 
         // Move user in user hash map
         users.remove(oldNickname);
@@ -519,15 +439,9 @@ public class Network {
 
         user.setNickname(newNickname);
 
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onNick(user, oldNickname);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onNick handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }            
-        }
+        callPlugin(new PluginCallback("onNick") {
+            void callback(Plugin plugin) { plugin.onNick(user, oldNickname); };
+        });
     }
 
     /**
@@ -539,26 +453,20 @@ public class Network {
 
         System.out.println("New topic for " + channelName + " is " + newTopic);
 
-        Channel channel = getChannel(channelName);
+        final Channel channel = getChannel(channelName);
 
         if (channel != null) {
-            String oldTopic = channel.getTopic();
+            final String oldTopic = channel.getTopic();
             channel.setTopic(newTopic);
 
-            for (Plugin plugin : plugins.values()) {
-                try {
-                    plugin.onTopic(me, channel, oldTopic);
-                } catch (Exception e) {
-                    System.out.println("Plugin " + plugin + "crashed in onTopic handler:");
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
-                }
-            }
+            callPlugin(new PluginCallback("onTopic") {
+                void callback(Plugin plugin) { plugin.onTopic(me, channel, oldTopic); };
+            });
         } else {
             // TODO: check unavaible list?
-            channel = unjoinedChannels.get(channelName);
-            if (channel != null) {
-                channel.setTopic(newTopic);
+            Channel unjoinedChannel = unjoinedChannels.get(channelName);
+            if (unjoinedChannel != null) {
+                unjoinedChannel.setTopic(newTopic);
             } else {
                 System.out.println("Error: Topic for non joined and non unjoined channel " + channelName);
             }
@@ -571,15 +479,11 @@ public class Network {
     void onConnect() {
         connected = true;
         addUser(me);
-        for (Plugin plugin: getPlugins().values()) {
-            try {
-                plugin.onConnected();
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onConnected handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        
+        callPlugin(new PluginCallback("onConnected") {
+            void callback(Plugin plugin) { plugin.onConnected(); };
+        });
+
         for (Map.Entry<String, Channel> entry : unjoinedChannels.entrySet()) {
             getConnection().join(entry.getKey(), entry.getValue().password);
         }
@@ -849,6 +753,26 @@ public class Network {
     }
 
     /**
+     * Call the callback in the PluginCallback for every loaded plugin.
+     *
+     * TODO: logging, exception handeling, exception frequency, etc
+     *
+     * @param  pcb  Plugin callback to call for every loaded plugin
+     */
+    public void callPlugin(PluginCallback pcb) {
+          for (Plugin plugin : plugins.values()) {
+            try {
+                pcb.callback(plugin);
+            } catch (Exception e) {
+                System.out.println("Plugin " + plugin + "crashed in " 
+                        + pcb.getCallbackName() + " handler:");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * Get an indicator of the number of exceptions occuring in this network's working thread.
      * 0 is good. Every exception adds one and every tick() removes one.
      *
@@ -871,7 +795,7 @@ public class Network {
      * 
      *
      */
-    private void onTick(int ticks) {
+    private void onTick(final int ticks) {
     
         if(!connected) {
             return;
@@ -881,15 +805,10 @@ public class Network {
         if(exceptionFrequenzy > 0) {
             exceptionFrequenzy--;
         }
-        for (Plugin plugin : plugins.values()) {
-            try {
-                plugin.onTick(ticks);
-            } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in onTick handler:");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+        
+        callPlugin(new PluginCallback("onTick") {
+            void callback(Plugin plugin) { plugin.onTick(ticks); };
+        });
     }
 
     /**
