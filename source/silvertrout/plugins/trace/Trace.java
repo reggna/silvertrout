@@ -139,6 +139,12 @@ public class Trace extends silvertrout.Plugin {
                     channel.sendPrivmsg(user.getNickname() + ": " 
                             + message + ": " + operator);
                 }
+
+                // Fetch ratsit information
+                if(ssn != null && !ssn.equals("")) {
+                    String info = RatsitFinder.getInformation(ssn);
+                    channel.sendPrivmsg(user.getNickname() + ": " + info);
+                }
             }
         }
     }
