@@ -46,9 +46,12 @@
   </question>
 
   <question>
-    <line>Vad har Sverige för grundlagar?</line>
+    <line>Nämn en av Sveriges grundlagar.</line>
     <answers>
-      <answer>Regeringsformen, Tryckfrihetsförordningen, Yttrandefrihetsgrundlagen och Succesionsordningen</answer>
+      <answer>Tryckfrihetsförordningen</answer>
+      <answer>Yttrandefrihetsgrundlagen</answer>
+      <answer>Regeringsformen</answer>
+      <answer>Succesionsordningen</answer>
     </answers>
   </question>
 
@@ -63,13 +66,6 @@
     <line>Vem stiftar förordningar?</line>
     <answers>
       <answer>Regeringen</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vem är generalsekreterare för Sveriges advokatsamfund?</line>
-    <answers>
-      <answer>Anne Ramberg</answer>
     </answers>
   </question>
 
@@ -172,13 +168,6 @@
   </question>
 
   <question>
-    <line>Teleologisk lagtolkning innebär att man...</line>
-    <answers>
-      <answer>Tolkar lagen ur ett ändamålsperspektiv</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Dödstraffet avskaffades i fredstid 1921 men när avskaffades dödstraffet i krigstid?</line>
     <answers>
       <answer>1973</answer>
@@ -203,13 +192,6 @@
     <line>Du köper en ny tv i din lokala tv- och radiobutik. Ett par dagar senare upptäcker du att en likadan tv säljs mycket billigare i en affär i närheten. Har du enligt lagen rätt att ångra ditt första köp, lämna tillbaka tvn och få pengarna tillbaka?</line>
     <answers>
       <answer>Nej</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Du har ett fast arbete sedan några år tillbaka, men vill ta tjänstledigt för att studera. Har du laglig rätt att kräva tjänstledigt?</line>
-    <answers>
-      <answer>Ja, om studierna inte är av hobbykaraktär</answer>
     </answers>
   </question>
 
