@@ -145,8 +145,12 @@ public class User {
      * If both have server set and the servers are not equal they are not the same
      * Otherwise they are the same
      */
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
+    
+        Thread.dumpStack();
+        System.exit(1);
+        
         if (obj == null) {
             return false;
         }
@@ -161,17 +165,17 @@ public class User {
             return false;
         }
         return true;
-    }
+    }*/
 
     /**
      * An arbitrary hashcode algorithm based on nickname only
      * @return hash of nickname
      */
-    @Override
+    /*@Override
     public int hashCode() {
         int hash = 7;
         hash = 71 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
         return hash;
-    }
+    }*/
 }
 

@@ -436,6 +436,8 @@ public class Network {
         // Move user in user hash map
         users.remove(oldNickname);
         users.put(newNickname, user);
+        
+        // Update channels
 
         user.setNickname(newNickname);
 

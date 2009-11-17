@@ -459,6 +459,46 @@ public class Quizmaster extends silvertrout.Plugin {
         getNetwork().getConnection().sendPrivmsg(channelName, msg);
     }
     
+    void checkAnswer(User user, Channel channel, String message) {
+        // Answer to question
+        String uanswer      = message.toLowerCase().trim();
+        int    uanswerCount = 0;
+        int    score        = 0;
+        for(Question.Answer answer: question.answers) {
+
+            String cans = answer.answer.toLowerCase();
+            int pos = uanswer.indexOf(cans);
+            char before = pos <= 0 ? ' ': uanswer.charAt(pos - 1);
+            char after  = pos + cans.length() >= uanswer.length() ? ' ': uanswer.charAt(pos + cans.length());
+            
+            System.out.println(cans + "/" + uanswer + " = " + pos + ", " + before + ", " + after);
+            
+            if(pos >= 0 && !Character.isLetterOrDigit(before) && 
+                        !Character.isLetterOrDigit(after)) { 
+                score += answer.score;
+                uanswerCount++;
+                
+            } else {
+                if(answer.required) {
+                    //getNetwork().getConnection().sendPrivmsg(channelName, 
+                    //      "missing req answer: " + answer.answer);
+                    return;
+                }
+            }
+        }
+        if(uanswerCount >= question.required) {
+            for(int i = 0; i < currentHint; i++)
+               score -= question.hints.get(i).scoredec;
+            awardScore(user.getNickname(), Math.max(1, score));
+            endQuestion(true);
+
+        } else {
+            //getNetwork().getConnection().sendPrivmsg(channelName, 
+            //      "req answer " + question.required + " > " + uanswerCount);
+        }
+
+    }
+    
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
 
@@ -466,41 +506,7 @@ public class Quizmaster extends silvertrout.Plugin {
         if(channel != null && channel.getName().equalsIgnoreCase(channelName)) {
 
             if(state == State.RUNNING_QUESTION) {
-                // Answer to question
-                String uanswer      = message.toLowerCase().trim();
-                int    uanswerCount = 0;
-                int    score        = 0;
-                for(Question.Answer answer: question.answers) {
-
-                    String cans = answer.answer.toLowerCase();
-                    int pos = uanswer.indexOf(cans);
-                    char before = pos <= 0 ? ' ': uanswer.charAt(pos - 1);
-                    char after  = pos + cans.length() >= uanswer.length() ? ' ': uanswer.charAt(pos + cans.length());
-                    
-                    System.out.println(cans + "/" + uanswer + " = " + pos + ", " + before + ", " + after);
-                    
-                    if(pos >= 0 && !Character.isLetterOrDigit(before) && 
-                                !Character.isLetterOrDigit(after)) { 
-                        score += answer.score;
-                        uanswerCount++;
-                        
-                    } else {
-                        if(answer.required) {
-                            //getNetwork().getConnection().sendPrivmsg(channelName, "missing req answer: " + answer.answer);
-                            return;
-                        }
-                    }
-                }
-                if(uanswerCount >= question.required) {
-                    for(int i = 0; i < currentHint; i++)
-                       score -= question.hints.get(i).scoredec;
-                    awardScore(user.getNickname(), Math.max(1, score));
-                    endQuestion(true);
-
-                } else {
-                    //getNetwork().getConnection().sendPrivmsg(channelName, "req answer " + question.required + " > " + uanswerCount);
-                }
-
+                checkAnswer(user, channel, message);
             } else if(state == State.NOT_RUNNING) {
                 // Start new round
                 // TODO: what about categories?
