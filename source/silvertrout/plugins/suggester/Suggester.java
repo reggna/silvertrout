@@ -116,7 +116,7 @@ public class Suggester extends silvertrout.Plugin {
      */
     private static String getSuggestion(String s) {
         String suggestion = ConnectHelper.Connect(connection, server, file + s, 
-            port, maxContentLength);
+            port, maxContentLength, null, null);
         suggestion = suggestion.substring(suggestion.indexOf("class=p><b><i>")+14);
         suggestion = suggestion.substring(0, suggestion.indexOf("<"));
         if(suggestion.indexOf(">") > 0) return null;

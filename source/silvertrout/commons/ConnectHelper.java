@@ -23,10 +23,13 @@ package silvertrout.commons;
 
 import java.nio.ByteBuffer;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import java.net.URL;
+import java.net.URLEncoder;
+
 import java.net.HttpURLConnection;
 import java.io.OutputStreamWriter;
 
@@ -42,6 +45,37 @@ public class ConnectHelper {
     // Charset to fall back to if none was found
     private static final String fallbackCharset = "iso-8859-1";
 
+
+    private static String getCharset(String contentType) {
+        String[] parameters = contentType.split(";");
+        
+        for(int i = 1; i < parameters.length; i++) {
+            String parameter = parameters[i].trim();
+            if(parameter.indexOf('=') != -1) {
+                int    split = parameter.indexOf('=');
+                String key   = parameter.substring(0, split);
+                String value = parameter.substring(split + 1);
+                
+                if(key.equalsIgnoreCase("charset")) {
+                    //TODO: fix for quoted strings
+                    return value;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static boolean okContentType(String contentType) {
+        for (int i = 0; i < contentTypes.length; i++) {
+            if (contentTypes[i].equalsIgnoreCase(contentType)) {
+                return true;
+            }
+        }
+//        System.out.println("damn content type!");
+        return false;
+    }
+
+
     /**
      *
      * @param connectionType
@@ -51,7 +85,8 @@ public class ConnectHelper {
      * @param maxContentLength
      * @return
      */
-    public static String Connect(String connectionType, String server, String file, int port, int maxContentLength) {
+    public static String Connect(String connectionType, String server, String file, int port, int maxContentLength,
+            String requestMethod, Map<String, String> postData) {
         try {
             // Set up connection to disallow output and allow input. It should follow
             // redirects but dont use a cache.
@@ -66,25 +101,28 @@ public class ConnectHelper {
             con.setUseCaches(false);
             con.setInstanceFollowRedirects(true);
 
-            // Find out charset and content type. As default, if we don't find a
-            // charset in the HTML header we try to use ISO-8559-1.
-            String patternContentType = "(?i)^([a-zA-Z0-9_\\-\\/]+)(?:;)+(?:\\s)*(?:" +
-                    "charset=([a-zA-Z0-9_\\-]+))?+$";
-            Pattern pc = Pattern.compile(patternContentType);
-
-            Matcher mc = pc.matcher(con.getContentType());
-            String charset = null;
-            String contentType = null;
-            if (mc.find()) {
-                contentType = mc.group(1);
-                charset = mc.group(2);
-            } else {
-//                System.out.println("Link does not contain content type");
-//                System.out.println(con.getContentType());
-                contentType = con.getContentType();
-//                return null;
+            // Request method
+            if(requestMethod != null) {
+                con.setRequestMethod(requestMethod);
             }
 
+            // Write postdata:
+            if(postData != null && !postData.isEmpty()) {
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                String postdata = "";
+                for(Map.Entry<String,String> entry: postData.entrySet()) {
+                    postdata = "&" + URLEncoder.encode(entry.getKey(), "utf-8")
+                            + "=" + URLEncoder.encode(entry.getValue(), "utf-8");
+                }
+                wr.write(postdata.substring(1));
+                wr.flush();
+            }
+            
+            // Find out charset and content type. As default, if we don't find a
+            // charset in the HTML header we try to use ISO-8559-1 later.
+            String contentType = con.getContentType().split(";")[0];
+            String charset     = getCharset(con.getContentType());
+            
             // Check for content type. Only accept web pages.
             if (!okContentType(contentType)) {
                 if(contentType.contains(";"))
@@ -117,121 +155,43 @@ public class ConnectHelper {
             }
 
             if (charset == null) {
-                String patternMeta = "(?i)<meta http-equiv=\"Content-Type\" " +
-                        "content=\"([a-zA-Z0-9_\\-\\/]+)(?:; " +
-                        "charset=([a-zA-Z0-9_\\-]+))?+\"";
+                String patternMeta = "(?i)<meta\\s([^>]*)>";
                 Pattern pm = Pattern.compile(patternMeta);
                 Matcher mm = pm.matcher(new String(bb.array(), fallbackCharset));
 
-                if (mm.find()) {
-                    charset = mm.group(2);
-                }
-            }
-            // If still no charset, fall back to fallbackCharset
-            if (charset == null) {
-                charset = fallbackCharset;
-            }
+                while(mm.find()) {
 
-            return new String(bb.array(), charset);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /**
-     *
-     * @param connectionType
-     * @param server
-     * @param file
-     * @param port
-     * @param maxContentLength
-     * @param postdata
-     * @return
-     */
-    public static String Connect(String connectionType, String server,
-            String file, int port, int maxContentLength, String postdata) {
-        try {
-            // Set up connection to disallow output and allow input. It should follow
-            // redirects but dont use a cache.
-            URL urll = new URL(connectionType, server, port, file);
-            HttpURLConnection con = (HttpURLConnection) urll.openConnection();
-
-            con.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
-
-            con.setAllowUserInteraction(false);
-            con.setDoInput(true);
-            con.setDoOutput(true);
-            con.setUseCaches(false);
-            con.setInstanceFollowRedirects(true);
-
-            // Write postdata:
-            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
-            wr.write(postdata);
-            wr.flush();
-
-            // Find out charset and content type. As default, if we don't find a
-            // charset in the HTML header we try to use ISO-8559-1.
-            String patternContentType = "(?i)^([a-zA-Z0-9_\\-\\/]+)(?:;)+(?:\\s)*(?:" +
-                    "charset=([a-zA-Z0-9_\\-]+))?+$";
-            Pattern pc = Pattern.compile(patternContentType);
-
-            Matcher mc = pc.matcher(con.getContentType());
-            String charset = null;
-            String contentType = null;
-            if (mc.find()) {
-                contentType = mc.group(1);
-                charset = mc.group(2);
-            } else {
-//                System.out.println("Link does not contain content type");
-//                System.out.println(con.getContentType());
-                contentType = con.getContentType();
-//                return null;
-            }
-
-            // Check for content type. Only accept web pages.
-            if (!okContentType(contentType)) {
-                return null;
-            }
-
-            // Byte buffer (from content length):
-            int contentLength = con.getContentLength();
-            if (contentLength > maxContentLength || contentLength < 100) {
-                contentLength = maxContentLength;
-            }
-            ByteBuffer bb = ByteBuffer.allocate(contentLength);
-
-            try {
-                while (true) {
-                    byte[] tmp = new byte[256];
-                    int cnt = con.getInputStream().read(tmp);
-                    if (cnt == -1) {
-                        break;
+                    String patternAttrib = "(?i)([a-z\\-]+)=(\"|')([^\"|']*)(\"|')";
+                    Pattern pa = Pattern.compile(patternAttrib);
+                    Matcher ma = pa.matcher(mm.group(1));
+                    
+                    System.out.println(mm.group(1));
+                    
+                    String httpEquiv = null, content = null;
+                    while(ma.find()) {
+                        System.out.println(ma.group(1) + ": " + ma.group(3));
+                        if(ma.group(1).equalsIgnoreCase("http-equiv")) {
+                            httpEquiv = ma.group(3);
+                        } else if(ma.group(1).equalsIgnoreCase("content")) {
+                            content  = ma.group(3);
+                        }
                     }
-                    bb.put(tmp, 0, cnt);
-                }
-            } catch (java.io.IOException e) {
-                e.printStackTrace();
-                return null;
-            } catch (java.nio.BufferOverflowException e) {
-                //e.printStackTrace();
-            // TODO: Work around
-            }
-
-            if (charset == null) {
-                String patternMeta = "(?i)<meta http-equiv=\"Content-Type\" " +
-                        "content=\"([a-zA-Z0-9_\\-\\/]+)(?:; " +
-                        "charset=([a-zA-Z0-9_\\-]+))?+\"";
-                Pattern pm = Pattern.compile(patternMeta);
-                Matcher mm = pm.matcher(new String(bb.array(), fallbackCharset));
-
-                if (mm.find()) {
-                    charset = mm.group(2);
+                    
+                    if(httpEquiv != null && content != null) {
+                        if(httpEquiv.equalsIgnoreCase("Content-Type")) {
+                          System.out.println("Found charset in meta");
+                          System.out.println(httpEquiv + ", " + content);
+                          charset = getCharset(content);
+                          break;
+                        }
+                    }
                 }
             }
+            
             // If still no charset, fall back to fallbackCharset
             if (charset == null) {
                 charset = fallbackCharset;
+                 System.out.println("Using fallback charset: " + charset);
             }
 
             return new String(bb.array(), charset);
@@ -241,14 +201,5 @@ public class ConnectHelper {
         }
     }
 
-    private static boolean okContentType(String contentType) {
-        for (int i = 0; i < contentTypes.length; i++) {
-            if (contentTypes[i].equalsIgnoreCase(contentType)) {
-                return true;
-            }
-        }
-//        System.out.println("damn content type!");
-        return false;
-    }
 }
 

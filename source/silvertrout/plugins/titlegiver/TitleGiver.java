@@ -134,7 +134,7 @@ public class TitleGiver extends silvertrout.Plugin {
         }
 
         // Find title
-        String page = ConnectHelper.Connect(connection, server, file, port, maxContentLength * 10);
+        String page = ConnectHelper.Connect(connection, server, file, port, maxContentLength * 10, null, null);
         if (page != null) {
             String titlePattern = "(?is)<title>([^<]+)";
             Pattern pt = Pattern.compile(titlePattern);

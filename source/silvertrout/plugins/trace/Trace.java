@@ -59,7 +59,7 @@ public class Trace extends silvertrout.Plugin {
                 }catch(UnsupportedEncodingException e){ /* not possible  */}
                 /* fetch information from eniro */
                 String eniro = ConnectHelper.Connect("http", "www.eniro.se",
-                        url, 80, 16384);
+                        url, 80, 16384, null, null);
                 System.out.println(url);
                 firstname = substring(eniro,
                         "<span class=\"given-name\">","<");
@@ -81,7 +81,7 @@ public class Trace extends silvertrout.Plugin {
                     }catch(UnsupportedEncodingException e){ /* not possible  */}
                     /* then we try hitta */
                     eniro = ConnectHelper.Connect("http", "hitta.se", url, 80,
-                            524288);
+                            524288, null, null);
                     System.out.println(url); 
                     firstname = substring(eniro,"var tooltipText = '<strong>",
                             " ");
@@ -110,7 +110,7 @@ public class Trace extends silvertrout.Plugin {
                 }catch(UnsupportedEncodingException e){ /* not possible  */}
                 System.out.println(url);
                 String upplysning = ConnectHelper.Connect("http",
-                        "www.upplysning.se", url, 80, 16384);
+                        "www.upplysning.se", url, 80, 16384, null, null);
                 if(!upplysning.contains("<a href=\"show.aspx?id=")){
                     try{
                         url = "/search.aspx?bs=S%F6k&what="
@@ -121,7 +121,7 @@ public class Trace extends silvertrout.Plugin {
                     }catch(UnsupportedEncodingException e){ /* not possible  */}
                     System.out.println(url);
                     upplysning = ConnectHelper.Connect("http",
-                            "www.upplysning.se", url, 80, 16384);
+                            "www.upplysning.se", url, 80, 16384, null, null);
                 }
                 if(upplysning.contains("<a href=\"show.aspx?id=")){
                     ssn = Base64Coder.decodeString(substring(upplysning,

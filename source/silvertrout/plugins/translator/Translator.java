@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import java.util.List;
+import java.util.HashMap;
 
 import silvertrout.commons.EscapeUtils;
 import silvertrout.commons.ConnectHelper;
@@ -46,18 +47,23 @@ public class Translator extends silvertrout.Plugin {
         if(message.startsWith("!t") && channel != null){
             message = message.substring(3);
             /* engelska till svenska */
+            
+            HashMap<String, String> postData = new HashMap<String, String>();
+            postData.put("sprak", "malsprak");
+            postData.put("uppslagsord", message);
             String page = ConnectHelper.Connect("http", "lexin.nada.kth.se", 
-                    "/cgi-bin/sve-eng", 80, maxContentLength, 
-                    "sprak=malsprak&uppslagsord="+ message);
+                    "/cgi-bin/sve-eng", 80, maxContentLength, "POST", postData); 
             String s = getEng(page); 
             if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
             s = getSwe(page);
             if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
             
             /* svenska till engelska: */
+            HashMap<String, String> postData2 = new HashMap<String, String>();
+            postData2.put("sprak", "kallsprak");
+            postData2.put("uppslagsord", message);
             String page2 = ConnectHelper.Connect("http", "lexin.nada.kth.se", 
-                    "/cgi-bin/sve-eng", 80, maxContentLength, 
-                    "sprak=kallsprak&uppslagsord="+ message);
+                    "/cgi-bin/sve-eng", 80, maxContentLength, "POST", postData2);
             s = getEng(page2);
             if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
             s = getSwe(page2);
