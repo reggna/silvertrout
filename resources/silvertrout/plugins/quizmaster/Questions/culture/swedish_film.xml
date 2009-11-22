@@ -1,0 +1,66 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Kultur" subcategory="Svensk film">
+        
+        
+  <question>
+    <line>Vad kallas begreppet som skapades i samband med filmer som 'Jag är nyfiken - gul' som klassades som pornografi i delar av USA?</line>
+    <answers>
+      <answer>Den svenska synden</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vem har regiserat filmen Fucking Åmål?</line>
+    <answers>
+      <answer>Lukas Moodyson</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Nämn en av filmerna i Modstriologin.</line>
+    <answers>
+      <answer>Dom kallar oss mods</answer>
+      <answer>Ett anständigt liv</answer>
+      <answer>Det sociala arvet</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Greta Garbo är en känd svensk skådespelare. Men vad hette hon innan hon skaffade sitt kända artistnamn?</line>
+    <answers>
+      <answer>Greta Gustafsson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad hette skådespelaren som är känd från filmer som Söder om landsvägen och Kalle på Spången?</line>
+    <answers>
+      <answer>Edvard Persson</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vem har regiserat filmen Sånger från andra våningen?</line>
+    <answers>
+      <answer>Roy Andersson</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter skådespelaren som spelade mot Johnny Depp i The Ninth Gate?</line>
+    <answers>
+      <answer>Lena Olin</answer>
+    </answers>
+  </question>
+  
+    <question>
+    <line>Vem har regiserat Utvandrarna?</line>
+    <answers>
+      <answer>Jan Troell</answer>
+    </answers>
+  </question>
+
+</questions>
+

@@ -1,0 +1,99 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Historia" subcategory="Folkrepubliken Kina">
+
+  <question>
+    <line>Efter kampen mellan kommunisterna under Mao Zedong och nationaliserna under Chiang Kai-shek, där kommunisterna vann, utropades Fokrepubliken Kina. Vilket årtal skedde detta?</line>
+    <answers>
+      <answer>1971</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var första ledaren för Folkrepubliken Kina?</line>
+    <answers>
+      <answer>Mao Zedong</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vem var president i Folkrepubliken Kina mellan 1954 och 1956?</line>
+    <answers>
+      <answer>Mao Zedong</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>När är Folkrepubliken Kina utropades 1971, men vilken dag var det? Denna dag är dessutom nationaldag.</line>
+    <answers>
+      <answer>1 oktober</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Vad kallas den bok som innehåller citat ur Maos skrifter, ofta tryckt i fickformat?</line>
+    <answers>
+      <answer>Maos lilla röda</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallades den politisk kampanj som iscensattes av Mao Zedong 1966 och främst genomfördes av rödgardisterna?</line>
+    <answers>
+      <answer>Kulturrevolutionen</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>År 1950 gick Kina in i Koreakriget, men på vems sida?</line>
+    <answers>
+      <answer>Nordkoreas</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Den 5 juni 1989 slogs en stor demonstration (för ökad demokratisering och minskade korruption) blodigt ner. Var hölls demonstrationen?</line>
+    <answers>
+      <answer>Himmelska fridens torg</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter efterträdaren till Jiang Zemin som blev landets president 15 mars 2003?</line>
+    <answers>
+      <answer>Hu Jintao</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter nationalsången som börjar ungefär "Stå upp ni folk som vägrar vara slavar! Med vårt kött och blod bygger vi vår nya långa mur!"?</line>
+    <answers>
+      <answer>De frivilligas marsch</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Guomindangregeringen tog sin tillflykt till ön Taiwan efter kampen med kommunisterna 1949. Hur länge erkände FN denna regering som Kinas lagliga regering?</line>
+    <answers>
+      <answer>1972</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är det officiella namnet på Folkrepubliken Kinas militära styrkor?</line>
+    <answers>
+      <answer>Folkets befrielsearmé</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad kallas den okände man som under protesterna på Himmelska fridens torg blev känd genoma att ensam ställa sig framför en kolonn med stridsvagnar?</line>
+    <answers>
+      <answer>Den okände rebellen</answer>
+      <answer>Tankmannen</answer>
+    </answers>
+  </question>
+
+</questions>
+
