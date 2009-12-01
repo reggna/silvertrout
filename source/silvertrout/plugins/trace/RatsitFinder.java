@@ -31,6 +31,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import silvertrout.commons.EscapeUtils;
@@ -92,8 +93,7 @@ public class RatsitFinder {
                     }
                 }
             }
-            cookies = cookies.substring(0, cookies.length() - 2);
-
+            cookies = cookies.substring(0, cookies.lastIndexOf(";"));
             // Read in response
             String presult   = getConnectionData(l);
             String viewstate = getViewstate(presult);
@@ -187,15 +187,27 @@ public class RatsitFinder {
             conr.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
             conr.setRequestProperty("Referer", "http://www.ratsit.se/BC/Search.aspx");
 
+            System.out.println(resultLink);
             // Read in response
             String rresult = getConnectionData(conr);
-            String civils = extract(rresult, 
-                    "nd:</a></td><td class=\"GridCell\">", "</td>");
+            String civils = EscapeUtils.stripHtml(extract(rresult,
+                    "nd:</a></td><td class=\"GridCell\">", "</td>"));
+            System.out.println(civils);
+            if(civils.contains("Gift med ")){
+                HashMap<String,String> personInfo = new HashMap<String,String>();
+                personInfo.put("firstname", Trace.substring(civils, "Gift med ", " "));
+                String s = civils.substring(0, civils.lastIndexOf(" "));
+                s = s.substring(s.lastIndexOf(" ")+1);
+                personInfo.put("lastname", s);
+                personInfo.put("ssn", Trace.substring(civils, "(", ")").substring(0,8));
+                Trace.getSSN(personInfo);
+                civils = civils.replaceAll("XXXX", personInfo.get("ssn").substring(9));
+            }
             String bolag = extract(rresult, 
                     "sengagemang:</a></td><td class=\"GridCell\">", "</td>");
 
             return EscapeUtils.normalizeSpaces(
-                    "Civilstånd: " + EscapeUtils.stripHtml(civils)
+                    "Civilstånd: " + civils
                     + ", Bolagsengagemang: " + EscapeUtils.stripHtml(bolag));
 
         } catch (IOException ex) {

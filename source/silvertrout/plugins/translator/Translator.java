@@ -21,15 +21,11 @@
  */
 package silvertrout.plugins.translator;
 
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
-import java.util.List;
+import com.google.api.translate.Language;
+import com.google.api.translate.Translate;
+import java.util.Map;
 import java.util.HashMap;
 
-import silvertrout.commons.EscapeUtils;
-import silvertrout.commons.ConnectHelper;
 import silvertrout.Channel;
 import silvertrout.User;
 
@@ -38,65 +34,47 @@ import silvertrout.User;
  **
  */
 public class Translator extends silvertrout.Plugin {
-
+    private static final int maxContentLength = 4096;
     // Max content length (in bytes) to grab to check for translations
-    private static final int maxContentLength = 16384;
+    //private static final int maxContentLength = 16384;
+    Map<String, Language[]> users = new HashMap<String, Language[]>();
+    @Override
+    public void onLoad(Map<String, String> settings){
+        Translate.setHttpReferrer("http://code.google.com/p/silvertrout/");
+    }
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-        if(message.startsWith("!t") && channel != null){
-            message = message.substring(3);
-            /* engelska till svenska */
-            
-            HashMap<String, String> postData = new HashMap<String, String>();
-            postData.put("sprak", "malsprak");
-            postData.put("uppslagsord", message);
-            String page = ConnectHelper.Connect("http", "lexin.nada.kth.se", 
-                    "/cgi-bin/sve-eng", 80, maxContentLength, "POST", postData); 
-            String s = getEng(page); 
-            if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
-            s = getSwe(page);
-            if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
-            
-            /* svenska till engelska: */
-            HashMap<String, String> postData2 = new HashMap<String, String>();
-            postData2.put("sprak", "kallsprak");
-            postData2.put("uppslagsord", message);
-            String page2 = ConnectHelper.Connect("http", "lexin.nada.kth.se", 
-                    "/cgi-bin/sve-eng", 80, maxContentLength, "POST", postData2);
-            s = getEng(page2);
-            if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
-            s = getSwe(page2);
-            if(s != null) channel.sendPrivmsg(user.getNickname() +": "+ s);
+        if(message.startsWith("!clearlang")) users.clear();
+        else if(message.startsWith("!setlang")){
+            String[] langString;
+            try{
+                langString = message.substring(11).split("-");
+            }catch(Exception e){
+                users.remove(user.getNickname());
+                return;
+            }
+            if(langString.length < 2){
+                 users.remove(user.getNickname());
+                 return;
+            }
+            Language[] lang = { Language.fromString(langString[0]),
+                                Language.fromString(langString[1]) };
+            if(lang[0] == null || lang[1] == null)
+                users.remove(user.getNickname());
+            else users.put(user.getNickname(), lang);
+        }else if(message.startsWith("!listlang")){
+            String m = "";
+            for (Language l : Language.values())
+                m+= l.toString() + " ";
+            channel.sendAction(m);
+        }else{
+            if(!users.containsKey(user.getNickname())) return;
+            try{
+                channel.sendPrivmsg(Translate.execute(message, users.get(user.getNickname())[0], users.get(user.getNickname())[1]));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
-    }
-
-    private static String getSwe(String page){
-        return getString(page, "(?:<DT>Svenskt uppslagsord<DD>|<DT>Svensk översättning<DD>)((.*))");
-    }
-    private static String getEng(String page){
-        return getString(page, "(?:<DT>Engelskt uppslagsord<DD>|<DT>Engelsk översättning<DD>)((.*))");
-    }
-    private static String getString(String page, String pattern){
-        Pattern pt = Pattern.compile(pattern);
-        Matcher mt = pt.matcher(page);
-
-        String s = "";
-        if(mt.find())
-            s = mt.group(1);
-        else return null;
-        while(mt.find()) {
-            s += ", " + mt.group(1);
-        }
-        s = EscapeUtils.stripHtml(s).replaceAll("\\W?(\\(|\\[|\\{).*?(\\)|\\]|\\})","");
-        s = s.replaceAll("\\W?(adj|adv|förk|interj|konj|prep|pron|räkne|subst).", ""); 
-        String re = s;
-        if(s.indexOf(", ") > -1)
-            re = s.substring(0, s.indexOf(","));
-        for(String ss: s.split(", ")){
-            if(!re.contains(ss)) re += ", " + ss;
-        }
-        return re;
     }
 }
-

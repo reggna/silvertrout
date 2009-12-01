@@ -30,6 +30,8 @@ import silvertrout.User;
 
 import silvertrout.commons.Base64Coder;
 
+import java.util.HashMap;
+
 /**
  * JBT-plugin to fetch a web page's title and print it to the channel
  * 
@@ -41,111 +43,145 @@ import silvertrout.commons.Base64Coder;
  * @author tigge
  */
 public class Trace extends silvertrout.Plugin {
-    private String substring(String s, String start, String end){
+    public static String substring(String s, String start, String end){
         s = s.substring(s.indexOf(start)+start.length());
         return EscapeUtils.unescapeHtml(s.substring(0,s.indexOf(end)));
     }
 
     @Override
     public void onPrivmsg(User user, Channel channel, String message) {
-        String firstname, lastname, address, zipCode, locality, ssn, url = "";
-        if (channel != null) {
-            if (message.startsWith("!trace")) {
-                message = message.substring(7);
-                try{
-                    url = "/query?search_word="
-                            + java.net.URLEncoder.encode(message,
-                            "iso-8859-1");
-                }catch(UnsupportedEncodingException e){ /* not possible  */}
-                /* fetch information from eniro */
-                String eniro = ConnectHelper.Connect("http", "www.eniro.se",
-                        url, 80, 16384, null, null);
-                System.out.println(url);
-                firstname = substring(eniro,
-                        "<span class=\"given-name\">","<");
-                lastname  = substring(eniro,
-                        "<span class=\"family-name\">","<");
-                address   = substring(eniro,
-                        "<span class=\"street-address\">", "<");
-                zipCode   = substring(eniro,
-                        "<span class=\"postal-code\">", "<");
-                locality  = substring(eniro,
-                        "<span class=\"locality\">", "<");
+        if (channel == null || !message.startsWith("!trace")) return;
+        /* fix a hashmap to store information about the person */
+        HashMap<String, String> personInfo = new HashMap<String, String>();
+        personInfo.put("search", message.substring(7));
+        fetchFromEniro(personInfo);
+        /* did something go wrong? */
+        if(!personInfo.containsKey("firstname")){
+            /* then we try hitta */
+            fetchFromHitta(personInfo);
+        }
+        /* still no match, then return */
+        if(!personInfo.containsKey("firstname")){
+            channel.sendPrivmsg(user.getNickname() + ": N.N.");
+            return;
+        }
 
-                /* did something go wrong? */
-                if(firstname.contains("/")){
-                    try{
-                        url = "/SearchMixed.aspx?vad="
-                                + java.net.URLEncoder.encode(message,
-                                "iso-8859-1");
-                    }catch(UnsupportedEncodingException e){ /* not possible  */}
-                    /* then we try hitta */
-                    eniro = ConnectHelper.Connect("http", "hitta.se", url, 80,
-                            524288, null, null);
-                    System.out.println(url); 
-                    firstname = substring(eniro,"var tooltipText = '<strong>",
-                            " ");
-                    lastname  = substring(eniro, "var tooltipText = '<strong>"
-                            + firstname +"  ","<");
-                    address   = substring(eniro, "<strong>Adress:</strong><br>",
-                            "<");
-                    zipCode   = substring(eniro, "var zipCode = '", "'");
-                    locality  = substring(eniro, "var locality = \"", "\"");
-                }
-                
-                /* still no match, then return */
-                if(firstname.contains("/")){
-                    channel.sendPrivmsg(user.getNickname() + ": N.N.");
-                    return;
-                }
-                
-                /* fetch ssn from upplysning */
-                ssn = "";
-                try{
+        /* fetch ssn from upplysning */
+        getSSN(personInfo);
+
+        channel.sendPrivmsg(user.getNickname() + ": "
+                + personInfo.get("firstname") + " "
+                + personInfo.get("lastname") + ", "
+                + personInfo.get("address") + ", "
+                + personInfo.get("zipCode") + " "
+                + personInfo.get("locality") + " "
+                + personInfo.get("ssn"));
+
+        // Fetch operator for a number
+        String operator = OperatorFinder.getOperator(personInfo.get("search"));
+        if(operator != null) {
+            channel.sendPrivmsg(user.getNickname() + ": "
+                    + personInfo.get("search") + ": " + operator);
+        }
+
+        // Fetch ratsit information
+        if(personInfo.containsKey("ssn") && !personInfo.get("ssn").equals("")) {
+            String info = RatsitFinder.getInformation(personInfo.get("ssn"));
+            channel.sendPrivmsg(user.getNickname() + ": " + info);
+        }
+    }
+
+    public static void getSSN(HashMap<String,String> personInfo){
+        String ssn = "", url = "", upplysning = "";
+        if(personInfo.containsKey("ssn")){
+        try{
+            url = "/search.aspx?searchkey=26722183&bsa=S%F6k&tab=person&f="
+                + java.net.URLEncoder.encode(personInfo.get("firstname"), "iso-8859-1")
+                + "&l=" + java.net.URLEncoder.encode(personInfo.get("lastname"), "iso-8859-1")
+                + "&s=" + personInfo.get("ssn");
+        } catch(UnsupportedEncodingException e){ /* not possible  */}
+        System.out.println(url);
+        upplysning = ConnectHelper.Connect("http",
+                "www.upplysning.se", url, 80, 16384, null, null);
+        }else{
+            try{
                 url = "/search.aspx?bs=S%F6k&what="
-                        + java.net.URLEncoder.encode(firstname + " "
-                        + lastname, "iso-8859-1") + "&where="
-                        + java.net.URLEncoder.encode(address
-                        + ", " + zipCode + " " + locality, "iso-8859-1");
+                    + java.net.URLEncoder.encode(personInfo.get("firstname") + " "
+                    + personInfo.get("lastname"), "iso-8859-1") + "&where="
+                    + java.net.URLEncoder.encode(personInfo.get("address")
+                    + ", " + personInfo.get("zipCode") + " "
+                    + personInfo.get("locality"), "iso-8859-1");
+            } catch(UnsupportedEncodingException e){ /* not possible  */}
+            upplysning = ConnectHelper.Connect("http",
+                    "www.upplysning.se", url, 80, 16384, null, null);
+            if(!upplysning.contains("<a href=\"show.aspx?id=")){
+                try{
+                    url = "/search.aspx?bs=S%F6k&what="
+                        + java.net.URLEncoder.encode(personInfo.get("firstname")
+                        + " " + personInfo.get("lastname"), "iso-8859-1")
+                        + "&where="+ java.net.URLEncoder.encode(
+                        personInfo.get("zipCode") + " "
+                        + personInfo.get("locality"), "iso-8859-1");
                 }catch(UnsupportedEncodingException e){ /* not possible  */}
                 System.out.println(url);
-                String upplysning = ConnectHelper.Connect("http",
-                        "www.upplysning.se", url, 80, 16384, null, null);
-                if(!upplysning.contains("<a href=\"show.aspx?id=")){
-                    try{
-                        url = "/search.aspx?bs=S%F6k&what="
-                            + java.net.URLEncoder.encode(firstname + " "
-                            + lastname, "iso-8859-1") + "&where="
-                            + java.net.URLEncoder.encode(zipCode + " "
-                            + locality, "iso-8859-1");
-                    }catch(UnsupportedEncodingException e){ /* not possible  */}
-                    System.out.println(url);
-                    upplysning = ConnectHelper.Connect("http",
-                            "www.upplysning.se", url, 80, 16384, null, null);
-                }
-                if(upplysning.contains("<a href=\"show.aspx?id=")){
-                    ssn = Base64Coder.decodeString(substring(upplysning,
-                            "<a href=\"show.aspx?id=","\"")).replaceAll(
-                            "\\D", "");
-                    ssn = ssn.substring(0, 8) + "-" + ssn.substring(8);
-                }
-                channel.sendPrivmsg(user.getNickname() + ": " + firstname + " "
-                        + lastname + ", " + address + ", " + zipCode + " "
-                        + locality + " " + ssn);
-                
-                // Fetch operator for a number
-                String operator = OperatorFinder.getOperator(message);
-                if(operator != null) {
-                    channel.sendPrivmsg(user.getNickname() + ": " 
-                            + message + ": " + operator);
-                }
-
-                // Fetch ratsit information
-                if(ssn != null && !ssn.equals("")) {
-                    String info = RatsitFinder.getInformation(ssn);
-                    channel.sendPrivmsg(user.getNickname() + ": " + info);
-                }
+                upplysning = ConnectHelper.Connect("http", "www.upplysning.se",
+                        url, 80, 16384, null, null);
             }
         }
+        if(upplysning.contains("<a href=\"show.aspx?id=")){
+            ssn = Base64Coder.decodeString(substring(upplysning,
+                    "<a href=\"show.aspx?id=","\"")).replaceAll(
+                    "\\D", "");
+            personInfo.put("ssn", ssn.substring(0, 8) + "-" + ssn.substring(8));
+            System.out.println("out: "+ ssn);
+        }
+    }
+
+    public static void fetchFromEniro(HashMap<String, String> personInfo){
+        String message = personInfo.get("search");
+        if(message == null || message.equals("")) return;
+        String url = "";
+        try{
+            url = "/query?search_word=" + java.net.URLEncoder.encode(message,
+                    "iso-8859-1");
+        }catch(UnsupportedEncodingException e){ return;  /* not possible  */}
+        /* fetch information from eniro */
+        String eniro = ConnectHelper.Connect("http", "www.eniro.se", url,
+                80, 16384, null, null);
+        /* make sure we did get a hit: */
+        if(eniro.contains("ingen träff")) return;
+        personInfo.put("firstname", substring(eniro,
+                "<span class=\"given-name\">","<"));
+        personInfo.put("lastname", substring(eniro,
+                "<span class=\"family-name\">","<"));
+        personInfo.put("address", substring(eniro,
+                "<span class=\"street-address\">", "<"));
+        personInfo.put("zipCode", substring(eniro,
+                "<span class=\"postal-code\">", "<"));
+        personInfo.put("locality", substring(eniro,
+                "<span class=\"locality\">", "<"));
+    }
+
+    public static void fetchFromHitta(HashMap<String, String> personInfo){
+        String message = personInfo.get("search");
+        if(message == null || message.equals("")) return;
+        String url = "";
+        try{
+            url = "/SearchMixed.aspx?vad="
+                    + java.net.URLEncoder.encode(message,
+                    "iso-8859-1");
+        }catch(UnsupportedEncodingException e){ /* not possible  */}
+        String hitta = ConnectHelper.Connect("http", "hitta.se", url, 80,
+                524288, null, null);
+        if(hitta.contains("inga träffar")) return;
+        System.out.println(url);
+        personInfo.put("firstname", substring(hitta,"var tooltipText = '<strong>",
+                " "));
+        personInfo.put("lastname", substring(hitta, "var tooltipText = '<strong>"
+                + personInfo.get("firstname") +"  ","<"));
+        personInfo.put("address", substring(hitta, "<strong>Adress:</strong><br>",
+                "<"));
+        personInfo.put("zipCode", substring(hitta, "var zipCode = '", "'"));
+        personInfo.put("locality", substring(hitta, "var locality = \"", "\""));
     }
 }
