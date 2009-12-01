@@ -16,6 +16,7 @@
       <pathelement location="${lib.dir}/SQLiteJDBCv056/sqlitejdbc-v056.jar"/>
       <pathelement location="${lib.dir}/HTMLParser/htmlparser.jar"/>
       <pathelement location="${lib.dir}/HTMLParser/htmllexer.jar"/>
+      <pathelement location="${lib.dir}/google-api-translate-java/google-api-translate-java-0.91.jar"/>
       <pathelement path="${classes.dir}"/>
   </path>
 

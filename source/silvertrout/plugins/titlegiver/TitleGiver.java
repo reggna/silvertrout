@@ -68,9 +68,10 @@ public class TitleGiver extends silvertrout.Plugin {
      * @return
      */
     public static List<String> getTitles(String message) {
+        System.out.println("Title: " + message);
         java.util.ArrayList<String> r = new java.util.ArrayList<String>();
         Pattern p = Pattern.compile("(http|https):\\/\\/([\\w\\.-]+)(?:\\:" +
-                "(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=]*)?");
+                "(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=\\\\\\,]*)?");
         Matcher m = p.matcher(message);
         while (m.find()) {
             String title = getTitle(m.group(0), m.group(1), m.group(2), m.group(3), m.group(4));
@@ -154,9 +155,7 @@ public class TitleGiver extends silvertrout.Plugin {
 
     /* For offline test: */
     /*public static void main(String args[]) {
-    List<String> s = getTitles(args[0]);
-    for(String t: s) {
-    System.out.println("Title: " +t);
-    }
+        List<String> s = getTitles(args[0]);
+        for(String t: s) System.out.println("Title: " +t);
     }*/
 }
