@@ -186,7 +186,7 @@
     </answers>
   </question>
   
-   <question>
+  <question>
     <line>Hur smittas HIV?</line>
     <answers>
       <answer>Genom samlag, från en gravid kvinna till hennes foster samt genom blod eller vävnad.</answer>
@@ -273,7 +273,7 @@
     </answers>
   </question>
   
-   <question>
+  <question>
     <line>Munherpes är inte samma sorts herpesvirus som könsherpes, men kan munherpes smitta till könet via oralsex?</line>
     <answers attempts="1">
       <answer>Ja</answer>
