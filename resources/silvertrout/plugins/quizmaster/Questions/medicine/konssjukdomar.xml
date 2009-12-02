@@ -1,283 +1,283 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-          xsi:noNamespaceSchemaLocation="questions.xsd"
-        category="Medicin" subcategory="Könssjukdomar">
-  
-  <question>
-    <line>Vad kallas den process när man måste ange alla sina sexpartners till en kurator eller läkare, efter att ha smittats av t.ex. HIV eller gonorré?</line>
-    <answers>
-      <answer>Partneruppföljning</answer>
-      <answer>Partnerkontroll</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Det gör ont i halsen. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>Gonorré</answer>
-    </answers>
-  </question>
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+          xsi:noNamespaceSchemaLocation="questions.xsd"
+        category="Medicin" subcategory="Könssjukdomar">
+  
+  <question>
+    <line>Vad kallas den process när man måste ange alla sina sexpartners till en kurator eller läkare, efter att ha smittats av t.ex. HIV eller gonorré?</line>
+    <answers>
+      <answer>Partneruppföljning</answer>
+      <answer>Partnerkontroll</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Det gör ont i halsen. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>Gonorré</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Du mår illa. Du har minskad aptit. Du är trött. Din hud kliar. Din hud och dina ögonvitor gulfärgas. Vilken sjukdom kan du ha drabbats av?
+  <question>
+    <line>Du mår illa. Du har minskad aptit. Du är trött. Din hud kliar. Din hud och dina ögonvitor gulfärgas. Vilken sjukdom kan du ha drabbats av?
 </line>
-    <answers>
-      <answer>Hepatit B</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Det är en grupp små blåsor på rodnad botten. Blåsorna bränner, kliar eller svider. De går snabbt sönder och efter några dagar läker de utan ärr. De kommer oftast runt munnen och på könsorganen men kan ibland finnas på andra ställen på kroppen. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>Herpes</answer>
-      <answer>Könsherpes</answer>
-      <answer>Munherpes</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line> Du har svullna lymfkörtlar. Du har svampinfektioner i munslemhinnan. Du får bältros. Du minskar kraftigt i vikt. Du hostar. Du har besvärlig och långdragen diarré. Du har kraftig nattsvettning. Du lider av svår trötthet. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>HIV</answer>
-    </answers>
-  </question>
-    
-  <question>
-    <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>Klamydia</answer>
-    </answers>
-  </question>
-    
-  <question>
-    <line>Du har långsamt växande hårda vita knottror i hela underlivet. Vårtorna kan även sitta kring och i analöppningen och inne i ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>Kondylom</answer>
-    </answers>
-  </question>
-    
-  <question>
-    <line>Du har sår på könsorganen som inte ömmar. Du har utslag, över hela kroppen inklusive handflator och fotsulor, som inte kliar. Du har svullna ljumskar. Vilken sjukdom kan du ha drabbats av?</line>
-    <answers>
-      <answer>Syfilis</answer>
-    </answers>
-  </question>
-      
-  <question>
-    <line>Hur behandlas gonorré?</line>
-    <answers>
-      <answer>Antibiotika</answer>
-    </answers>
-  </question>
-  
-    <question>
-    <line>Hur behandlas Hepatit B?</line>
-    <answers>
-      <answer>Inte alls</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Hur behandlas könsherpes?</line>
-    <answers>
-      <answer>Inte alls</answer>
-    </answers>
-  </question>
+    <answers>
+      <answer>Hepatit B</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Det är en grupp små blåsor på rodnad botten. Blåsorna bränner, kliar eller svider. De går snabbt sönder och efter några dagar läker de utan ärr. De kommer oftast runt munnen och på könsorganen men kan ibland finnas på andra ställen på kroppen. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>Herpes</answer>
+      <answer>Könsherpes</answer>
+      <answer>Munherpes</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line> Du har svullna lymfkörtlar. Du har svampinfektioner i munslemhinnan. Du får bältros. Du minskar kraftigt i vikt. Du hostar. Du har besvärlig och långdragen diarré. Du har kraftig nattsvettning. Du lider av svår trötthet. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>HIV</answer>
+    </answers>
+  </question>
+    
+  <question>
+    <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>Klamydia</answer>
+    </answers>
+  </question>
+    
+  <question>
+    <line>Du har långsamt växande hårda vita knottror i hela underlivet. Vårtorna kan även sitta kring och i analöppningen och inne i ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>Kondylom</answer>
+    </answers>
+  </question>
+    
+  <question>
+    <line>Du har sår på könsorganen som inte ömmar. Du har utslag, över hela kroppen inklusive handflator och fotsulor, som inte kliar. Du har svullna ljumskar. Vilken sjukdom kan du ha drabbats av?</line>
+    <answers>
+      <answer>Syfilis</answer>
+    </answers>
+  </question>
+      
+  <question>
+    <line>Hur behandlas gonorré?</line>
+    <answers>
+      <answer>Antibiotika</answer>
+    </answers>
+  </question>
+  
+    <question>
+    <line>Hur behandlas Hepatit B?</line>
+    <answers>
+      <answer>Inte alls</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur behandlas könsherpes?</line>
+    <answers>
+      <answer>Inte alls</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Hur behandlas HIV?</line>
-    <answers>
-      <answer>Bromsmediciner</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Hur behandlas HIV?</line>
+    <answers>
+      <answer>Bromsmediciner</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Hur behandlas klamydia?</line>
-    <answers>
-      <answer>Antibiotika</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Hur behandlas klamydia?</line>
+    <answers>
+      <answer>Antibiotika</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Hur behandlas kondylom?</line>
-    <answers>
-      <answer>Man tar bort vårtorna</answer>
-      <answer>Vårtborttagning</answer>
-    </answers>
-  </question>
-    
-      <question>
-    <line>Hur behandlas syfilis?</line>
-    <answers>
-      <answer>Antibiotika</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Hur behandlas kondylom?</line>
+    <answers>
+      <answer>Man tar bort vårtorna</answer>
+      <answer>Vårtborttagning</answer>
+    </answers>
+  </question>
+    
+      <question>
+    <line>Hur behandlas syfilis?</line>
+    <answers>
+      <answer>Antibiotika</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Vilken sjukdom kan hos både kvinnor och män orsaka ögoninflammation, ledbesvär och blodförgiftning om den lämnas obehandlad?</line>
-    <answers>
-      <answer>Gonorré</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Vilken sjukdom kan hos både kvinnor och män orsaka ögoninflammation, ledbesvär och blodförgiftning om den lämnas obehandlad?</line>
+    <answers>
+      <answer>Gonorré</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Vilken sjukdom kan leda till skrumplever eller levercancer?</line>
-    <answers>
-      <answer>Hepatit B</answer>
-    </answers>
-  </question>
+    <question>
+    <line>Vilken sjukdom kan leda till skrumplever eller levercancer?</line>
+    <answers>
+      <answer>Hepatit B</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Vilken sjukdom kan orsaka hjärnhinneinflammation eller komma in i ögats hornhinna?</line>
-    <answers>
-      <answer>Herpes</answer>
-    </answers>
-  </question>
+    <question>
+    <line>Vilken sjukdom kan orsaka hjärnhinneinflammation eller komma in i ögats hornhinna?</line>
+    <answers>
+      <answer>Herpes</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Vilken sjukdom leder till AIDS?</line>
-    <answers>
-      <answer>HIV</answer>
-    </answers>
-  </question>
+    <question>
+    <line>Vilken sjukdom leder till AIDS?</line>
+    <answers>
+      <answer>HIV</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Vilken sjukdom kan hos både män och kvinnor orsaka ögoninflammation och ledbesvär om den lämnas obehandlas?</line>
-    <answers>
-      <answer>Klamydia</answer>
-    </answers>
-  </question>
+    <question>
+    <line>Vilken sjukdom kan hos både män och kvinnor orsaka ögoninflammation och ledbesvär om den lämnas obehandlas?</line>
+    <answers>
+      <answer>Klamydia</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Vilken sjukdom kan ge skador på exempelvis hjärnan och hjärtat om den lämnas obehandlas?</line>
-    <answers>
-      <answer>Syfilis</answer>
-    </answers>
-  </question>
-        
-    <question>
-    <line>Vad står förkortningen AIDS för?</line>
-    <answers>
-      <answer>Acquired Immune Deficiency Syndrome</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Hur smittas gonorré?</line>
-    <answers>
-      <answer>Slemhinnekontakt</answer>
-    </answers>
-  </question>
+    <question>
+    <line>Vilken sjukdom kan ge skador på exempelvis hjärnan och hjärtat om den lämnas obehandlas?</line>
+    <answers>
+      <answer>Syfilis</answer>
+    </answers>
+  </question>
+        
+    <question>
+    <line>Vad står förkortningen AIDS för?</line>
+    <answers>
+      <answer>Acquired Immune Deficiency Syndrome</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur smittas gonorré?</line>
+    <answers>
+      <answer>Slemhinnekontakt</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Hur smittas Hepatit B?</line>
-    <answers>
-      <answer required="false">Genom blod och samlag</answer>
-      <answer required="true">Blod</answer>
-      <answer required="true">Samlag</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Hur smittas Hepatit B?</line>
+    <answers>
+      <answer required="false">Genom blod och samlag</answer>
+      <answer required="true">Blod</answer>
+      <answer required="true">Samlag</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Hur smittas könherpes?</line>
-    <answers>
-      <answer>Genom samlag</answer>
-	  <answer required="true">Samlag</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Hur smittas HIV?</line>
-    <answers>
-      <answer>Genom samlag, från en gravid kvinna till hennes foster samt genom blod eller vävnad.</answer>
-	  <answer required="true" score="5">Samlag</answer>
-	  <answer required="true" score="5">gravid kvinna till hennes foster</answer>
-	  <answer required="true" score="5">blod</answer>
-	  <answer score="5">vävnad</answer>
-    </answers>
-  </question> 
-  
-  <question>
-    <line>Hur smittas klamydia?</line>
-    <answers>
-      <answer>Genom samlag och oralsex</answer>
-	  <answer required="true" score="5">Samlag</answer>
-	  <answer required="true" score="5">oralsex</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Hur smittas kondylom?</line>
-    <answers>
-      <answer>Genom samlag</answer>
-	  <answer required="true">Samlag</answer>
-    </answers>
-  </question>
-      
-  <question>
-    <line>Hur smittas syfilis?</line>
-    <answers>
-      <answer>Genom samlag och från en gravid kvinna till hennes foster</answer>
-	  <answer required="true" score="5">Samlag</answer>
-  	  <answer required="true" score="5">gravid kvinna till hennes foster</answer>
+  <question>
+    <line>Hur smittas könherpes?</line>
+    <answers>
+      <answer>Genom samlag</answer>
+	  <answer required="true">Samlag</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur smittas HIV?</line>
+    <answers>
+      <answer>Genom samlag, från en gravid kvinna till hennes foster samt genom blod eller vävnad.</answer>
+	  <answer required="true" score="5">Samlag</answer>
+	  <answer required="true" score="5">gravid kvinna till hennes foster</answer>
+	  <answer required="true" score="5">blod</answer>
+	  <answer score="5">vävnad</answer>
+    </answers>
+  </question> 
+  
+  <question>
+    <line>Hur smittas klamydia?</line>
+    <answers>
+      <answer>Genom samlag och oralsex</answer>
+	  <answer required="true" score="5">Samlag</answer>
+	  <answer required="true" score="5">oralsex</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Hur smittas kondylom?</line>
+    <answers>
+      <answer>Genom samlag</answer>
+	  <answer required="true">Samlag</answer>
+    </answers>
+  </question>
+      
+  <question>
+    <line>Hur smittas syfilis?</line>
+    <answers>
+      <answer>Genom samlag och från en gravid kvinna till hennes foster</answer>
+	  <answer required="true" score="5">Samlag</answer>
+  	  <answer required="true" score="5">gravid kvinna till hennes foster</answer>
 
-    </answers>
-  </question>
-  
-  <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av gonorré?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av gonorré?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av hepatit B?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av hepatit B?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av herpes?</line>
-    <answers attempts="1">
-      <answer>Nej</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av herpes?</line>
+    <answers attempts="1">
+      <answer>Nej</answer>
+    </answers>
+  </question>
 
-  <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av HIV?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question>
-  
-    <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av klamydia?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question>
+  <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av HIV?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question>
+  
+    <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av klamydia?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question>
 
-    <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av kondylom?</line>
-    <answers attempts="1">
-      <answer>Nej</answer>
-    </answers>
-  </question>
-    
-    <question>
-    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av syfilis?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question>
-  
-  <question>
-    <line>Munherpes är inte samma sorts herpesvirus som könsherpes, men kan munherpes smitta till könet via oralsex?</line>
-    <answers attempts="1">
-      <answer>Ja</answer>
-    </answers>
-  </question> 
-  
+    <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av kondylom?</line>
+    <answers attempts="1">
+      <answer>Nej</answer>
+    </answers>
+  </question>
+    
+    <question>
+    <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av syfilis?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question>
+  
+  <question>
+    <line>Munherpes är inte samma sorts herpesvirus som könsherpes, men kan munherpes smitta till könet via oralsex?</line>
+    <answers attempts="1">
+      <answer>Ja</answer>
+    </answers>
+  </question> 
+  
 </questions>
