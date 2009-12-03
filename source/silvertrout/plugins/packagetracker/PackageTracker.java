@@ -249,7 +249,8 @@ public class PackageTracker extends silvertrout.Plugin {
                         pe.description = n.getTextContent();
                     }
                 }
-                if(pe.date >= p.lastDate && pe.time > p.lastTime) {
+                if(pe.date > p.lastDate || (pe.date == p.lastDate
+                        && pe.time > p.lastTime)) {
                     events.add(pe);
                 }
             }

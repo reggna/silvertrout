@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<?POSTNET SND="00075564514106" SNDKVAL="30" REC="5563417731" RECKVAL="30" MSGTYPE="IFTSTA" MSGID="5461"?>
+<statusevents>
+<header>
+<version>1.0</version>
+<sender id="00075564514106" codelist="30"/>
+<receiver id="XXXXXXX" codelist="30"/>
+<interchangetime>Thu, 01 Feb 2007 07:00:30 +0100 (MET)</interchangetime>
+<interchangeid>5461</interchangeid>
+</header>
+<parcel id="81775835615SE">
+<reference type="CU">415618</reference>
+<event code="22" name="Inkommet spridande terminal">
+<date>200702010352</date>
+<location type="T" id="126" name="Stockholm Södra"/>
+</event>
+</parcel>
+<parcel id="81775914123SE">
+<reference type="CU">403339</reference>
+<event code="22" name="Inkommet spridande terminal">
+<date>200702010042</date>
+<location type="T" id="201" name="Malmö"/>
+</event>
+</parcel>
+<parcel id="81775924908SE">
+<reference type="CU">430060</reference>
+<event code="22" name="Inkommet spridande terminal">
+<date>200702010258</date>
+<location type="T" id="421" name="Göteborg"/>
+</event>
+</parcel>
+
