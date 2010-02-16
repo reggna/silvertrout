@@ -36,29 +36,43 @@ import java.io.UnsupportedEncodingException;
 
 /**
  *
- **
+ *
+ * TODO: implement better with a ConnectHelper exception.
+ *
  */
 public class ConnectHelper {
 
     // Content types the tile giver should check
+    // XXX: Is text/plain neccesary?
     private static final String[] contentTypes = new String[]{"text/html",
         "application/xhtml+xml", "application/xml", "text/xml", "text/plain"};
     // Charset to fall back to if none was found
     private static final String fallbackCharset = "iso-8859-1";
 
 
+    /**
+     * Extracts a charset from a Content-Type.
+     *
+     * @param  contentType  The Content-Type to extract from
+     * @return              The extracted charset. Null if no charset was found.
+     *
+     */
     private static String getCharset(String contentType) {
         String[] parameters = contentType.split(";");
 
         for(int i = 1; i < parameters.length; i++) {
-            String parameter = parameters[i].trim();
+            String parameter = parameters[i];
             if(parameter.indexOf('=') != -1) {
                 int    split = parameter.indexOf('=');
-                String key   = parameter.substring(0, split);
-                String value = parameter.substring(split + 1);
+                String key   = parameter.substring(0, split).trim();
+                String value = parameter.substring(split + 1).trim();
 
                 if(key.equalsIgnoreCase("charset")) {
-                    //TODO: fix for quoted strings
+                    // XXX: This should be enough for quoted strings. We should
+                    // not have any special chars in our charsets.
+                    if(value.startsWith("\"")) {
+                      return value.substring(1, value.length() - 1);
+                    }                    
                     return value;
                 }
             }
@@ -66,13 +80,20 @@ public class ConnectHelper {
         return null;
     }
 
+    /**
+     * Checks if this is a okay content type
+     *
+     * TODO: rename function
+     *
+     * @param  contentType  The Content-Type to check
+     * @return              True if okay, false if not.
+     */
     private static boolean okContentType(String contentType) {
         for (int i = 0; i < contentTypes.length; i++) {
             if (contentTypes[i].equalsIgnoreCase(contentType)) {
                 return true;
             }
         }
-//        System.out.println("damn content type!");
         return false;
     }
 
@@ -89,8 +110,6 @@ public class ConnectHelper {
     public static String Connect(String connectionType, String server,
             String file, int port, int maxContentLength,
             String requestMethod, Map<String, String> postData) {
-        String charset;
-        ByteBuffer bb;
         try {
             // Set up connection to disallow output and allow input. It should follow
             // redirects but dont use a cache.
@@ -125,106 +144,146 @@ public class ConnectHelper {
                 wr.close();
             }
             
-            // Find out charset and content type. As default, if we don't find a
-            // charset in the HTML header we try to use ISO-8559-1 later.
-            String contentType = "";
-            try{
-                contentType = con.getContentType().split(";")[0];
-            }catch(Exception e){
-                System.err.println("Unable to connect to " + connectionType
-                        + "://" + server + file + ":" + port);
+            // Read in content type. If we have no content type this most 
+            // certainly means that the web page was not loaded due to some
+            // reason -- like connection error or a bad server.
+            String contentType = con.getContentType();
+            if(contentType == null) {
+                System.out.println("Could not get the content type");
                 return null;
+            } else  {
+                contentType = contentType.split(";")[0];
             }
-            charset     = getCharset(con.getContentType());
-
+            
             // Check for content type. Only accept web pages.
             if (!okContentType(contentType)) {
-                if(contentType.contains(";"))
-                    contentType = contentType.substring(0,contentType.indexOf(";"));
-                else{
-                    System.out.println("Found unrecognized content type: " + contentType);
-                    return null;
-                }
-            }
-
-            // Byte buffer (from content length):
-            int contentLength = con.getContentLength();
-            if (contentLength > maxContentLength || contentLength < 100) {
-                contentLength = maxContentLength;
-            }
-            bb = ByteBuffer.allocate(contentLength);
-
-            try {
-                while (true) {
-                    byte[] tmp = new byte[256];
-                    int cnt = con.getInputStream().read(tmp);
-                    if (cnt == -1) {
-                        break;
-                    }
-                    bb.put(tmp, 0, cnt);
-                }
-            } catch (java.io.IOException e) {
-                e.printStackTrace();
+                System.out.println("Found unrecognized content type: " + contentType);
                 return null;
-            } catch (java.nio.BufferOverflowException e) {
-                //e.printStackTrace();
-            // TODO: Work around
             }
+    
+            // Get data
+            ByteBuffer bb = getConnectionData(con, maxContentLength);
+            if(bb == null) {
+                System.out.println("Unable to fetch data");
+                return null;
+            }
+    
+            // Try to use charset from HTTP header Content-Type:
+            try {
+                String charset = getCharset(con.getContentType());
+                System.out.println("Charset from content-type header: '" + charset + "'");
+                if(charset != null)
+                    return new String(bb.array(), charset);
+            } catch(UnsupportedEncodingException e) {
+              // ...
+            }
+            
+            // Try to use charset from Meta tags:
+            try {
+                String charset = getCharsetFromDocument(bb);
+                System.out.println("Charset from document meta tag: '" + charset + "'");
+                if(charset != null)
+                    return new String(bb.array(), charset);
+            } catch(UnsupportedEncodingException e) {
+                // ...
+            }
+            
+            // Try to use fallback encoding:
+            System.out.println("Using fallback charset: '" + fallbackCharset + "'");
+            return new String(bb.array(), fallbackCharset);
+      
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        if (charset == null) {
-              String patternMeta = "(?i)<meta\\s([^>]*)>";
-              Pattern pm = Pattern.compile(patternMeta);
-              Matcher mm;
-              try{
-                mm = pm.matcher(new String(bb.array(), fallbackCharset));
-              } catch(Exception e){
-                e.printStackTrace();
-                return null;
-              }
+        
+    }
 
-              while(mm.find()) {
+    /**
+     * Fetches connection data from an open connection.
+     *
+     * @param   con               The connection to fetch bytes from
+     * @param   maxContentLength  The maxiumum number of bytes to fetch
+     *
+     * @return  The data from the connect (max maxContentLength bytes)
+     */
+    private static ByteBuffer getConnectionData(HttpURLConnection con, int maxContentLength) {
+        // Byte buffer (from content length):
+        int contentLength = con.getContentLength();
+        // TODO: why '< 100'?
+        if (contentLength > maxContentLength || contentLength < 100) {
+            contentLength = maxContentLength;
+        }
+        ByteBuffer bb = ByteBuffer.allocate(contentLength);
 
-                  String patternAttrib = "(?i)([a-z\\-]+)=(\"|')([^\"|']*)(\"|')";
-                  Pattern pa = Pattern.compile(patternAttrib);
-                  Matcher ma = pa.matcher(mm.group(1));
+        try {
+            while (true) {
+                byte[] tmp = new byte[256];
+                int cnt = con.getInputStream().read(tmp);
+                if (cnt == -1) {
+                    break;
+                }
+                bb.put(tmp, 0, cnt);
+            }
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (java.nio.BufferOverflowException e) {
+            //e.printStackTrace();
+            // TODO: Work around
+        }
+        return bb;
+    }
 
-                  System.out.println(mm.group(1));
+    /**
+     * Get charset from a document.
+     *
+     * This function searches the document for meta tags and parses them, and
+     * searches for a content-type httpequiv with some charset.
+     *
+     * @param bb  The document to search
+     *
+     * @return    The charset, if found. Otherwise null.
+     *
+     */
+    private static String getCharsetFromDocument(ByteBuffer bb) {
+        String patternMeta = "(?i)<meta\\s([^>]*)>";
+        Pattern pm = Pattern.compile(patternMeta);
+        Matcher mm;
+        try{
+            mm = pm.matcher(new String(bb.array(), fallbackCharset));
+        } catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
-                  String httpEquiv = null, content = null;
-                  while(ma.find()) {
-                      System.out.println(ma.group(1) + ": " + ma.group(3));
-                      if(ma.group(1).equalsIgnoreCase("http-equiv")) {
-                          httpEquiv = ma.group(3);
-                      } else if(ma.group(1).equalsIgnoreCase("content")) {
-                          content  = ma.group(3);
-                      }
-                  }
+        while(mm.find()) {
 
-                  if(httpEquiv != null && content != null) {
-                      if(httpEquiv.equalsIgnoreCase("Content-Type")) {
-                        System.out.println("Found charset in meta");
-                        System.out.println(httpEquiv + ", " + content);
-                        charset = getCharset(content);
-                        break;
-                      }
-                  }
-              }
-          }
-          try{
-              return new String(bb.array(), charset);
-          } catch(UnsupportedEncodingException e){
-              charset = fallbackCharset;
-              System.out.println("Using fallback charset: " + charset);
-              try{
-                  return new String(bb.array(), charset);
-              } catch(Exception ee){
-                  e.printStackTrace();
-                  return null;
-              }
-          }
+            String patternAttrib = "(?i)([a-z\\-]+)=(\"|')([^\"|']*)(\"|')";
+            Pattern pa = Pattern.compile(patternAttrib);
+            Matcher ma = pa.matcher(mm.group(1));
+
+            System.out.println(mm.group(1));
+
+            String httpEquiv = null, content = null;
+            while(ma.find()) {
+                System.out.println(ma.group(1) + ": " + ma.group(3));
+                if(ma.group(1).equalsIgnoreCase("http-equiv")) {
+                    httpEquiv = ma.group(3);
+                } else if(ma.group(1).equalsIgnoreCase("content")) {
+                    content  = ma.group(3);
+                }
+            }
+
+            if(httpEquiv != null && content != null) {
+                if(httpEquiv.equalsIgnoreCase("Content-Type")) {
+                    System.out.println("Found charset in meta");
+                    System.out.println(httpEquiv + ", " + content);
+                    return getCharset(content);
+                }
+            }
+        }
+        return null;
     }
 
 }
