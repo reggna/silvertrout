@@ -123,17 +123,21 @@ public class Trace extends silvertrout.Plugin {
                         personInfo.get("zipCode") + " "
                         + personInfo.get("locality"), "iso-8859-1");
                 }catch(UnsupportedEncodingException e){ /* not possible  */}
-                System.out.println(url);
                 upplysning = ConnectHelper.Connect("http", "www.upplysning.se",
                         url, 80, 16384, null, null);
             }
         }
+        System.out.println(url);
         if(upplysning.contains("<a href=\"show.aspx?id=")){
-            ssn = Base64Coder.decodeString(substring(upplysning,
+            try{
+                ssn = Base64Coder.decodeString(substring(upplysning,
                     "<a href=\"show.aspx?id=","\"")).replaceAll(
                     "\\D", "");
             personInfo.put("ssn", ssn.substring(0, 8) + "-" + ssn.substring(8));
             System.out.println("out: "+ ssn);
+            }catch(Exception e){
+                personInfo.put("ssn", "");
+            }
         }
     }
 
@@ -178,7 +182,7 @@ public class Trace extends silvertrout.Plugin {
         personInfo.put("firstname", substring(hitta,"var tooltipText = '<strong>",
                 " "));
         personInfo.put("lastname", substring(hitta, "var tooltipText = '<strong>"
-                + personInfo.get("firstname") +"  ","<"));
+                + personInfo.get("firstname") +" ","<"));
         personInfo.put("address", substring(hitta, "<strong>Adress:</strong><br>",
                 "<"));
         personInfo.put("zipCode", substring(hitta, "var zipCode = '", "'"));
