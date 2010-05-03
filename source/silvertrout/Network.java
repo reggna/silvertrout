@@ -386,7 +386,7 @@ public class Network {
         Channel channel = getChannel(channelName);
 
         // Its'a me mario! (It's me joining)
-        if (user == getMyUser()) {
+        if (user.equals(getMyUser())) {
             System.out.println("Half-joining channel " + channelName);
             // Add channel to unjoined channels
             channel = new Channel(channelName, this);
