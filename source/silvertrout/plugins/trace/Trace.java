@@ -21,6 +21,7 @@
  */
 package silvertrout.plugins.trace;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import silvertrout.commons.EscapeUtils;
@@ -44,8 +45,13 @@ import java.util.HashMap;
  */
 public class Trace extends silvertrout.Plugin {
     public static String substring(String s, String start, String end){
-        s = s.substring(s.indexOf(start)+start.length());
-        return EscapeUtils.unescapeHtml(s.substring(0,s.indexOf(end)));
+        if(s.contains(start))
+            s = s.substring(s.indexOf(start)+start.length());
+        else return "";
+        
+        if(s.contains(end))
+            return EscapeUtils.unescapeHtml(s.substring(0,s.indexOf(end)));
+        else return "";
     }
 
     @Override
@@ -68,14 +74,18 @@ public class Trace extends silvertrout.Plugin {
 
         /* fetch ssn from upplysning */
         getSSN(personInfo);
-
-        channel.sendPrivmsg(user.getNickname() + ": "
+        String send = user.getNickname() + ": "
                 + personInfo.get("firstname") + " "
                 + personInfo.get("lastname") + ", "
                 + personInfo.get("address") + ", "
                 + personInfo.get("zipCode") + " "
                 + personInfo.get("locality") + " "
-                + personInfo.get("ssn"));
+                + personInfo.get("ssn");
+        if(send.contains("\\")){
+            channel.sendPrivmsg("ERROR!");
+            return;
+        }
+        channel.sendPrivmsg(send);
 
         // Fetch operator for a number
         String operator = OperatorFinder.getOperator(personInfo.get("search"));
@@ -87,7 +97,8 @@ public class Trace extends silvertrout.Plugin {
         // Fetch ratsit information
         if(personInfo.containsKey("ssn") && !personInfo.get("ssn").equals("")) {
             String info = RatsitFinder.getInformation(personInfo.get("ssn"));
-            channel.sendPrivmsg(user.getNickname() + ": " + info);
+            if(!info.equals(""))
+                channel.sendPrivmsg(user.getNickname() + ": " + info);
         }
     }
 
@@ -133,7 +144,7 @@ public class Trace extends silvertrout.Plugin {
                 ssn = Base64Coder.decodeString(substring(upplysning,
                     "<a href=\"show.aspx?id=","\"")).replaceAll(
                     "\\D", "");
-            personInfo.put("ssn", ssn.substring(0, 8) + "-" + ssn.substring(8));
+            personInfo.put("ssn", ssn.substring(2, 8) + "-" + ssn.substring(8));
             System.out.println("out: "+ ssn);
             }catch(Exception e){
                 personInfo.put("ssn", "");
@@ -154,16 +165,29 @@ public class Trace extends silvertrout.Plugin {
                 80, 16384, null, null);
         /* make sure we did get a hit: */
         if(eniro.contains("ingen träff")) return;
-        personInfo.put("firstname", substring(eniro,
-                "<span class=\"given-name\">","<"));
-        personInfo.put("lastname", substring(eniro,
-                "<span class=\"family-name\">","<"));
+        // person or organization?
+        if(eniro.contains("given-name")){
+            personInfo.put("firstname", substring(eniro,
+                    "<span class=\"given-name\">","<"));
+            personInfo.put("lastname", substring(eniro,
+                    "<span class=\"family-name\">","<"));
+        } else {
+            personInfo.put("firstname", substring(eniro,
+                    "org\">","<"));
+            personInfo.put("lastname", "");
+        }
         personInfo.put("address", substring(eniro,
                 "<span class=\"street-address\">", "<"));
         personInfo.put("zipCode", substring(eniro,
                 "<span class=\"postal-code\">", "<"));
         personInfo.put("locality", substring(eniro,
                 "<span class=\"locality\">", "<"));
+        /*System.out.println("firstname:" + personInfo.get("firstname"));
+        System.out.println("lastname:" + personInfo.get("lastname"));
+        System.out.println("address:" + personInfo.get("address"));
+        System.out.println("zipCode:" + personInfo.get("zipCode"));
+        System.out.println("locality:" + personInfo.get("locality"));
+         */
     }
 
     public static void fetchFromHitta(HashMap<String, String> personInfo){

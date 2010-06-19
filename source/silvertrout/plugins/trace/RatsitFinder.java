@@ -214,7 +214,7 @@ public class RatsitFinder {
             Logger.getLogger(RatsitFinder.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return null;
+        return "";
     }
 
 }
