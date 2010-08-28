@@ -61,6 +61,46 @@ public class TitleGiver extends silvertrout.Plugin {
             }
         }
     }
+    
+    protected static String createProtocolPattern() {
+    	return "(http|https):\\/\\/";
+    }
+    
+    protected static String createHostPattern() {
+    	// TODO support IP-addresses
+    	String letter = "A-Za-zåäö";
+    	String digit = "\\d";
+    	String let_dig = "[" + letter + digit + "]";
+    	String let_dig_hyp = "[" + letter + "\\-" + digit + "]";
+    	String ldh_str = let_dig_hyp + "+";
+    	String label = "[" + letter + "]" + "(?:(?:" + ldh_str + ")?" + let_dig + ")?";
+    	String subdomain = "((?:" + label + "\\.)*" + label + ")";
+    	return subdomain;
+    }
+    
+    protected static String createPortPattern() {
+    	return "(?:\\:(\\d+))?";
+    }
+    
+    protected static String createPathPattern() {
+    	String unreserved = "\\w\\-\\.~"; // '_' is part of \w
+    	String sub_delims = "!\\$&'\\(\\)\\*\\+,;=";
+    	String pct_encoded = "(?:%\\d\\d)";
+    	
+    	String pchar = "[" + unreserved + "|" + pct_encoded + "|" + sub_delims + "|:|@]";
+    	//(?:(?:\/pchar)|(?:\/(?:\s|$)))*
+    	return "((?:(?:\\/" + pchar + "+)|(?:\\/(?:\\s|$)))*)";//"( (?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)* )?";
+    }
+    
+    protected static String createURLPattern() {
+    	String protocol = createProtocolPattern();
+    	String host     = createHostPattern();
+    	String port     = createPortPattern();
+    	String path     = createPathPattern();
+    	
+    	// It's the create methods responsibility to make sure that the regex groups are correct
+    	return "(?:" + protocol + host + port + path + "(?:\\s|$))";
+    }
 
     /**
      *
@@ -70,8 +110,11 @@ public class TitleGiver extends silvertrout.Plugin {
     public static List<String> getTitles(String message) {
         System.out.println("Title: " + message);
         java.util.ArrayList<String> r = new java.util.ArrayList<String>();
-        Pattern p = Pattern.compile("(http|https):\\/\\/([\\w\\.-]+)(?:\\:" +
-                "(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=\\\\\\,]*)?");
+        // TODO Parse IP hosts
+        // "(http|https):\\/\\/(\\w+(\\.\\w+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
+        // "(http|https):\\/\\/([\\w\\.-]+)(?:\\:(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=\\\\\\,]*)?"
+        //  	"(http|https):\\/\\/([\\wåäö]+(?:\\.[\\wåäö]+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
+        Pattern p = Pattern.compile(createURLPattern());
         Matcher m = p.matcher(message);
         while (m.find()) {
             String title = getTitle(m.group(0), m.group(1), m.group(2), m.group(3), m.group(4));
