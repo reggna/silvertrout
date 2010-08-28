@@ -68,7 +68,7 @@ public class TitleGiver extends silvertrout.Plugin {
     
     protected static String createHostPattern() {
     	// TODO support IP-addresses
-    	String letter = "A-Za-zåäö";
+    	String letter = "\\p{L}";//"A-Za-zåäö";
     	String digit = "\\d";
     	String let_dig = "[" + letter + digit + "]";
     	String let_dig_hyp = "[" + letter + "\\-" + digit + "]";
@@ -115,6 +115,7 @@ public class TitleGiver extends silvertrout.Plugin {
         // "(http|https):\\/\\/([\\w\\.-]+)(?:\\:(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=\\\\\\,]*)?"
         //  	"(http|https):\\/\\/([\\wåäö]+(?:\\.[\\wåäö]+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
         Pattern p = Pattern.compile(createURLPattern());
+        //p.
         Matcher m = p.matcher(message);
         while (m.find()) {
             String title = getTitle(m.group(0), m.group(1), m.group(2), m.group(3), m.group(4));

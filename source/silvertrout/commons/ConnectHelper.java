@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import java.net.IDN;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -113,7 +114,7 @@ public class ConnectHelper {
         try {
             // Set up connection to disallow output and allow input. It should follow
             // redirects but dont use a cache.
-            URL url = new URL(connectionType, server, port, file);
+            URL url = new URL(connectionType, IDN.toASCII(server), port, file);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             
             con.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
