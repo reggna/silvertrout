@@ -115,10 +115,36 @@ public class TitleGiverTest {
 		runTest(p, "http://www.google.se/search?q=java6+javadoc&ie=utf-8&oe=utf-8&aq=t&rls=com.ubuntu:en-US:official&client=firefox-a");
 		runTest(p, "http://www.google.se/search?q=%26");
 		runTest(p, "http://göteborg.se/hj_er");
+
 		
 		runNonTest(p, "http://www.google.com//help");
 		runNonTest(p, "http://www.google.com//");
 		runNonTest(p, "http://w.senews+");
 		runNonTest(p, "http://.");
+    
+    // Delimiter tests
+    Matcher m;
+    String base = "http://www.google.com";
+    String s;
+    
+    s = "<" + base + ">";
+    m = p.matcher(s);
+		assertTrue(p.toString(), m.matches());
+		assertEquals("Group: " + m.group(), base, m.group());
+    
+    s = base + "#foo";
+    m = p.matcher(s);
+		assertTrue(p.toString(), m.matches());
+		assertEquals("Group: " + m.group(), base, m.group());
+    
+    s = base + "#";
+    m = p.matcher(s);
+		assertTrue(p.toString(), m.matches());
+		assertEquals("Group: " + m.group(), base, m.group());
+    
+    s = "\"" + base + "\"";
+    m = p.matcher(s);
+		assertTrue(p.toString(), m.matches());
+		assertEquals("Group: " + m.group(), base, m.group());
 	}
 }
