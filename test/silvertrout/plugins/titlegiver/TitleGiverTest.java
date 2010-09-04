@@ -1,6 +1,5 @@
 package silvertrout.plugins.titlegiver;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,6 +9,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
+
 
 public class TitleGiverTest {
 
@@ -22,7 +22,7 @@ public class TitleGiverTest {
 	
 	private void runTest(Pattern p, String host) {
 		Matcher m = p.matcher(host);
-		assertTrue(p.toString(), m.matches());
+		assertTrue("Base: " + host + "\nPatter: " + p.toString(), m.matches());
 		assertEquals("Group: " + m.group(), host, m.group());
 	}
 	
@@ -122,29 +122,39 @@ public class TitleGiverTest {
 		runNonTest(p, "http://w.senews+");
 		runNonTest(p, "http://.");
     
-    // Delimiter tests
-    Matcher m;
-    String base = "http://www.google.com";
-    String s;
-    
-    s = "<" + base + ">";
-    m = p.matcher(s);
-		assertTrue(p.toString(), m.matches());
-		assertEquals("Group: " + m.group(), base, m.group());
-    
-    s = base + "#foo";
-    m = p.matcher(s);
-		assertTrue(p.toString(), m.matches());
-		assertEquals("Group: " + m.group(), base, m.group());
-    
-    s = base + "#";
-    m = p.matcher(s);
-		assertTrue(p.toString(), m.matches());
-		assertEquals("Group: " + m.group(), base, m.group());
-    
-    s = "\"" + base + "\"";
-    m = p.matcher(s);
-		assertTrue(p.toString(), m.matches());
-		assertEquals("Group: " + m.group(), base, m.group());
+        // Delimiter tests
+        Matcher m;
+        String base = "http://www.google.com";
+        String s;
+
+        s = "<" + base + ">";
+        m = p.matcher(s);
+        assertTrue("Base: " + s + "\nPatter: " + p.toString(), m.matches());
+        assertEquals("Group: " + m.group(), s, m.group());
+        assertEquals("Group: " + m.group(2), base, "http://" + m.group(2));
+
+        s = base + "#foo";
+        m = p.matcher(s);
+        assertTrue("Base: " + s + "\nPatter: " + p.toString(), m.matches());
+        assertEquals("Group: " + m.group(), s, m.group());
+        assertEquals("Group: " + m.group(2), base, "http://" + m.group(2));
+
+        s = base + "#";
+        m = p.matcher(s);
+        assertTrue("Base: " + s + "\nPatter: " + p.toString(), m.matches());
+        assertEquals("Group: " + m.group(), s, m.group());
+        assertEquals("Group: " + m.group(2), base, "http://" + m.group(2));
+
+        s = base + "/bar#";
+        m = p.matcher(s);
+        assertTrue("Base: " + s + "\nPatter: " + p.toString(), m.matches());
+        assertEquals("Group: " + m.group(), s, m.group());
+        assertEquals("Group: " + m.group(2), base, "http://" + m.group(2));
+
+        s = "\"" + base + "\"";
+        m = p.matcher(s);
+        assertTrue("Base: " + s + "\nPatter: " + p.toString(), m.matches());
+        assertEquals("Group: " + m.group(), s, m.group());
+        assertEquals("Group: " + m.group(2), base, "http://" + m.group(2));
 	}
 }

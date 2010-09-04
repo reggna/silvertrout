@@ -99,7 +99,7 @@ public class TitleGiver extends silvertrout.Plugin {
     	String path     = createPathPattern();
     	
     	// It's the create methods responsibility to make sure that the regex groups are correct
-    	return "(?:" + protocol + host + port + path + "(?:\\s|$))";
+    	return "(?:(?:<|\\s|\\\"|^)" + protocol + host + port + path + "(?:\\s|$|\\\"|>|#[A-Za-z]*))";
     }
 
     /**

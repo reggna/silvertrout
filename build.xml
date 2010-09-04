@@ -9,8 +9,18 @@
   <property name="javadoc.dir"   value="${doc.dir}/javadoc"/>
   <property name="classes.dir"   value="${build.dir}/classes"/>
   <property name="jar.dir"       value="${build.dir}/jar"/>
+  <property name="test.dir"      location="test" />
+  <property name="ant-lib.dir"   value="ant" />
 
   <property name="debug"         value="true"/>
+
+
+  <path id="classpath.test">
+    <pathelement path="${ant-lib.dir}/junit.jar" />
+  	<pathelement path="${ant-lib.dir}/org.hamcrest.core.jar" />
+    <pathelement location="${test.dir}" />
+  	<path refid="project.libs" />
+  </path>
 
   <path id="project.libs">
       <pathelement location="${lib.dir}/SQLiteJDBCv056/sqlitejdbc-v056.jar"/>
@@ -20,6 +30,28 @@
       <pathelement path="${classes.dir}"/>
   </path>
 
+	<target name="compile-test" depends="build">
+		<!-- debug is true to allow line numbers in test case print outs -->
+    <javac srcdir="${test.dir}" destdir="${test.dir}" classpathref="classpath.test" debug="true">
+    </javac>
+  </target>
+  
+  <target name="clean-compile-test">
+    <delete>
+      <fileset dir="${test.dir}" includes="**/*.class" />
+    </delete>
+  </target>
+
+  <target name="test" depends="compile-test">
+    <junit printsummary="yes">
+      <classpath refid="classpath.test" />
+      <formatter type="brief" usefile="false" />
+    	<batchtest>
+          <fileset dir="${test.dir}" includes="**/*Test.java"/>
+      </batchtest>
+    </junit>
+  </target>
+	
   <target name="run" depends="build" description="Run silvertrout">
     <java dir="${classes.dir}" fork="true" classname="silvertrout.IRC" classpathref="project.libs" />
   </target>
@@ -74,7 +106,7 @@
     </javadoc>
   </target>
   
-  <target name="clean">
+  <target name="clean" depends="clean-compile-test">
     <echo>Cleaning generated silvertrout builds...</echo>
     <delete dir="${build.dir}"/>
     <delete dir="${dist.dir}"/>
