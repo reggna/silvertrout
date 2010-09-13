@@ -438,7 +438,6 @@ public class IRCConnection {
             for (;;) {
                 try {
                     String line = reader.readLine();
-                    System.out.println("got line: " + line);
                     if(line == null) {
                       throw new IOException("Socket closed: end of stream reached in bufferreader");
                     } if(network.getWorkerThread() != null) {
