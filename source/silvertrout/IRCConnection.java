@@ -87,13 +87,13 @@ public class IRCConnection {
      * @throws java.io.IOException
      */
     private void setupConnection() throws IOException {
-        System.err.println(" - Creating writer");
-        Writer writer = new BufferedWriter(new OutputStreamWriter(
-                socket.getOutputStream(), 
-                network.getNetworkSettings().getCharset()));
         System.err.println(" - Creating reader");
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 socket.getInputStream(), 
+                network.getNetworkSettings().getCharset()));
+        System.err.println(" - Creating writer");
+        Writer writer = new BufferedWriter(new OutputStreamWriter(
+                socket.getOutputStream(), 
                 network.getNetworkSettings().getCharset()));
 
         // Do registration before we start any threads. This will enable some 
@@ -438,6 +438,7 @@ public class IRCConnection {
             for (;;) {
                 try {
                     String line = reader.readLine();
+                    System.out.println("got line: " + line);
                     if(line == null) {
                       throw new IOException("Socket closed: end of stream reached in bufferreader");
                     } if(network.getWorkerThread() != null) {

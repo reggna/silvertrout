@@ -96,6 +96,9 @@ public class Network {
             }
         }
 
+        // Create worker
+        createWorkerThread();
+        
         // Connect to server
         if (networkSettings.isSecure()) {
             connection = new SecureIRCConnection(this);
@@ -109,16 +112,19 @@ public class Network {
             unjoinedChannels.put(entry.getKey(),c);
         }
         System.err.println("Creating worker thread");
-        createWorkerThread();
+
     }
 
     private void createWorkerThread() {
         if (workerThread != null && !workerThread.isStop()) {
-            throw new IllegalStateException("Can only start one instance of workerthread for network \"" + getNetworkSettings().getName() + "\"!");
+            throw new IllegalStateException("Can only start one instance of "
+                    + "workerthread for network \""
+                    + getNetworkSettings().getName() + "\"!");
         }
 
         workerThread = new WorkerThread();
-        workerThread.setName("Network \"" + getNetworkSettings().getName() + "\"  worker thread");
+        workerThread.setName("Network \"" + getNetworkSettings().getName()
+                + "\"  worker thread");
 
         workerThread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
@@ -126,13 +132,19 @@ public class Network {
             public void uncaughtException(Thread t, Throwable e) {
                 workerThread.cancel();
                 exceptionFrequenzy++;
-                System.out.println("*** Exception occured in network \"" + getNetworkSettings().getName() + "\": " + e);
-                System.out.println("*** Exception frequenzy: " + exceptionFrequenzy);
+                System.out.println("*** Exception occured in network \""
+                        + getNetworkSettings().getName() + "\": " + e);
+                System.out.println("*** Exception frequenzy: "
+                        + exceptionFrequenzy);
 
                 e.printStackTrace();
 
-                if(exceptionFrequenzy >= 3) { // number greater than 1. Number found by injecting errors by messages. 3 seem to be a good number.
-                    System.out.println("*** Too many exceptions! Closing network \"" + getNetworkSettings().getName() + "\"!");
+                if(exceptionFrequenzy >= 3) { // number greater than 1. 
+                    // Number found by injecting errors by messages. 3 seem
+                    // to be a good number.
+                    System.out.println("*** Too many exceptions! Closing "
+                            + " network \"" + getNetworkSettings().getName()
+                            + "\"!");
                     getConnection().forceClose();
                     return;
                 }
@@ -141,7 +153,8 @@ public class Network {
 
                 createWorkerThread();
 
-                System.out.println("*** New worker thread for network \"" + getNetworkSettings().getName() + "\" started!");
+                System.out.println("*** New worker thread for network \""
+                        + getNetworkSettings().getName() + "\" started!");
             }
         });
 
@@ -386,7 +399,7 @@ public class Network {
         Channel channel = getChannel(channelName);
 
         // Its'a me mario! (It's me joining)
-        if (user.equals(getMyUser())) {
+        if (user != null && user.equals(getMyUser())) {
             System.out.println("Half-joining channel " + channelName);
             // Add channel to unjoined channels
             channel = new Channel(channelName, this);
