@@ -157,11 +157,11 @@ public class Trace extends silvertrout.Plugin {
         if(message == null || message.equals("")) return;
         String url = "";
         try{
-            url = "/query?search_word=" + java.net.URLEncoder.encode(message,
+            url = "/resultat/" + java.net.URLEncoder.encode(message,
                     "iso-8859-1");
         }catch(UnsupportedEncodingException e){ return;  /* not possible  */}
         /* fetch information from eniro */
-        String eniro = ConnectHelper.Connect("http", "www.eniro.se", url,
+        String eniro = ConnectHelper.Connect("http", "personer.eniro.se", url,
                 80, 16384, null, null);
         /* make sure we did get a hit: */
         if(eniro.contains("ingen träff")) return;
