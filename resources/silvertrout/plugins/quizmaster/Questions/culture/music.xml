@@ -124,8 +124,12 @@
 
   <question>
     <line>På vilket bleckblåsinstrument ändrar man tonläget genom att dra en dragbygel fram och tillbaka?</line>
+    <hints>
+      <line>Trombon</line>
+    </hints>
     <answers>
-      <answer>Trombon // Dragbasun</answer>
+      <answer>Trombon</answer>
+      <answer>Dragbasun</answer>
     </answers>
   </question>
 
