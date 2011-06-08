@@ -308,18 +308,6 @@
   </question>
 
   <question>
-    <line>Vad heter de tre nornorna som bor vid Yggrdrasils rötter?</line>
-    <hints>
-      <line>Urd, Skuld och Verdandi</line>
-    </hints>
-    <answers>
-      <answer required="true">Urd</answer>
-      <answer required="true">Skuld</answer>
-      <answer required="true">Verdandi</answer>
-    </answers>
-  </question>
-
-  <question>
     <line>Vilken sorts träd är Yggdrasil?</line>
     <answers>
       <answer>En ask</answer>
