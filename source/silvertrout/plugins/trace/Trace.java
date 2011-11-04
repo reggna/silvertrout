@@ -102,8 +102,15 @@ public class Trace extends silvertrout.Plugin {
         }
     }
 
+    public static String getTokenFromUpplysning(){
+        String site = ConnectHelper.Connect("http", "upplysning.se", "/",
+                80, 16384, null, null);
+        return substring(site, "name=\"x\" value=\"", "\"");
+    }
+
     public static void getSSN(HashMap<String,String> personInfo){
         String ssn = "", url = "", upplysning = "";
+        String x = getTokenFromUpplysning();
         if(personInfo.containsKey("ssn")){
         try{
             url = "/search.aspx?searchkey=26722183&bsa=S%F6k&tab=person&f="
