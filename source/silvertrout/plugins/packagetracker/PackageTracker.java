@@ -41,9 +41,17 @@ import silvertrout.User;
 /**
  * Tracks packages from the Swedish postal service (Posten).
  *
- * Keeps up to date with shipping information by using Posten's xml services
- * which is located at http://www.posten.se/c/online_steg_steg with additional
- * information on other pages linked from there.
+ * Keeps up to date with shipping information by using Posten's or Schenker's
+ * xml services. 
+ * Posten's service is documented at http://www.posten.se/c/online_steg_steg
+ * with additional information on other pages linked from there.
+ * Schenker's service is documented at http://www.schenker.nu/servlet/se.ementor.econgero.servlet.presentation.Main?data.node.id=26784&data.language.id=1
+ * with information regarding different types of package id's at
+ * http://www.privatpaket.se/servlet/se.ementor.econgero.servlet.presentation.Main?data.node.id=25039&data.language.id=1
+ * 
+ * Tried to find information about how to tell different service providers apart,
+ * found the UPU S10 Standard http://pls.upu.int/document/2011/an/cep_c_4_gn_ep_4-1/src/d008_ad00_an01_p00_r00.pdf
+ * Looks like there is no easy way to distinguish service providers.
  *
  * The plugin fetches updated information from their xml service and checks if
  * there are any new events. These are printed to the channel and stored for
@@ -202,7 +210,13 @@ public class PackageTracker extends silvertrout.Plugin {
         // Connect and fetch package information:
         try {
 
-            URL url = new URL("http://server.logistik.posten.se/servlet/PacTrack?lang=SE&kolliid=" + p.id);;
+            String serviceProvider;
+            if(p.id.length() == 13 && p.id.endsWith("SE"))
+                serviceProvider = "http://server.logistik.posten.se/servlet/PacTrack?lang=SE&kolliid=";
+            else
+                serviceProvider = "http://privpakportal.schenker.nu/TrackAndTrace/packagexml.aspx?packageid=";
+            
+            URL url = new URL(serviceProvider + p.id);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
 
             DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
