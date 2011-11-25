@@ -254,9 +254,11 @@ public class PackageTracker extends silvertrout.Plugin {
                 for(int j = 0; j < eventListNodes.getLength(); j++) {
                     Node n = eventListNodes.item(j);
                     if(n.getNodeName().equals("date")) {
-                        pe.date = Integer.parseInt(n.getTextContent());
+                        String textContent = n.getTextContent().replace("-", "");
+                        pe.date = Integer.parseInt(textContent);
                     } else if(n.getNodeName().equals("time")) {
-                        pe.time = Integer.parseInt(n.getTextContent());
+                        String textContent = n.getTextContent().replace(":", "");
+                        pe.time = Integer.parseInt(textContent);
                     } else if(n.getNodeName().equals("location")) {
                         pe.location = n.getTextContent();
                     } else if(n.getNodeName().equals("description")) {
