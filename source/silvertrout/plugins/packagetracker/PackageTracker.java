@@ -37,6 +37,7 @@ import java.net.HttpURLConnection;
 import silvertrout.commons.EscapeUtils;
 import silvertrout.Channel;
 import silvertrout.User;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider;
 
 /**
  * Tracks packages from the Swedish postal service (Posten).
@@ -68,6 +69,8 @@ public class PackageTracker extends silvertrout.Plugin {
         public String  id;
         public String  customer        = "Unknown customer";
         public String  service         = "Unknown service";
+        
+        public PackageServiceProvider provider = null;
 
         public String  recieverZipCode = "Unknown zip code";
         public String  recieverCity    = "Unknown city";
@@ -107,9 +110,20 @@ public class PackageTracker extends silvertrout.Plugin {
         }
     }
     private final ArrayList<Package> packages = new ArrayList<Package>();
+    private final ArrayList<PackageServiceProvider> serviceProviders = new ArrayList<PackageServiceProvider>();
 
     public PackageTracker() {
-
+        PackageServiceProviderFactory packageServiceProviderFactory = new PackageServiceProviderFactory();
+        serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten());
+        serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
+    }
+    
+    private PackageServiceProvider findServiceProvider(String id) {
+        for (PackageServiceProvider provider : serviceProviders) {
+            if(provider.isServiceProvider(id))
+                return provider;
+        }
+        return null;
     }
 
     public boolean exists(String id)
@@ -134,7 +148,7 @@ public class PackageTracker extends silvertrout.Plugin {
         p.channel  = channel;
         p.lastDate = Integer.parseInt("19700101");
         p.lastTime = Integer.parseInt("0000");
-
+        
         update(p);
 
         packages.add(p);
@@ -175,11 +189,19 @@ public class PackageTracker extends silvertrout.Plugin {
 
         int hour   = time / 100;
         int minute = time % 100;
-;
+
         return String.format("%1$04d-%2$02d-%3$02d %4$02d:%5$02d", year, month, day, hour, minute);
     }
 
     public void update(Package p) {
+        
+        // New packages and packages not yet registered at the service provider
+        // have a null provider
+        if(p.provider == null) {
+            p.provider = findServiceProvider(p.id);
+            if(p.provider == null)
+                return;
+        }
 
         ArrayList<PackageEvent> events = fetch(p);
 
@@ -210,13 +232,7 @@ public class PackageTracker extends silvertrout.Plugin {
         // Connect and fetch package information:
         try {
 
-            String serviceProvider;
-            if(p.id.length() == 13 && p.id.endsWith("SE"))
-                serviceProvider = "http://server.logistik.posten.se/servlet/PacTrack?lang=SE&kolliid=";
-            else
-                serviceProvider = "http://privpakportal.schenker.nu/TrackAndTrace/packagexml.aspx?packageid=";
-            
-            URL url = new URL(serviceProvider + p.id);
+            URL url = new URL(p.provider.baseURL + p.id);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
 
             DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -335,10 +351,7 @@ public class PackageTracker extends silvertrout.Plugin {
                 getNetwork().getConnection().sendPrivmsg(to.getName(),
                         "Could not find package");
             }
-
         }
-
-
     }
 
     @Override
