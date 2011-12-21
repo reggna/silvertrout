@@ -125,13 +125,10 @@ public class PackageServiceProviderFactory {
 
                 // A 'programevent' is returned both for erronous IDs and 
                 // IDs that havent been registered in the system yet 
-                if(doc.getElementsByTagName("programevent").getLength() > 0) {
-                    String status = doc.getElementsByTagName("programevent").item(0).getTextContent();
-                    if(status.equalsIgnoreCase("PaketID saknas eller är felaktigt angivet - ingen träff."))
-                        return false;
-                    else
-                        return true;
-                }
+                if(doc.getElementsByTagName("programevent").getLength() > 0)
+                    return false;
+                else
+                    return true;
 
             } catch (Exception e) {
                 System.out.println("Failed while parsing " + id + " for " + this);
