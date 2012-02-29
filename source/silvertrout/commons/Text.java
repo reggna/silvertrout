@@ -71,13 +71,13 @@ public class Text {
 	public static String format(String type, String s){
 		HashMap typeMap = new HashMap();
 		
-		typeMap.put("bold", "02");
-		typeMap.put("reverse", "26");
-		typeMap.put("underline", "37");
+		typeMap.put("bold", "\002");
+		typeMap.put("reverse", "\026");
+		typeMap.put("underline", "\037");
 		
 		if (type != "")
 		{
-			return "\0" + typeMap.get(type) + s + "\0" + typeMap.get(type);
+			return typeMap.get(type) + s + typeMap.get(type);
 		}
 		else
 		{
