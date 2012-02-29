@@ -44,4 +44,25 @@ public class Color{
     public static String white(String s){
         return "\0030,1"+s+"\003";
     }
+    
+    /**
+     * 
+     * Text Formatting
+     * \002 = bold
+     * \037 = underline
+     * \026 is reverse
+     * 
+     */
+
+    public static String bold(String s){
+        return "\002"+s+"\002";
+    }
+    
+    public static String underline(String s){
+        return "\037"+s+"\037";
+    }
+    public static String reverse(String s){
+        return "\026"+s+"\026";
+    }
+    
 }
