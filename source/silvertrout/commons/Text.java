@@ -27,7 +27,7 @@ package silvertrout.commons;
  */
 public class Text {
 	
-	public static String color(String s, String color = "", Boolean background = false, String bgcolor = "")
+	public static String color(String s, String color, Boolean background, String bgcolor)
 	{
 		
 		HashMap colorMap = new HashMap();
@@ -68,7 +68,7 @@ public class Text {
 		
 	}
 	
-	public static String format(String type = "", String s)
+	public static String format(String type, String s)
 	{
 		HashMap typeMap = new HashMap();
 		
