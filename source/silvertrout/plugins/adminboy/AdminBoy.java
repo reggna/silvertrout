@@ -29,36 +29,30 @@ import silvertrout.Modes;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- *
- **
- */
 public class AdminBoy extends silvertrout.Plugin {
 
   // Password for AdminBoy
   private String password;
-  
+
   @Override
   public void onPrivmsg(User user, String message) {
-    System.out.println("AB: onPrivmsg(u, m) = (" + user + ", " + message + ")");
-  
     String[] parts = message.split("\\s");
     if(parts.length > 1 && parts[0].equals(password)) {
       String cmd = parts[1].toLowerCase();
-      
-      // Channel commandos: (!op, !kick, !etc)
+
+      // Channel commandos: (!op, !kick, etc)
       if(parts.length > 3 && (cmd.equals("!kick") 
           || cmd.equals("!deop") || cmd.equals("!op") 
           || cmd.equals("!voice") || cmd.equals("!devoice") 
           || cmd.equals("!halfop") || cmd.equals("!dehalfop"))){
-          
+
         parts = message.split("\\s", 4);
-          
+
         if(getNetwork().isInChannel(parts[2])) {
           Channel chan = getNetwork().getChannel(parts[2]);
           User    usr  = getNetwork().getUser(parts[3]);
           String  rest = ""; if(parts.length > 4)rest = parts[4];
-           
+
           if(cmd.equals("!kick")) {
             chan.kick(usr, rest);
           } else if(cmd.equals("!op")) {
@@ -99,85 +93,84 @@ public class AdminBoy extends silvertrout.Plugin {
       // Network commands:
       } else if(parts.length > 2) {
         if(cmd.equals("!join")) {
-        
+
             if(!getNetwork().isInChannel(parts[2])) {
-                user.sendPrivmsg("Jag mår bra när jag får vara i " + parts[2] + ".");
+                user.sendPrivmsg("Joined " + parts[2] + ".");
                 getNetwork().getConnection().join(parts[2]);
             } else {
-                user.sendPrivmsg("Jag är redan i " + parts[2] + ".");            
+                user.sendPrivmsg("Unable to join, already in channel: " + parts[2] + ".");
             }
         } else if(cmd.equals("!part")) {
             if(getNetwork().isInChannel(parts[2])) {
-                user.sendPrivmsg("Tråkigt att du inte vill ha mig kvar i " + parts[2] +".");
+                user.sendPrivmsg("Leaving " + parts[2] +".");
                 getNetwork().getConnection().part(parts[2]);
             } else {
-                user.sendPrivmsg("Jag är inte i " + parts[2] +".");
+                user.sendPrivmsg("Unable to leave, not in channel: " + parts[2] +".");
             }
 
         } else if(cmd.equals("!loadplugin")) {
-        
             if(getNetwork().loadPlugin(parts[2])) {
-                user.sendPrivmsg(parts[2] + " har laddats.");
+                user.sendPrivmsg("Loaded plugin: " + parts[2] + ".");
             } else {
-                user.sendPrivmsg(parts[2] + " kunde inte laddas");
-            }              
+                user.sendPrivmsg("Unable to load plugin: " + parts[2] + ".");
+            }
         } else if(cmd.equals("!unloadplugin")) {
-        
             if(getNetwork().unloadPlugin(parts[2])) {
-                user.sendPrivmsg(parts[2] +" har avaktiverats.");
+                user.sendPrivmsg("Unloaded plugin: " + parts[2] +".");
             } else {
-                user.sendPrivmsg(parts[2] + " kunde inte laddas");
-            } 
+                user.sendPrivmsg("Unable to unload plugin: " + parts[2] + ".");
+            }
         } else if(cmd.equals("!users")) {
             Channel chan = getNetwork().getChannel(parts[2]);
-            user.sendPrivmsg(chan.getName() + " har "
-                + chan.getUsers().size() + " användare");
+            user.sendPrivmsg(chan.getName() + " has "
+                + chan.getUsers().size() + " users:");
             String  usrlst  = "";
             for(Map.Entry<User, Modes> ue: chan.getUsers().entrySet()) {
               usrlst += ue.getKey().getNickname() + "[" + ue.getValue().get() + "], ";
             }
             user.sendPrivmsg(usrlst);
           }
-      
+
       // Unknown commands:
       } else {
-        user.sendPrivmsg("Kommandot " + cmd + " kan inte hanteras av mig");
+        user.sendPrivmsg("Unsupported command: " + cmd + ".");
       }
-    
+
     }
   }
-  
+
     @Override
     public void onLoad(Map<String,String> settings){
         password = settings.get("password");
         if(password == null) password = "password";
     }
-  
+
   private String getHelp() {
-    return "Just nu finns följande kommandon tillgängliga: !join !part " +
+    return "The following commands are currently supported: " +
         "!loadplugin !unloadplugin !channels !listplugins !users !op !deop " +
         "!voice !devoice !kick";
   }
-  
+
   private String getHelp(String command){
     if(command.equals("!help") || command.equals("help"))
-      return "!help [kommando]: Returnerar kommandolista, alternativt hjälptext för det givna kommando.";
+      return "!help [commmand]: Returns information about the given command.";
     else if(command.equals("!part") || command.equals("part"))
-      return "!part [#kanal]: Kommenderar jbt att lämna en bestämd kanal.";
+      return "!part [#channel]: Make the bot leave a given channel.";
     else if(command.equals("!join") || command.equals("join"))
-      return "!part [#kanal]: Beordrar jbt att ansluta sig till en ny kanal.";
+      return "!join [#channel]: Make the bot join a given channel.";
     else if(command.equals("!loadplugin") || command.equals("loadplugin"))
-      return "!loadplugin [plugin]: Befaller jbt att ladda ett nytt plugin.";
+      return "!loadplugin [plugin]: Dynamically load a plugin from the given class file.";
     else if(command.equals("!unloadplugin") || command.equals("unloadplugin"))
-      return "!unloadplugin [plugin]: Ger jpb i uppdrag att lossa en bestämd insticksmodul.";
+      return "!unloadplugin [plugin]: Unload a given plugin.";
     else if(command.equals("!channels") || command.equals("channels"))
-      return "!channels: Listar de kanaler som jbt är aktiv på.";
+      return "!channels: Returns the current channel list.";
     else if(command.equals("!listplugins") || command.equals("listplugins"))
-      return "!listplugins: Listar de insticksmoduler som är laddade på nätverket.";
+      return "!listplugins: Returns a list of the active plugins.";
     else if (command.equals("!users") || command.equals("users"))
-      return "!users [#kanal]: Listar användare (och deras lägen) i en kanal där jbt finns";
+      return "!users [#channel]: Returns a user list from the given channel " +
+             "(note that this only works if the bot in currently in the channel)";
     else
-      return "Känner nog inte riktigt till det där kommandot, prata med Tigge så fixar han det. :)";
+      return "Unrecognized command, use !help with no arguments for a list of available commands.";
   }
 
 
