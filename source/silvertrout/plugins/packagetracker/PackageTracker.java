@@ -22,19 +22,18 @@
 package silvertrout.plugins.packagetracker;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 // XML parser
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
-import javax.xml.xpath.*;
 
 // URL and URL connection
 import java.net.URL;
 import java.net.HttpURLConnection;
-
-// Silvertrout internal
-import silvertrout.commons.EscapeUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider;
@@ -44,7 +43,7 @@ import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageS
  *
  * Keeps up to date with shipping information by using Posten's or Schenker's
  * xml services. 
- * Posten's service is documented at http://www.posten.se/c/online_steg_steg
+ * Posten's service is documented at http://services3.posten.se/c/online_steg_steg
  * with additional information on other pages linked from there.
  * Schenker's service is documented at http://www.schenker.nu/servlet/se.ementor.econgero.servlet.presentation.Main?data.node.id=26784&data.language.id=1
  * with information regarding different types of package id's at
@@ -74,14 +73,14 @@ public class PackageTracker extends silvertrout.Plugin {
 
         public String  recieverZipCode = "Unknown zip code";
         public String  recieverCity    = "Unknown city";
+        public String  receiverNickname;
 
         public String  weight          = "?";
 
         public String  dateSent        = "Unknown send date";
         public String  dateDelivered   = "Unknown deliver date";
 
-        public int     lastDate;
-        public int     lastTime;
+        public DateTime lastDateTime;
 
         public final ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
 
@@ -91,7 +90,7 @@ public class PackageTracker extends silvertrout.Plugin {
         public String toString() {
             return "Package (" + service + ", " + weight + " kg) "
                     + id + " from " + customer + " on route to "
-                    + recieverZipCode + " " + recieverCity;
+                    + receiverNickname + " at " + recieverZipCode + " " + recieverCity;
         }
     }
 
@@ -100,17 +99,18 @@ public class PackageTracker extends silvertrout.Plugin {
         public String description;
         public String location;
 
-        public int    date;
-        public int    time;
+        public DateTime    dateTime;
 
         @Override
         public String toString()
         {
-            return format(date, time) + ": " + description + ", " + location;
+            return dateTime.toString("yyyy-MM-dd HH:mm;ss") + " : " + description + ", " + location;
         }
     }
+    
     private final ArrayList<Package> packages = new ArrayList<Package>();
     private final ArrayList<PackageServiceProvider> serviceProviders = new ArrayList<PackageServiceProvider>();
+    private final int PACKAGE_TTL = 14; // TTL in days
 
     public PackageTracker() {
         PackageServiceProviderFactory packageServiceProviderFactory = new PackageServiceProviderFactory();
@@ -118,9 +118,9 @@ public class PackageTracker extends silvertrout.Plugin {
         serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
     }
     
-    private PackageServiceProvider findServiceProvider(String id) {
+    private PackageServiceProvider findServiceProvider(Package p) {
         for (PackageServiceProvider provider : serviceProviders) {
-            if(provider.isServiceProvider(id))
+            if(provider.isServiceProvider(p.id))
                 return provider;
         }
         return null;
@@ -138,7 +138,7 @@ public class PackageTracker extends silvertrout.Plugin {
         return false;
     }
 
-    public boolean add(String id, Channel channel) {
+    public boolean add(String id, Channel channel, String receiverNickname) {
 
         if(exists(id))return false;
 
@@ -146,8 +146,8 @@ public class PackageTracker extends silvertrout.Plugin {
 
         p.id       = id;
         p.channel  = channel;
-        p.lastDate = Integer.parseInt("19700101");
-        p.lastTime = Integer.parseInt("0000");
+        p.receiverNickname = receiverNickname;
+        p.lastDateTime = new DateTime(0);
         
         update(p);
 
@@ -181,24 +181,25 @@ public class PackageTracker extends silvertrout.Plugin {
         return null;
     }
 
-    public String format(int date, int time)
-    {
-        int year   = date / 10000;
-        int month  = (date % 10000) / 100;
-        int day    = date % 100;
-
-        int hour   = time / 100;
-        int minute = time % 100;
-
-        return String.format("%1$04d-%2$02d-%3$02d %4$02d:%5$02d", year, month, day, hour, minute);
-    }
-
     public void update(Package p) {
+        
+        // Has this package's TTL expired?
+        Duration timeSinceUpdate = new Duration(new DateTime(p.lastDateTime), null);
+
+        if (p.lastDateTime.isAfter(new DateTime(0)) && timeSinceUpdate.isLongerThan(Duration.standardDays(PACKAGE_TTL))) {
+
+            getNetwork().getConnection().sendPrivmsg(p.channel.getName(), " * " + "Package has not been updated for "
+                    + PACKAGE_TTL + " days - removing from PackageTracker!");
+            getNetwork().getConnection().sendPrivmsg(p.channel.getName(), p.toString());
+
+            packages.remove(p);
+            return;
+        }
         
         // New packages and packages not yet registered at the service provider
         // have a null provider
         if(p.provider == null) {
-            p.provider = findServiceProvider(p.id);
+            p.provider = findServiceProvider(p);
             if(p.provider == null)
                 return;
         }
@@ -215,10 +216,8 @@ public class PackageTracker extends silvertrout.Plugin {
             for(PackageEvent event: events) {
                 getNetwork().getConnection().sendPrivmsg(chan, " * " + event);
 
-                if(event.date > p.lastDate || (event.date == p.lastDate
-                        && event.time > p.lastTime)) {
-                    p.lastDate = event.date;
-                    p.lastTime = event.time;
+                if(event.dateTime.isAfter(p.lastDateTime)) {
+                    p.lastDateTime = event.dateTime;
                 }
             }
         }
@@ -266,23 +265,36 @@ public class PackageTracker extends silvertrout.Plugin {
             System.out.println("Got " + eventList.getLength() + " events");
             for(int i = 0; i < eventList.getLength(); i++) {
                 PackageEvent pe = new PackageEvent();
+                String date = null, time = null;
+                
                 NodeList eventListNodes = eventList.item(i).getChildNodes();
                 for(int j = 0; j < eventListNodes.getLength(); j++) {
                     Node n = eventListNodes.item(j);
                     if(n.getNodeName().equals("date")) {
-                        String textContent = n.getTextContent().replace("-", "");
-                        pe.date = Integer.parseInt(textContent);
+                        date = n.getTextContent().replace("-", "");
                     } else if(n.getNodeName().equals("time")) {
-                        String textContent = n.getTextContent().replace(":", "");
-                        pe.time = Integer.parseInt(textContent);
+                        time = n.getTextContent().replace(":", "");
                     } else if(n.getNodeName().equals("location")) {
                         pe.location = n.getTextContent();
                     } else if(n.getNodeName().equals("description")) {
                         pe.description = n.getTextContent();
                     }
                 }
-                if(pe.date > p.lastDate || (pe.date == p.lastDate
-                        && pe.time > p.lastTime)) {
+                
+                if (date != null && time != null) {
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMddHHmmss");
+                    pe.dateTime = dtf.parseDateTime(date+time);
+                }
+                else if (date != null) {
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMdd");
+                    pe.dateTime = dtf.parseDateTime(date);
+                }
+                else if (time != null) {
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("HHmmss");
+                    pe.dateTime = dtf.parseDateTime(time);
+                }
+                
+                if(pe.dateTime.isAfter(p.lastDateTime)) {
                     events.add(pe);
                 }
             }
@@ -317,7 +329,7 @@ public class PackageTracker extends silvertrout.Plugin {
             }
         // Add package:
         } else if (parts.length == 2 && command.equals("!addpackage")) {
-            if (add(parts[1], to)) {
+            if (add(parts[1], to, from.getNickname())) {
                 Package p = packages.get(packages.size() - 1);
                 getNetwork().getConnection().sendPrivmsg(to.getName(),
                         "Added: " + p);
