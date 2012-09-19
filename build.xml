@@ -27,6 +27,7 @@
       <pathelement location="${lib.dir}/HTMLParser/htmlparser.jar"/>
       <pathelement location="${lib.dir}/HTMLParser/htmllexer.jar"/>
       <pathelement location="${lib.dir}/google-api-translate-java/google-api-translate-java-0.91.jar"/>
+      <pathelement location="${lib.dir}/joda-time-2.1/joda-time-2.1.jar"/>
       <pathelement path="${classes.dir}"/>
   </path>
 
