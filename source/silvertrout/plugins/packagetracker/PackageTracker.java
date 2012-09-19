@@ -282,7 +282,7 @@ public class PackageTracker extends silvertrout.Plugin {
                 }
                 
                 if (date != null && time != null) {
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMddHHmmss");
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMddHHmm");
                     pe.dateTime = dtf.parseDateTime(date+time);
                 }
                 else if (date != null) {
@@ -290,7 +290,7 @@ public class PackageTracker extends silvertrout.Plugin {
                     pe.dateTime = dtf.parseDateTime(date);
                 }
                 else if (time != null) {
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("HHmmss");
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("HHmm");
                     pe.dateTime = dtf.parseDateTime(time);
                 }
                 
