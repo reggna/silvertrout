@@ -12,8 +12,11 @@
 
   <question>
     <line>Hur länge varar ett kokainrus?</line>
+    <hints>
+      <line>Upp till en halvtimme</line>
+    </hints>
     <answers>
-      <answer>Upp till en halvtimme</answer>
+      <answer>halvtimme</answer>
     </answers>
   </question>
 
@@ -46,7 +49,7 @@
   </question>
 
   <question>
-    <line>När blev LSD narkotikaklassat i sverige?</line>
+    <line>När blev LSD narkotikaklassat i Sverige?</line>
     <answers>
       <answer>1966</answer>
     </answers>
@@ -67,58 +70,65 @@
   </question>
 
   <question>
-    <line>När blev det förbjudet med innehav och försäljning av marijuana i sverige?</line>
+    <line>När blev det förbjudet med innehav och försäljning av marijuana i Sverige?</line>
     <answers>
       <answer>1930</answer>
     </answers>
   </question>
 
   <question>
-    <line>När blev det förbjudet att bruka marijuana i sverige?</line>
+    <line>När blev det förbjudet att bruka marijuana i Sverige?</line>
+    <hints>
+      <line>Slutet av 1980-talet</line>
+    </hints>
     <answers>
-      <answer>Slutet av 1980-talet</answer>
+      <answer>1980-talet</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vad kostar ett gram hasch i genomsnitt i sverige?</line>
+    <line>Vad kostar ett gram hasch i genomsnitt i Sverige?</line>
     <answers>
       <answer>100 kronor</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vad kostar ett gram vitt heroin i genomsnitt i sverige?</line>
+    <line>Vad kostar ett gram vitt heroin i genomsnitt i Sverige?</line>
     <answers>
       <answer>1000 kronor</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vad kostar ett gram amfetamin i genomsnitt i sverige?</line>
+    <line>Vad kostar ett gram amfetamin i genomsnitt i Sverige?</line>
     <answers>
       <answer>200 kronor</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vilken är den mest förekommande illegala drogen i sverige?</line>
+    <line>Vilken är den mest förekommande illegala drogen i Sverige?</line>
     <answers>
-      <answer>cannabis</answer>
+      <answer>Cannabis</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vilken är den näst mest förekommande illegala drogen i sverige?</line>
+    <line>Vilken är den näst mest förekommande illegala drogen i Sverige?</line>
     <answers>
       <answer>Amfetamin</answer>
     </answers>
   </question>
 
   <question>
-    <line>När förbjöds GHB i sverige?</line>
+    <line>När förbjöds GHB i Sverige?</line>
+    <hints>
+      <line>1 februari 2000</line>
+    </hints>
     <answers>
-      <answer>1 februari 2000</answer>
+      <answer score="5">1 februari</answer>
+      <answer score="5" required="true">2000</answer>
     </answers>
   </question>
 
@@ -138,8 +148,12 @@
 
   <question>
     <line>När blev DXM narkotikaklassat i sverige?</line>
+    <hints>
+      <line>7 juli 2008</line>
+    </hints>
     <answers>
-      <answer>7 juli 2008</answer>
+      <answer score="5">7 juli</answer>
+      <answer score="5" required="true">2008</answer>
     </answers>
   </question>
 
@@ -165,9 +179,13 @@
   </question>
 
   <question>
-    <line>När blev lustgas narkotikaklassat i sverige?</line>
+    <line>När blev lustgas narkotikaklassat i Sverige?</line>
+    <hints>
+      <line>Den är inte narkotikaklassad</line>
+    </hints>
     <answers>
       <answer>Den är inte narkotikaklassad</answer>
+      <answer>Aldrig</answer>
     </answers>
   </question>
 
@@ -271,8 +289,12 @@
 
   <question>
     <line>Vilken är den äldsta typen av alkoholdryck?</line>
+    <hints>
+      <line>Øhl</line>
+    </hints>
     <answers>
       <answer>Øhl</answer>
+      <answer>Öl</answer>
     </answers>
   </question>
 
@@ -341,20 +363,31 @@
 
   <question>
     <line>Vilka droger är lagliga och socialt accepterade i sverige?</line>
+    <hints>
+      <line>Koffein, alkohol, kakao och nikotin</line>
+    </hints>
     <answers>
-      <answer>Koffein- och alkoholhaltiga drycker samt produkter av kakao och nikotin</answer>
+      <answer>Koffein, alkohol, kakao och nikotin</answer>
+      <answer required="true">Koffein</answer>
+      <answer required="true">Alkohol</answer>
+      <answer required="true">Kakao</answer>
+      <answer required="true">Nikotin</answer>
     </answers>
   </question>
 
   <question>
     <line>Vilka två droger är de mest spridda i världen?</line>
+    <hints>
+      <line>Nikotin och koffein</line>
+    </hints>
     <answers>
-      <answer>nikotin och koffein</answer>
+      <answer required="true">nikotin</answer>
+      <answer required="true">koffein</answer>
     </answers>
   </question>
 
   <question>
-    <line>Vilken drog (som är narkotikaklassad i sverige) är i storbritannien klassad som en grönsak?</line>
+    <line>Vilken drog (som är narkotikaklassad i Sverige) är i Storbritannien klassad som en grönsak?</line>
     <answers>
       <answer>Khat</answer>
     </answers>
@@ -376,8 +409,12 @@
 
   <question>
     <line>Vilken drog sägs ha gett namn åt det engelska ordet "assassin" (mördare)?</line>
+    <hints>
+      <line>Cannabis</line>
+    </hints>
     <answers>
       <answer>Cannabis</answer>
+      <answer>Hasch</answer>
     </answers>
   </question>
 

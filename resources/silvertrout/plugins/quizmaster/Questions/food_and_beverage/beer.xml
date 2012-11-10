@@ -12,8 +12,14 @@
 
   <question>
     <line>Vilka är de fyra huvudingredienserna i öl?</line>
+    <hints>
+      <line>Malt, humle, jäst och vatten</line>
+    </hints>
     <answers>
-      <answer>Malt, humle, jäst och vatten</answer>
+      <answer required="true">malt</answer>
+      <answer required="true">humle</answer>
+      <answer required="true">jäst</answer>
+      <answer required="true">vatten</answer>
     </answers>
   </question>
 

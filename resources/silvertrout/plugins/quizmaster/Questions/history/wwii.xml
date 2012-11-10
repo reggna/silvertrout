@@ -83,7 +83,7 @@
   <question>
     <line>Ungefär hur många judar och andra avvikande avrättas under Hitlers tid vid makten?</line>
     <answers>
-      <answer>9000000</answer>
+      <answer>6000000</answer>
     </answers>
   </question>
 
@@ -180,8 +180,13 @@
 
   <question>
     <line>Efter stora framgångar i inledningen av operation Barbarossa kom tyska armégrupp nord fram till Leningrad i september 1941. Hitler såg en snabb seger framför sig, men istället blev det en lång belägring av staden. Hur länge varade den?</line>
+    <hints>
+      <line>Ca 900 dagar</line>
+    </hints>
     <answers>
       <answer>Ca 900 dagar</answer>
+      <answer>Ungefär 900 dagar</answer>
+      <answer>Cirka 900 dagar</answer>
     </answers>
   </question>
 
@@ -277,7 +282,7 @@
   </question>
 
   <question>
-    <line>I september 1941 ockuperade von Mannsteins tyska trupper hela Krimhalvön vid Svarta havet, utom Sevastopol och Kertjhalvön. Tyskarna ville inta Sevastopol för att den vägen kunna ta in förnödenheter sjövägen, men Sevastopol försvarades av ett antal starkt befästa fort. För att mala ner försvaret av Sevastopol användes den största kanon som tillverkats och använts i strid. Vad hette den?</line>
+    <line>I september 1941 ockuperade tyska trupper hela Krimhalvön vid Svarta havet, utom Sevastopol och Kertjhalvön. Tyskarna ville inta Sevastopol för att den vägen kunna ta in förnödenheter sjövägen, men Sevastopol försvarades av ett antal starkt befästa fort. För att mala ner försvaret av Sevastopol användes den största kanon som tillverkats och använts i strid. Vad hette den?</line>
     <answers>
       <answer>Schwere Gustav</answer>
     </answers>

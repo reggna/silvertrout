@@ -5,8 +5,13 @@
 
   <question>
     <line>Vilka ingredienser finns i whiskey?</line>
+    <hints>
+      <line>Säd, jäst och vatten</line>
+    </hints>
     <answers>
-      <answer>Säd, jäst och vatten</answer>
+      <answer required="true">Säd</answer>
+      <answer required="true">jäst</answer>
+      <answer required="true">vatten</answer>
     </answers>
   </question>
 

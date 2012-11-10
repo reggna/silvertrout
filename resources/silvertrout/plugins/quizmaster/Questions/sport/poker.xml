@@ -68,8 +68,14 @@
 
   <question>
     <line>"Ducks" är...?</line>
+    <hints>
+      <line>Två 2:or</line>
+    </hints>
     <answers>
       <answer>Två 2:or</answer>
+      <answer>2 2:or</answer>
+      <answer>Två tvåor</answer>
+      <answer>2 tvåor</answer>
     </answers>
   </question>
 
@@ -82,8 +88,12 @@
 
   <question>
     <line>Vilken hand kallas Big Slick i Texas Holdem</line>
+    <hints>
+      <line>Ess och Kung</line>
+    </hints>
     <answers>
-      <answer>Ess och Kung</answer>
+      <answer required="true">Ess</answer>
+      <answer required="true">Kung</answer>
     </answers>
   </question>
 
@@ -103,15 +113,23 @@
 
   <question>
     <line>Om du fått "Cowboys" på handen vad har du då?</line>
+    <hints>
+      <line>Två Kungar</line>
+    </hints>
     <answers>
       <answer>Två Kungar</answer>
+      <answer>2 Kungar</answer>
     </answers>
   </question>
 
   <question>
     <line>Om du har fått 'Big Slick' på hand när du spelar Hold'em så har du vad?</line>
+    <hints>
+      <line>Ess och Kung</line>
+    </hints>
     <answers>
-      <answer>Ess och Kung</answer>
+      <answer required="true">Ess</answer>
+      <answer required="true">Kung</answer>
     </answers>
   </question>
 
@@ -124,8 +142,12 @@
 
   <question>
     <line>Vilka har vunnit WSOP 3 gånger?</line>
+    <hints>
+      <line>Stuey Ungar och Johnny Moss</line>
+    </hints>
     <answers>
-      <answer>Stuey Ungar och Johnny Moss</answer>
+      <answer required="true">Stuey Ungar</answer>
+      <answer required="true">Johnny Moss</answer>
     </answers>
   </question>
 
@@ -188,7 +210,8 @@
   <question>
     <line>Vilken hand kallas för Doyle Brunson?</line>
     <answers>
-      <answer>10 2</answer>
+      <answer>10</answer>
+      <answer>2</answer>
     </answers>
   </question>
 

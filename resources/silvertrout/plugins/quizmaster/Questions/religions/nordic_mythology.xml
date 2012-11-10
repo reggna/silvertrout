@@ -156,12 +156,12 @@
   </question>
 
   <question>
-    <line>Vad heter Odens söner?</line>
+    <line>Vad heter Odens bröder?</line>
     <hints>
-      <line>Ville och Ve</line>
+      <line>Vile och Ve</line>
     </hints>
     <answers>
-      <answer required="true">Ville</answer>
+      <answer required="true">Vile</answer>
       <answer required="true">Ve</answer>
     </answers>
   </question>

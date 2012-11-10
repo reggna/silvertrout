@@ -1,0 +1,111 @@
+<questions 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+        category="Mat och dryck" subcategory="Öl- och spritsmaker">
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Kryddig smak med beska och tydlig karaktär av malört, inslag av pomerans och kanel."</line>
+  <hints>
+    <line>Bäska droppar</line>
+  </hints>
+  <answers>
+   <answer score="5">Bäska droppar</answer>
+   <answer score="2">Bäsk</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Ren smak med tydlig karaktär av kummin, anis och fänkål, inslag av fat."</line>
+  <hints>
+    <line>OP Anderson Aquavit</line>
+  </hints>
+  <answers>
+   <answer score="3" required="true">OP Anderson</answer>
+   <answer score="2">Aquavit</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Maltig smak med inslag av knäckebröd, honung och apelsinskal."</line>
+  <hints>
+   <line>Carlsberg Export</line>
+  </hints>
+  <answers>
+   <answer>Carlsberg Export</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Fruktig smak med inslag av ljust bröd, honung, örter och citrus."</line>
+  <hints>
+   <line>Pripps Blå</line>
+  </hints>
+  <answers>
+   <answer>Pripps Blå</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Söt, kryddig smak med viss bitterhet, inslag av lakritsrot, torkade örter, kanel, ingefära och pomerans."</line>
+  <hints>
+   <line>Jägermeister</line>
+  </hints>
+  <answers>
+   <answer>Jägermeister</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Medelstor beska. Mycket eldig, kraftfull smak med inslag av torkad frukt och nötter. Markerad efterbeska."</line>
+  <hints>
+   <line>Arboga 10,2</line>
+  </hints>
+  <answers>
+   <answer>Arboga 10,2</answer>
+  </answers>
+ </question>
+
+ <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Fruktig smak med liten sötma, inslag av fat, smörkola, vanilj och torkad frukt."</line>
+  <hints>
+   <line>Innis & Gunn</line>
+  </hints>
+  <answers>
+   <answer>Innis & Gunn</answer>
+   <answer>Innis and Gunn</answer>
+  </answers>
+ </question>
+
+  <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Mycket söt, simmig smak med tydlig karaktär arrak, inslag av pomerans."</line>
+  <hints>
+   <line>Carlshamns Flaggpunsch</line>
+  </hints>
+  <answers>
+   <answer>Carlshamns Flaggpunsch</answer>
+  </answers>
+ </question>
+
+   <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Kryddig smak med inslag av arrak, mörk choklad, mandelmassa och vanilj."</line>
+  <hints>
+   <line>Captain Morgan Spiced Gold</line>
+  </hints>
+  <answers>
+   <answer score="3" required="true">Captain Morgan</answer>
+   <answer score="2">Spiced Gold</answer>
+  </answers>
+ </question>
+
+  <question>
+  <line>Vilken alkoholhaltig dryck åsyftas? "Smakrik, tydligt rostad smak med stor beska, inslag av kaffe, choklad, tjära och mörkt bröd."</line>
+  <hints>
+   <line>Guinness Extra Stout</line>
+  </hints>
+  <answers>
+   <answer score="3" required="true">Guinness</answer>
+   <answer score="2">Extra Stout</answer>
+  </answers>
+ </question>
+
+</questions>

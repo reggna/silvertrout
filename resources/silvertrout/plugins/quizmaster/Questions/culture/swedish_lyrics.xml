@@ -60,8 +60,7 @@
       <answer>Hjalle Östman</answer>
       <answer>Mia Mästerbo</answer>
       <answer>Anders Andersson</answer>
-      <answer>Bror Jonas Stentäpp</answer>
-      <answer>Hjalle Östman</answer>                  
+      <answer>Bror Jonas Stentäpp</answer>            
       <answer>Johan Åsberg</answer>
     </answers>
   </question>  
@@ -129,17 +128,6 @@
     <answers>
       <answer required="true">Joakim Thåström</answer>
       <answer required="true"> Flicka med guld...</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>I vilken låt återfinns textraden "Jag gör om alla söndagar till lördag i kväll och klär mig för att gå på kalas"? Vi söker dessutom artisten.</line>
-    <hints>
-      <line>Joakim Thåström med Flicka med guld...</line>
-    </hints>    
-    <answers>
-      <answer required="true">Joakim Thåström</answer>
-      <answer required="true">Flicka med guld...</answer>
     </answers>
   </question>
 

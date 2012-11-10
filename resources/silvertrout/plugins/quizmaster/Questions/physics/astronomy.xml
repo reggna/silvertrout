@@ -40,8 +40,15 @@
 
   <question>
     <line>Hur lång tid tar det för månen att passera 1 varv runt jorden?</line>
-    <answers>
-      <answer>Ungefär 1 månad</answer>
+    <hints>
+      <line>Drygt 27 dygn</line>
+    </hints>
+    <answers required="2">
+      <answer required="true">27 dygn</answer>
+      <answer>Ungefär</answer>
+      <answer>ca</answer>
+      <answer>cirka</answer>
+      <answer>drygt</answer>
     </answers>
   </question>
 
@@ -110,8 +117,15 @@
 
   <question>
     <line>Hur lång tid tar det för Solens ljus att nå Jorden?</line>
-    <answers>
-      <answer>Drygt 8 minuter</answer>
+    <hints>
+      <line>Drygt 8 minuter</line>
+    </hints>
+    <answers required="2">
+      <answer required="true">8 minuter</answer>
+      <answer>drygt</answer>
+      <answer>ungefär</answer>
+      <answer>cirka</answer>
+      <answer>ca</answer>
     </answers>
   </question>
 
@@ -173,15 +187,24 @@
 
   <question>
     <line>Vad händer vid en solförmörkesle?</line>
+    <hints>
+      <line>Månens skugga faller på jorden</line>
+    </hints>
     <answers>
       <answer>Månens skugga faller på jorden</answer>
+      <answer>Skuggan av månen faller på jorden</answer>
     </answers>
   </question>
 
   <question>
     <line>Var finns världens största teleskop?</line>
-    <answers>
-      <answer>I den chilenska Atacamaöknen</answer>
+    <hints>
+      <line>I den chilenska Atacamaöknen</line>
+    </hints>
+    <answers required="2">
+      <answer required="true">Atacamaöknen</answer>
+      <answer>chilenska</answer>
+      <answer>Chile</answer>
     </answers>
   </question>
 
@@ -215,8 +238,12 @@
 
   <question>
     <line>Vad innebär en månförmörkelse?</line>
+    <hints>
+      <line>Skuggan av Jorden syns på månen</line>
+    </hints>
     <answers>
       <answer>Skuggan av Jorden syns på månen</answer>
+      <answer>Jordens skugga faller på månen</answer>
     </answers>
   </question>
 

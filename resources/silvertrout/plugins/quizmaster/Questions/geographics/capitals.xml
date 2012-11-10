@@ -572,8 +572,12 @@
 
   <question>
     <line>Vad heter Kinas huvudstad?</line>
+    <hints>
+      <line>Peking</line>
+    </hints>
     <answers>
       <answer>Peking</answer>
+      <answer>Bejing</answer>
     </answers>
   </question>
 
@@ -1139,14 +1143,23 @@
 
   <question>
     <line>Vad heter Sydafrikas huvudstad?</line>
+    <hints>
+      <line>Kapstaden</line>
+    </hints>
     <answers>
       <answer>Kapstaden</answer>
+      <answer>Pretoria</answer>
+      <answer>Bloemfontein</answer>
     </answers>
   </question>
 
   <question>
     <line>Vad heter Sydkoreas huvudstad?</line>
+    <hints>
+      <line>Seoul</line>
+    </hints>
     <answers>
+      <answer>Seoul</answer>
       <answer>Söul</answer>
     </answers>
   </question>

@@ -48,8 +48,12 @@
 
   <question>
     <line>Vad har Googles två grundare, samt företagets nuvarnade VD, i årslön?</line>
+    <hints>
+      <line>1 USD</line>
+    </hints>
     <answers>
       <answer>1 USD</answer>
+      <answer>$1</answer>
     </answers>
   </question>
 
