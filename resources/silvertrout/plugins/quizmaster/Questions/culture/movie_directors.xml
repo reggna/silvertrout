@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Film" subcategory="Regissörer">
 
   <question>
@@ -96,8 +96,13 @@
 
   <question>
     <line>Vilka har regisserat filmen The Matrix?</line>
-    <answers>
-      <answer>Andy och Larry Wachowski</answer>
+    <hints>
+      <line>Andy och Larry Wachowski</line>
+    </hints>
+    <answers required="2">
+      <answer required="true">Wachowski</answer>
+      <answer required="true">Andy</answer>
+      <answer required="true">Larry</answer>
     </answers>
   </question>
 

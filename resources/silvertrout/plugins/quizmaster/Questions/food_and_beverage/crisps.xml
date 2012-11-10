@@ -40,8 +40,14 @@
 
   <question>
     <line>Hur mycket potatis går det åt till ett kilo chips?</line>
-    <answers>
-      <answer>ca 4 kilo</answer>
+    <hints>
+      <line>Ca 4 kilo</line>
+    </hints>
+    <answers required="2">
+      <answer required="true">4 kilo</answer>
+      <answer>ca</answer>
+      <answer>ungefär</answer>
+      <answer>cirka</answer>
     </answers>
   </question>
 

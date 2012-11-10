@@ -47,15 +47,23 @@
   
   <question>
     <line>Hur många takter har en vanlig bilmotor?</line>
+    <hints>
+      <line>4</line>
+    </hints>
     <answers>
       <answer>Fyra</answer>
+      <answer>4</answer>
     </answers>
   </question>
   
   <question>
     <line>Vad heter de två bröderna som är bilmekaniker i tv-serien Macken?</line>
+    <hints>
+      <line>Roy och Roger</line>
+    </hints>
     <answers>
-      <answer>Roy och Roger</answer>
+      <answer required="true">Roy</answer>
+      <answer required="true">Roger</answer>
     </answers>
   </question>
   
@@ -194,8 +202,12 @@
 
   <question>
     <line>Vad heter de två stora svenska lastbilstillverkarna?</line>
+    <hints>
+      <line>Scania och Volvo</line>
+    </hints>
     <answers>
-      <answer>Scania och Volvo</answer>
+      <answer required="true">Scania</answer>
+      <answer required="true">Volvo</answer>
     </answers>
   </question>
 

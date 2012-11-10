@@ -12,8 +12,12 @@
 
   <question>
     <line>Hur många ägare kan det som lägst vara i ett aktiebolag?</line>
+    <hints>
+      <line>1</line>
+    </hints>
     <answers>
       <answer>1</answer>
+      <answer>en</answer>
     </answers>
   </question>
 

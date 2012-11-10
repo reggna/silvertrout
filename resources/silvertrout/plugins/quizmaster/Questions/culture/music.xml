@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Kultur" subcategory="Musik">
 
   <question>
@@ -44,7 +44,7 @@
       <answer>Venedig</answer>
     </answers>
   </question>
-  
+ 
   <question>
     <line>Vilka instrument spelar en batterist?</line>
     <answers>

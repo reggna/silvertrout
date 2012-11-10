@@ -16,7 +16,7 @@
       <answer>I två rum på Katarina brandstation</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Hur många bultar finns det i ölandsbron?</line>
     <answers>
@@ -90,7 +90,7 @@
       <answer>Tudor</answer>
     </answers>
   </question>
-  
+
    <question>
     <line>Fortsätt citatet av Mick Talbot: "Den som bäddar..."</line>
     <answers>
@@ -104,23 +104,26 @@
       <answer>på mitt kuvert</answer>
     </answers>
   </question> 
-  
+
      <question>
     <line>Fortsätt citatet av Mick Talbot: "Den som gapar efter..."</line>
     <answers>
       <answer>galen fågel, ser inte skogen för alla ben</answer>
     </answers>
   </question> 
-  
+
      <question>
     <line>Fortsätt citatet av Mick Talbot: "Du anar ugglor..."</line>
     <answers>
       <answer>som får kläder</answer>
     </answers>
   </question> 
-  
+
   <question>
     <line>Vilka framför låten "Laglöst land"?</line>
+    <hints>
+      <line>Nordman, Syd-sydvästman, Bordman och Ostman</line>
+    </hints>
     <answers>
       <answer score="5" required="true">Nordman</answer>
       <answer score="5" required="true">Syd-sydvästman</answer>
@@ -128,14 +131,14 @@
       <answer score="5" required="true">Ostman</answer>
     </answers>
   </question> 
-  
+
   <question>
     <line>Vad rekommenderar farbror Barbro till gravida 14-åringen Lena?</line>
     <answers>
       <answer>Ett nytt rengöringsmedel för CD-skivor</answer>
     </answers>
   </question> 
-  
+
   <question>
     <line>Vad kostar Dennispaketet?</line>
     <answers>
@@ -157,16 +160,19 @@
       <answer>03.30</answer>
     </answers>
   </question> 
-  
+
   <question>
     <line>Vad står det bak på Weiron i ottans gaffeltruck?</line>
     <answers>
       <answer>Arbetsfordon</answer>
     </answers>
   </question> 
-  
+
   <question>
     <line>Vad har Weiron i ottan med sig till jobbet?</line>
+    <hints>
+      <line>Kaffe, vodka, snus och porrtidningar</line>
+    </hints>
     <answers>
       <answer required="true">Kaffe</answer>
       <answer required="true">Vodka</answer>
@@ -174,5 +180,5 @@
       <answer required="true">Porrtidningar</answer>
     </answers>
   </question> 
-  
+
 </questions>

@@ -82,8 +82,14 @@
 
   <question>
     <line>Hur många guld vann Jesse Owens under OS 1936?</line>
+    <hints>
+      <line>4 st</line>
+    </hints>
     <answers>
       <answer>4 st</answer>
+      <answer>fyra st</answer>
+      <answer>4 stycken</answer>
+      <answer>fyra stycken</answer>
     </answers>
   </question>
 
@@ -131,8 +137,10 @@
 
   <question>
     <line>Micheline Ostermeyer från Frankrike vann både kulstötningen och diskus i London OS 1948. Vad hade hon för annan sysselsättning förutom friidrott?</line>
+    <hints>Hon var konsertpianist><hints>
     <answers>
       <answer>Hon var konsertpianist</answer>
+      <answer>konsertpianist</answer>
     </answers>
   </question>
 
@@ -180,15 +188,23 @@
 
   <question>
     <line>Vilken stad arrangerade sommarspelen 1988?</line>
+    <hints>
+      <line>Seoul</line>
+    </hints>
     <answers>
       <answer>Seoul</answer>
+      <answer>Söul</answer>
     </answers>
   </question>
 
   <question>
     <line>Vilken stad arrangerade sommarspelen 2008?</line>
+    <hints>
+      <line>Peking</line>
+    </hints>
     <answers>
       <answer>Peking</answer>
+      <answer>Bejing</answer>
     </answers>
   </question>
 

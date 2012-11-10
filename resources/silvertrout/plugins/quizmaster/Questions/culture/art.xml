@@ -55,7 +55,7 @@
   <question>
     <line>Braque och Picasso skapade en av våra konstinriktningar. Vilken?</line>
     <answers>
-      <answer>Kubismen</answer>
+      <answer>Kubism</answer>
     </answers>
   </question>
 
@@ -90,7 +90,7 @@
   <question>
     <line>Vilken stil fick sitt genombrott på världsutställningen i Stockholm 1930?</line>
     <answers>
-      <answer>Funktionalismen</answer>
+      <answer>Funktionalism</answer>
     </answers>
   </question>
 
@@ -104,14 +104,14 @@
   <question>
     <line>Degas, Manet och Monet representerar en viss konstinriktning. Vilken?</line>
     <answers>
-      <answer>Impressionismen</answer>
+      <answer>Impressionism</answer>
     </answers>
   </question>
 
   <question>
     <line>Vilken konstinriktning förknippar man med Henri Rousseau?</line>
     <answers>
-      <answer>Naivismen</answer>
+      <answer>Naivism</answer>
     </answers>
   </question>
 
@@ -131,8 +131,11 @@
 
   <question>
     <line>Var kan Michelangelos mästerverk Pietá beskådas?</line>
+    <hints>
+      <line>I St. Peterskyrkan</line>
+    </hints>
     <answers>
-      <answer>I St. Peterskyrkan</answer>
+      <answer>St. Peterskyrkan</answer>
     </answers>
   </question>
 
@@ -153,7 +156,7 @@
   <question>
     <line>För vilket berömt konstverk stod Isabella Singer modell?</line>
     <answers>
-      <answer>Frihetsgudinnan i New York</answer>
+      <answer>Frihetsgudinnan</answer>
     </answers>
   </question>
 
@@ -189,13 +192,6 @@
     <line>Michelangelo hade faktiskt ett efternamn. Vilket?</line>
     <answers>
       <answer>Buonarroti</answer>
-    </answers>
-  </question>
-
-  <question>
-    <line>Vad heter Babsan på riktigt?</line>
-    <answers>
-      <answer>Lars-Åke Wilhelmsson</answer>
     </answers>
   </question>
   

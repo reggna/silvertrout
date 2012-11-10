@@ -40,8 +40,12 @@
 
   <question>
     <line>Vad hände med det tredje träsk-slottet?</line>
+    <hints>
+      <line>Det brann ner, välte och sjönk ner i träsket</line>
+    </hints>
     <answers>
       <answer>Det brann ner, välte och sjönk ner i träsket</answer>
+      <answer>Det brann upp, välte och sjönk ner i träsket</answer>
     </answers>
   </question>
 

@@ -1,9 +1,9 @@
-<questions 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<questions
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="questions.xsd"
     category="Kultur" subcategory="Svensk poesi">
-    
-    
+   
+   
   <question>
     <line>Vad heter Harry Martinssons ryndempos?</line>
     <answers>
@@ -60,7 +60,7 @@
       <answer required="true">Viktor Rydberg</answer>
     </answers>
   </question>
-      
+     
   <question>
     <line>Vilken diktare skrev "För mig var du en ljusgestalt i nattens tid upprunnen, vid morgonen försvunnen, jag minns dig som en stjärna, en saga, en sång"?</line>
     <answers>
@@ -74,5 +74,5 @@
       <answer>Nils Ferlin</answer>
     </answers>
   </question>
-        
+       
 </questions>

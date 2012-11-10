@@ -1,0 +1,122 @@
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
+        category="Kultur" subcategory="Smurfkunskap">
+
+  <question>
+    <line>Den belgiska serieskaparen Pierre Culliford skapade smurfarna, men vad hade han för smeknamn?</line>
+    <hints>
+      <line>Peyo</line>
+    </hints>
+    <answers>
+      <answer>Peyo</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Smurfarna är ganska korta i rocken. Hur stora är de egentligen?</line>
+    <hints>
+      <line>Tre äpplen höga</line>
+    </hints>
+    <answers>
+      <answer>Tre äpplen höga</answer>
+      <answer>3 äpplen höga</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är smurfarnas favoritdryck?</line>
+    <hints>
+      <line>Hallonsaft</line>
+    </hints>
+    <answers>
+      <answer>Hallonsaft</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad är smurfarnas favoritmat?</line>
+    <hints>
+      <line>Sarsaparill</line>
+    </hints>
+    <answers>
+      <answer>Sarsaparill</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter smurfarna på orginalspråket franska?</line>
+    <hints>
+      <line>Les Schtroumpfs</line>
+    </hints>
+    <answers>
+      <answer>Les Schtroumpfs</answer>
+    </answers>
+  </question>
+ 
+  <question>
+    <line>Vad heter antagonisten tillika alkemisten i sagorna om smurfarna?</line>
+    <hints>
+      <line>Gargamel</line>
+    </hints>
+    <answers>
+      <answer>Gargamel</answer>
+    </answers>
+  </question>
+ 
+  <question>
+    <line>Vad heter Gargamels onda katt i sagorna om smurfarna?</line>
+    <hints>
+      <line>Azrael</line>
+    </hints>
+    <answers>
+      <answer>Azrael</answer>
+    </answers>
+  </question>
+   
+  <question>
+    <line>Hur säger man "Vill du följa med på en skogspromenad och plocka sarsaparill vid den stora ekens rötter?" på smurfspråk?</line>
+    <hints>
+      <line>Vill du smurfa med på en smurfpromenad och smurfa sarsaparill vid den smurfiga ekens smurf?</line>
+    </hints>
+    <answers>
+      <answer>Vill du smurfa med på en smurfpromenad och smurfa sarsaparill vid den smurfiga ekens smurf?</answer>
+      <answer>Vill du smurfa med på en smurfpromenad och smurfa smurf vid den smurfiga smurfens smurf?</answer>
+    </answers>
+  </question>
+ 
+  <question>
+    <line>Hur många smurfar fanns det från början?</line>
+    <hints>
+      <line>99</line>
+    </hints>
+    <answers>
+      <answer>99</answer>
+      <answer>nittionio</answer>
+    </answers>
+  </question>
+ 
+  <question>
+    <line>Smurfan skapades av Gargamel för att infiltrera smurfbyn, men bytte senare sida och blev god. Hon räknas inte med i de 99 ursprungliga smurfarna, vilken i ordningen är hon?</line>
+    <hints>
+      <line>Den 101:a</line>
+    </hints>
+    <answers>
+      <answer>Den 101:a</answer>
+      <answer>Den hundraförsta</answer>
+      <answer>Den etthundraförsta</answer>
+    </answers>
+  </question>
+ 
+  <question>
+    <line>Att Gammelsmurf är gammal inses lätt. Hur gammal var han under medeltiden?</line>
+    <hints>
+      <line>542 kantarellår</line>
+    </hints>
+    <answers>
+      <answer>542 kantarellår</answer>
+      <answer>femhundrafyrtiotvå kantarellår</answer>
+    </answers>
+  </question>
+
+</questions>

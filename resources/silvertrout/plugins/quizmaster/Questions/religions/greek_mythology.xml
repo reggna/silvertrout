@@ -82,8 +82,12 @@
 
   <question>
     <line>Var var Minos kung?</line>
+    <hints>
+      <line>På Kreta</line>
+    </hints>
     <answers>
       <answer>På Kreta</answer>
+      <answer>Kreta</answer>
     </answers>
   </question>
 
@@ -110,8 +114,12 @@
 
   <question>
     <line>Hur många huvuden har draken som vaktar hesperidernas gyllene äpplen?</line>
+    <hints>
+      <line>Hundra</line>
+    </hints>
     <answers>
       <answer>Hundra</answer>
+      <answer>100</answer>
     </answers>
   </question>
 
@@ -160,14 +168,19 @@
   <question>
     <line>Hur dog Bellerofon?</line>
     <answers>
-      <answer>Han föll av pegasos</answer>
+      <answer>Han föll av Pegasos</answer>
     </answers>
   </question>
 
   <question>
     <line>Vilka tre djurhuvuden hade den mytiska Chimairan?</line>
+    <hints>
+      <line>Lejon, get och orm</line>
+    </hints>
     <answers>
-      <answer>Lejon, get och orm</answer>
+      <answer required="true">lejon</answer>
+      <answer required="true">get</answer>
+      <answer required="true">orm</answer>
     </answers>
   </question>
 
@@ -208,9 +221,13 @@
 
   <question>
     <line>Hur föddes Pegasus?</line>
+    <hints>
+      <line>Medusas blod blandas med havsskum</line>
+    </hints>
     <answers>
       <answer>Medusas blod blandas med havsskum</answer>
-    </answers>
+      <answer>Medusas blod blandades med havsskum</answer>
+</answers>
   </question>
 
 </questions>
