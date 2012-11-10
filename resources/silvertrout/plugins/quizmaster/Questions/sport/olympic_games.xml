@@ -137,7 +137,9 @@
 
   <question>
     <line>Micheline Ostermeyer från Frankrike vann både kulstötningen och diskus i London OS 1948. Vad hade hon för annan sysselsättning förutom friidrott?</line>
-    <hints>Hon var konsertpianist><hints>
+    <hints>
+      <line>Hon var konsertpianist</line>
+    </hints>
     <answers>
       <answer>Hon var konsertpianist</answer>
       <answer>konsertpianist</answer>

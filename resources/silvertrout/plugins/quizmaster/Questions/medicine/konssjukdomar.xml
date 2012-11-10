@@ -5,6 +5,9 @@
  
   <question>
     <line>Vad kallas den process när man måste ange alla sina sexpartners till en kurator eller läkare, efter att ha smittats av t.ex. HIV eller gonorré?</line>
+    <hints>
+      <line>Partneruppföljning</line>
+    </hints>
     <answers>
       <answer>Partneruppföljning</answer>
       <answer>Partnerkontroll</answer>
@@ -171,8 +174,10 @@
 
   <question>
     <line>Hur smittas Hepatit B?</line>
+    <hints>
+      <line>Genom blod och samlag</line>
+    </hints>
     <answers>
-      <answer required="false">Genom blod och samlag</answer>
       <answer required="true">Blod</answer>
       <answer required="true">Samlag</answer>
     </answers>
@@ -180,16 +185,20 @@
 
   <question>
     <line>Hur smittas könherpes?</line>
+    <hints>
+      <line>Genom samlag</line>
+    </hints>
     <answers>
-      <answer>Genom samlag</answer>
       <answer required="true">Samlag</answer>
     </answers>
   </question>
  
   <question>
     <line>Hur smittas HIV?</line>
+    <hints>
+      <line>Genom samlag, från en gravid kvinna till hennes foster samt genom blod eller vävnad.</line>
+    </hints>
     <answers>
-      <answer>Genom samlag, från en gravid kvinna till hennes foster samt genom blod eller vävnad.</answer>
       <answer required="true" score="5">Samlag</answer>
       <answer required="true" score="5">gravid kvinna till hennes foster</answer>
       <answer required="true" score="5">blod</answer>
@@ -199,8 +208,10 @@
  
   <question>
     <line>Hur smittas klamydia?</line>
+    <hints>
+      <line>Genom samlag och oralsex</line>
+    </hints>
     <answers>
-      <answer>Genom samlag och oralsex</answer>
       <answer required="true" score="5">Samlag</answer>
       <answer required="true" score="5">oralsex</answer>
     </answers>
@@ -208,19 +219,22 @@
  
   <question>
     <line>Hur smittas kondylom?</line>
+    <hints>
+      <line>Genom samlag</line>
+    </hints>
     <answers>
-      <answer>Genom samlag</answer>
       <answer required="true">Samlag</answer>
     </answers>
   </question>
      
   <question>
     <line>Hur smittas syfilis?</line>
+     <hints>
+       <line>Genom samlag och från en gravid kvinna till hennes foster</line>
+    </hints>
     <answers>
-      <answer>Genom samlag och från en gravid kvinna till hennes foster</answer>
       <answer required="true" score="5">Samlag</answer>
       <answer required="true" score="5">gravid kvinna till hennes foster</answer>
-
     </answers>
   </question>
  

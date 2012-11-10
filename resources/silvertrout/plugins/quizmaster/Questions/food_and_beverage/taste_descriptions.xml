@@ -68,10 +68,10 @@
  <question>
   <line>Vilken alkoholhaltig dryck åsyftas? "Fruktig smak med liten sötma, inslag av fat, smörkola, vanilj och torkad frukt."</line>
   <hints>
-   <line>Innis & Gunn</line>
+   <line>Innis &amp; Gunn</line>
   </hints>
   <answers>
-   <answer>Innis & Gunn</answer>
+   <answer>Innis &amp; Gunn</answer>
    <answer>Innis and Gunn</answer>
   </answers>
  </question>

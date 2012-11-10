@@ -82,8 +82,12 @@
 
   <question>
     <line>Hur många gånger har CS Bastun brunnit ner?</line>
+    <hints>
+      <line>Två</line>
+    </hints>
     <answers>
       <answer>Två</answer>
+      <answer>2</answer>
     </answers>
   </question>
 
@@ -95,7 +99,14 @@
   </question>
 
   <question>
-    <line>Vad heter den nu kända komikergrupp som bildades på Chalmers?</line>
+    <line>Vad heter den nu kända barbershopgrupp som bildades på Chalmers?</line>
+    <answers>
+      <answer>After Shave</answer>
+    </answers>
+  </question>
+
+  <question>
+    <line>Vad heter den kända komikergrupp som Chalmersgruppen After Shave senare slogs ihop med?</line>
     <answers>
       <answer>Galenskaparna</answer>
     </answers>
