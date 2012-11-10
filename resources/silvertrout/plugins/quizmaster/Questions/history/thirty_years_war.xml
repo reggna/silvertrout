@@ -12,9 +12,9 @@
 
   <question>
     <line>Mellan vilka år utspelades det trettioåriga kriget?</line>
-    <hint>
+    <hints>
       <line>1618 och 1648</line>
-    </hint>
+    </hints>
     <answers>
       <answer required="true">1618</answer>
       <answer required="true">1648</answer>
