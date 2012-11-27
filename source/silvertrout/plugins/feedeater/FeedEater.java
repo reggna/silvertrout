@@ -106,7 +106,7 @@ public class FeedEater extends silvertrout.Plugin {
         String link    = feedItem.getLink();
 
         getNetwork().getConnection().sendPrivmsg(feed.getChannel().getName(),
-                "\u0002[Feed update]\u000f " + title + ": " + content
+                "[" + feed.getTitle() + "] \u0002" + title + "\u000f: " + content
                 + " - " + link);
     }
 
@@ -120,8 +120,7 @@ public class FeedEater extends silvertrout.Plugin {
             Collection<FeedItem> feedItems = fetchItems(feed);
             int itemnumber = 0;
             for (FeedItem feedItem : feedItems) {
-
-                if (itemnumber >= UPDATE_ITEM_LIMIT) {
+                if ((feedItems.size() - itemnumber) > 1 && itemnumber >= UPDATE_ITEM_LIMIT) {
                     getNetwork().getConnection().sendPrivmsg(
                             feed.getChannel().getName(),
                             (feedItems.size() - itemnumber) 

@@ -33,7 +33,7 @@ import silvertrout.Channel;
  */
 public abstract class Feed {
 
-    protected String        title;
+    protected String        title = "";
     protected String        description;
     private   URL           url;
     private   Channel       channel;

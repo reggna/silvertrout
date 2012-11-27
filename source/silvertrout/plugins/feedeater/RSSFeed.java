@@ -56,7 +56,7 @@ class RSSFeed extends Feed {
                 String nodeContent = element.getTextContent();
 
                 if (nodeName.equals("title")) {
-                    title       = cleanData(nodeContent);
+                    title       = cleanData(nodeContent).split(":|-|\\||\\(|\\[", 2)[0].trim();
                 } else if (nodeName.equals("description")) {
                     description = cleanData(nodeContent);
                 }
