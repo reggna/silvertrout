@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Valid ID, delivered -->
+<TrackingInformationResponse>
+  <shipments>
+    <Shipment>
+      <shipmentId>00373500447810728197</shipmentId>
+      <uri>/ntt-service-rest/api/shipment/00373500447810728197/0</uri>
+      <assessedNumberOfItems>1</assessedNumberOfItems>
+      <deliveryDate>2012-12-13T18:48:00</deliveryDate>
+      <estimatedTimeOfArrival>2012-12-13T18:00:00</estimatedTimeOfArrival>
+      <service>
+        <code>19</code>
+        <name>MyPack</name>
+      </service>
+      <consignor>
+        <name>CDON.COM</name>
+        <address>
+          <street1>c/o ENS</street1>
+          <street2>Viaredsvägen 24</street2>
+          <city>Borås</city>
+          <countryCode>SWE</countryCode>
+          <country>Sverige</country>
+          <postCode>50494</postCode>
+        </address>
+      </consignor>
+      <consignee>
+        <name>Mikael Hjort</name>
+        <address>
+          <street1>Östra Eriksbergsgatan 83 Lgh 5</street1>
+          <city>Göteborg</city>
+          <countryCode>SWE</countryCode>
+          <country>Sverige</country>
+          <postCode>41762</postCode>
+        </address>
+      </consignee>
+      <statusText>
+        <header>Sändningen är utlämnad till mottagaren</header>
+        <body>Sändningen lämnades ut 2012-12-13 kl. 18:48</body>
+      </statusText>
+      <status>DELIVERED</status>
+      <totalWeight>
+        <value>4.6</value>
+        <unit>kg</unit>
+      </totalWeight>
+      <totalVolume>
+        <value>0.026</value>
+        <unit>m3</unit>
+      </totalVolume>
+      <items>
+        <Item>
+          <itemId>00373500447810728197</itemId>
+          <dropOffDate>2012-12-12T17:12:00</dropOffDate>
+          <deliveryDate reference="../../../deliveryDate"/>
+          <status>DELIVERED</status>
+          <statusText>
+            <header>Försändelsen är utlämnad till mottagaren</header>
+            <body>Försändelsen lämnades ut 2012-12-13 kl 18:48</body>
+          </statusText>
+          <statedMeasurement>
+            <weight>
+              <value>4.6</value>
+              <unit>kg</unit>
+            </weight>
+            <length>
+              <value>0.36</value>
+              <unit>m</unit>
+            </length>
+            <height>
+              <value>0.2</value>
+              <unit>m</unit>
+            </height>
+            <width>
+              <value>0.36</value>
+              <unit>m</unit>
+            </width>
+            <volume>
+              <value>0.026</value>
+              <unit>m3</unit>
+            </volume>
+          </statedMeasurement>
+          <events>
+            <TrackingEvent>
+              <eventTime>2012-12-12T08:08:00</eventTime>
+              <eventCode>68</eventCode>
+              <eventDescription>Elektronisk förhandsinformation har mottagits</eventDescription>
+              <location>
+                <displayName>CDON.COM</displayName>
+                <name>CDON.COM</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-12T17:12:00</eventTime>
+              <eventCode>31</eventCode>
+              <eventDescription>Försändelsen transporteras</eventDescription>
+              <location>
+                <locationId>421</locationId>
+                <displayName>Göteborg</displayName>
+                <name>Göteborg</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+                <postcode>43891</postcode>
+                <city>Landvetter</city>
+                <locationType>HUB</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-13T01:46:00</eventTime>
+              <eventCode>31</eventCode>
+              <eventDescription>Försändelsen transporteras</eventDescription>
+              <location>
+                <locationId>421</locationId>
+                <displayName>Göteborg</displayName>
+                <name>Göteborg</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+                <postcode>43891</postcode>
+                <city>Landvetter</city>
+                <locationType>HUB</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-13T12:35:00</eventTime>
+              <eventCode>1</eventCode>
+              <eventDescription>Försändelsen har levererats till ett serviceställe</eventDescription>
+              <location>
+                <locationId>235171</locationId>
+                <displayName>Coop Extra Eriksberg</displayName>
+                <name>Coop Extra Eriksberg</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+                <postcode>41761</postcode>
+                <city>Göteborg</city>
+                <locationType>SERVICE_POINT</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-13T13:04:00</eventTime>
+              <eventCode>z04</eventCode>
+              <eventDescription>En avi har levererats till mottagaren via SMS</eventDescription>
+              <location>
+                <locationId>3</locationId>
+                <displayName>Posten</displayName>
+                <name>Posten</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+                <locationType>HUB</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-13T18:48:00</eventTime>
+              <eventCode>21</eventCode>
+              <eventDescription>Försändelsen har levererats</eventDescription>
+              <location>
+                <locationId>235171</locationId>
+                <displayName>Coop Extra Eriksberg</displayName>
+                <name>Coop Extra Eriksberg</name>
+                <countryCode>SWE</countryCode>
+                <country>Sverige</country>
+                <postcode>41761</postcode>
+                <city>Göteborg</city>
+                <locationType>SERVICE_POINT</locationType>
+              </location>
+            </TrackingEvent>
+          </events>
+          <references>
+            <Reference>
+              <value>00101327528410</value>
+              <type>CU</type>
+              <name>Avsändarreferens</name>
+            </Reference>
+          </references>
+        </Item>
+      </items>
+      <additionalServices>
+        <AdditionalService>
+          <code>68</code>
+          <name>SMS-avisering</name>
+        </AdditionalService>
+      </additionalServices>
+      <splitStatuses/>
+      <shipmentReferences>
+        <Reference>
+          <value>00101327528410</value>
+          <type>CU</type>
+          <name>Avsändarreferens</name>
+        </Reference>
+      </shipmentReferences>
+    </Shipment>
+  </shipments>
+</TrackingInformationResponse>
+
+
+<!-- Valid id, not yet delivered -->
+<TrackingInformationResponse>
+  <shipments>
+    <Shipment>
+      <shipmentId>RR449063024SE</shipmentId>
+      <uri>/ntt-service-rest/api/shipment/RR449063024SE/0</uri>
+      <assessedNumberOfItems>1</assessedNumberOfItems>
+      <service>
+        <code>RR</code>
+        <name>Rekommenderat brev</name>
+      </service>
+      <consignee>
+        <address>
+          <city>GÖTEBORG</city>
+          <countryCode>SWE</countryCode>
+          <country>Sverige</country>
+          <postCode>41280</postCode>
+        </address>
+      </consignee>
+      <statusText>
+        <header>Sändningen transporteras</header>
+      </statusText>
+      <status>EN_ROUTE</status>
+      <items>
+        <Item>
+          <itemId>RR449063024SE</itemId>
+          <noItems>1</noItems>
+          <status>EN_ROUTE</status>
+          <statusText>
+            <header>Försändelsen transporteras</header>
+            <body>Försändelsen är vidaresänd inom Posten till sorteringsterminal</body>
+          </statusText>
+          <events>
+            <TrackingEvent>
+              <eventTime>2012-12-14T15:37:00</eventTime>
+              <eventCode>VAPO_26</eventCode>
+              <eventDescription>Försändelsen är inlämnad</eventDescription>
+              <location>
+                <locationId>186031</locationId>
+                <displayName>Posten Växjö Ljungadalsgatan</displayName>
+                <name>Posten Växjö Ljungadalsgatan</name>
+                <postcode>35246</postcode>
+                <locationType>SERVICE_POINT</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-14T15:53:00</eventTime>
+              <eventCode>VAPO_138</eventCode>
+              <eventDescription>Föraviserad med SMS</eventDescription>
+              <location>
+                <locationId>0472</locationId>
+                <displayName>Posten</displayName>
+                <name>Posten</name>
+                <locationType>UNDEF</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-14T16:17:00</eventTime>
+              <eventCode>VAPO_119</eventCode>
+              <eventDescription>Sms-avisering lyckad</eventDescription>
+              <location>
+                <locationId>0471</locationId>
+                <displayName>Posten</displayName>
+                <name>Posten</name>
+                <locationType>UNDEF</locationType>
+              </location>
+            </TrackingEvent>
+            <TrackingEvent>
+              <eventTime>2012-12-14T17:31:00</eventTime>
+              <eventCode>VAPO_113</eventCode>
+              <eventDescription>Försändelsen är vidaresänd inom Posten till sorteringsterminal</eventDescription>
+              <location>
+                <locationId>186031</locationId>
+                <displayName>Posten Växjö Ljungadalsgatan</displayName>
+                <name>Posten Växjö Ljungadalsgatan</name>
+                <postcode>35246</postcode>
+                <locationType>SERVICE_POINT</locationType>
+              </location>
+            </TrackingEvent>
+          </events>
+          <references/>
+        </Item>
+      </items>
+      <additionalServices/>
+      <splitStatuses/>
+      <shipmentReferences/>
+    </Shipment>
+  </shipments>
+</TrackingInformationResponse>
+
+
+<!-- Invalid ID -->
+<TrackingInformationResponse>
+  <compositeFault>
+    <faults>
+      <Fault>
+        <faultCode>invalidIdentifier</faultCode>
+        <explanationText>Identifier must be a valid ItemId or ShipmentId</explanationText>
+        <paramValues>
+          <ParamValue>
+            <param>identifier</param>
+            <value>00377</value>
+          </ParamValue>
+        </paramValues>
+      </Fault>
+    </faults>
+  </compositeFault>
+  <shipments/>
+</TrackingInformationResponse>

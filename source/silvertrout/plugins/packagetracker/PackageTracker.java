@@ -23,20 +23,13 @@ package silvertrout.plugins.packagetracker;
 
 import java.util.ArrayList;
 
-// XML parser
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
-
-// URL and URL connection
-import java.net.URL;
-import java.net.HttpURLConnection;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import silvertrout.Channel;
 import silvertrout.User;
-import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.*;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.Package;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.PackageEvent;
 
 /**
  * Tracks packages from the Swedish postal service (Posten).
@@ -63,57 +56,13 @@ import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageS
  */
 public class PackageTracker extends silvertrout.Plugin {
 
-    public class Package {
-
-        public String  id;
-        public String  customer        = "Unknown customer";
-        public String  service         = "Unknown service";
-        
-        public PackageServiceProvider provider = null;
-
-        public String  recieverZipCode = "Unknown zip code";
-        public String  recieverCity    = "Unknown city";
-        public String  receiverNickname;
-
-        public String  weight          = "?";
-
-        public String  dateSent        = "Unknown send date";
-        public String  dateDelivered   = "Unknown deliver date";
-
-        public DateTime lastDateTime;
-
-        public final ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
-
-        public Channel channel;
-
-        @Override
-        public String toString() {
-            return "Package (" + service + ", " + weight + " kg) "
-                    + id + " from " + customer + " on route to "
-                    + receiverNickname + " at " + recieverZipCode + " " + recieverCity;
-        }
-    }
-
-    public class PackageEvent {
-
-        public String description;
-        public String location;
-
-        public DateTime    dateTime;
-
-        @Override
-        public String toString()
-        {
-            return dateTime.toString("yyyy-MM-dd HH:mm;ss") + " : " + description + ", " + location;
-        }
-    }
-    
     private final ArrayList<Package> packages = new ArrayList<Package>();
     private final ArrayList<PackageServiceProvider> serviceProviders = new ArrayList<PackageServiceProvider>();
     private final int PACKAGE_TTL = 14; // TTL in days
+    private final PackageServiceProviderFactory packageServiceProviderFactory;
 
     public PackageTracker() {
-        PackageServiceProviderFactory packageServiceProviderFactory = new PackageServiceProviderFactory();
+        packageServiceProviderFactory = new PackageServiceProviderFactory();
         serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten());
         serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
     }
@@ -142,7 +91,8 @@ public class PackageTracker extends silvertrout.Plugin {
 
         if(exists(id))return false;
 
-        Package p = new Package();
+        PlaceholderServiceProvider placeholderServiceProvider = packageServiceProviderFactory.getPlaceholderServiceProvider();
+        Package p = placeholderServiceProvider.new Package();
 
         p.id       = id;
         p.channel  = channel;
@@ -181,7 +131,7 @@ public class PackageTracker extends silvertrout.Plugin {
         return null;
     }
 
-    public void update(Package p) {
+    private void update(Package p) {
         
         // Has this package's TTL expired?
         Duration timeSinceUpdate = new Duration(new DateTime(p.lastDateTime), null);
@@ -204,7 +154,7 @@ public class PackageTracker extends silvertrout.Plugin {
                 return;
         }
 
-        ArrayList<PackageEvent> events = fetch(p);
+        ArrayList<PackageEvent> events = p.provider.fetch(p);
 
         if(events.size() > 0) {
 
@@ -222,91 +172,6 @@ public class PackageTracker extends silvertrout.Plugin {
             }
         }
 
-    }
-
-    public ArrayList<PackageEvent> fetch(Package p) {
-
-        ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
-
-        // Connect and fetch package information:
-        try {
-
-            URL url = new URL(p.provider.baseURL + p.id);
-            HttpURLConnection con = (HttpURLConnection)url.openConnection();
-
-            DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-            domFactory.setNamespaceAware(true);
-            DocumentBuilder builder = domFactory.newDocumentBuilder();
-            Document doc = builder.parse(con.getInputStream());
-
-            // XXX, DEBUG!!
-            //if(p.id.equals("1000"))
-            //  doc = builder.parse(new java.io.FileInputStream("/home/tigge/Desktop/packet.xml"));
-
-            // Update basic information:
-            //if(doc.getElementsByTagName("parcel").getLength() > 0)
-            //    p.id              = doc.getElementsByTagName("parcel").item(0).getAttributes().getNamedItem("id").getNodeValue();
-            if(doc.getElementsByTagName("customername").getLength() > 0)
-                p.customer        = doc.getElementsByTagName("customername").item(0).getTextContent();
-            if(doc.getElementsByTagName("servicename").getLength() > 0)
-                p.service         = doc.getElementsByTagName("servicename").item(0).getTextContent();
-            if(doc.getElementsByTagName("receiverzipcode").getLength() > 0)
-                p.recieverZipCode = doc.getElementsByTagName("receiverzipcode").item(0).getTextContent();
-            if(doc.getElementsByTagName("receivercity").getLength() > 0)
-                p.recieverCity    = doc.getElementsByTagName("receivercity").item(0).getTextContent();
-            if(doc.getElementsByTagName("datesent").getLength() > 0)
-                p.dateSent        = doc.getElementsByTagName("datesent").item(0).getTextContent();
-            if(doc.getElementsByTagName("datedelivered").getLength() > 0)
-                p.dateDelivered   = doc.getElementsByTagName("datedelivered").item(0).getTextContent();
-            if(doc.getElementsByTagName("actualweight").getLength() > 0)
-                p.weight          = doc.getElementsByTagName("actualweight").item(0).getTextContent();
-
-            NodeList eventList = doc.getElementsByTagName("event");
-            System.out.println("Got " + eventList.getLength() + " events");
-            for(int i = 0; i < eventList.getLength(); i++) {
-                PackageEvent pe = new PackageEvent();
-                String date = null, time = null;
-                
-                NodeList eventListNodes = eventList.item(i).getChildNodes();
-                for(int j = 0; j < eventListNodes.getLength(); j++) {
-                    Node n = eventListNodes.item(j);
-                    if(n.getNodeName().equals("date")) {
-                        date = n.getTextContent().replace("-", "");
-                    } else if(n.getNodeName().equals("time")) {
-                        time = n.getTextContent().replace(":", "");
-                    } else if(n.getNodeName().equals("location")) {
-                        pe.location = n.getTextContent();
-                    } else if(n.getNodeName().equals("description")) {
-                        pe.description = n.getTextContent();
-                    }
-                }
-                
-                if (date != null && time != null) {
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMddHHmm");
-                    pe.dateTime = dtf.parseDateTime(date+time);
-                }
-                else if (date != null) {
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMdd");
-                    pe.dateTime = dtf.parseDateTime(date);
-                }
-                else if (time != null) {
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("HHmm");
-                    pe.dateTime = dtf.parseDateTime(time);
-                }
-                
-                if(pe.dateTime.isAfter(p.lastDateTime)) {
-                    events.add(pe);
-                }
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Failed to update package " + p.id);
-            e.printStackTrace();
-            return new ArrayList<PackageEvent>();
-        }
-
-        return events;
     }
 
     @Override
