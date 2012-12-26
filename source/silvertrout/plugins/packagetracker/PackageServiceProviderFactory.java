@@ -31,18 +31,21 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import silvertrout.Channel;
+import silvertrout.commons.XMLUtils;
 
 /**
- *
+ * PackageServiceProviderFactory, Singleton-style
  * @author Reeen
  */
-public class PackageServiceProviderFactory {
-
-    public PackageServiceProviderFactory() {
+public enum PackageServiceProviderFactory {
+    
+    INSTANCE;
+    
+    private PackageServiceProviderFactory() {
     }
-
-    public Posten getServiceProviderPosten() {
-        return new Posten();
+    
+    public Posten getServiceProviderPosten(String consumerID) {
+        return new Posten(consumerID);
     }
 
     public Schenker getServiceProviderSchenker() {
@@ -62,14 +65,6 @@ public class PackageServiceProviderFactory {
 
         public abstract ArrayList<PackageServiceProvider.PackageEvent> fetch(PackageServiceProvider.Package p);
 
-        protected String tryToGetTextContent(Element element, String tag) {
-            if (element.getElementsByTagName(tag).getLength() > 0) {
-                return element.getElementsByTagName(tag).item(0).getTextContent();
-            } else {
-                return "";
-            }
-        }
-
         @Override
         public String toString() {
             return name + " (" + baseURL + ")";
@@ -82,7 +77,6 @@ public class PackageServiceProviderFactory {
             public String receiverNickname;
             public DateTime lastDateTime;
             public final ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
-            public Channel channel;
 
             @Override
             public String toString() {
@@ -117,10 +111,12 @@ public class PackageServiceProviderFactory {
     }
 
     public class Posten extends PackageServiceProvider {
+        private final String consumerID; // 4617779c-d862-4508-91fc-1adf7be36001
 
-        public Posten() {
+        public Posten(String consumerID) {
             name = "Posten AB";
-            baseURL = "http://logistics.postennorden.com/wsp/rest-services/ntt-service-rest/api/shipment.xml?id={INSERT_ID}&locale=sv&consumerId=4617779c-d862-4508-91fc-1adf7be36001";
+            baseURL = "http://logistics.postennorden.com/wsp/rest-services/ntt-service-rest/api/shipment.xml?id={INSERT_ID}&locale=sv&consumerId=";
+            this.consumerID = consumerID;
         }
 
         public class PostenPackage extends PackageServiceProvider.Package {
@@ -151,7 +147,7 @@ public class PackageServiceProviderFactory {
         public boolean isServiceProvider(String id) {
 
             try {
-                URL url = new URL(baseURL.replace("{INSERT_ID}", id));
+                URL url = new URL(baseURL.replace("{INSERT_ID}", id)+consumerID);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -196,7 +192,7 @@ public class PackageServiceProviderFactory {
             // Connect and fetch package information:
             try {
 
-                URL url = new URL(baseURL.replace("{INSERT_ID}", p.id));
+                URL url = new URL(baseURL.replace("{INSERT_ID}", p.id)+consumerID);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -207,26 +203,26 @@ public class PackageServiceProviderFactory {
                 // The sender (service customer)
                 if (doc.getElementsByTagName("consignor").getLength() > 0) {
                     Element consignor = (Element) doc.getElementsByTagName("consignor").item(0);
-                    p.sender = tryToGetTextContent(consignor, "name");
+                    p.sender = XMLUtils.tryToGetTextContent(consignor, "name");
                 }
                 // The service name
                 if (doc.getElementsByTagName("service").getLength() > 0) {
                     Element service = (Element) doc.getElementsByTagName("service").item(0);
-                    p.service = tryToGetTextContent(service, "name");
+                    p.service = XMLUtils.tryToGetTextContent(service, "name");
                 }
                 // The receivers information
                 if (doc.getElementsByTagName("consignee").getLength() > 0) {
                     Element consignee = (Element) doc.getElementsByTagName("consignee").item(0);
-                    p.receiverName = tryToGetTextContent(consignee, "name");
+                    p.receiverName = XMLUtils.tryToGetTextContent(consignee, "name");
 
                     if (consignee.getElementsByTagName("address").getLength() > 0) {
                         Element address = (Element) consignee.getElementsByTagName("address").item(0);
-                        p.receiverStreet += tryToGetTextContent(address, "street1");
-                        p.receiverStreet += " " + tryToGetTextContent(address, "street2");
-                        p.receiverStreet += " " + tryToGetTextContent(address, "street3");
-                        p.receiverPostalCode = tryToGetTextContent(address, "postalCode");
-                        p.receiverCity = tryToGetTextContent(address, "city");
-                        p.receiverCountry = tryToGetTextContent(address, "country");
+                        p.receiverStreet += XMLUtils.tryToGetTextContent(address, "street1");
+                        p.receiverStreet += " " + XMLUtils.tryToGetTextContent(address, "street2");
+                        p.receiverStreet += " " + XMLUtils.tryToGetTextContent(address, "street3");
+                        p.receiverPostalCode = XMLUtils.tryToGetTextContent(address, "postalCode");
+                        p.receiverCity = XMLUtils.tryToGetTextContent(address, "city");
+                        p.receiverCountry = XMLUtils.tryToGetTextContent(address, "country");
                     }
 
                     if (doc.getElementsByTagName("estimatedTimeOfArrival").getLength() > 0) {
@@ -234,7 +230,7 @@ public class PackageServiceProviderFactory {
                     }
                     if (doc.getElementsByTagName("totalWeight").getLength() > 0) {
                         Element totalWeight = (Element) doc.getElementsByTagName("actualweight").item(0);
-                        p.weight = tryToGetTextContent(totalWeight, "value");
+                        p.weight = XMLUtils.tryToGetTextContent(totalWeight, "value");
                     }
 
                     NodeList eventList = doc.getElementsByTagName("TrackingEvent");
@@ -257,11 +253,11 @@ public class PackageServiceProviderFactory {
                         Element trackingEvent = (Element) eventList.item(i);
                         Element locationInfo = (Element) trackingEvent.getElementsByTagName("location").item(0);
 
-                        String locationName = tryToGetTextContent((Element) locationInfo, "displayName");
-                        String locationPostalCode = tryToGetTextContent((Element) locationInfo, "postalCode");
-                        String locationCity = tryToGetTextContent((Element) locationInfo, "city");
-                        String locationCountry = tryToGetTextContent((Element) locationInfo, "country");
-                        String locationType = tryToGetTextContent((Element) locationInfo, "locationType");
+                        String locationName = XMLUtils.tryToGetTextContent((Element) locationInfo, "displayName");
+                        String locationPostalCode = XMLUtils.tryToGetTextContent((Element) locationInfo, "postalCode");
+                        String locationCity = XMLUtils.tryToGetTextContent((Element) locationInfo, "city");
+                        String locationCountry = XMLUtils.tryToGetTextContent((Element) locationInfo, "country");
+                        String locationType = XMLUtils.tryToGetTextContent((Element) locationInfo, "locationType");
 
                         pe.location = locationName + " " + locationPostalCode + " " + locationCity + " " + " " + locationCountry + " (" + locationType + ")";
 

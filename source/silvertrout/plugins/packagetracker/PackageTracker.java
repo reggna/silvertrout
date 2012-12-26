@@ -22,14 +22,16 @@
 package silvertrout.plugins.packagetracker;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import silvertrout.Channel;
 import silvertrout.User;
-import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.*;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider;
 import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.Package;
 import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.PackageEvent;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PlaceholderServiceProvider;
 
 /**
  * Tracks packages from the Swedish postal service (Posten).
@@ -60,11 +62,18 @@ public class PackageTracker extends silvertrout.Plugin {
     private final ArrayList<PackageServiceProvider> serviceProviders = new ArrayList<PackageServiceProvider>();
     private final int PACKAGE_TTL = 14; // TTL in days
     private final PackageServiceProviderFactory packageServiceProviderFactory;
+    private Map<String, String> settings;
+    private Map<String, Channel> channels = new HashMap<String, Channel>();
 
     public PackageTracker() {
-        packageServiceProviderFactory = new PackageServiceProviderFactory();
-        serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten());
+        packageServiceProviderFactory = PackageServiceProviderFactory.INSTANCE;
+        serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten(settings.get("Posten.consumerID")));
         serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
+    }
+    
+    @Override
+    public void onLoad(Map<String, String> settings) {
+        this.settings = settings;
     }
     
     private PackageServiceProvider findServiceProvider(Package p) {
@@ -95,13 +104,13 @@ public class PackageTracker extends silvertrout.Plugin {
         Package p = placeholderServiceProvider.new Package();
 
         p.id       = id;
-        p.channel  = channel;
         p.receiverNickname = receiverNickname;
         p.lastDateTime = new DateTime(0);
         
         update(p);
 
         packages.add(p);
+        channels.put(id, channel);
 
         return true;
     }
@@ -113,6 +122,7 @@ public class PackageTracker extends silvertrout.Plugin {
             if(p.id.equals(id))
             {
                 packages.remove(p);
+                channels.remove(id);
                 return true;
             }
         }
@@ -138,9 +148,9 @@ public class PackageTracker extends silvertrout.Plugin {
 
         if (p.lastDateTime.isAfter(new DateTime(0)) && timeSinceUpdate.isLongerThan(Duration.standardDays(PACKAGE_TTL))) {
 
-            getNetwork().getConnection().sendPrivmsg(p.channel.getName(), " * " + "Package has not been updated for "
+            getNetwork().getConnection().sendPrivmsg(channels.get(p.id).getName(), " * " + "Package has not been updated for "
                     + PACKAGE_TTL + " days - removing from PackageTracker!");
-            getNetwork().getConnection().sendPrivmsg(p.channel.getName(), p.toString());
+            getNetwork().getConnection().sendPrivmsg(channels.get(p.id).getName(), p.toString());
 
             packages.remove(p);
             return;
@@ -159,7 +169,7 @@ public class PackageTracker extends silvertrout.Plugin {
         if(events.size() > 0) {
 
             p.events.addAll(events);
-            String chan = p.channel.getName();
+            String chan = channels.get(p.id).getName();
 
             getNetwork().getConnection().sendPrivmsg(chan, p.toString());
 
