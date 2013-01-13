@@ -26,7 +26,6 @@ import silvertrout.User;
 import silvertrout.Channel;
 import silvertrout.Modes;
 
-import java.util.Iterator;
 import java.util.Map;
 
 public class AdminBoy extends silvertrout.Plugin {
@@ -36,114 +35,119 @@ public class AdminBoy extends silvertrout.Plugin {
 
   @Override
   public void onPrivmsg(User user, String message) {
-    String[] parts = message.split("\\s");
-    if(parts.length > 1 && parts[0].equals(password)) {
+    String[] parts = message.split("\\s", 4);
+    try {
+      if(!parts[0].equals(password))
+        return;
       String cmd = parts[1].toLowerCase();
 
-      // Channel commandos: (!op, !kick, etc)
-      if(parts.length > 3 && (cmd.equals("!kick") 
-          || cmd.equals("!deop") || cmd.equals("!op") 
-          || cmd.equals("!voice") || cmd.equals("!devoice") 
-          || cmd.equals("!halfop") || cmd.equals("!dehalfop"))){
+      // A few channel commands share the same parameters;
+      // easiest solution is to set them right now
+      Channel chan = null;
+      if(parts.length > 2) chan = getNetwork().getChannel(parts[2]);
+      User usr = null;
+      if(parts.length > 3) usr = getNetwork().getUser(parts[3]);
 
-        parts = message.split("\\s", 4);
-
-        if(getNetwork().isInChannel(parts[2])) {
-          Channel chan = getNetwork().getChannel(parts[2]);
-          User    usr  = getNetwork().getUser(parts[3]);
-          String  rest = ""; if(parts.length > 4)rest = parts[4];
-
-          if(cmd.equals("!kick")) {
-            chan.kick(usr, rest);
-          } else if(cmd.equals("!op")) {
-            chan.giveOp(usr);
-          } else if(cmd.equals("!deop")) {
-            chan.deOp(usr);
-          } else if(cmd.equals("!voice")) {
-            chan.giveVoice(usr);
-          } else if(cmd.equals("!devoice")) {
-            chan.deVoice(usr);
-          } else if(cmd.equals("!halfop")) {
-            chan.deHalfOp(usr);
-          } else if(cmd.equals("!dehalfop")) {
-            chan.giveHalfOp(usr);
-          }
-        }
-      // Help commands:
-      } else if(parts.length >= 2 && cmd.equals("!help")) {
-        if(parts.length > 2) {
-          user.sendPrivmsg(getHelp(parts[2]));
-        } else {
-          user.sendPrivmsg(getHelp());
-        }
-      // Single commands: (!listplugins, !channels, etc)
-      } else if(parts.length == 2) {
-        if(cmd.equals("!listplugins")) {
+      switch (cmd) {
+        case "!kick":
+          String rest = "";
+          if (parts.length > 4) rest = parts[4];
+          chan.kick(usr, rest);
+          break;
+        case "!op":
+          chan.giveOp(usr);
+          break;
+        case "!deop":
+          chan.deOp(usr);
+          break;
+        case "!voice":
+          chan.giveVoice(usr);
+          break;
+        case "!devoice":
+          chan.deVoice(usr);
+          break;
+        case "!halfop":
+          chan.deHalfOp(usr);
+          break;
+        case "!dehalfop":
+          chan.giveHalfOp(usr);
+          break;
+        case "!help":
+          if(parts.length > 2) user.sendPrivmsg(getHelp(parts[2]));
+          else user.sendPrivmsg(getHelp());
+          break;
+        case "!listplugins":
           int number = 1;
           for(String p: getNetwork().getPlugins().keySet()) {
             user.sendPrivmsg("#" + (number++) + " - " + p);
           }
-        } else if(cmd.equals("!channels")) {
+          break;
+        case "!channels":
           user.sendPrivmsg("I am in " + getNetwork().getChannels().size() + " channels:");
           for(Channel c: getNetwork().getChannels()) {
             user.sendPrivmsg("* " + c.getName() + " (" + c.getTopic() + ")");
           }
-        }
-
-      // Network commands:
-      } else if(parts.length > 2) {
-        if(cmd.equals("!join")) {
-
-            if(!getNetwork().isInChannel(parts[2])) {
-                user.sendPrivmsg("Joined " + parts[2] + ".");
-                getNetwork().getConnection().join(parts[2]);
-            } else {
-                user.sendPrivmsg("Unable to join, already in channel: " + parts[2] + ".");
-            }
-        } else if(cmd.equals("!part")) {
-            if(getNetwork().isInChannel(parts[2])) {
-                user.sendPrivmsg("Leaving " + parts[2] +".");
-                getNetwork().getConnection().part(parts[2]);
-            } else {
-                user.sendPrivmsg("Unable to leave, not in channel: " + parts[2] +".");
-            }
-
-        } else if(cmd.equals("!loadplugin")) {
-            if(getNetwork().loadPlugin(parts[2])) {
-                user.sendPrivmsg("Loaded plugin: " + parts[2] + ".");
-            } else {
-                user.sendPrivmsg("Unable to load plugin: " + parts[2] + ".");
-            }
-        } else if(cmd.equals("!unloadplugin")) {
-            if(getNetwork().unloadPlugin(parts[2])) {
-                user.sendPrivmsg("Unloaded plugin: " + parts[2] +".");
-            } else {
-                user.sendPrivmsg("Unable to unload plugin: " + parts[2] + ".");
-            }
-        } else if(cmd.equals("!users")) {
-            Channel chan = getNetwork().getChannel(parts[2]);
-            user.sendPrivmsg(chan.getName() + " has "
-                + chan.getUsers().size() + " users:");
-            String  usrlst  = "";
-            for(Map.Entry<User, Modes> ue: chan.getUsers().entrySet()) {
-              usrlst += ue.getKey().getNickname() + "[" + ue.getValue().get() + "], ";
-            }
-            user.sendPrivmsg(usrlst);
+          break;
+        case "!join":
+          if(!getNetwork().isInChannel(parts[2])) {
+            user.sendPrivmsg("Joined " + parts[2] + ".");
+            getNetwork().getConnection().join(parts[2]);
+          } else {
+            user.sendPrivmsg("Unable to join, already in channel: " + parts[2] + ".");
           }
-
-      // Unknown commands:
-      } else {
-        user.sendPrivmsg("Unsupported command: " + cmd + ".");
+          break;
+        case "!part":
+          if(getNetwork().isInChannel(parts[2])) {
+            user.sendPrivmsg("Leaving " + parts[2] +".");
+            getNetwork().getConnection().part(parts[2]);
+          } else {
+            user.sendPrivmsg("Unable to leave, not in channel: " + parts[2] +".");
+          }
+          break;
+        case "!loadplugin":
+          if(getNetwork().loadPlugin(parts[2])) {
+            user.sendPrivmsg("Loaded plugin: " + parts[2] + ".");
+          } else {
+            user.sendPrivmsg("Unable to load plugin: " + parts[2] + ".");
+          }
+          break;
+        case "!unloadplugin":
+          if(parts.length >= 3 && getNetwork().unloadPlugin(parts[2])) {
+            user.sendPrivmsg("Unloaded plugin: " + parts[2] +".");
+          } else {
+            user.sendPrivmsg("Unable to unload plugin.");
+          }
+          break;
+        case "!users":
+          if (chan == null) {
+            user.sendPrivmsg("Unknown channel");
+            return;
+          }
+          user.sendPrivmsg(chan.getName() + " has "
+              + chan.getUsers().size() + " users:");
+          String  usrlst  = "";
+          for(Map.Entry<User, Modes> ue: chan.getUsers().entrySet()) {
+            usrlst += ue.getKey().getNickname() + "[" + ue.getValue().get() + "], ";
+          }
+          user.sendPrivmsg(usrlst);
+          break;
+        default:
+          user.sendPrivmsg("Unsupported command: " + cmd + ", use !help for a list of commands.");
       }
-
+    } catch (ArrayIndexOutOfBoundsException e) {
+      e.printStackTrace();
+    } catch (NullPointerException e) {
+      e.printStackTrace();
     }
   }
 
-    @Override
-    public void onLoad(Map<String,String> settings){
-        password = settings.get("password");
-        if(password == null) password = "password";
-    }
+  @Override
+  public void onLoad(Map<String,String> settings){
+    // Set the password from the config file, if it exist.
+    password = settings.get("password");
+    // If not, use the default password.
+    if(password == null) password = "password";
+  }
 
   private String getHelp() {
     return "The following commands are currently supported: " +
