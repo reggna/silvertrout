@@ -219,14 +219,6 @@ public class Network {
     }
 
     /**
-     * Invite received from unknown user
-     * @param channel
-     */
-    void onInvite(String nickname, String channel) {
-        onInvite(new User(nickname, this), channel);
-    }
-
-    /**
      * Someone did a kick
      * @param kicker
      * @param channel
@@ -580,7 +572,10 @@ public class Network {
      * @return The user with the specified nickname
      */
     public User getUser(String nickname) {
-        return users.get(nickname);
+        if(users.containsKey(nickname))
+          return users.get(nickname);
+        else
+          return new User(nickname, this);
     }
 
     /**
