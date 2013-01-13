@@ -162,8 +162,10 @@ class IRCProcessor {
             } else if (cmd.equals("PRIVMSG")) {
                 network.onPrivmsg(msg.nickname, msg.params.get(0), msg.params.get(1));
             } else if (cmd.equals("INVITE")) {
-                //p.onInvite(user, msg.params.get(1));
-                network.onInvite(user, msg.params.get(1));
+                if(user == null)
+                  network.onInvite(msg.nickname, msg.params.get(1));
+                else
+                  network.onInvite(user, msg.params.get(1));
             } else if (cmd.equals("KICK")) {
                 //p.onKick(user, getChannel(msg.params.get(0)), getUser(msg.params.get(1)), msg.params.get(2));
                 network.onKick(user, network.getChannel(msg.params.get(0)), network.getUser(msg.params.get(1)), msg.params.get(2));
