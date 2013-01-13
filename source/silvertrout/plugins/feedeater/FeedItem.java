@@ -33,9 +33,9 @@ public class FeedItem {
     
     public FeedItem(String id, String title, String content, String link) {
       this.id      = id;
-      this.title   = title;
-      this.content = content;
-      this.link    = link;    
+      this.title   = title.replaceAll("\\<.*?>","");
+      this.content = content.replaceAll("\\<.*?>","");
+      this.link    = link;
     }
 
     public String getContent() {
