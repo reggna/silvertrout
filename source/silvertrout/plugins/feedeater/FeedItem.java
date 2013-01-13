@@ -21,6 +21,8 @@
  */
 package silvertrout.plugins.feedeater;
 
+import silvertrout.commons.EscapeUtils;
+
 /**
  *
  */
@@ -33,8 +35,8 @@ public class FeedItem {
     
     public FeedItem(String id, String title, String content, String link) {
       this.id      = id;
-      this.title   = title.replaceAll("\\<.*?>","");
-      this.content = content.replaceAll("\\<.*?>","");
+      this.title   = EscapeUtils.unescpaeAndStripHtml(title);
+      this.content = EscapeUtils.unescpaeAndStripHtml(content);
       this.link    = link;
     }
 

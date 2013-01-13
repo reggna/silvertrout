@@ -433,5 +433,21 @@ public class EscapeUtils {
     public static String normalizeSpaces(String source) {
         return source.replaceAll("\\s+", " ");
     }
+
+    /**
+     * Apply unescapeHtml, stripHtml, and normalizeSpaces on a given String,
+     * and return the result.
+     * @param data the String to apply the functions on
+     * @return the result after all functions has been applied
+     * @see EscapeUtils.unescapeHtml
+     * @see EscapeUtils.stripHtml
+     * @see EscapeUtils.normalizeSpaces
+     */
+    public static String unescpaeAndStripHtml(String data) {
+      data = EscapeUtils.unescapeHtml(data);
+      data = EscapeUtils.stripHtml(data);
+      data = EscapeUtils.normalizeSpaces(data);
+      return data;
+  }
 }
 
