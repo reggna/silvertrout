@@ -49,18 +49,14 @@ public class PackageServiceProviderFactory {
         return new Schenker();
     }
 
-    public PlaceholderServiceProvider getPlaceholderServiceProvider() {
-        return new PlaceholderServiceProvider();
-    }
-
-    public abstract class PackageServiceProvider {
+    public abstract class PackageServiceProvider <P extends PackageServiceProviderFactory.Package> {
 
         public String name;
         public String baseURL;
 
         public abstract boolean isServiceProvider(String id);
 
-        public abstract ArrayList<PackageServiceProvider.PackageEvent> fetch(PackageServiceProvider.Package p);
+        public abstract ArrayList<PackageServiceProviderFactory.PackageEvent> fetch(P p);
 
         protected String tryToGetTextContent(Element element, String tag) {
             if (element.getElementsByTagName(tag).getLength() > 0) {
@@ -74,56 +70,43 @@ public class PackageServiceProviderFactory {
         public String toString() {
             return name + " (" + baseURL + ")";
         }
+    }
+    
+    public class Package {
 
-        public class Package {
+        public String id;
+        public PackageServiceProvider provider = null;
+        public String receiverNickname;
+        public DateTime lastDateTime;
+        public final ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
+        public Channel channel;
 
-            public String id;
-            public PackageServiceProvider provider = null;
-            public String receiverNickname;
-            public DateTime lastDateTime;
-            public final ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
-            public Channel channel;
-
-            @Override
-            public String toString() {
-                return "Package " + id + " on route to " + receiverNickname + ".";
-            }
-        }
-
-        public class PackageEvent {
-
-            public String description;
-            public String location;
-            public DateTime dateTime;
-
-            @Override
-            public String toString() {
-                return dateTime.toString("yyyy-MM-dd HH:mm") + " : " + description + ", " + location;
-            }
+        @Override
+        public String toString() {
+            return "Package " + id + " on route to " + receiverNickname + ".";
         }
     }
 
-    public class PlaceholderServiceProvider extends PackageServiceProvider {
+    public class PackageEvent {
+
+        public String description;
+        public String location;
+        public DateTime dateTime;
 
         @Override
-        public boolean isServiceProvider(String id) {
-            return false;
-        }
-
-        @Override
-        public ArrayList<PackageEvent> fetch(Package p) {
-            return new ArrayList<PackageEvent>();
+        public String toString() {
+            return dateTime.toString("yyyy-MM-dd HH:mm") + " : " + description + ", " + location;
         }
     }
 
-    public class Posten extends PackageServiceProvider {
+    public class Posten extends PackageServiceProvider<Posten.PostenPackage> {
 
         public Posten() {
             name = "Posten AB";
             baseURL = "http://logistics.postennorden.com/wsp/rest-services/ntt-service-rest/api/shipment.xml?id={INSERT_ID}&locale=sv&consumerId=4617779c-d862-4508-91fc-1adf7be36001";
         }
 
-        public class PostenPackage extends PackageServiceProvider.Package {
+        public class PostenPackage extends PackageServiceProviderFactory.Package {
 
             String sender = "";
             String service = "";
@@ -190,13 +173,12 @@ public class PackageServiceProviderFactory {
         }
 
         @Override
-        public ArrayList<PackageEvent> fetch(Package pack) {
+        public ArrayList<PackageEvent> fetch(PostenPackage pack) {
             ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
-            PostenPackage p = (PostenPackage) pack;
             // Connect and fetch package information:
             try {
 
-                URL url = new URL(baseURL.replace("{INSERT_ID}", p.id));
+                URL url = new URL(baseURL.replace("{INSERT_ID}", pack.id));
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
                 DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
@@ -207,34 +189,34 @@ public class PackageServiceProviderFactory {
                 // The sender (service customer)
                 if (doc.getElementsByTagName("consignor").getLength() > 0) {
                     Element consignor = (Element) doc.getElementsByTagName("consignor").item(0);
-                    p.sender = tryToGetTextContent(consignor, "name");
+                    pack.sender = tryToGetTextContent(consignor, "name");
                 }
                 // The service name
                 if (doc.getElementsByTagName("service").getLength() > 0) {
                     Element service = (Element) doc.getElementsByTagName("service").item(0);
-                    p.service = tryToGetTextContent(service, "name");
+                    pack.service = tryToGetTextContent(service, "name");
                 }
                 // The receivers information
                 if (doc.getElementsByTagName("consignee").getLength() > 0) {
                     Element consignee = (Element) doc.getElementsByTagName("consignee").item(0);
-                    p.receiverName = tryToGetTextContent(consignee, "name");
+                    pack.receiverName = tryToGetTextContent(consignee, "name");
 
                     if (consignee.getElementsByTagName("address").getLength() > 0) {
                         Element address = (Element) consignee.getElementsByTagName("address").item(0);
-                        p.receiverStreet += tryToGetTextContent(address, "street1");
-                        p.receiverStreet += " " + tryToGetTextContent(address, "street2");
-                        p.receiverStreet += " " + tryToGetTextContent(address, "street3");
-                        p.receiverPostalCode = tryToGetTextContent(address, "postalCode");
-                        p.receiverCity = tryToGetTextContent(address, "city");
-                        p.receiverCountry = tryToGetTextContent(address, "country");
+                        pack.receiverStreet += tryToGetTextContent(address, "street1");
+                        pack.receiverStreet += " " + tryToGetTextContent(address, "street2");
+                        pack.receiverStreet += " " + tryToGetTextContent(address, "street3");
+                        pack.receiverPostalCode = tryToGetTextContent(address, "postalCode");
+                        pack.receiverCity = tryToGetTextContent(address, "city");
+                        pack.receiverCountry = tryToGetTextContent(address, "country");
                     }
 
                     if (doc.getElementsByTagName("estimatedTimeOfArrival").getLength() > 0) {
-                        p.estimatedTOA = doc.getElementsByTagName("estimatedTimeOfArrival").item(0).getTextContent();
+                        pack.estimatedTOA = doc.getElementsByTagName("estimatedTimeOfArrival").item(0).getTextContent();
                     }
                     if (doc.getElementsByTagName("totalWeight").getLength() > 0) {
                         Element totalWeight = (Element) doc.getElementsByTagName("actualweight").item(0);
-                        p.weight = tryToGetTextContent(totalWeight, "value");
+                        pack.weight = tryToGetTextContent(totalWeight, "value");
                     }
 
                     NodeList eventList = doc.getElementsByTagName("TrackingEvent");
@@ -265,14 +247,14 @@ public class PackageServiceProviderFactory {
 
                         pe.location = locationName + " " + locationPostalCode + " " + locationCity + " " + " " + locationCountry + " (" + locationType + ")";
 
-                        if (pe.dateTime.isAfter(p.lastDateTime)) {
+                        if (pe.dateTime.isAfter(pack.lastDateTime)) {
                             events.add(pe);
                         }
                     }
                 }
 
             } catch (Exception e) {
-                System.out.println("Failed to update package " + p.id);
+                System.out.println("Failed to update package " + pack.id);
                 e.printStackTrace();
                 return new ArrayList<PackageEvent>();
             }
@@ -281,14 +263,14 @@ public class PackageServiceProviderFactory {
         }
     }
 
-    public class Schenker extends PackageServiceProvider {
+    public class Schenker extends PackageServiceProvider<Schenker.SchenkerPackage> {
 
         public Schenker() {
             name = "Schenker PrivPak";
             baseURL = "http://privpakportal.schenker.nu/TrackAndTrace/packagexml.aspx?packageid=";
         }
         
-        public class SchenkerPackage extends PackageServiceProvider.Package {
+        public class SchenkerPackage extends PackageServiceProviderFactory.Package {
             String customer = "";
             String service = "";
             String recieverZipCode = "";
@@ -327,7 +309,7 @@ public class PackageServiceProviderFactory {
         }
 
         @Override
-        public ArrayList<PackageEvent> fetch(Package pack) {
+        public ArrayList<PackageEvent> fetch(SchenkerPackage pack) {
             ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
             SchenkerPackage p = (SchenkerPackage)pack;
 
