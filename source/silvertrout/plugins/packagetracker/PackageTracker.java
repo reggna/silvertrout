@@ -28,8 +28,8 @@ import org.joda.time.Duration;
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.*;
-import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.Package;
-import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageServiceProvider.PackageEvent;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.Package;
+import silvertrout.plugins.packagetracker.PackageServiceProviderFactory.PackageEvent;
 
 /**
  * Tracks packages from the Swedish postal service (Posten).
@@ -91,8 +91,7 @@ public class PackageTracker extends silvertrout.Plugin {
 
         if(exists(id))return false;
 
-        PlaceholderServiceProvider placeholderServiceProvider = packageServiceProviderFactory.getPlaceholderServiceProvider();
-        Package p = placeholderServiceProvider.new Package();
+        Package p = packageServiceProviderFactory.new Package();
 
         p.id       = id;
         p.channel  = channel;
