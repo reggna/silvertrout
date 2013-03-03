@@ -66,13 +66,13 @@ public class PackageTracker extends silvertrout.Plugin {
 
     public PackageTracker() {
         packageServiceProviderFactory = PackageServiceProviderFactory.INSTANCE;
-        serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten(settings.get("Posten.consumerID")));
-        serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
     }
     
     @Override
     public void onLoad(Map<String, String> settings) {
         this.settings = settings;
+        serviceProviders.add(packageServiceProviderFactory.getServiceProviderPosten(settings.get("Posten.consumerID")));
+        serviceProviders.add(packageServiceProviderFactory.getServiceProviderSchenker());
     }
     
     private PackageServiceProvider findServiceProvider(Package p) {
