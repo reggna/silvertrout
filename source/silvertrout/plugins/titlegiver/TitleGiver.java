@@ -21,17 +21,15 @@
  */
 package silvertrout.plugins.titlegiver;
 
-
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
+import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-
-import silvertrout.commons.EscapeUtils;
-import silvertrout.commons.ConnectHelper;
 import silvertrout.Channel;
 import silvertrout.User;
+import silvertrout.commons.ConnectHelper;
+import silvertrout.commons.EscapeUtils;
 
 /**
  * JBT-plugin to fetch a web page's title and print it to the channel
@@ -126,19 +124,8 @@ public class TitleGiver extends silvertrout.Plugin {
         return r;
     }
 
-    public static List<String> getSpotifyTitles(String message){
-        java.util.ArrayList<String> r = new java.util.ArrayList<String>();
-        Pattern p = Pattern.compile("spotify:(album|artist|track):" +
-                "([a-zA-Z0-9]+)");
-        Matcher m = p.matcher(message);
-        while (m.find()) {
-            String title = getTitle("http://spotify.url.fi/" + m.group(1) + "/" 
-                    + m.group(2), "http", "spotify.url.fi", 80, "/" + m.group(1)
-                    + "/" + m.group(2));
-            if (title != null && !title.equals("")) r.add(title.substring(0,
-                    title.indexOf("Decode Spotify URIs")));
-        }
-        return r;
+    public static Collection<String> getSpotifyTitles(String message) {
+        return SpotifyGiver.parse(message);
     }
 
     /**
