@@ -24,18 +24,14 @@ package silvertrout.plugins.feedeater;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import silvertrout.commons.EscapeUtils;
 
 class RSSFeed extends Feed {
@@ -68,7 +64,7 @@ class RSSFeed extends Feed {
         }
 
     }
-    
+
     private String cleanData(String data) {
         data = EscapeUtils.unescapeHtml(data);
         data = EscapeUtils.normalizeSpaces(data);
@@ -123,9 +119,6 @@ class RSSFeed extends Feed {
             e.printStackTrace();
         }
         return feedItems;
-    }   
-
+    }
 
 }
-
-

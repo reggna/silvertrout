@@ -23,11 +23,12 @@ package silvertrout.plugins.feedeater;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
 
 class FeedFactory {
 
@@ -42,9 +43,8 @@ class FeedFactory {
             Document doc = builder.parse(con.getInputStream());
 
             Element root = doc.getDocumentElement();
-            String  tag  = root.getTagName();
-            
-            Feed feed = null;
+            String tag = root.getTagName();
+
             // RDF RSS 1.0 (TODO) or RSS 0.9/0.91/2.0
             if(tag.equals("rdf:RDF") || tag.equals("rss")) {
                 return new RSSFeed(doc);
@@ -54,8 +54,7 @@ class FeedFactory {
             } else {
                 throw new Exception("Could not determine feed type. Tag: " + tag);
             }
-            
-            
+
         } catch (Exception e) {
             System.out.println("Failed to add feed");
             e.printStackTrace();

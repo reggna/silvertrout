@@ -22,19 +22,16 @@
 package silvertrout.plugins.feedeater;
 
 import java.net.MalformedURLException;
-
-// XML parser stuff
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-// URL and URL connection
 import java.net.URL;
-
-// JBT internal
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.lang3.StringUtils;
+
 import silvertrout.Channel;
 import silvertrout.User;
 
@@ -48,7 +45,7 @@ import silvertrout.User;
 // TODO: make it more configurable. Use const for spam limit, update time, etc
 /**
  *
- **
+ *
  */
 public class FeedEater extends silvertrout.Plugin {
 
@@ -101,13 +98,14 @@ public class FeedEater extends silvertrout.Plugin {
     }
 
     private void print(Feed feed, FeedItem feedItem) {
-        String title   = feedItem.getTitle();
-        String content = feedItem.getContent();
-        String link    = feedItem.getLink();
+        String title = StringUtils.abbreviate(feedItem.getTitle(), 80);
+        String content = StringUtils.abbreviate(feedItem.getContent(), 250);
+        String link = feedItem.getLink();
 
-        getNetwork().getConnection().sendPrivmsg(feed.getChannel().getName(),
-                "[" + feed.getTitle() + "] \u0002" + title + "\u000f: " + content
-                + " - " + link);
+        getNetwork().getConnection().sendPrivmsg(
+                feed.getChannel().getName(),
+                "[" + feed.getTitle() + "] \u0002" + title + "\u000f: "
+                        + content + " - " + link);
     }
 
     private Collection<FeedItem> fetchItems(Feed feed) {
@@ -115,7 +113,6 @@ public class FeedEater extends silvertrout.Plugin {
     }
 
     public void update() {
-        //System.out.println("Trying to find updated pages...");
         for (Feed feed : feeds) {
             Collection<FeedItem> feedItems = fetchItems(feed);
             int itemnumber = 0;
@@ -178,7 +175,6 @@ public class FeedEater extends silvertrout.Plugin {
 
     @Override
     public void onTick(int t) {
-        //System.out.println("t = " + t + ", " + (t % (60 * 1)));
         if ((t % UPDATE_INTERVAL) == 0) {
             update();
         }

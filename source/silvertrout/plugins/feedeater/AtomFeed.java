@@ -24,19 +24,22 @@ package silvertrout.plugins.feedeater;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import silvertrout.commons.EscapeUtils;
 
 class AtomFeed extends Feed {
 
     public AtomFeed(Document doc) {
 
-        Node feedNode     = doc.getDocumentElement();
+        Node feedNode = doc.getDocumentElement();
         NodeList elements = feedNode.getChildNodes();
 
         // Loop through feed items
@@ -46,8 +49,8 @@ class AtomFeed extends Feed {
             String nodeContent = element.getTextContent();
 
             if (nodeName.equals("title")) {
-                title = EscapeUtils.unescpaeAndStripHtml(
-                        nodeContent).split(":|-|\\||\\(|\\[", 2)[0].trim();
+                title = EscapeUtils.unescpaeAndStripHtml(nodeContent).split(
+                        ":|-|\\||\\(|\\[", 2)[0].trim();
             }
         }
 
@@ -61,9 +64,11 @@ class AtomFeed extends Feed {
 
         try {
             // Fetch feed items
-            HttpURLConnection con = (HttpURLConnection)getUrl().openConnection();
+            HttpURLConnection con = (HttpURLConnection) getUrl()
+                    .openConnection();
 
-            DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory domFactory = DocumentBuilderFactory
+                    .newInstance();
             domFactory.setNamespaceAware(true);
             DocumentBuilder builder = domFactory.newDocumentBuilder();
             Document doc = builder.parse(con.getInputStream());
@@ -72,37 +77,41 @@ class AtomFeed extends Feed {
 
             for (int i = 0; i < nodes.getLength(); i++) {
                 NodeList childNodes = nodes.item(i).getChildNodes();
-                String fid = null, ftitle = null, fcontent = null, flink = null;
+                String fid = null, ftitle = null, fsummary = null, fcontent = null, flink = null;
 
                 for (int j = 0; j < childNodes.getLength(); j++) {
-                    if(!(childNodes.item(j) instanceof Element)) {
-                      continue;
+                    if (!(childNodes.item(j) instanceof Element)) {
+                        continue;
                     }
-                    Element node        = (Element)childNodes.item(j);
-                    String  nodeName    = childNodes.item(j).getNodeName();
-                    String  nodeContent = childNodes.item(j).getTextContent();
+                    Element node = (Element) childNodes.item(j);
+                    String nodeName = childNodes.item(j).getNodeName();
+                    String nodeContent = childNodes.item(j).getTextContent();
 
                     if (nodeName.equals("title")) {
-                        ftitle   = EscapeUtils.unescpaeAndStripHtml(nodeContent);
+                        ftitle = EscapeUtils.unescpaeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("link")) {
-                        flink    = EscapeUtils.unescpaeAndStripHtml(node.getAttribute("href"));
+                        flink = EscapeUtils.unescpaeAndStripHtml(node
+                                .getAttribute("href"));
+                    } else if (nodeName.equals("summary")) {
+                        fsummary = EscapeUtils
+                                .unescpaeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("content")) {
-                        fcontent = EscapeUtils.unescpaeAndStripHtml(nodeContent);
+                        fcontent = EscapeUtils
+                                .unescpaeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("id")) {
-                        fid      = EscapeUtils.unescpaeAndStripHtml(nodeContent);
+                        fid = EscapeUtils.unescpaeAndStripHtml(nodeContent);
                     }
                 }
 
                 // Add to feed item list.
-                feedItems.add(new FeedItem(fid, ftitle, fcontent, flink));
+                feedItems.add(new FeedItem(fid, ftitle,
+                        fsummary != null ? fsummary : fcontent, flink));
             }
         } catch (Exception e) {
             System.out.println("Fail in XML parser");
             e.printStackTrace();
         }
         return feedItems;
-    }   
-
-
+    }
 
 }
