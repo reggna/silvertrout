@@ -206,7 +206,7 @@ public class PackageTracker extends silvertrout.Plugin {
         } else if (parts.length == 2 && command.equals("!addpackage")) {
             if (add(parts[1], to, from.getNickname())) {
                 Package p = packages.get(packages.size() - 1);
-                // getNetwork().getConnection().sendPrivmsg(to.getName(), "Added: " + p);
+                getNetwork().getConnection().sendPrivmsg(to.getName(), "Added: " + p);
             } else {
                 getNetwork().getConnection().sendPrivmsg(to.getName(), "Failed to add package");
             }

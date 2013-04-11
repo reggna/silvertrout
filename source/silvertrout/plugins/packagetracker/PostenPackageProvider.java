@@ -48,15 +48,15 @@ public class PostenPackageProvider extends PackageProvider {
 
     public class PostenPackage extends Package {
 
-        String sender = "";
-        String service = "";
-        String receiverName = "";
-        String receiverStreet;
-        String receiverPostalCode = "";
-        String receiverCity = "";
-        String receiverCountry = "";
-        String estimatedTOA = "";
-        String weight = "";
+        private String sender = "";
+        private String service = "";
+        private String receiverName = "";
+        private String receiverStreet = "";
+        private String receiverPostalCode = "";
+        private String receiverCity = "";
+        private String receiverCountry = "";
+        private String estimatedTOA = "";
+        private String weight = "";
 
         public PostenPackage(Package p) {
             super(p);
@@ -93,7 +93,7 @@ public class PostenPackageProvider extends PackageProvider {
                     if (consignee.getElementsByTagName("address").getLength() > 0) {
                         Element address = (Element) consignee.getElementsByTagName("address").item(
                                 0);
-                        receiverStreet += XMLUtils.tryToGetTextContent(address, "street1");
+                        receiverStreet = XMLUtils.tryToGetTextContent(address, "street1");
                         receiverStreet += " " + XMLUtils.tryToGetTextContent(address, "street2");
                         receiverStreet += " " + XMLUtils.tryToGetTextContent(address, "street3");
                         receiverPostalCode = XMLUtils.tryToGetTextContent(address, "postalCode");
@@ -161,10 +161,10 @@ public class PostenPackageProvider extends PackageProvider {
             String delivery = "";
             if (!estimatedTOA.equals(""))
                 delivery = "Expected time of delivery is " + estimatedTOA;
-            return "Package (" + getId() + ", " + weight + ") added by " + receiverNickname
-                    + " on route to " + receiverName + " " + receiverStreet + " "
-                    + receiverPostalCode + " " + receiverCity + " " + receiverCountry + ". "
-                    + delivery;
+            return "Package (" + getId() + ", " + service + ", " + weight + " kg) added by "
+                    + receiverNickname + " on route to " + receiverName + " " + receiverStreet
+                    + " " + receiverPostalCode + " " + receiverCity + " " + receiverCountry + ". "
+                    + sender + ". " + delivery;
         }
     }
 
