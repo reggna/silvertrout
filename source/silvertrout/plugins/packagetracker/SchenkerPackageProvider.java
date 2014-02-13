@@ -59,8 +59,8 @@ public class SchenkerPackageProvider extends PackageProvider {
         }
 
         @Override
-        public List<PackageEvent> getEvents() {
-            ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
+        public List<Package.Event> getEvents() {
+            ArrayList<Package.Event> events = new ArrayList<Package.Event>();
 
             // Connect and fetch package information:
             try {
@@ -84,7 +84,7 @@ public class SchenkerPackageProvider extends PackageProvider {
 
                 NodeList eventList = doc.getElementsByTagName("event");
                 for (int i = 0; i < eventList.getLength(); i++) {
-                    PackageEvent pe = new PackageEvent();
+                    Package.Event pe = new Package.Event();
                     String date = null, time = null;
 
                     NodeList eventListNodes = eventList.item(i).getChildNodes();
@@ -117,7 +117,7 @@ public class SchenkerPackageProvider extends PackageProvider {
             } catch (Exception e) {
                 System.out.println("Failed to update package " + getId());
                 e.printStackTrace();
-                return new ArrayList<PackageEvent>();
+                return new ArrayList<Package.Event>();
             }
 
             return events;

@@ -31,17 +31,30 @@ import silvertrout.Channel;
 
 abstract public class Package {
 
+    public class Event {
+
+        public String description;
+        public String location;
+        public DateTime dateTime;
+
+        @Override
+        public String toString() {
+            return dateTime.toString("yyyy-MM-dd HH:mm") + " : " + description + ", " + location;
+        }
+    }
+
     public static final int PACKAGE_TTL = 14; // TTL in days
 
     private final String id;
-    public String receiverNickname;
+    private final String receiverNickname;
     private DateTime created = new DateTime();
     protected DateTime updated = new DateTime(0);
-    public List<PackageEvent> events = new ArrayList<PackageEvent>();
+    public List<Event> events = new ArrayList<Event>();
     public Channel channel;
 
-    public Package(String id) {
+    public Package(String id, String receiverNickname) {
         this.id = id;
+        this.receiverNickname = receiverNickname;
     }
 
     public Package(Package p) {
@@ -57,6 +70,10 @@ abstract public class Package {
         return id;
     }
 
+    public String getReceiverNickname() {
+        return receiverNickname;
+    }
+
     public DateTime getCreated() {
         return created;
     }
@@ -70,12 +87,12 @@ abstract public class Package {
      * 
      * @return
      */
-    public List<PackageEvent> update() {
-        List<PackageEvent> all = getEvents();
-        List<PackageEvent> events = new ArrayList<PackageEvent>();
+    public List<Event> update() {
+        List<Event> all = getEvents();
+        List<Event> events = new ArrayList<Event>();
         DateTime latest = updated;
 
-        for (PackageEvent event : all) {
+        for (Event event : all) {
             if (event.dateTime.isAfter(latest)) {
                 latest = event.dateTime;
             }
@@ -88,13 +105,13 @@ abstract public class Package {
         return events;
     }
 
-    protected List<PackageEvent> getEvents() {
-        return new ArrayList<PackageEvent>();
+    protected List<Event> getEvents() {
+        return new ArrayList<Event>();
     }
 
     @Override
     public String toString() {
-        return "Package " + id + " on route to " + receiverNickname + ".";
+        return "Package " + id + " on route to " + getReceiverNickname() + ".";
     }
 
     /**

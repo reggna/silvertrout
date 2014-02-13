@@ -63,8 +63,8 @@ public class PostenPackageProvider extends PackageProvider {
         }
 
         @Override
-        protected ArrayList<PackageEvent> getEvents() {
-            ArrayList<PackageEvent> events = new ArrayList<PackageEvent>();
+        protected ArrayList<Package.Event> getEvents() {
+            ArrayList<Package.Event> events = new ArrayList<Package.Event>();
             // Connect and fetch package information:
             try {
                 URL url = new URL(baseURL.replace("{INSERT_ID}", getId()) + consumerID);
@@ -113,7 +113,7 @@ public class PostenPackageProvider extends PackageProvider {
 
                     NodeList eventList = doc.getElementsByTagName("TrackingEvent");
                     for (int i = 0; i < eventList.getLength(); i++) {
-                        PackageEvent pe = new PackageEvent();
+                        Package.Event pe = new Package.Event();
 
                         NodeList eventListNodes = eventList.item(i).getChildNodes();
                         for (int j = 0; j < eventListNodes.getLength(); j++) {
@@ -150,7 +150,7 @@ public class PostenPackageProvider extends PackageProvider {
             } catch (Exception e) {
                 System.out.println("Failed to update package " + getId());
                 e.printStackTrace();
-                return new ArrayList<PackageEvent>();
+                return new ArrayList<Package.Event>();
             }
 
             return events;
@@ -162,9 +162,9 @@ public class PostenPackageProvider extends PackageProvider {
             if (!estimatedTOA.equals(""))
                 delivery = "Expected time of delivery is " + estimatedTOA;
             return "Package (" + getId() + ", " + service + ", " + weight + " kg) added by "
-                    + receiverNickname + " on route to " + receiverName + " " + receiverStreet
-                    + " " + receiverPostalCode + " " + receiverCity + " " + receiverCountry + ". "
-                    + sender + ". " + delivery;
+                    + getReceiverNickname() + " on route to " + receiverName + " " + receiverStreet
+                    + " " + receiverPostalCode + " " + receiverCity + " " + receiverCountry
+                    + ". From " + sender + ". " + delivery;
         }
     }
 

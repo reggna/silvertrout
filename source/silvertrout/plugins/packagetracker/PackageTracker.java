@@ -54,8 +54,8 @@ public class PackageTracker extends silvertrout.Plugin {
 
     static private class NullPackageProvider extends PackageProvider {
         static private class NullPackage extends Package {
-            public NullPackage(String id) {
-                super(id);
+            public NullPackage(String id, String receiverNickname) {
+                super(id, receiverNickname);
             }
         }
 
@@ -94,8 +94,8 @@ public class PackageTracker extends silvertrout.Plugin {
         if (exists(id))
             return false;
 
-        Package p = new NullPackageProvider.NullPackage(id);
-        p.receiverNickname = receiverNickname;
+        Package p = new NullPackageProvider.NullPackage(id, receiverNickname);
+        // .receiverNickname = receiverNickname;
 
         packages.add(p);
         channels.put(id, channel);
@@ -169,7 +169,7 @@ public class PackageTracker extends silvertrout.Plugin {
     }
 
     private void updatePackage(Package p) {
-        List<PackageEvent> events = p.update();
+        List<Package.Event> events = p.update();
 
         if (events.size() > 0) {
 
@@ -178,7 +178,7 @@ public class PackageTracker extends silvertrout.Plugin {
 
             getNetwork().getConnection().sendPrivmsg(chan, p.toString());
 
-            for (PackageEvent event : events) {
+            for (Package.Event event : events) {
                 getNetwork().getConnection().sendPrivmsg(chan, " * " + event);
             }
         }
@@ -242,4 +242,5 @@ public class PackageTracker extends silvertrout.Plugin {
             update();
         }
     }
+
 }
