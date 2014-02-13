@@ -35,8 +35,8 @@ public class FeedItem {
     
     public FeedItem(String id, String title, String content, String link) {
       this.id      = id;
-      this.title   = EscapeUtils.unescpaeAndStripHtml(title);
-      this.content = EscapeUtils.unescpaeAndStripHtml(content);
+      this.title   = EscapeUtils.unescapeAndStripHtml(title);
+      this.content = EscapeUtils.unescapeAndStripHtml(content);
       this.link    = link;
     }
 

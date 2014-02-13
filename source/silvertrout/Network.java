@@ -28,13 +28,16 @@ import java.util.TimerTask;
 import java.util.Collection;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.commons.collections4.map.AbstractHashedMap;
+
 import silvertrout.settings.NetworkSettings;
 
 /**
@@ -57,11 +60,25 @@ public class Network {
         }
     }
 
+    private static class LowerCaseMap<T> extends AbstractHashedMap<String, T> {
+        public LowerCaseMap() {
+            super(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR, DEFAULT_THRESHOLD);
+        }
+
+        @Override
+        protected Object convertKey(Object key) {
+            if (key != null) {
+                return Message.toLower(key.toString());
+            }
+            return AbstractHashedMap.NULL;
+        }
+    }
+
     private final NetworkSettings networkSettings;
     private final User me;
-    private final Map<String, Channel> channels = new HashMap<String, Channel>();
-    private final Map<String, Channel> unjoinedChannels = new HashMap<String, Channel>();
-    private final Map<String, User> users = new HashMap<String, User>();
+    private final Map<String, Channel> channels = new LowerCaseMap<Channel>();
+    private final Map<String, Channel> unjoinedChannels = new LowerCaseMap<Channel>();
+    private final Map<String, User> users = new LowerCaseMap<User>();
     private final Map<String, Plugin> plugins = new ConcurrentHashMap<String, Plugin>();
     private final IRC irc;
     private final IRCConnection connection; // do not instantiate here, let constructior decide what kind of IRCConnection we want

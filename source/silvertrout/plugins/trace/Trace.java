@@ -23,6 +23,7 @@ package silvertrout.plugins.trace;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import silvertrout.commons.EscapeUtils;
 import silvertrout.commons.ConnectHelper;
@@ -44,14 +45,16 @@ import java.util.HashMap;
  * @author tigge
  */
 public class Trace extends silvertrout.Plugin {
-    public static String substring(String s, String start, String end){
-        if(s.contains(start))
-            s = s.substring(s.indexOf(start)+start.length());
-        else return "";
-        
-        if(s.contains(end))
-            return EscapeUtils.unescapeHtml(s.substring(0,s.indexOf(end)));
-        else return "";
+    public static String substring(String s, String start, String end) {
+        if (s.contains(start))
+            s = s.substring(s.indexOf(start) + start.length());
+        else
+            return "";
+
+        if (s.contains(end))
+            return StringEscapeUtils.unescapeHtml4(s.substring(0, s.indexOf(end)));
+        else
+            return "";
     }
 
     @Override

@@ -38,6 +38,7 @@ import silvertrout.commons.EscapeUtils;
 import silvertrout.commons.ConnectHelper;
 import silvertrout.Channel;
 import silvertrout.User;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 public class OperatorFinder {
 
@@ -127,7 +128,7 @@ public class OperatorFinder {
         int epos = number.indexOf(TAG_END);
         number   = number.substring(0, epos);
         
-        return EscapeUtils.unescapeHtml(number);
+        return StringEscapeUtils.unescapeHtml4(number);
     }
 
     public static String getOperator(String number) {

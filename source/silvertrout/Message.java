@@ -245,4 +245,15 @@ class Message {
     public boolean isCommand() {
         return (reply == -1);
     }
+
+    static String toLower(String s) {
+        StringBuilder r = new StringBuilder();
+        for (int i = 0; i < s.length(); i++){
+            if (s.charAt(i) >= 0x41 && s.charAt(i) <= 0x5d)
+                r.append((char)(s.charAt(i) + 0x20));
+            else
+                r.append(s.charAt(i));
+        }
+        return r.toString();
+    }
 }

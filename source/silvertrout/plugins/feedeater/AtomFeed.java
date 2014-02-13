@@ -49,7 +49,7 @@ class AtomFeed extends Feed {
             String nodeContent = element.getTextContent();
 
             if (nodeName.equals("title")) {
-                title = EscapeUtils.unescpaeAndStripHtml(nodeContent).split(
+                title = EscapeUtils.unescapeAndStripHtml(nodeContent).split(
                         ":|-|\\||\\(|\\[", 2)[0].trim();
             }
         }
@@ -88,18 +88,18 @@ class AtomFeed extends Feed {
                     String nodeContent = childNodes.item(j).getTextContent();
 
                     if (nodeName.equals("title")) {
-                        ftitle = EscapeUtils.unescpaeAndStripHtml(nodeContent);
+                        ftitle = EscapeUtils.unescapeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("link")) {
-                        flink = EscapeUtils.unescpaeAndStripHtml(node
+                        flink = EscapeUtils.unescapeAndStripHtml(node
                                 .getAttribute("href"));
                     } else if (nodeName.equals("summary")) {
                         fsummary = EscapeUtils
-                                .unescpaeAndStripHtml(nodeContent);
+                                .unescapeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("content")) {
                         fcontent = EscapeUtils
-                                .unescpaeAndStripHtml(nodeContent);
+                                .unescapeAndStripHtml(nodeContent);
                     } else if (nodeName.equals("id")) {
-                        fid = EscapeUtils.unescpaeAndStripHtml(nodeContent);
+                        fid = EscapeUtils.unescapeAndStripHtml(nodeContent);
                     }
                 }
 
