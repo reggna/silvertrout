@@ -28,6 +28,7 @@ import java.util.Collection;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -66,7 +67,7 @@ class RSSFeed extends Feed {
     }
 
     private String cleanData(String data) {
-        data = EscapeUtils.unescapeHtml(data);
+        data = StringEscapeUtils.unescapeHtml4(data);
         data = EscapeUtils.normalizeSpaces(data);
         return data;
     }

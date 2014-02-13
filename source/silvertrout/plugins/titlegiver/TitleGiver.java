@@ -26,10 +26,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import silvertrout.Channel;
 import silvertrout.User;
 import silvertrout.commons.ConnectHelper;
-import silvertrout.commons.EscapeUtils;
 
 /**
  * JBT-plugin to fetch a web page's title and print it to the channel
@@ -174,7 +175,7 @@ public class TitleGiver extends silvertrout.Plugin {
 
             if (mt.find()) {
                 String title = mt.group(1);
-                return EscapeUtils.unescapeHtml(title.replaceAll("\\s+", " ").trim());
+                return StringEscapeUtils.unescapeHtml4(title.replaceAll("\\s+", " ").trim());
             }
             System.out.println("No title found");
         }
