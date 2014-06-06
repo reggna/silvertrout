@@ -176,6 +176,18 @@ public class TitleGiver extends silvertrout.Plugin {
             if (mt.find()) {
                 String title = mt.group(1);
                 return StringEscapeUtils.unescapeHtml4(title.replaceAll("\\s+", " ").trim());
+            } else if(server.equals("t.co")) {
+                // TODO(reggna): Move this to the ConnectHelper, and do proper
+                // META "redirects".  Be careful not to not create a redirect
+                // loop like this though.
+                Pattern pattern = Pattern.compile("<META http-equiv=\"refresh\"(?:[^URL]+)URL=([^\"]+)");
+                Matcher matcher = pattern.matcher(page);
+                if (matcher.find()) {
+                    List<String> titles = getTitles(matcher.group(1));
+                    if (titles.size() > 0) {
+                        return titles.get(0);
+                    }
+                }
             }
             System.out.println("No title found");
         }
