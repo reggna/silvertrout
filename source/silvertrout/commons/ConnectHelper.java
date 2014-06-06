@@ -23,6 +23,7 @@ package silvertrout.commons;
 
 import java.nio.ByteBuffer;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -150,8 +151,17 @@ public class ConnectHelper {
             // reason -- like connection error or a bad server.
             String contentType = con.getContentType();
             if(contentType == null) {
-                System.out.println("Could not get the content type");
-                return null;
+                // t.co (e.g.) uses "content-type" instead of "Content-Type",
+                // so let's do a case insensitive check
+                for (Map.Entry<String, List<String> > entry : con.getHeaderFields().entrySet()) {
+                    if (entry != null && entry.getKey() != null && entry.getKey().equalsIgnoreCase("content-type")) {
+                        List<String> types = entry.getValue();
+                        if (types != null && types.size() > 0) {
+                            contentType = types.get(0);
+                            break;
+                        }
+                    }
+                }
             } else  {
                 contentType = contentType.split(";")[0];
             }
