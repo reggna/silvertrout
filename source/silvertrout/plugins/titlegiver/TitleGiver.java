@@ -98,7 +98,7 @@ public class TitleGiver extends silvertrout.Plugin {
     	String path     = createPathPattern();
     	
     	// It's the create methods responsibility to make sure that the regex groups are correct
-    	return "(?:(?:<|\\s|\\\"|^)" + protocol + host + port + path + "(?:\\s|$|\\\"|>|#[A-Za-z]*))";
+    	return "(?:(?:<|\\s|\\\"|^)" + protocol + host + port + path + "(?:\\s|$|\\\"|>*))";
     }
 
     /**
@@ -111,7 +111,7 @@ public class TitleGiver extends silvertrout.Plugin {
         java.util.ArrayList<String> r = new java.util.ArrayList<String>();
         // TODO Parse IP hosts
         // "(http|https):\\/\\/(\\w+(\\.\\w+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
-        // "(http|https):\\/\\/([\\w\\.-]+)(?:\\:(\\d+))?([\\/\\_\\+\\-\\w\\?\\#\\%\\&\\(\\)\\.\\=\\\\\\,]*)?"
+        // "(http|https):\\/\\/([\\w\\.-]+)(?:\\:(\\d+))?([\\/\\_\\+\\-\\w\\?\\%\\&\\(\\)\\.\\=\\\\\\,]*)?"
         //  	"(http|https):\\/\\/([\\wåäö]+(?:\\.[\\wåäö]+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
         Pattern p = Pattern.compile(createURLPattern());
         //p.
