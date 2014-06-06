@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -135,12 +135,12 @@ public class CTCP extends silvertrout.Plugin {
                     new DCCFileReciever(name, size, host, port);
                 }
             }else if(parts[0].equals("VERSION")){
-            	//For more detailed version reply:
-            	//Properties props = System.getProperties();
-            	//getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version + " using " + props.getProperty("java.vm.name") + " " + props.getProperty("java.vm.version") + " on " + props.getProperty("os.name") + " " + props.getProperty("os.version"))); //TODO
-            	
-            	//For normal version reply:
-            	getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version )); //TODO
+                //For more detailed version reply:
+                //Properties props = System.getProperties();
+                //getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version + " using " + props.getProperty("java.vm.name") + " " + props.getProperty("java.vm.version") + " on " + props.getProperty("os.name") + " " + props.getProperty("os.version"))); //TODO
+
+                //For normal version reply:
+                getNetwork().getConnection().sendNotice(from, quote("VERSION " + BuildInfo.programName + " " + BuildInfo.version )); //TODO
             } else {
                 /*
                 case "ACTION"     :

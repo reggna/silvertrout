@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -42,18 +42,18 @@ import silvertrout.settings.NetworkSettings;
 
 /**
  * Network class that handles connection to the network. Sending and
- * 
- * 
+ *
+ *
  */
 public class Network {
 
     private static abstract class PluginCallback {
         String callbackName;
-        
+
         PluginCallback(String callbackName) {
           this.callbackName = callbackName;
         }
-        
+
         abstract void   callback(Plugin plugin);
         String getCallbackName() {
             return callbackName;
@@ -115,7 +115,7 @@ public class Network {
 
         // Create worker
         createWorkerThread();
-        
+
         // Connect to server
         if (networkSettings.isSecure()) {
             connection = new SecureIRCConnection(this);
@@ -156,7 +156,7 @@ public class Network {
 
                 e.printStackTrace();
 
-                if(exceptionFrequenzy >= 3) { // number greater than 1. 
+                if(exceptionFrequenzy >= 3) { // number greater than 1.
                     // Number found by injecting errors by messages. 3 seem
                     // to be a good number.
                     System.out.println("*** Too many exceptions! Closing "
@@ -189,7 +189,7 @@ public class Network {
         connected = false;
         // stop worker thread
         workerThread.cancel();
-        
+
         // notify plugins
         callPlugin(new PluginCallback("onDisconnected") {
             void callback(Plugin plugin) { plugin.onDisconnected(); };
@@ -304,7 +304,7 @@ public class Network {
      */
     void onPart(final Channel channel, final String message) {
         removeChannel(channel.getName());
-        
+
         callPlugin(new PluginCallback("onPart") {
             void callback(Plugin plugin) { plugin.onPart(channel, message); };
         });
@@ -342,8 +342,8 @@ public class Network {
     void onPrivmsg(String from, String to, final String message) {
         /* ignore everything we send to ourself to prevent sending loops */
         if(from == to) return;
-        
-        // Private message 
+
+        // Private message
         if (to.equals(getMyUser().getNickname())) {
             final User user = getUser(from) != null ? getUser(from): new User(from, this);
             callPlugin(new PluginCallback("onPrivms") {
@@ -439,7 +439,7 @@ public class Network {
                     System.out.println("New unknown user joining channel " + channelName);
                 }
                 System.out.println("New known user " + user + " joining channel " + channel);
-                // Add user 
+                // Add user
                 channel.addUser(user, new Modes());
                 // Tell our fine plugins about this joyus occation and let them
                 // rejoice and be happy.
@@ -466,7 +466,7 @@ public class Network {
         // Move user in user hash map
         users.remove(oldNickname);
         users.put(newNickname, user);
-        
+
         // Update channels
 
         user.setNickname(newNickname);
@@ -511,7 +511,7 @@ public class Network {
     void onConnect() {
         connected = true;
         addUser(me);
-        
+
         callPlugin(new PluginCallback("onConnected") {
             void callback(Plugin plugin) { plugin.onConnected(); };
         });
@@ -695,7 +695,7 @@ public class Network {
      * Returns a channel with a specified name
      *
      * @param  name The name of the channel to search fo
-     * @return      The channel with the specified name, orr null if the 
+     * @return      The channel with the specified name, orr null if the
      *              channel does not exist
      */
     public Channel getChannel(String name) {
@@ -766,7 +766,7 @@ public class Network {
             synchronized (plugins) {
                 try {
                     PluginClassLoader pcl = new PluginClassLoader();
-                    Class<?> c = pcl.findClass("silvertrout.plugins." 
+                    Class<?> c = pcl.findClass("silvertrout.plugins."
                             + name.toLowerCase() + "." + name);
                     if (Plugin.class.isAssignableFrom(c)) {
                         Plugin p = (Plugin) c.newInstance();
@@ -796,7 +796,7 @@ public class Network {
             try {
                 pcb.callback(plugin);
             } catch (Exception e) {
-                System.out.println("Plugin " + plugin + "crashed in " 
+                System.out.println("Plugin " + plugin + "crashed in "
                         + pcb.getCallbackName() + " handler:");
                 System.out.println(e.getMessage());
                 e.printStackTrace();
@@ -814,7 +814,7 @@ public class Network {
         return exceptionFrequenzy;
     }
 
-    /** 
+    /**
      * Get the current tick.
      *
      * @return  the current tick (i.e. seconds since silvertrout started)
@@ -822,22 +822,22 @@ public class Network {
     public int getTick(){
         return tick;
     }
-    
+
     /**
-     * 
+     *
      *
      */
     private void onTick(final int ticks) {
-    
+
         if(!connected) {
             return;
         }
-    
+
         tick = ticks;
         if(exceptionFrequenzy > 0) {
             exceptionFrequenzy--;
         }
-        
+
         callPlugin(new PluginCallback("onTick") {
             void callback(Plugin plugin) { plugin.onTick(ticks); };
         });

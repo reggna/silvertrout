@@ -69,7 +69,7 @@ public class SecureIRCConnection extends IRCConnection {
             SSLContext context;
 
             trustManagers = new TrustManager[]{new TrustingX509TrustManager()};
-            
+
             try {
                 context = SSLContext.getInstance("SSL");
                 context.init(null, trustManagers, new SecureRandom());
@@ -105,7 +105,7 @@ public class SecureIRCConnection extends IRCConnection {
             }
 
             /**
-             * 
+             *
              * @return
              */
             @Override

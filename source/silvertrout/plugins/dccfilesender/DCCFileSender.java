@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -48,7 +48,7 @@ public class DCCFileSender implements Runnable {
     UUID id;
 
     final static int SOCKET_TIMEOUT = 60000; // 60s in milliseconds
-    
+
     /**
      *
      * @param file
@@ -57,7 +57,7 @@ public class DCCFileSender implements Runnable {
      * @param cb
      */
     public DCCFileSender(File file, User recipient, Network network, Callback cb) {
-    	this.cb = cb;
+        this.cb = cb;
 
         if (file.exists() && file.isFile() && file.canRead()) {
             try {
@@ -77,15 +77,15 @@ public class DCCFileSender implements Runnable {
     }
     // TODO: use User instead
 
-	/**
-	 * Start sending the file.
-	 * @return Unique UUID for this session.
-	 */
-	public UUID startSend() {
-		new Thread(this).start();
-		return id;
-	}
-    
+    /**
+     * Start sending the file.
+     * @return Unique UUID for this session.
+     */
+    public UUID startSend() {
+        new Thread(this).start();
+        return id;
+    }
+
     /**
      *
      * @param filename
@@ -106,7 +106,7 @@ public class DCCFileSender implements Runnable {
     public DCCFileSender(String filename, User recipient, Network network) {
         this(new File(filename), recipient, network, null);
     }
-    
+
     /**
      *
      * @param file
@@ -144,16 +144,16 @@ public class DCCFileSender implements Runnable {
 
             // Try to get connection:
             try{
-            	socket = serverSocket.accept();
+                socket = serverSocket.accept();
             }catch(SocketTimeoutException e){
                 if(cb != null){
-                	String[] arg = {"ERROR","Timeout"};
-                	cb.callback(id,arg);
+                    String[] arg = {"ERROR","Timeout"};
+                    cb.callback(id,arg);
                 }
                 serverSocket.close();
                 return;
             }
-            
+
             os = socket.getOutputStream();
             serverSocket.close();
 
@@ -169,11 +169,11 @@ public class DCCFileSender implements Runnable {
             }
 
             System.out.println("DCCFileSender: Done sending file");
-            
+
             //Call the callback
             if(cb != null){
-            	String[] arg = {"OK"};
-            	cb.callback(id,arg);
+                String[] arg = {"OK"};
+                cb.callback(id,arg);
             }
 
         } catch (java.io.IOException e) {

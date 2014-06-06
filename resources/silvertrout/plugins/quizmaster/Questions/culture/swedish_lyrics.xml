@@ -1,5 +1,5 @@
-<questions 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<questions
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="questions.xsd"
     category="Kultur" subcategory="Svenska låttexter">
 
@@ -20,21 +20,21 @@
       <answer required="true">Håkan Hellström</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>I vilken låt återfinns textraden "Bakom femton dubbla reglar, bakom femton dubbla lås, håller rikedomen hov i maktens salar"?</line>
     <answers>
       <answer>Keops pyramid</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Jag skulle unna mig och drömma, hundra mil genom Europa, om en främling lika tillitsfull som du"?</line>
     <answers>
       <answer>Om du lämnar mig nu</answer>
     </answers>
-  </question>  
-  
+  </question>
+
   <question>
     <line>Vem sjöng textraden "Du har så svårt att säga om jag ens betyder nåt för dig. Jag räcker inte fram."? Vi söker både låttitel och artist.</line>
     <hints>
@@ -51,7 +51,7 @@
     <answers>
       <answer>Öppna upp ditt fönster</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>Mimikry skrev en låt där man kan höra texten "Jag är borta vid hörnan igen. Sitter och väntar när gonggongen klämtar." Vi söker låttitlen och minst en av bandets medlemar.</line>
@@ -60,71 +60,71 @@
       <answer>Hjalle Östman</answer>
       <answer>Mia Mästerbo</answer>
       <answer>Anders Andersson</answer>
-      <answer>Bror Jonas Stentäpp</answer>            
+      <answer>Bror Jonas Stentäpp</answer>
       <answer>Johan Åsberg</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Dom som äger framtiden är dom som köpt historien, tror du dom frågar; om du vill ha alternativ, om du vill ha ett rägligt liv efter förmåga?"? Vi söker dessutom bandets namn</line>
     <hints>
       <line>Charta 77 med Herrarna i sandlådan</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Herrarna i sandlådan</answer>
       <answer required="true">Charta 77</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Den där skogen, gör nånting med mig - jag blir alldeles för ärlig"? Vi söker dessutom artisten.</line>
     <hints>
       <line>Säkert! med Det kommer bara leda till nåt ont</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Det kommer bara leda till nåt ont</answer>
       <answer required="true">Säkert!</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Du vet var det sitter och siktar tills du riktigt säkert vet att det hittar in - där ingen annan kommit in"? Vi söker dessutom artisten.</line>
     <hints>
       <line>Markus Krunegård med Jag är en vampyr</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Jag är en vampyr</answer>
       <answer required="true">Markus Krunegård</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Nere på tunnelbaneperrongen bromsar sista tåget in och kanske hinner jag ifatt, kanske jagar också du ett tåg i London, kanske inte, men kanske kan vi drömma om varandra i natt"? Vi söker dessutom artisten.</line>
     <hints>
       <line>Peggy Lejonhjärta med Sista styverns trappor</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Peggy Lejonhjärta</answer>
       <answer required="true">Sista styverns trappor</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Var har du varit i hela mitt liv eller under hela min kväll. Under klänningen tar hon små kliv, hon kliver närmre och närmre mig."? Vi söker dessutom artisten.</line>
     <hints>
       <line>Jakob Hellman med Du är allt jag vill ha</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Jakob Hellman</answer>
       <answer required="true">Du är allt jag vill ha</answer>
     </answers>
-  </question>  
+  </question>
 
   <question>
     <line>I vilken låt återfinns textraden "Jag gör om alla söndagar till lördag i kväll och klär mig för att gå på kalas"? Vi söker dessutom artisten.</line>
     <hints>
       <line>Joakim Thåström med Flicka med guld...</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Joakim Thåström</answer>
       <answer required="true">Flicka med guld</answer>
@@ -135,7 +135,7 @@
     <line>I vilken låt återfinns textraden "Jag tror det här är sista natten jag ser hur mörkret faller emot mig i en värld som dimmar ner, i en stad som tänder upp så långt man ser"? Vi söker dessutom artisten.</line>
     <hints>
       <line>Tomas Andersson Wij med En sommar på speed</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Tomas Andersson Wij</answer>
       <answer required="true">En sommar på speed</answer>
@@ -146,7 +146,7 @@
     <line>I en av Kents låtar återfinns textraden "Långsamt glömmer man bort allt, också pojkar i manchestertyg. Men jag minns våra skrikiga stolar i köket och virveln på min kula av porslin". Vad heter låten och från vilket album är den?</line>
     <hints>
       <line>Frank från skivan Kent</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Frank</answer>
       <answer required="true">Kent</answer>
@@ -157,7 +157,7 @@
     <line>I en av Kents låtar återfinns textraden "Brinn pengar brinn, jag vet att du är värd någonting. Du är hoppet i ett IQ-fritt land, du är drömmarna jag drömmer ibland.". Vad heter låten och från vilket album är den?</line>
     <hints>
       <line>Kärleken väntar från skivan Vapen &amp; ammunition</line>
-    </hints>    
+    </hints>
     <answers>
       <answer required="true">Kärleken väntar</answer>
       <answer required="true">Vapen &amp; ammunition</answer>

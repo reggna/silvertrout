@@ -21,7 +21,7 @@ public class BuildInfo {
      *
      */
     public static final String programName = "SilverTrout";
-	
+
     /**
      *
      */
@@ -30,10 +30,9 @@ public class BuildInfo {
      *
      */
     public static final String timeStamp="Sat, 27-December-2008 15:56:07 CET";
-	
+
     /**
      *
      */
     public static final String version = majorVersion + "." + minorVersion + "." + revisionNumber;
 }
-	

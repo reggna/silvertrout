@@ -121,7 +121,7 @@ public class TitleGiverTest {
 		runNonTest(p, "http://www.google.com//");
 		runNonTest(p, "http://w.senews+");
 		runNonTest(p, "http://.");
-    
+
         // Delimiter tests
         Matcher m;
         String base = "http://www.google.com";

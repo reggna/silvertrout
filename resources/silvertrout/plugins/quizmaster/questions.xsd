@@ -21,9 +21,9 @@
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
-   
+
     <!-- hint types -->
-    <xs:complexType name="hints">  
+    <xs:complexType name="hints">
         <xs:sequence>
             <xs:element name="hint" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
@@ -45,9 +45,9 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    
+
     <!-- answer types -->
-    <xs:complexType name="answerMultiple">        
+    <xs:complexType name="answerMultiple">
         <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="answer">
                 <xs:complexType>

@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -34,7 +34,7 @@ import silvertrout.commons.ConnectHelper;
 
 /**
  * JBT-plugin to fetch a web page's title and print it to the channel
- * 
+ *
  * Beta version with URL and URLConnection support. Tries to do some charset
  * conversion based on HTTP headers. TODO: Check meta tag for additional
  * information about charset.
@@ -60,45 +60,45 @@ public class TitleGiver extends silvertrout.Plugin {
             }
         }
     }
-    
+
     protected static String createProtocolPattern() {
-    	return "(http|https):\\/\\/";
+        return "(http|https):\\/\\/";
     }
-    
+
     protected static String createHostPattern() {
-    	// TODO support IP-addresses
-    	String letter = "\\p{L}";//"A-Za-zåäö";
-    	String digit = "\\d";
-    	String let_dig = "[" + letter + digit + "]";
-    	String let_dig_hyp = "[" + letter + "\\-" + digit + "]";
-    	String ldh_str = let_dig_hyp + "+";
-    	String label = "[" + letter + "]" + "(?:(?:" + ldh_str + ")?" + let_dig + ")?";
-    	String subdomain = "((?:" + label + "\\.)*" + label + ")";
-    	return subdomain;
+        // TODO support IP-addresses
+        String letter = "\\p{L}";//"A-Za-zåäö";
+        String digit = "\\d";
+        String let_dig = "[" + letter + digit + "]";
+        String let_dig_hyp = "[" + letter + "\\-" + digit + "]";
+        String ldh_str = let_dig_hyp + "+";
+        String label = "[" + letter + "]" + "(?:(?:" + ldh_str + ")?" + let_dig + ")?";
+        String subdomain = "((?:" + label + "\\.)*" + label + ")";
+        return subdomain;
     }
-    
+
     protected static String createPortPattern() {
-    	return "(?:\\:(\\d+))?";
+        return "(?:\\:(\\d+))?";
     }
-    
+
     protected static String createPathPattern() {
-    	String unreserved = "\\w\\-\\.~"; // '_' is part of \w
-    	String sub_delims = "!\\$&'\\(\\)\\*\\+,;=";
-    	String pct_encoded = "(?:%\\d\\d)";
-    	
-    	String pchar = "[" + unreserved + "|" + pct_encoded + "|" + sub_delims + "|:|@]";
-    	//(?:(?:\/pchar)|(?:\/(?:\s|$)))*
-    	return "((?:(?:\\/" + pchar + "+)|(?:\\/(?:\\s|$)))*)";//"( (?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)* )?";
+        String unreserved = "\\w\\-\\.~"; // '_' is part of \w
+        String sub_delims = "!\\$&'\\(\\)\\*\\+,;=";
+        String pct_encoded = "(?:%\\d\\d)";
+
+        String pchar = "[" + unreserved + "|" + pct_encoded + "|" + sub_delims + "|:|@]";
+        //(?:(?:\/pchar)|(?:\/(?:\s|$)))*
+        return "((?:(?:\\/" + pchar + "+)|(?:\\/(?:\\s|$)))*)";//"( (?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)* )?";
     }
-    
+
     protected static String createURLPattern() {
-    	String protocol = createProtocolPattern();
-    	String host     = createHostPattern();
-    	String port     = createPortPattern();
-    	String path     = createPathPattern();
-    	
-    	// It's the create methods responsibility to make sure that the regex groups are correct
-    	return "(?:(?:<|\\s|\\\"|^)" + protocol + host + port + path + "(?:\\s|$|\\\"|>*))";
+        String protocol = createProtocolPattern();
+        String host     = createHostPattern();
+        String port     = createPortPattern();
+        String path     = createPathPattern();
+
+        // It's the create methods responsibility to make sure that the regex groups are correct
+        return "(?:(?:<|\\s|\\\"|^)" + protocol + host + port + path + "(?:\\s|$|\\\"|>*))";
     }
 
     /**
@@ -112,7 +112,7 @@ public class TitleGiver extends silvertrout.Plugin {
         // TODO Parse IP hosts
         // "(http|https):\\/\\/(\\w+(\\.\\w+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
         // "(http|https):\\/\\/([\\w\\.-]+)(?:\\:(\\d+))?([\\/\\_\\+\\-\\w\\?\\%\\&\\(\\)\\.\\=\\\\\\,]*)?"
-        //  	"(http|https):\\/\\/([\\wåäö]+(?:\\.[\\wåäö]+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
+        //      "(http|https):\\/\\/([\\wåäö]+(?:\\.[\\wåäö]+)*)(?:\\:(\\d+))?((?:\\/(?:[-\\w\\%\\?~\\.\\d!\\$&'\\(\\)\\*\\+,;\\=:@]+)|\\/\\s)*)?"
         Pattern p = Pattern.compile(createURLPattern());
         //p.
         Matcher m = p.matcher(message);

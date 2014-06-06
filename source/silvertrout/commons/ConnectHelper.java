@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -74,7 +74,7 @@ public class ConnectHelper {
                     // not have any special chars in our charsets.
                     if(value.startsWith("\"")) {
                       return value.substring(1, value.length() - 1);
-                    }                    
+                    }
                     return value;
                 }
             }
@@ -117,7 +117,7 @@ public class ConnectHelper {
             // redirects but dont use a cache.
             URL url = new URL(connectionType, IDN.toASCII(server), port, file);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            
+
             con.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)");
 
             con.setAllowUserInteraction(false);
@@ -145,8 +145,8 @@ public class ConnectHelper {
                 wr.flush();
                 wr.close();
             }
-            
-            // Read in content type. If we have no content type this most 
+
+            // Read in content type. If we have no content type this most
             // certainly means that the web page was not loaded due to some
             // reason -- like connection error or a bad server.
             String contentType = con.getContentType();
@@ -165,20 +165,20 @@ public class ConnectHelper {
             } else  {
                 contentType = contentType.split(";")[0];
             }
-            
+
             // Check for content type. Only accept web pages.
             if (!okContentType(contentType)) {
                 System.out.println("Found unrecognized content type: " + contentType);
                 return null;
             }
-    
+
             // Get data
             ByteBuffer bb = getConnectionData(con, maxContentLength);
             if(bb == null) {
                 System.out.println("Unable to fetch data");
                 return null;
             }
-    
+
             // Try to use charset from HTTP header Content-Type:
             try {
                 String charset = getCharset(con.getContentType());
@@ -188,7 +188,7 @@ public class ConnectHelper {
             } catch(UnsupportedEncodingException e) {
               // ...
             }
-            
+
             // Try to use charset from Meta tags:
             try {
                 String charset = getCharsetFromDocument(bb);
@@ -198,16 +198,16 @@ public class ConnectHelper {
             } catch(UnsupportedEncodingException e) {
                 // ...
             }
-            
+
             // Try to use fallback encoding:
             System.out.println("Using fallback charset: '" + fallbackCharset + "'");
             return new String(bb.array(), fallbackCharset);
-      
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        
+
     }
 
     /**

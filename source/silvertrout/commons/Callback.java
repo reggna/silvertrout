@@ -7,10 +7,10 @@ import java.util.UUID;
  *
  */
 public interface Callback {
-	/**
-	 * 
-	 * @param id Unique id that can identify this callback
-	 * @param args Optional arguments to the callback method
-	 */
-	public void callback(UUID id, String[] args);
+    /**
+     *
+     * @param id Unique id that can identify this callback
+     * @param args Optional arguments to the callback method
+     */
+    public void callback(UUID id, String[] args);
 }

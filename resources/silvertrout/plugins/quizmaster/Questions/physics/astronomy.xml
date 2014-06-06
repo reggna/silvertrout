@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Fysik" subcategory="Astronomi">
 
   <question>
@@ -9,28 +9,28 @@
       <answer>9,4 biljoner km</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter den ryska motsvarigheten till astronaut?</line>
     <answers>
       <answer>Kosmonaut</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter vår galax?</line>
     <answers>
       <answer>Vintergatan</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter Sveriges förste utbildade astronaut?</line>
     <answers>
       <answer>Christer Fuglesang</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad kallas en rymdfarkost som man använder flera gånger?</line>
     <answers>

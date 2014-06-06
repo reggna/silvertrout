@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -57,7 +57,7 @@ public class IRCConnection {
     private   final AtomicBoolean disconectionNotificationSent = new AtomicBoolean(false);
 
     /**
-     * Create a new IRCConnection and connect to the server specified in 
+     * Create a new IRCConnection and connect to the server specified in
      * network.getNetworkSettings()
      *
      * @param   network
@@ -73,12 +73,12 @@ public class IRCConnection {
 
     /**
      * Setup the connection, register and start the threads
-     * 
+     *
      * @throws java.io.IOException
      */
     protected void connect() throws IOException {
         System.err.println(" - Setting up socket");
-        socket = new Socket(network.getNetworkSettings().getHost(), 
+        socket = new Socket(network.getNetworkSettings().getHost(),
                 network.getNetworkSettings().getPort());
     }
 
@@ -89,19 +89,19 @@ public class IRCConnection {
     private void setupConnection() throws IOException {
         System.err.println(" - Creating reader");
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                socket.getInputStream(), 
+                socket.getInputStream(),
                 network.getNetworkSettings().getCharset()));
         System.err.println(" - Creating writer");
         Writer writer = new BufferedWriter(new OutputStreamWriter(
-                socket.getOutputStream(), 
+                socket.getOutputStream(),
                 network.getNetworkSettings().getCharset()));
 
-        // Do registration before we start any threads. This will enable some 
+        // Do registration before we start any threads. This will enable some
         // more notifications of connection failiures.
         System.err.println(" - Registering user");
         register(writer);
 
-        // No error yet, probably means the connection was successful, 
+        // No error yet, probably means the connection was successful,
         // start threads!
         System.err.println(" - Starting sender thread");
         senderThread = new SenderThread(writer);
@@ -112,7 +112,7 @@ public class IRCConnection {
     }
 
     /**
-     * Register silvertrout as a user on the IRC network. This 
+     * Register silvertrout as a user on the IRC network. This
      *
      * TODO: No check for what happens if we get a nickname that is already
      *       in use. This should be supported somehow.
@@ -122,11 +122,11 @@ public class IRCConnection {
      */
     protected void register(Writer writer) throws IOException {
         if (network.getNetworkSettings().getPassword() != null) {
-            writer.write("PASS " + network.getNetworkSettings().getPassword() 
+            writer.write("PASS " + network.getNetworkSettings().getPassword()
                     + "\r\n");
         }
         writer.write("NICK " + network.getMyUser().getNickname() + "\r\n");
-        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :" 
+        writer.write("USER " + network.getMyUser().getUsername() + " 0 * :"
                 + network.getNetworkSettings().getRealname() + "\r\n");
         writer.flush();
     }
@@ -167,14 +167,14 @@ public class IRCConnection {
     public void sendPrivmsg(User user, String message) {
         sendPrivmsg(user.getNickname(), message);
     }
-    
+
     /**
      * Send a notice to a user
      * @param user
      * @param message
      */
     public void sendNotice(User user, String message){
-    	sendNotice(user.getNickname(), message);
+        sendNotice(user.getNickname(), message);
     }
 
     /**
@@ -203,7 +203,7 @@ public class IRCConnection {
      */
     private void notifyDisconnect() {
         if (!disconectionNotificationSent.getAndSet(true)) { // only do once!
-        
+
             try {
             senderThread.close();
             receiverThread.close();
@@ -224,7 +224,7 @@ public class IRCConnection {
      * Force a close on the connection.
      *
      * I don't know when to use this. Might be good for something... :)
-     * Difference between this and close is that close waits for the current 
+     * Difference between this and close is that close waits for the current
      * transmission if finshed (if there is any)
      */
     public void forceClose() {
@@ -287,14 +287,14 @@ public class IRCConnection {
         sendRaw("PRIVMSG " + to + " :" + message);
         network.onPrivmsg(network.getMyUser().getNickname(), to, message);
     }
-    
+
     /**
      * Sends a notice to a user.
      * @param to The nick to sent to
      * @param message The message to send
      */
     public synchronized void sendNotice(String to, String message) {
-    	sendRaw("NOTICE " + to + " :" + message);
+        sendRaw("NOTICE " + to + " :" + message);
     }
 
     /**
@@ -389,13 +389,13 @@ public class IRCConnection {
         public void run() {
             for (;;) {
                 try {
-                    // Make this aquire first to not enable more burst messages 
+                    // Make this aquire first to not enable more burst messages
                     // than intended!
                     outputQueueSempaphore.acquire();
                     // If this is done first the floodTimer might have time to
                     // add one more permit before an actual sending
                     floodProtectionSemaphore.acquire();
-                    
+
                     writer.write(outputQueue.poll());
                     writer.flush();
                 } catch (Exception ex) {

@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Mat och dryck" subcategory="Drinkar">
 
   <question>
@@ -33,7 +33,7 @@
       <answer required="true">Limon</answer>
       <answer required="true">Razz</answer>
       <answer required="true">Apple</answer>
-      <answer required="true">Grand Melón</answer> 
+      <answer required="true">Grand Melón</answer>
     </answers>
   </question>
 

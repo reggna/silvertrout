@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -37,28 +37,28 @@ public class AdminBoy extends silvertrout.Plugin {
 
   // Password for AdminBoy
   private String password;
-  
+
   @Override
   public void onPrivmsg(User user, String message) {
     System.out.println("AB: onPrivmsg(u, m) = (" + user + ", " + message + ")");
-  
+
     String[] parts = message.split("\\s");
     if(parts.length > 1 && parts[0].equals(password)) {
       String cmd = parts[1].toLowerCase();
-      
+
       // Channel commandos: (!op, !kick, !etc)
-      if(parts.length > 3 && (cmd.equals("!kick") 
-          || cmd.equals("!deop") || cmd.equals("!op") 
-          || cmd.equals("!voice") || cmd.equals("!devoice") 
+      if(parts.length > 3 && (cmd.equals("!kick")
+          || cmd.equals("!deop") || cmd.equals("!op")
+          || cmd.equals("!voice") || cmd.equals("!devoice")
           || cmd.equals("!halfop") || cmd.equals("!dehalfop"))){
-          
+
         parts = message.split("\\s", 4);
-          
+
         if(getNetwork().isInChannel(parts[2])) {
           Channel chan = getNetwork().getChannel(parts[2]);
           User    usr  = getNetwork().getUser(parts[3]);
           String  rest = ""; if(parts.length > 4)rest = parts[4];
-           
+
           if(cmd.equals("!kick")) {
             chan.kick(usr, rest);
           } else if(cmd.equals("!op")) {
@@ -99,12 +99,12 @@ public class AdminBoy extends silvertrout.Plugin {
       // Network commands:
       } else if(parts.length > 2) {
         if(cmd.equals("!join")) {
-        
+
             if(!getNetwork().isInChannel(parts[2])) {
                 user.sendPrivmsg("Jag mår bra när jag får vara i " + parts[2] + ".");
                 getNetwork().getConnection().join(parts[2]);
             } else {
-                user.sendPrivmsg("Jag är redan i " + parts[2] + ".");            
+                user.sendPrivmsg("Jag är redan i " + parts[2] + ".");
             }
         } else if(cmd.equals("!part")) {
             if(getNetwork().isInChannel(parts[2])) {
@@ -115,19 +115,19 @@ public class AdminBoy extends silvertrout.Plugin {
             }
 
         } else if(cmd.equals("!loadplugin")) {
-        
+
             if(getNetwork().loadPlugin(parts[2])) {
                 user.sendPrivmsg(parts[2] + " har laddats.");
             } else {
                 user.sendPrivmsg(parts[2] + " kunde inte laddas");
-            }              
+            }
         } else if(cmd.equals("!unloadplugin")) {
-        
+
             if(getNetwork().unloadPlugin(parts[2])) {
                 user.sendPrivmsg(parts[2] +" har avaktiverats.");
             } else {
                 user.sendPrivmsg(parts[2] + " kunde inte laddas");
-            } 
+            }
         } else if(cmd.equals("!users")) {
             Channel chan = getNetwork().getChannel(parts[2]);
             user.sendPrivmsg(chan.getName() + " har "
@@ -138,27 +138,27 @@ public class AdminBoy extends silvertrout.Plugin {
             }
             user.sendPrivmsg(usrlst);
           }
-      
+
       // Unknown commands:
       } else {
         user.sendPrivmsg("Kommandot " + cmd + " kan inte hanteras av mig");
       }
-    
+
     }
   }
-  
+
     @Override
     public void onLoad(Map<String,String> settings){
         password = settings.get("password");
         if(password == null) password = "password";
     }
-  
+
   private String getHelp() {
     return "Just nu finns följande kommandon tillgängliga: !join !part " +
         "!loadplugin !unloadplugin !channels !listplugins !users !op !deop " +
         "!voice !devoice !kick";
   }
-  
+
   private String getHelp(String command){
     if(command.equals("!help") || command.equals("help"))
       return "!help [kommando]: Returnerar kommandolista, alternativt hjälptext för det givna kommando.";

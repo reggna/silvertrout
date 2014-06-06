@@ -20,13 +20,13 @@ import org.w3c.dom.NodeList;
 
 /**
  * Fetch artist, album and track information from Spotify
- * 
+ *
  * This is done by using the Spotify Metadata API (or Web API) which returns
  * information in XML format from a search or lookup. This class does lookup
  * request on Spotify URIs and Spotify HTTP URLs.
- * 
+ *
  * @author Gustav Tiger <tiggex@gmail.com>
- * 
+ *
  */
 public class SpotifyGiver {
 

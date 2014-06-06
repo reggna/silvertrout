@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Kultur" subcategory="Konst">
 
   <question>
@@ -194,7 +194,7 @@
       <answer>Buonarroti</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad kallas en konstnärs arbetslokal?</line>
     <answers>

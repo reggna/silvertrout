@@ -21,9 +21,9 @@ class Converter {
     }
 
     static void convertQuestions(File f) {
-    
+
         LinkedList<Question> questions = new LinkedList<Question>();
-        
+
         try {
             BufferedReader fr = new BufferedReader(new FileReader(f));
             String category = fr.readLine();
@@ -38,15 +38,15 @@ class Converter {
                 questions.add(q);
             }
             fr.close();
-            
+
             System.out.println(category);
             String[] cat        = category.split("-", 2);
             String mainCategory = cat[0].trim();
             String subCategory  = cat[1].trim();
-            
+
             BufferedWriter fw = new BufferedWriter(new FileWriter(f)); //new OutputStreamWriter(System.out)
             fw.write("<questions \n" +
-                    "        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n" + 
+                    "        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \n" +
                     "        xsi:noNamespaceSchemaLocation=\"../../questions.xsd\" \n" +
                     "        category=\"" + mainCategory + "\" subcategory=\"" + subCategory + "\">\n\n");
             for(Question q: questions) {
@@ -54,7 +54,7 @@ class Converter {
                 fw.write("    <line>" + q.question + "</line>\n");
                 fw.write("    <answers>\n");
                 fw.write("      <answer>" + q.answer + "</answer>\n");
-                fw.write("    </answers>\n");                            
+                fw.write("    </answers>\n");
                 fw.write("  </question>\n\n");
             }
             fw.write("</questions>\n");

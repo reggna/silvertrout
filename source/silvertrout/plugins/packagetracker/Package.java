@@ -84,7 +84,7 @@ abstract public class Package {
 
     /**
      * Update package
-     * 
+     *
      * @return
      */
     public List<Event> update() {
@@ -116,7 +116,7 @@ abstract public class Package {
 
     /**
      * Check if package have expired, either if it was created and not updated for a while
-     * 
+     *
      * @return true if package have expired
      */
     public boolean expired() {

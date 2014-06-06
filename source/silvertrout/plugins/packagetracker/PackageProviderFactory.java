@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * PackageServiceProviderFactory, Singleton-style
- * 
+ *
  * @author Reeen
  */
 public class PackageProviderFactory {

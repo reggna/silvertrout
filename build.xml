@@ -2,7 +2,7 @@
   <description>Silvertrout is an IRC bot</description>
   <property name="source.dir"    value="source"/>
   <property name="build.dir"     value="build"/>
-  <property name="dist.dir"      value="distribution"/>  
+  <property name="dist.dir"      value="distribution"/>
   <property name="doc.dir"       value="documentation"/>
   <property name="resources.dir" value="resources"/>
   <property name="lib.dir"       value="libraries"/>
@@ -38,7 +38,7 @@
     <javac srcdir="${test.dir}" destdir="${test.dir}" classpathref="classpath.test" debug="true">
     </javac>
   </target>
-  
+
   <target name="clean-compile-test">
     <delete>
       <fileset dir="${test.dir}" includes="**/*.class" />
@@ -58,9 +58,9 @@
   <target name="run" depends="build" description="Run silvertrout">
     <java dir="${classes.dir}" fork="true" classname="silvertrout.IRC" classpathref="project.libs" />
   </target>
-  
+
   <target name="build" depends="build-silvertrout,build-plugins" />
-  
+
   <target name="build-silvertrout" description="Standard build">
     <echo>Building silvertrout...</echo>
     <mkdir dir="${classes.dir}"/>
@@ -72,7 +72,7 @@
       <fileset dir="${resources.dir}" excludes="silvertrout/plugins/**"/>
     </copy>
   </target>
-  
+
   <target name="build-plugins" depends="build-silvertrout" description="Build plugins">
     <echo>Building silvertrout plugins...</echo>
     <javac srcdir="${source.dir}" destdir="${classes.dir}" debug="${debug}" classpathref="project.libs">
@@ -83,9 +83,9 @@
       <fileset dir="${resources.dir}" includes="silvertrout/plugins/**"/>
     </copy>
   </target>
-  
+
   <target name="jar" depends="build" description="Building jar file">
-    <echo>Building silvertrout as a jar...</echo> 
+    <echo>Building silvertrout as a jar...</echo>
     <mkdir dir="${jar.dir}"/>
     <jar destfile="${jar.dir}/silvertrout.jar">
       <manifest>
@@ -96,19 +96,19 @@
 
         <attribute name="Main-Class" value="silvertrout.IRC"/>
       </manifest>
-      
+
       <fileset dir="${classes.dir}" />
 
     </jar>
-  </target> 
-  
+  </target>
+
   <target name="javadoc">
     <echo>Building silvertrout documentation...</echo>
     <javadoc source="${ant.build.javac.source}" sourcepath="${source.dir}"
              destdir="${javadoc.dir}">
     </javadoc>
   </target>
-  
+
   <target name="clean" depends="clean-compile-test">
     <echo>Cleaning generated silvertrout builds...</echo>
     <delete dir="${build.dir}"/>

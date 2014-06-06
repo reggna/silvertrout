@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -59,7 +59,7 @@ public class ScoreManager {
         public int compareTo(Score s) {
             return s.getTotalScore() - getTotalScore();
         };
-        
+
         /**
          *
          * @return  The total score
@@ -71,7 +71,7 @@ public class ScoreManager {
             }
             return totalScore;
         }
-        
+
         /**
          *
          * @param   part  Part to return score of
@@ -80,11 +80,11 @@ public class ScoreManager {
         public int getScore(String part) {
             if(score.containsKey(part)) {
                 return score.get(part);
-            }        
+            }
             return 0;
         }
     }
-    
+
     private final LinkedList<Score> scores    = new LinkedList<Score>();
     private       File              scoreFile;
 
@@ -111,28 +111,28 @@ public class ScoreManager {
             BufferedReader fr = new BufferedReader(new FileReader(f));
 
             while (true) {
-                String nick = fr.readLine();                
+                String nick = fr.readLine();
                 if(nick == null || nick.equals(""))break;
-                
+
                 Score s = new Score();
                 s.nick = nick;
-                
+
                 System.out.println("'" + nick + "'");
-                
+
                 while(true) {
                     String   score      = fr.readLine();
                     if(score == null || score.equals("")) break;
                     String[] scoreParts = score.split("\t");
-                    
+
                     String   part       = scoreParts[0].trim();
                     int      partScore  = Integer.parseInt(scoreParts[1].trim());
-                    
+
                     s.score.put(part, partScore);
                 }
                 scores.add(s);
             }
             System.out.println("loaded " + scores.size() + " scores");
-            
+
             fr.close();
 
         } catch (Exception e) {
@@ -175,12 +175,12 @@ public class ScoreManager {
                 Score s = scores.get(i);
                 if(s.score.containsKey(what)) {
                     return s.score.get(what);
-                }                
+                }
             }
         }
         return 0;
     }
-    
+
     /**
      *
      * @param nickname

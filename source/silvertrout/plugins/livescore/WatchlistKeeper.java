@@ -61,7 +61,7 @@ public class WatchlistKeeper {
 
 
         try {
-            // Create file 
+            // Create file
             FileWriter fstream = new FileWriter(WATCHLISTFILE);
             BufferedWriter out = new BufferedWriter(fstream);
             for (Follower f : followers) {

@@ -1,46 +1,46 @@
-    _______ __ __                    _______                    __   
-   |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+    _______ __ __                    _______                    __
+   |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
    |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
    |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
-  
+
    Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
-  
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-  
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-  
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- 
+
 What is SilverTrout?
 --------------------------------------------------------------------------------
-SilverTrout is a IRC bot written in java published under GNU General Public 
-License (read the state above). 
+SilverTrout is a IRC bot written in java published under GNU General Public
+License (read the state above).
 
-This package contains all basic functionalities and an extensive potential 
-with its easy implemented plugin system. It also contains some prearranged 
+This package contains all basic functionalities and an extensive potential
+with its easy implemented plugin system. It also contains some prearranged
 plugins with the most common functionalities.
 
 
 To build SilverTrout from source code:
 --------------------------------------------------------------------------------
-SilverTrout and its plugins are written in Java 6.0 you will need the 
-Java Development Kit (JDK) to compile the source code. The latest version of 
-JDK may be found at Sun Microsystem’s web page: 
+SilverTrout and its plugins are written in Java 6.0 you will need the
+Java Development Kit (JDK) to compile the source code. The latest version of
+JDK may be found at Sun Microsystem’s web page:
 http://java.sun.com/javase/downloads/index.jsp
 
-To use the build system you need to have ANT intalled. The latest version of 
+To use the build system you need to have ANT intalled. The latest version of
 ANT may be found at the Apache Ant's  web page:
 http://ant.apache.org/bindownload.cgi
 
-When you have installed JDK and ensured that your PATH variable is correctly 
+When you have installed JDK and ensured that your PATH variable is correctly
 configured run the build script using ant:
 
   ant build
@@ -53,17 +53,17 @@ Start SilverTrout by executing the command:
   ant run
 
 The first time SilverTrout is executed it will create a template configuration
-file called config.xml and by changing this file you may customize SilverTrout 
+file called config.xml and by changing this file you may customize SilverTrout
 to work as you want it to.
 
-The xml configuration file should only contain xml elements and attributes. By 
-looking in the template file you’ll get the grip on how the file should be 
+The xml configuration file should only contain xml elements and attributes. By
+looking in the template file you’ll get the grip on how the file should be
 formatted.
 
 
 Configure plugins:
 --------------------------------------------------------------------------------
-Some plugins have extended configuration abilities and may take input from the 
+Some plugins have extended configuration abilities and may take input from the
 configuration file. Examples:
 
  <plugin name="XDCCServer">
@@ -72,21 +72,21 @@ configuration file. Examples:
  </plugin>
  <plugin name="Quizmaster">
   <channel>#quizchannel</channel>
- </plugin> 
+ </plugin>
  <plugin name="AdminBoy">
   <password>mypassword</password>
  </plugin>
 
-NOTE: If you store your config in resources/config.xml it will be copied to 
-the correct place and used everytime you run silvertrout. Your copy in 
-build/classes/config.xml will be removed each time you do 'ant clean' or 
+NOTE: If you store your config in resources/config.xml it will be copied to
+the correct place and used everytime you run silvertrout. Your copy in
+build/classes/config.xml will be removed each time you do 'ant clean' or
 overwritten if there is a newer config.xml file in resources folder.
 
 Start SilverTrout:
 --------------------------------------------------------------------------------
-Starting SilverTrout works the same way in every system with java capabilities. 
+Starting SilverTrout works the same way in every system with java capabilities.
 Simply run the following command in the base directory:
-  
+
   run ant
 
 

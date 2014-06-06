@@ -1,20 +1,20 @@
-/*   _______ __ __                    _______                    __   
- *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_ 
+/*   _______ __ __                    _______                    __
+ *  |     __|__|  |.--.--.-----.----.|_     _|.----.-----.--.--.|  |_
  *  |__     |  |  ||  |  |  -__|   _|  |   |  |   _|  _  |  |  ||   _|
  *  |_______|__|__| \___/|_____|__|    |___|  |__| |_____|_____||____|
- * 
+ *
  *  Copyright 2008 - Gustav Tiger, Henrik Steen and Gustav "Gussoh" Sohtell
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -58,7 +58,7 @@ public class FeedEater extends silvertrout.Plugin {
      *
      */
     public FeedEater() {
-        
+
     }
 
     /**
@@ -75,7 +75,7 @@ public class FeedEater extends silvertrout.Plugin {
 
             feed.setUrl(url);
             feed.setChannel(channel);
-            
+
             feeds.add(feed);
             return feed;
         } catch (MalformedURLException ex) {
@@ -120,7 +120,7 @@ public class FeedEater extends silvertrout.Plugin {
                 if ((feedItems.size() - itemnumber) > 1 && itemnumber >= UPDATE_ITEM_LIMIT) {
                     getNetwork().getConnection().sendPrivmsg(
                             feed.getChannel().getName(),
-                            (feedItems.size() - itemnumber) 
+                            (feedItems.size() - itemnumber)
                             + " more items are not printed to "
                             + "prevent spamming... Sorry!");
                     break;
@@ -143,7 +143,7 @@ public class FeedEater extends silvertrout.Plugin {
             Iterator<Feed> iterator = feeds.iterator();
             for(int i = 0; iterator.hasNext(); i++) {
                 Feed feed = iterator.next();
-                getNetwork().getConnection().sendPrivmsg(to.getName(), 
+                getNetwork().getConnection().sendPrivmsg(to.getName(),
                         (i + 1) + ". " + feed.getTitle() + " ("
                         + feed.getUrl() + ")");
             }
@@ -151,7 +151,7 @@ public class FeedEater extends silvertrout.Plugin {
         } else if (parts.length == 2 && command.equals("!addfeed")) {
             Feed feed = add(parts[1], to);
             if (feed != null) {
-                getNetwork().getConnection().sendPrivmsg(to.getName(), 
+                getNetwork().getConnection().sendPrivmsg(to.getName(),
                         "Added feed: " + feed.getTitle() + " - "
                         + feed.getDescription());
             } else {

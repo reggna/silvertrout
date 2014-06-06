@@ -2,7 +2,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="questions.xsd"
         category="Medicin" subcategory="Könssjukdomar">
- 
+
   <question>
     <line>Vad kallas den process när man måste ange alla sina sexpartners till en kurator eller läkare, efter att ha smittats av t.ex. HIV eller gonorré?</line>
     <hints>
@@ -13,7 +13,7 @@
       <answer>Partnerkontroll</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Det gör ont i halsen. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
@@ -28,7 +28,7 @@
       <answer>Hepatit B</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Det är en grupp små blåsor på rodnad botten. Blåsorna bränner, kliar eller svider. De går snabbt sönder och efter några dagar läker de utan ärr. De kommer oftast runt munnen och på könsorganen men kan ibland finnas på andra ställen på kroppen. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
@@ -37,49 +37,49 @@
       <answer>Munherpes</answer>
     </answers>
   </question>
- 
+
   <question>
     <line> Du har svullna lymfkörtlar. Du har svampinfektioner i munslemhinnan. Du får bältros. Du minskar kraftigt i vikt. Du hostar. Du har besvärlig och långdragen diarré. Du har kraftig nattsvettning. Du lider av svår trötthet. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
       <answer>HIV</answer>
     </answers>
   </question>
-   
+
   <question>
     <line>Det svider när du kissar. Det kommer en flytning från urinröret, slidan eller ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
       <answer>Klamydia</answer>
     </answers>
   </question>
-   
+
   <question>
     <line>Du har långsamt växande hårda vita knottror i hela underlivet. Vårtorna kan även sitta kring och i analöppningen och inne i ändtarmen. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
       <answer>Kondylom</answer>
     </answers>
   </question>
-   
+
   <question>
     <line>Du har sår på könsorganen som inte ömmar. Du har utslag, över hela kroppen inklusive handflator och fotsulor, som inte kliar. Du har svullna ljumskar. Vilken sjukdom kan du ha drabbats av?</line>
     <answers>
       <answer>Syfilis</answer>
     </answers>
   </question>
-     
+
   <question>
     <line>Hur behandlas gonorré?</line>
     <answers>
       <answer>Antibiotika</answer>
     </answers>
   </question>
- 
+
     <question>
     <line>Hur behandlas Hepatit B?</line>
     <answers>
       <answer>Inte alls</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Hur behandlas könsherpes?</line>
     <answers>
@@ -108,7 +108,7 @@
       <answer>Vårtborttagning</answer>
     </answers>
   </question>
-   
+
       <question>
     <line>Hur behandlas syfilis?</line>
     <answers>
@@ -157,14 +157,14 @@
       <answer>Syfilis</answer>
     </answers>
   </question>
-       
+
     <question>
     <line>Vad står förkortningen AIDS för?</line>
     <answers>
       <answer>Acquired Immune Deficiency Syndrome</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Hur smittas gonorré?</line>
     <answers>
@@ -192,7 +192,7 @@
       <answer required="true">Samlag</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Hur smittas HIV?</line>
     <hints>
@@ -205,7 +205,7 @@
       <answer score="5">vävnad</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Hur smittas klamydia?</line>
     <hints>
@@ -216,7 +216,7 @@
       <answer required="true" score="5">oralsex</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Hur smittas kondylom?</line>
     <hints>
@@ -226,7 +226,7 @@
       <answer required="true">Samlag</answer>
     </answers>
   </question>
-     
+
   <question>
     <line>Hur smittas syfilis?</line>
      <hints>
@@ -237,7 +237,7 @@
       <answer required="true" score="5">gravid kvinna till hennes foster</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av gonorré?</line>
     <answers attempts="1">
@@ -265,7 +265,7 @@
       <answer>Ja</answer>
     </answers>
   </question>
- 
+
     <question>
     <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av klamydia?</line>
     <answers attempts="1">
@@ -279,19 +279,19 @@
       <answer>Nej</answer>
     </answers>
   </question>
-   
+
     <question>
     <line>Måste man, enligt lag, ange alla sina sexpartners om man är smittad av syfilis?</line>
     <answers attempts="1">
       <answer>Ja</answer>
     </answers>
   </question>
- 
+
   <question>
     <line>Munherpes är inte samma sorts herpesvirus som könsherpes, men kan munherpes smitta till könet via oralsex?</line>
     <answers attempts="1">
       <answer>Ja</answer>
     </answers>
   </question>
- 
+
 </questions>

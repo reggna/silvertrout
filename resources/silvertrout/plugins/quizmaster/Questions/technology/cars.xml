@@ -1,6 +1,6 @@
-<questions 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:noNamespaceSchemaLocation="../questions.xsd" 
+<questions
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../questions.xsd"
         category="Tekink" subcategory="Motorfordon">
 
   <question>
@@ -9,42 +9,42 @@
       <answer>Märkesverkstäder</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter den tv-kändis i förnamn som brukar kallas Bildoktorn?</line>
     <answers>
       <answer>Bosse</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>De flesta bilar drivs på bensin. Men vad är det näst vanligaste drivmedlet?</line>
     <answers>
       <answer>Diesel</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Var sitter motorn på en Porsche 911</line>
     <answers>
       <answer>Baktill</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vilken sorts däck är det förbjudet att köra med på sommaren?</line>
     <answers>
       <answer>Dubbdäck</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad alstrar ett tändstift, som är nödvändigt för att motorn ska fungera?</line>
     <answers>
       <answer>Gnistor</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Hur många takter har en vanlig bilmotor?</line>
     <hints>
@@ -55,7 +55,7 @@
       <answer>4</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter de två bröderna som är bilmekaniker i tv-serien Macken?</line>
     <hints>
@@ -66,84 +66,84 @@
       <answer required="true">Roger</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter det statliga företag som regelbundet kontrollerar bilens kondition och miljösäkerhet?</line>
     <answers>
       <answer>Bilprovningen</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>I ficklampor har man ofta alkaliska batterier. Vilken sorts batteri sitter i en bil?</line>
     <answers>
       <answer>Blybatteri</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Nuförtiden har de flesta bilar direktinsprutning av bensinen i motorn. Vad hade man tidigare?</line>
     <answers>
       <answer>Förgasare</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter den anordning som gör att bilen går olika fort fast man har samma varvtal i motorn?</line>
     <answers>
       <answer>Växellåda</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>En hybridbil har två motorer. En drivs med bensin. Vad drivs den andra med?</line>
     <answers>
       <answer>El</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Förr tittade och lyssnade bilmekaniker mera efter fel i bilen. Vilket hjälpmedel används till nya bilar?</line>
     <answers>
       <answer>En dator</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad kallas det ljus man har på när man kör i mörer, men måste slå av när man möter andra bilar, eftersom det bländar?</line>
     <answers>
       <answer>Helljus</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Vad heter den anordning i bilen som laddar batteriet, och alltså alstrar ström?</line>
     <answers>
       <answer>Generator</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>>Vilka tre bokstäver brukar användas för att beteckna låsningsfria bromsar på en bil?</line>
     <answers>
       <answer>ABS</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Ett bilhjul består av ett gummidäck och metalldel. Vad kallas metalldelen?</line>
     <answers>
       <answer>Fälg</answer>
     </answers>
   </question>
-  
+
   <question>
     <line>Det finns två vanliga bromstyper på motorfordon. Det ena är trumbromsar. Vad kallas den andra sortens bromsar?</line>
     <answers>
       <answer>Skivbromsar</answer>
     </answers>
   </question>
-  
+
     <question>
     <line>Vilken är den högsta hastighet en tung lastbil får hålla på svenska vägar?</line>
     <answers>
@@ -284,5 +284,5 @@
       <answer>Taxameter</answer>
     </answers>
   </question>
-  
+
 </questions>
